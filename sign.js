@@ -1,0 +1,25 @@
+'use strict'
+
+/*
+ * Create the function `sign` that takes one number argument
+ * and return 1 if the number is positive, -1 if the number is negative
+ * and 0 if the number is exactly 0
+ * see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
+ *
+ * @notions Functions, If-Else
+ * @next same-sign
+ */
+
+// Your code :
+
+//* Begin of tests
+const assert = require('assert')
+
+assert.strictEqual(typeof sign, 'function')
+assert.strictEqual(sign.length, 1)
+assert.notStrictEqual(sign, Math.sign)
+assert.strictEqual(sign(-2), -1)
+assert.strictEqual(sign(10), 1)
+assert.strictEqual(sign(0), 0)
+assert.strictEqual(sign(132), 1)
+// End of tests */

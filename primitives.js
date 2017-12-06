@@ -4,7 +4,7 @@
  * Create a constant variables for each primitives
  * `str`, `num`, `bool` and `undef`
  *
- * @notions Primitive, Variables
+ * @notions Primitive and Operators, Variables
  * @next escape-str
  */
 
