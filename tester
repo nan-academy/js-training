@@ -54,8 +54,6 @@ Object.keys(assert).forEach(key => {
   }
 })
 
-Error.stackTraceLimit = 2
-
 files.forEach((filename, i) => {
   current.length = 0
   current.allPass = true
