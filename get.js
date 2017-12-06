@@ -4,7 +4,7 @@
  * Create a get function that takes a key and return the corresponding value
  * in the sourceObject
  *
- * @notions Data-Structures, Get
+ * @notions Functions, Data-Structures, Get
  * @next
  */
 
