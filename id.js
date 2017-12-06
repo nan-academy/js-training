@@ -12,8 +12,9 @@
 //* Begin of tests
 const assert = require('assert')
 
-assert.strictEqual(Array.isArray(arr), true)
-assert.strictEqual(arr[0], 4)
-assert.strictEqual(arr[1], '2')
-assert.strictEqual(arr.length, 2)
+assert.strictEqual(typeof id, 'function')
+assert.strictEqual(id.length, 1)
+assert.strictEqual(id(5), 5)
+assert.strictEqual(id('pouet'), 'pouet')
+assert.strictEqual(id(assert), assert)
 // End of tests */

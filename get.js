@@ -21,6 +21,7 @@ const sourceObject = {
 //* Begin of tests
 const assert = require('assert')
 
+assert.strictEqual(typeof get, 'function')
 assert.strictEqual(get('num'), 42)
 assert.strictEqual(get('bool'), true)
 assert.strictEqual(get('str'), 'some text')
