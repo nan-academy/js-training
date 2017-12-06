@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-(async () => {
 'use strict'
 
 // extend str for colors
@@ -15,33 +14,34 @@
 const fs = require('fs')
 const { performance: { now } } = require('perf_hooks')
 const { promisify } = require('util')
-const readdir = promisify(fs.readdir)
-const upperCaseSecond = (_, m) => m.toUpperCase()
-const files = (await readdir(__dirname))
-  .filter(filename => /^[^.].+\.js$/.test(filename))
+const readFile = promisify(fs.readFile)
+
+const Module = require('module')
+const { dirname } = require('path')
+
 
 const current = []
 const ok = '  ✓ '.grn()
 
-const errKey = true ? 'stack' : 'message'
 const formatPathParts = (value, i) => i
   ? ':'.mgt() + value.blu()
-  : value.slice(__dirname.length + 1)
+  : value.wht()
+
+const wrapInParen = ((open, close) => str => `${open}${str}${close}`)('('.wht(), ')'.wht())
 
 const prettyPath = p => p.split(':').map(formatPathParts).join('')
-
 const parseStackLine = (line, err) => {
   if (!line) return ''
   let [ , src, path ] = line.split(/at (.+) \((.+)\)$/)
-  if (!src) return ` (${prettyPath(line)})`
+  if (!src) return wrapInParen(prettyPath(line))
   if ((src).includes('anonymous')) {
     src = err.key ? `assert.${err.key.cyn()}` :(err.name || 'Error').cyn()
   }
-  return ` (${src} ${prettyPath(path)})`
+  return wrapInParen(`${src} ${prettyPath(path)}`)
 }
 
 const prettyStack = err => err.message.red()
-  + parseStackLine(err.stack.split('\n')
+  + ' ' + parseStackLine(err.stack.split('\n')
     .filter(line => line.includes(current.filename))[0], err)
 
 const assert = require('assert')
@@ -55,26 +55,31 @@ Object.keys(assert).forEach(key => {
     } catch (err) {
       current.allPass = false
       err.key = key
-      current.push(`  ✗ ${current.length + 1} `.red() + prettyStack(err))
+      current.push(`  ✗`.red() +' '+ (current.length + 1) +' '+ prettyStack(err))
     }
   }
 })
 
-files.forEach((filename, i) => {
+const testFile = async filename => {
+  const code = fs.readFileSync(`${__dirname}/${filename}`, 'utf-8')
+
   current.length = 0
   current.allPass = true
   current.filename = filename
+
   try {
-    require(`${__dirname}/${filename}`)
+    (new Module(filename, module.parent))._compile(code, filename)
     if (current.allPass) {
-      console.log('✓'.grn(), filename)
+      console.log('✓'.grn(), filename.slice(0, -3))
     } else {
-      console.log('-'.blu(), filename)
+      console.log('-'.blu(), filename.slice(0, -3))
       console.log(current.join('\n'))
     }
   } catch (err) {
-    console.log(`✗ ${filename}: ${prettyStack(err)}`.red())
+    console.log(`✗`.red(), filename.slice(0, -3), prettyStack(err))
   }
-})
+  const next = code.split(/\* @next (\S+)/)[1]
+  next && testFile(next + '.js')
+}
 
-})().catch(console.error)
+testFile(require('./package.json').index)

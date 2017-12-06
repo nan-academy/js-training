@@ -1,7 +1,8 @@
 {
   "private": true,
+  "index": "primitives.js",
   "scripts": {
-    "update": "git pull -X theirs",
+    "update": "git stash && git stash pop && git checkout stash -- .",
     "test": "./tester"
   }
 }
