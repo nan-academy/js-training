@@ -24,14 +24,20 @@ const current = []
 const ok = '  ✓ '.grn()
 
 const errKey = true ? 'stack' : 'message'
+const formatPathParts = (value, i) => i
+  ? ':'.mgt() + value.blu()
+  : value.slice(__dirname.length + 1)
+
+const prettyPath = p => p.split(':').map(formatPathParts).join('')
 
 const parseStackLine = (line, err) => {
   if (!line) return ''
-  let [ , src, file, l, c ] = line.split(/at (.+) \((.+):(.+):(.+)\)$/)
-  if (src.includes('anonymous')) {
+  let [ , src, path ] = line.split(/at (.+) \((.+)\)$/)
+  if (!src) return ` (${prettyPath(line)})`
+  if ((src).includes('anonymous')) {
     src = err.key ? `assert.${err.key.cyn()}` :(err.name || 'Error').cyn()
   }
-  return ` (${src} ${file.slice(__dirname.length + 1)}:${l.blu()}:${c.mgt()})`
+  return ` (${src} ${prettyPath(path)})`
 }
 
 const prettyStack = err => err.message.red()
