@@ -4,6 +4,7 @@
  * Create the function `sign` that takes one number argument
  * and return 1 if the number is positive, -1 if the number is negative
  * and 0 if the number is exactly 0
+ * You must not just use `Math.sign`, make your own.
  * see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
  *
  * @notions Functions, If-Else
@@ -16,6 +17,7 @@
 const assert = require('assert')
 
 assert.strictEqual(typeof sign, 'function')
+assert.strictEqual(abs.toString().contains('Math'), false)
 assert.strictEqual(sign.length, 1)
 assert.notStrictEqual(sign, Math.sign)
 assert.strictEqual(sign(-2), -1)

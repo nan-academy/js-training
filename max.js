@@ -3,6 +3,7 @@
 /*
  * Create the function `max` that takes 2 number arguments
  * and returns the greatest
+ * You must not just use `Math.max`, make your own.
  * see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
  *
  * @notions Functions, Ternary
@@ -16,6 +17,7 @@ const assert = require('assert')
 
 assert.strictEqual(typeof max, 'function')
 assert.strictEqual(max.length, 2)
+assert.strictEqual(abs.toString().contains('Math'), false)
 assert.notStrictEqual(max, Math.max)
 assert.strictEqual(max(0, -2), 0)
 assert.strictEqual(max(-1, 10), 10)
