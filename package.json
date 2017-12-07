@@ -2,7 +2,7 @@
   "private": true,
   "index": "primitives.js",
   "scripts": {
-    "update": "git stash && git pull https://github.com/nan-ci/js.git master && git stash pop",
+    "update": "git reset && git stash && git pull https://github.com/nan-ci/js.git master && git stash pop",
     "test": "./tester"
   }
 }
