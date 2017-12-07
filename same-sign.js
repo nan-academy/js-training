@@ -14,7 +14,7 @@
 const assert = require('assert')
 
 assert.strictEqual(typeof sameSign, 'function')
-assert.strictEqual(sameSign.length, 1)
+assert.strictEqual(sameSign.length, 2)
 assert.notStrictEqual(sameSign, Math.sameSign)
 assert.strictEqual(sameSign(-2, -1), true)
 assert.strictEqual(sameSign(0, 0), true)
