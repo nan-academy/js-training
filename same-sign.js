@@ -5,7 +5,7 @@
  * if they both have the same sign
  *
  * @notions Functions, If-Else
- * @next multiply
+ * @next repeat
  */
 
 // Your code :
