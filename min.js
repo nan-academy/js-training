@@ -17,7 +17,7 @@ const assert = require('assert')
 
 assert.strictEqual(typeof min, 'function')
 assert.strictEqual(min.length, 2)
-assert.strictEqual(min.toString().includes('Math'), false)
+assert.strictEqual(min.toString().includes('Math.min'), false)
 assert.notStrictEqual(min, Math.min)
 assert.strictEqual(min(0, -2), -2)
 assert.strictEqual(min(-1, 10), -1)

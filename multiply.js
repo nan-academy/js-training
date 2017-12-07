@@ -4,9 +4,9 @@
  * Create a function `multiply` that takes two number arguments
  * and returns the result of the multiplication of those two.
  * But you must do this without using the operators * or /
-   *
-   * @notions Primitive and Operators, Functions, While
-   * @next multiply-recursive
+ *
+ * @notions Primitive and Operators, Functions, While
+ * @next multiply-recursive
  */
 
 // Your code :
@@ -16,6 +16,7 @@ const assert = require('assert')
 
 assert.strictEqual(typeof multiply, 'function')
 assert.strictEqual(multiply.length, 2)
+assert.strictEqual(multiply.toString().includes('Math.imul'), false)
 assert.strictEqual(multiply.toString().includes('*'), false)
 assert.strictEqual(multiply.toString().includes('/'), false)
 assert.strictEqual(multiply(34, 78), 2652)

@@ -17,7 +17,7 @@ const assert = require('assert')
 
 assert.strictEqual(typeof max, 'function')
 assert.strictEqual(max.length, 2)
-assert.strictEqual(max.toString().includes('Math'), false)
+assert.strictEqual(max.toString().includes('Math.max'), false)
 assert.notStrictEqual(max, Math.max)
 assert.strictEqual(max(0, -2), 0)
 assert.strictEqual(max(-1, 10), 10)
