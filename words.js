@@ -4,7 +4,7 @@
  * Create a function `words` that take a string
  * and return an array of each words using space as a delimiter
  *
- * @next total
+ * @next whisper
  */
 
 
