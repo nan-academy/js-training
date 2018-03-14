@@ -1,14 +1,45 @@
-
-Open an exercise in your editor and complete the code.
-
-Then run the file with node to test if you pass the tests correctly.
-
-
-Alternativly you can run all tests
+### Setup
 ```sh
-git clone https://github.com/wildcodeschoolparis/js-training.git # download the code localy
-cd js-training # change working directory to the newly cloned repository
-git checkout -b mybranch # get on your own branch
-./tester # run the test runner
-# open in your code editor and start to code !
+# download the code locally
+git clone https://github.com/wildcodeschoolparis/js-training.git
+
+# change working directory to the newly cloned repository
+cd js-training
+
+# get on your own branch
+git checkout -b mybranch
 ```
+
+### Solving
+You can start editing the javascript files with your favorite text editor.
+```sh
+# Sublime Text
+subl primitive.js
+
+# VSCode
+code primitive.js
+
+# Vim
+vim primitive.js
+
+# I can not be held responsable if you use anything else.
+```
+
+![where-to-code](https://github.com/wildcodeschoolparis/js-training/blob/master/img/where-to-code.png)
+
+### Testing
+Once you edit
+
+You may use our test tool to check all files
+```sh
+# run the test runner
+./tester
+```
+![output-tester](https://github.com/wildcodeschoolparis/js-training/blob/master/img/output-tester.png)
+
+Or you can test files one by one with node
+```sh
+node primitive.js
+```
+![output-node](https://github.com/wildcodeschoolparis/js-training/blob/master/img/output-node.png)
+
