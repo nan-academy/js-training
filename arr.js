@@ -4,7 +4,6 @@
  * Create a constant variables named `arr` that contains an array of 4 and '2'
  *
  * @notions Data-Structures
- * @next obj
  */
 
 // Your code :

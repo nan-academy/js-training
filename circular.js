@@ -5,7 +5,6 @@
  * itself as the value
  *
  * @notions Data-Structures, Get, Set
- * @next get-length
  */
 
 // Your code :

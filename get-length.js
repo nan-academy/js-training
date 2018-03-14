@@ -5,7 +5,6 @@
  * and return it's length.
  *
  * @notions Data-Structures, Get
- * @next get-first
  */
 
 // Your code :

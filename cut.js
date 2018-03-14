@@ -6,7 +6,6 @@
  * Create the function `cutFistLast` that takes a string
  * and remove the 2 first charcters and 2 last characters
  *
- * @next keep
  */
 
 // You must write your own tests

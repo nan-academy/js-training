@@ -5,7 +5,6 @@
  * and return the last element.
  *
  * @notions Data-Structures, Get
- * @next id
  */
 
 // Your code :

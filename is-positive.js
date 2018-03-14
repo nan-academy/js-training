@@ -4,7 +4,6 @@
  * Create a function `isPositive` that takes a Number
  * and return if the given number is positive
  *
- * @next sign
  */
 
 

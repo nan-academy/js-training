@@ -4,7 +4,6 @@
  * Create a function `total` that takes an array on numbers
  * and return it's total
  *
- * @next multiply
  */
 
 

@@ -6,7 +6,6 @@
  * But you must do this without using the operators * or /
  *
  * @notions Primitive and Operators, Functions, While
- * @next multiply-recursive
  */
 
 // Your code :

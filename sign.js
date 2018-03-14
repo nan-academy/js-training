@@ -8,7 +8,6 @@
  * see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
  *
  * @notions Functions, If-Else
- * @next same-sign
  */
 
 // Your code :

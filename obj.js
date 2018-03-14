@@ -5,7 +5,6 @@
  * much like in primitive.js
  *
  * @notions Functions, Operators
- * @next circular
  */
 
 // Your code :

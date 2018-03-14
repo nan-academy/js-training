@@ -5,7 +5,6 @@
  * characters: /\`"'
  *
  * @notions Primitive and Operators, Variables
- * @next arr
  */
 
 // Your code :

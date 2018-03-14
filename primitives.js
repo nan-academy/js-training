@@ -5,10 +5,10 @@
  * `str`, `num`, `bool` and `undef`
  *
  * @notions Primitive and Operators, Variables
- * @next escape-str
  */
 
 // Your code :
+
 
 //* Begin of tests
 const assert = require('assert')

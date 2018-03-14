@@ -4,7 +4,6 @@
  * Create a function `sub` that takes 2 arguments and substract them
  *
  * @notions Primitive and Operators, Functions
- * @next abs
  */
 
 // Your code :

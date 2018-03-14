@@ -10,7 +10,6 @@
  * Create a function `keepFirstLast` takes a string
  * and only keep 2 characters from the third character
  *
- * @next capitalize
  */
 
 // You must write your own tests

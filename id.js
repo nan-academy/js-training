@@ -4,7 +4,6 @@
  * Create a function `id` that takes one argument and return it
  *
  * @notions Functions
- * @next concat-str
  */
 
 // Your code :

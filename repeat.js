@@ -6,7 +6,6 @@
  * Like the method https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
  * Of course you may not use the method directly
  *
- * @next sentence
  */
 
 //* Begin of tests

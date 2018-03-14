@@ -7,7 +7,6 @@
  * see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
  *
  * @notions Functions, Ternary
- * @next max
  */
 
 // Your code :

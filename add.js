@@ -4,7 +4,6 @@
  * Create a function `add` that takes 2 arguments and add them
  *
  * @notions Primitive and Operators, Functions
- * @next sub
  */
 
 // Your code :

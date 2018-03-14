@@ -5,7 +5,6 @@
  * in the sourceObject
  *
  * @notions Functions, Data-Structures, Get
- * @next add
  */
 
 // Provided code :
