@@ -1,4 +1,4 @@
-### Setup
+## Setup
 ```sh
 # download the code locally
 git clone https://github.com/wildcodeschoolparis/js-training.git
@@ -10,7 +10,7 @@ cd js-training
 git checkout -b mybranch
 ```
 
-### Solving
+## Solving
 You can start editing the javascript files with your favorite text editor.
 ```sh
 # Sublime Text
@@ -27,10 +27,10 @@ vim primitive.js
 
 ![where-to-code](https://github.com/wildcodeschoolparis/js-training/blob/master/img/where-to-code.png)
 
-### Testing
-Once you edit
+## Testing
+Once you have coded your masterpiece, you can start to test your solutions.
 
-You may use our test tool to check all files
+You may either use our test tool to check all files
 ```sh
 # run the test runner
 ./tester
@@ -39,7 +39,33 @@ You may use our test tool to check all files
 
 Or you can test files one by one with node
 ```sh
+# open the file in node
 node primitive.js
 ```
 ![output-node](https://github.com/wildcodeschoolparis/js-training/blob/master/img/output-node.png)
 
+*our tester may include bugs, feel free to check the code and fix it*
+
+(in doubt use node)
+
+## Update
+We may update tests, to apply them fetch and merge the master branch back to
+your branch.
+
+```sh
+
+```
+
+
+## Test Style
+We recommand to use [`editorconfig`](http://editorconfig.org/#download) to
+auto-config your editor to match the coding style
+
+We also made an `eslint` rule to help you formating your code.
+
+You may want to use [`eslint`](https://eslint.org/) and [`prettier-eslint`](https://github.com/prettier/prettier-eslint) for painless application of
+the style
+
+
+## Contribute
+We greatly recommand you to add your own tests to this list
