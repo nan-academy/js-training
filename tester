@@ -7,7 +7,7 @@
   .split('.')
   .map(str => str.split(/([0-9]+)$/))
   .forEach(([ name, value ]) => {
-    String.prototype[name] = function () { return `\u001b[${value}m${this}\u001b[0m` }
+    String.prototype[name]       = function () { return `\u001b[${value}m${this}\u001b[0m` }
     String.prototype[`_${name}`] = function () { return `\u001b[${value};1m${this}\u001b[0m` }
   })
 
@@ -60,6 +60,8 @@ Object.keys(assert).forEach(key => {
   }
 })
 
+let failedTestCount = 0
+let skippedCount = 0
 const testFile = async filename => {
   const code = fs.readFileSync(`${__dirname}/${filename}`, 'utf-8')
 
@@ -72,14 +74,21 @@ const testFile = async filename => {
     if (current.allPass) {
       console.log('✓'.grn(), filename.slice(0, -3))
     } else {
+      failedTestCount++
       console.log('-'.blu(), filename.slice(0, -3))
       console.log(current.join('\n'))
     }
   } catch (err) {
-    console.log(`✗`.red(), filename.slice(0, -3), prettyStack(err))
+    if (!failedTestCount) {
+      console.log(`✗`.red(), filename.slice(0, -3), prettyStack(err))
+    }
+    failedTestCount++
   }
   const next = code.split(/\* @next (\S+)/)[1]
   next && testFile(next + '.js')
 }
 
 testFile(require('./package.json').index)
+  .then(() => {
+    failedTestCount > 1 && console.log(`...and ${failedTestCount - 1} more to pass.`.wht())
+  })

@@ -6,8 +6,9 @@ Then run the file with node to test if you pass the tests correctly.
 
 Alternativly you can run all tests
 ```sh
-git clone https://github.com/nan-ci/js.git # download the code localy
-cd git # change working directory to the newly cloned repository
-npm test # run the test runner
-code . # open it in your code editor and start to code !
+git clone https://github.com/wildcodeschoolparis/js-training.git # download the code localy
+cd js-training # change working directory to the newly cloned repository
+git checkout -b mybranch # get on your own branch
+./tester # run the test runner
+# open in your code editor and start to code !
 ```
