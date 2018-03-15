@@ -1,5 +1,5 @@
 ## Setup
-First, [**fork**](https://github.com/nan-academy/js-training#fork-destination-box) this repository.
+First, [**fork**](https://github.com/nan-academy/js-training/fork?fragment=1) this repository.
 ```sh
 # download your code locally
 git clone https://github.com/GITHUB_LOGIN/js-training.git
