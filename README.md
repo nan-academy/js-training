@@ -46,6 +46,17 @@ vim primitive.js
 
 ![where-to-code](https://github.com/nan-academy/js-training/blob/master/img/where-to-code.png)
 
+## Get Help !
+We maintain an example based code documentation
+
+All you need to know to solve those exercises is described in them.
+- [Primitive and Operators](https://github.com/nan-academy/js-training/blob/master/examples/primitive-and-operators.js) [[screencast](https://scrimba.com/c/cwyaEAd)]
+- [Variables](https://github.com/nan-academy/js-training/blob/master/examples/variables.js) [[screencast](https://scrimba.com/c/cLrBKA8)]
+- [Data-Structures](https://github.com/nan-academy/js-training/blob/master/examples/data-structures.js) [[screencast](https://scrimba.com/c/c9Py3sG)]
+- [Get](https://github.com/nan-academy/js-training/blob/master/examples/get.js) [[screencast](https://scrimba.com/c/cvzg2Tq)]
+- [Set](https://github.com/nan-academy/js-training/blob/master/examples/set.js) [[screencast](https://scrimba.com/c/cbWrGcg)]
+- ...[full list](https://github.com/nan-academy/js-training/tree/master/examples)
+
 ## Update
 We may update tests, to apply them fetch and merge the master branch back to
 your branch.
