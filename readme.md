@@ -1,14 +1,11 @@
 ## Setup
-First, fork this repository.
+First, [**fork**](https://github.com/nan-academy/js-trainig#fork-destination-box) this repository.
 ```sh
 # download your code locally
-git clone https://github.com/$GITHUB_LOGIN/js-training.git
+git clone https://github.com/GITHUB_LOGIN/js-training.git
 
 # change working directory to the newly cloned repository
 cd js-training
-
-# get on your own branch
-git checkout -b train
 ```
 
 ## Testing
@@ -57,7 +54,6 @@ your branch.
 git merge pull push branch checkout origin master stash pop
 ```
 
-
 ## Test Style
 We recommand to use [`editorconfig`](http://editorconfig.org/#download) to
 auto-config your editor to match the coding style
@@ -73,7 +69,7 @@ We greatly recommand you to add your own tests to this list
 
 - add your test file *(ex: `exercises/my-test.js`)*
 - edit `package.json` and add `"my-test"` to the `"tests"` array
-- make a pull request !
+- make a pull request ! `https://github.com/nan-academy/js-training/compare/master...GITHUB_LOGIN:master`
 
-All the tests must be written using [assert](https://nodejs.org/api/assert.html)
-for the tester to work properly.
+*All the tests must be written using [assert](https://nodejs.org/api/assert.html)
+for `./tester` to work properly.*
