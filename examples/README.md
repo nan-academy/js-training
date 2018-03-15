@@ -10,7 +10,7 @@ Commented code exemples for JavaScript
 - [Methods](https://github.com/nan-academy/js-training/blob/master/examples/methods.js)
 - [Ternary](https://github.com/nan-academy/js-training/blob/master/examples/ternary.js)
 - [If / Else](https://github.com/nan-academy/js-training/blob/master/examples/if-else.js)
-- [Loops](https://github.com/nan-academy/js-training/blob/master/examples/while.js)
+- [Loops](https://github.com/nan-academy/js-training/blob/master/examples/loops.js)
 - [Recursion](https://github.com/nan-academy/js-training/blob/master/examples/recursion.js)
 - *[Functions as Values](https://github.com/nan-academy/js-training/blob/master/examples/functions-as-values.js)* **WIP**
 - *[Callback](https://github.com/nan-academy/js-training/blob/master/examples/callback.js)* **WIP**

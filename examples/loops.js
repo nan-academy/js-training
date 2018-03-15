@@ -33,3 +33,34 @@ const times5 = n => {
   // loop is over !
   return result // return our result
 }
+
+
+/*
+
+  for..of
+
+  For..Of is a cleaner way to iterate over an iterable (Array, Strings, etc...)
+  It's the most usefull type of loops.
+
+  Here is the basic syntax :
+  for (const element of iterable) {
+    // code
+  }
+
+ */
+
+// Let's see how we could count how many letter O are in this sentence :
+const sentence = 'How are you today ?'
+
+let countOfTheLetterO = 0 // this will hold our total
+
+// for each element of our string
+// we assign it's value to a const variable named letter
+for (const letter of sentence) { // our loop will stop on reaching the end
+  if (letter === 'o') {
+    // we have a match ! better add it to our total now...
+    countOfTheLetterO = countOfTheLetterO + 1
+  }
+}
+
+// and that's all there is to it !
