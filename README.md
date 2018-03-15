@@ -58,6 +58,17 @@ All you need to know to solve those exercises is described in them.
 - ...[full list](https://github.com/nan-academy/js-training/tree/master/examples)
 
 And we also made you a currated list of all the most usefull methods :
+
+- Math
+  [min](https://devdocs.io/javascript/global_objects/math/min),
+  [max](https://devdocs.io/javascript/global_objects/math/max),
+  [abs](https://devdocs.io/javascript/global_objects/math/abs),
+  [sign](https://devdocs.io/javascript/global_objects/math/sign),
+  [round](https://devdocs.io/javascript/global_objects/math/round),
+  [floor](https://devdocs.io/javascript/global_objects/math/floor),
+  [ceil](https://devdocs.io/javascript/global_objects/math/ceil),
+  [trunc](https://devdocs.io/javascript/global_objects/math/trunc),
+  _[random](https://devdocs.io/javascript/global_objects/math/random)*_
 - String
   - Transform
     [slice](https://devdocs.io/javascript/global_objects/string/slice),
@@ -70,7 +81,6 @@ And we also made you a currated list of all the most usefull methods :
     [trimLeft](https://devdocs.io/javascript/global_objects/string/trimleft),
     [padStart](https://devdocs.io/javascript/global_objects/string/padstart),
     [padEnd](https://devdocs.io/javascript/global_objects/string/padend)
-
   - Search
     [includes](https://devdocs.io/javascript/global_objects/string/includes),
     [startsWidth](https://devdocs.io/javascript/global_objects/string/startswidth),
@@ -78,30 +88,16 @@ And we also made you a currated list of all the most usefull methods :
     [indexOf](https://devdocs.io/javascript/global_objects/string/indexof),
     [lastIndexOf](https://devdocs.io/javascript/global_objects/string/lastindexof),
     [charCodeAt](https://devdocs.io/javascript/global_objects/string/charcodeat)
-
-  - Math
-    [min](https://devdocs.io/javascript/global_objects/math/min),
-    [max](https://devdocs.io/javascript/global_objects/math/max),
-    [abs](https://devdocs.io/javascript/global_objects/math/abs),
-    [sign](https://devdocs.io/javascript/global_objects/math/sign),
-    [round](https://devdocs.io/javascript/global_objects/math/round),
-    [floor](https://devdocs.io/javascript/global_objects/math/floor),
-    [ceil](https://devdocs.io/javascript/global_objects/math/ceil),
-    [trunc](https://devdocs.io/javascript/global_objects/math/trunc),
-    _[random](https://devdocs.io/javascript/global_objects/math/random)*_
-
 - Arrays
 [Array.from](https://devdocs.io/javascript/global_objects/array/from),
 [Array.isArray](https://devdocs.io/javascript/global_objects/array/isarray),
 _[fill](https://devdocs.io/javascript/global_objects/array/fill)*_
-
   - Search
     [find](https://devdocs.io/javascript/global_objects/array/find),
     [findIndex](https://devdocs.io/javascript/global_objects/array/findindex),
     [includes](https://devdocs.io/javascript/global_objects/array/includes),
     [indexOf](https://devdocs.io/javascript/global_objects/array/indexof),
     [lastIndexOf](https://devdocs.io/javascript/global_objects/array/lastindexof)
-
   - Transform
     [concat](https://devdocs.io/javascript/global_objects/array/concat),
     [join](https://devdocs.io/javascript/global_objects/array/join),
@@ -111,11 +107,9 @@ _[fill](https://devdocs.io/javascript/global_objects/array/fill)*_
     _[shift](https://devdocs.io/javascript/global_objects/array/shift)*_,
     _[unshift](https://devdocs.io/javascript/global_objects/array/unshift)*_,
     _[splice](https://devdocs.io/javascript/global_objects/array/splice)*_
-
   - Re-order
     _[reverse](https://devdocs.io/javascript/global_objects/array/reverse)*_,
     _[sort](https://devdocs.io/javascript/global_objects/array/sort)*_
-
   - Functionnal Iteration
     [forEach](https://devdocs.io/javascript/global_objects/array/foreach),
     [filter](https://devdocs.io/javascript/global_objects/array/filter),
