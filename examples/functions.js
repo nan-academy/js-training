@@ -100,7 +100,7 @@ const add10 = n => add5(add5(n))
 console.log(add10(10))
 
 // And just like that build up complexity
-const op1 = n => add10(multiply(n), add5(n))
+const op1 = n => add10(multiply(n, add5(n)))
 
 /*
 
