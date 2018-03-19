@@ -2,7 +2,7 @@
 ## Setup
 First, [**fork**](https://github.com/nan-academy/js-training/fork?fragment=1) this repository.
 ### globals dependencies
-install globaly node and npm
+install globaly node on your computer
 
 ```sh
 # download your code locally
@@ -10,9 +10,6 @@ git clone https://github.com/GITHUB_LOGIN/js-training.git
 
 # change working directory to the newly cloned repository
 cd js-training
-
-# install dependencies
-npm install
 
 ```
 
