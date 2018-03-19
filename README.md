@@ -147,6 +147,10 @@ We also made an `.eslint` rule to help you formating your code.
 You may want to use [`eslint`](https://eslint.org/) and [`prettier-eslint`](https://github.com/prettier/prettier-eslint) for painless application of
 the style
 
+## Automated test
+We recommand to use [Travis](https://travis-ci.org) to automatise the testing phase, allow this repo and add this code in your README
+`[![Build Status](https://travis-ci.org/GITHUB_USER/js-training.svg?branch=master)](https://travis-ci.org/GITHUB_USER/js-training)`
+by remplacing GITHUB_USER by your github user
 
 ## Contribute
 We greatly recommand you to add your own tests to this list
