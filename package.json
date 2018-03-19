@@ -2,40 +2,133 @@
   "private": true,
   "index": "primitives.js",
   "tests": [
-    "primitives",
-    "escape-str",
-    "arr",
-    "obj",
-    "circular",
-    "get-length",
-    "get-first",
-    "get-last",
-    "id",
-    "concat-str",
-    "get",
-    "add",
-    "sub",
-    "abs",
-    "max",
-    "min",
-    "is-positive",
-    "sign",
-    "same-sign",
-    "repeat",
-    "sentence",
-    "words",
-    "whisper",
-    "yell",
-    "cut",
-    "keep",
-    "capitalize",
-    "jaden-case",
-    "total",
-    "multiply",
-    "multiply-recursive"
+    {
+      "step": "basics",
+      "name": "primitives"
+    },
+    {
+      "step": "str",
+      "name": "escape-str"
+    },
+    {
+      "step": "basics",
+      "name": "arr"
+    },
+    {
+      "step": "basics",
+      "name": "obj"
+    },
+    {
+      "step": "",
+      "name": "circular"
+    },
+    {
+      "step": "gets",
+      "name": "get-length"
+    },
+    {
+      "step": "gets",
+      "name": "get-first"
+    },
+    {
+      "step": "gets",
+      "name": "get-last"
+    },
+    {
+      "step": 3,
+      "name": "id"
+    },
+    {
+      "step": "str",
+      "name": "concat-str"
+    },
+    {
+      "step": "gets",
+      "name": "get"
+    },
+    {
+      "step": "math",
+      "name": "add"
+    },
+    {
+      "step": "math",
+      "name": "sub"
+    },
+    {
+      "step": "math",
+      "name": "abs"
+    },
+    {
+      "step": "math",
+      "name": "max"
+    },
+    {
+      "step": "math",
+      "name": "min"
+    },
+    {
+      "step": "math",
+      "name": "is-positive"
+    },
+    {
+      "step": "math",
+      "name": "sign"
+    },
+    {
+      "step": "math",
+      "name": "same-sign"
+    },
+    {
+      "step": "str",
+      "name": "repeat"
+    },
+    {
+      "step": "str",
+      "name": "sentence"
+    },
+    {
+      "step": "str",
+      "name": "words"
+    },
+    {
+      "step": "str",
+      "name": "whisper"
+    },
+    {
+      "step": "advanced",
+      "name": "yell"
+    },
+    {
+      "step": "str",
+      "name": "cut"
+    },
+    {
+      "step": "str",
+      "name": "keep"
+    },
+    {
+      "step": "str",
+      "name": "capitalize"
+    },
+    {
+      "step": "str",
+      "name": "jaden-case"
+    },
+    {
+      "step": "math",
+      "name": "total"
+    },
+    {
+      "step": "math",
+      "name": "multiply"
+    },
+    {
+      "step": "advanced",
+      "name": "multiply-recursive"
+    }
   ],
   "scripts": {
-    "update": "git reset && git stash && git pull https://github.com/nan-ci/js.git master && git stash pop",
-    "test": "./tester"
-  }
+    "update": "git reset && git stash && git pull https://github.com/nan-ci/js.git master && git stash pop"
+  },
+  "test": "./tester"
 }

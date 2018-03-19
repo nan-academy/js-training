@@ -1,11 +1,16 @@
+[![Build Status](https://travis-ci.org/riderx/js-training.svg?branch=master)](https://travis-ci.org/riderx/js-training)
 ## Setup
 First, [**fork**](https://github.com/nan-academy/js-training/fork?fragment=1) this repository.
+### globals dependencies
+install globaly node on your computer
+
 ```sh
 # download your code locally
 git clone https://github.com/GITHUB_LOGIN/js-training.git
 
 # change working directory to the newly cloned repository
 cd js-training
+
 ```
 
 ## Testing
@@ -18,6 +23,11 @@ You may either use our test tool to check all files
 ```
 ![output-tester](https://github.com/nan-academy/js-training/blob/master/img/output-tester.png)
 
+Or you can run only a some tests with 
+```sh
+# run the test runner with args ( basics, advanced, math, get)
+./tester basics
+```
 Or you can test files one by one with node
 ```sh
 # open a file in node
@@ -139,13 +149,17 @@ We also made an `.eslint` rule to help you formating your code.
 You may want to use [`eslint`](https://eslint.org/) and [`prettier-eslint`](https://github.com/prettier/prettier-eslint) for painless application of
 the style
 
+## Automated test
+We recommand to use [Travis](https://travis-ci.org) to automatise the testing phase, allow this repo and add this code in your README
+`[![Build Status](https://travis-ci.org/GITHUB_USER/js-training.svg?branch=master)](https://travis-ci.org/GITHUB_USER/js-training)`
+by remplacing GITHUB_USER by your github user
 
 ## Contribute
 We greatly recommand you to add your own tests to this list
 
 - add your test file *(ex: `exercises/my-test.js`)*
-- edit `package.json` and add `"my-test"` to the `"tests"` array
-- make a pull request ! `https://github.com/nan-academy/js-training/compare/master...GITHUB_LOGIN:master`
+- edit `package.json` and add `"my-test"` to the `"tests"` array with the syntax `{"step": X, "name": NAME}` where you replace the step (x) and the name (NAME)  
+- make a pull request !`https://github.com/nan-academy/js-training/compare/master...GITHUB_LOGIN:master`
 
 *All the tests must be written using [assert](https://nodejs.org/api/assert.html)
 for `./tester` to work properly.*
