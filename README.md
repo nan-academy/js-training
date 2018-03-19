@@ -153,8 +153,8 @@ by remplacing GITHUB_USER by your github user
 We greatly recommand you to add your own tests to this list
 
 - add your test file *(ex: `exercises/my-test.js`)*
-- edit `package.json` and add `"my-test"` to the `"tests"` array
-- make a pull request ! `https://github.com/nan-academy/js-training/compare/master...GITHUB_LOGIN:master`
+- edit `package.json` and add `"my-test"` to the `"tests"` array with the syntax `{"step": X, "name": NAME}` where you replace the step (x) and the name (NAME)  
+- make a pull request !`https://github.com/nan-academy/js-training/compare/master...GITHUB_LOGIN:master`
 
 *All the tests must be written using [assert](https://nodejs.org/api/assert.html)
 for `./tester` to work properly.*
