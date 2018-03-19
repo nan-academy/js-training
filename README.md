@@ -2,7 +2,7 @@
 ## Setup
 First, [**fork**](https://github.com/nan-academy/js-training/fork?fragment=1) this repository.
 ### globals dependencies
-install globaly node and yarn
+install globaly node and npm
 
 ```sh
 # download your code locally
@@ -12,7 +12,7 @@ git clone https://github.com/GITHUB_LOGIN/js-training.git
 cd js-training
 
 # install dependencies
-yarn
+npm install
 
 ```
 

@@ -6,8 +6,8 @@
 'no0.blk30.red31.grn32.ylw33.blu34.mgt35.cyn36.wht37'
   .split('.')
   .map(str => str.split(/([0-9]+)$/))
-  .forEach(([ name, value ]) => {
-    String.prototype[name]       = function () { return `\u001b[${value}m${this}\u001b[0m` }
+  .forEach(([name, value]) => {
+    String.prototype[name] = function () { return `\u001b[${value}m${this}\u001b[0m` }
     String.prototype[`_${name}`] = function () { return `\u001b[${value};1m${this}\u001b[0m` }
   })
 
@@ -33,10 +33,10 @@ const wrapInParen = ((open, close) => str => `${open}${str}${close}`)('('.wht(),
 const prettyPath = p => p.split(':').map(formatPathParts).join('')
 const parseStackLine = (line, err) => {
   if (!line) return ''
-  let [ , src, path ] = line.split(/at (.+) \((.+)\)$/)
+  let [, src, path] = line.split(/at (.+) \((.+)\)$/)
   if (!src) return wrapInParen(prettyPath(line))
   if ((src).includes('anonymous')) {
-    src = err.key ? `assert.${err.key.cyn()}` :(err.name || 'Error').cyn()
+    src = err.key ? `assert.${err.key.cyn()}` : (err.name || 'Error').cyn()
   }
   return wrapInParen(`${src} ${prettyPath(path)}`)
 }
@@ -55,7 +55,7 @@ Object.keys(assert).filter(key => key !== 'fail').forEach(key => {
     } catch (err) {
       current.allPass = false
       err.key = key
-      current.push(`  ✗`.red() +' '+ (current.length + 1) +' '+ prettyStack(err))
+      current.push(`  ✗`.red() + ' ' + (current.length + 1) + ' ' + prettyStack(err))
     }
   }
 })
@@ -90,5 +90,6 @@ Promise.all(pkg.tests.map(async key => ({
   if (failedTestCount > 1) {
     console.log(`...and ${failedTestCount - 1} more to pass.`.wht())
   }
+  process.exit(failedTestCount);
 }).catch(console.error)
 
