@@ -2,40 +2,133 @@
   "private": true,
   "index": "primitives.js",
   "tests": [
-    "primitives",
-    "escape-str",
-    "arr",
-    "obj",
-    "circular",
-    "get-length",
-    "get-first",
-    "get-last",
-    "id",
-    "concat-str",
-    "get",
-    "add",
-    "sub",
-    "abs",
-    "max",
-    "min",
-    "is-positive",
-    "sign",
-    "same-sign",
-    "repeat",
-    "sentence",
-    "words",
-    "whisper",
-    "yell",
-    "cut",
-    "keep",
-    "capitalize",
-    "jaden-case",
-    "total",
-    "multiply",
-    "multiply-recursive"
+    {
+      "step": 1,
+      "name": "primitives"
+    },
+    {
+      "step": 1,
+      "name": "escape-str"
+    },
+    {
+      "step": 1,
+      "name": "arr"
+    },
+    {
+      "step": 1,
+      "name": "obj"
+    },
+    {
+      "step": 2,
+      "name": "circular"
+    },
+    {
+      "step": 2,
+      "name": "get-length"
+    },
+    {
+      "step": 2,
+      "name": "get-first"
+    },
+    {
+      "step": 2,
+      "name": "get-last"
+    },
+    {
+      "step": 3,
+      "name": "id"
+    },
+    {
+      "step": 3,
+      "name": "concat-str"
+    },
+    {
+      "step": 3,
+      "name": "get"
+    },
+    {
+      "step": 3,
+      "name": "add"
+    },
+    {
+      "step": 4,
+      "name": "sub"
+    },
+    {
+      "step": 4,
+      "name": "abs"
+    },
+    {
+      "step": 4,
+      "name": "max"
+    },
+    {
+      "step": 4,
+      "name": "min"
+    },
+    {
+      "step": 5,
+      "name": "is-positive"
+    },
+    {
+      "step": 5,
+      "name": "sign"
+    },
+    {
+      "step": 5,
+      "name": "same-sign"
+    },
+    {
+      "step": 5,
+      "name": "repeat"
+    },
+    {
+      "step": 1,
+      "name": "sentence"
+    },
+    {
+      "step": 1,
+      "name": "words"
+    },
+    {
+      "step": 1,
+      "name": "whisper"
+    },
+    {
+      "step": 1,
+      "name": "yell"
+    },
+    {
+      "step": 1,
+      "name": "cut"
+    },
+    {
+      "step": 1,
+      "name": "keep"
+    },
+    {
+      "step": 1,
+      "name": "capitalize"
+    },
+    {
+      "step": 1,
+      "name": "jaden-case"
+    },
+    {
+      "step": 1,
+      "name": "total"
+    },
+    {
+      "step": 1,
+      "name": "multiply"
+    },
+    {
+      "step": 1,
+      "name": "multiply-recursive"
+    }
   ],
   "scripts": {
-    "update": "git reset && git stash && git pull https://github.com/nan-ci/js.git master && git stash pop",
-    "test": "./tester"
-  }
+    "update": "git reset && git stash && git pull https://github.com/nan-ci/js.git master && git stash pop"
+  },
+  "test": "./tester"
 }
