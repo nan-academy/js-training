@@ -1,2 +1,2 @@
-install: yarn
+install: npm
 script: ./tester
