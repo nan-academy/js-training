@@ -23,6 +23,11 @@ You may either use our test tool to check all files
 ```
 ![output-tester](https://github.com/nan-academy/js-training/blob/master/img/output-tester.png)
 
+Or you can run only a some tests with 
+```sh
+# run the test runner with args ( basics, advanced, math, get)
+./tester basics
+```
 Or you can test files one by one with node
 ```sh
 # open a file in node

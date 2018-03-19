@@ -3,35 +3,35 @@
   "index": "primitives.js",
   "tests": [
     {
-      "step": 1,
+      "step": "basics",
       "name": "primitives"
     },
     {
-      "step": 1,
+      "step": "str",
       "name": "escape-str"
     },
     {
-      "step": 1,
+      "step": "basics",
       "name": "arr"
     },
     {
-      "step": 1,
+      "step": "basics",
       "name": "obj"
     },
     {
-      "step": 2,
+      "step": "",
       "name": "circular"
     },
     {
-      "step": 2,
+      "step": "gets",
       "name": "get-length"
     },
     {
-      "step": 2,
+      "step": "gets",
       "name": "get-first"
     },
     {
-      "step": 2,
+      "step": "gets",
       "name": "get-last"
     },
     {
@@ -39,91 +39,91 @@
       "name": "id"
     },
     {
-      "step": 3,
+      "step": "str",
       "name": "concat-str"
     },
     {
-      "step": 3,
+      "step": "gets",
       "name": "get"
     },
     {
-      "step": 3,
+      "step": "math",
       "name": "add"
     },
     {
-      "step": 4,
+      "step": "math",
       "name": "sub"
     },
     {
-      "step": 4,
+      "step": "math",
       "name": "abs"
     },
     {
-      "step": 4,
+      "step": "math",
       "name": "max"
     },
     {
-      "step": 4,
+      "step": "math",
       "name": "min"
     },
     {
-      "step": 5,
+      "step": "math",
       "name": "is-positive"
     },
     {
-      "step": 5,
+      "step": "math",
       "name": "sign"
     },
     {
-      "step": 5,
+      "step": "math",
       "name": "same-sign"
     },
     {
-      "step": 5,
+      "step": "str",
       "name": "repeat"
     },
     {
-      "step": 1,
+      "step": "str",
       "name": "sentence"
     },
     {
-      "step": 1,
+      "step": "str",
       "name": "words"
     },
     {
-      "step": 1,
+      "step": "str",
       "name": "whisper"
     },
     {
-      "step": 1,
+      "step": "advanced",
       "name": "yell"
     },
     {
-      "step": 1,
+      "step": "str",
       "name": "cut"
     },
     {
-      "step": 1,
+      "step": "str",
       "name": "keep"
     },
     {
-      "step": 1,
+      "step": "str",
       "name": "capitalize"
     },
     {
-      "step": 1,
+      "step": "str",
       "name": "jaden-case"
     },
     {
-      "step": 1,
+      "step": "math",
       "name": "total"
     },
     {
-      "step": 1,
+      "step": "math",
       "name": "multiply"
     },
     {
-      "step": 1,
+      "step": "advanced",
       "name": "multiply-recursive"
     }
   ],
