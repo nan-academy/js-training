@@ -1,1 +1,2 @@
 script: ./tester
+language: node_js
