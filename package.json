@@ -2,37 +2,130 @@
   "private": true,
   "index": "primitives.js",
   "tests": [
-    "primitives",
-    "escape-str",
-    "arr",
-    "obj",
-    "circular",
-    "get-length",
-    "get-first",
-    "get-last",
-    "id",
-    "concat-str",
-    "get",
-    "add",
-    "sub",
-    "abs",
-    "max",
-    "min",
-    "is-positive",
-    "sign",
-    "same-sign",
-    "repeat",
-    "sentence",
-    "words",
-    "whisper",
-    "yell",
-    "cut",
-    "keep",
-    "capitalize",
-    "jaden-case",
-    "total",
-    "multiply",
-    "multiply-recursive"
+    {
+      "name": "primitives",
+      "tags": [ "basics", "declaration" ]
+    },
+    {
+      "name": "escape-str",
+      "tags": [ "str", "declaration" ]
+    },
+    {
+      "name": "arr",
+      "tags": [ "basics", "declaration" ]
+    },
+    {
+      "name": "obj",
+      "tags": [ "basics", "declaration" ]
+    },
+    {
+      "name": "circular",
+      "tags": [ "advanced", "declaration" ]
+    },
+    {
+      "name": "id",
+      "tags": [ "basics", "declaration", "function" ]
+    },
+    {
+      "name": "get-length",
+      "tags": [ "gets", "function" ]
+    },
+    {
+      "name": "get-first",
+      "tags": [ "gets", "function" ]
+    },
+    {
+      "name": "get-last",
+      "tags": [ "gets", "function" ]
+    },
+    {
+      "name": "concat-str",
+      "tags": [ "str", "function", "opperator" ]
+    },
+    {
+      "name": "get",
+      "tags": [ "gets", "function" ]
+    },
+    {
+      "name": "is-positive",
+      "tags": [ "math", "function" ]
+    },
+    {
+      "name": "add",
+      "tags": [ "math", "opperator", "function" ]
+    },
+    {
+      "name": "sub",
+      "tag": "math"
+    },
+    {
+      "name": "abs",
+      "tag": "math"
+    },
+    {
+      "name": "max",
+      "tag": "math"
+    },
+    {
+      "name": "min",
+      "tag": "math"
+    },
+    {
+      "name": "sign",
+      "tag": "math"
+    },
+    {
+      "name": "same-sign",
+      "tag": "math"
+    },
+    {
+      "name": "repeat",
+      "tags": [ "str" ]
+    },
+    {
+      "name": "sentence",
+      "tags": [ "str", "method" ]
+    },
+    {
+      "name": "words",
+      "tags": [ "str", "method" ]
+    },
+    {
+      "name": "yell",
+      "tags": [ "str", "tdd", "method" ]
+    },
+    {
+      "name": "whisper",
+      "tags": [ "str", "tdd", "method" ]
+    },
+    {
+      "name": "cut",
+      "tags": [ "str", "tdd", "method" ]
+    },
+    {
+      "name": "keep",
+      "tags": [ "str", "tdd", "method" ]
+    },
+    {
+      "name": "capitalize",
+      "tags": [ "str", "method" ]
+    },
+    {
+      "name": "jaden-case",
+      "tags": [ "advanced", "tdd", "method" ]
+    },
+    {
+      "name": "total",
+      "tag": "math"
+    },
+    {
+      "name": "multiply",
+      "tag": "math"
+    },
+    {
+      "name": "multiply-recursive",
+      "tags": [ "advanced", "recursion" ]
+    }
   ],
   "scripts": {
     "update": "git reset && git stash && git pull https://github.com/nan-ci/js.git master && git stash pop",
