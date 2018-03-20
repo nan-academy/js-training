@@ -32,7 +32,7 @@ Or you can run only a some tests with
 Or you can test files one by one with node
 ```sh
 # open a file in node
-node exercises/primitive
+node exercises/primitives
 ```
 ![output-node](https://github.com/nan-academy/js-training/blob/master/img/output-node.png)
 
@@ -44,13 +44,13 @@ node exercises/primitive
 You can start editing the javascript files with your favorite text editor.
 ```sh
 # Sublime Text
-subl primitive.js
+subl primitives.js
 
 # VSCode
-code primitive.js
+code primitives.js
 
 # Vim
-vim primitive.js
+vim primitives.js
 
 # I can not be held responsable if you use anything else.
 ```
