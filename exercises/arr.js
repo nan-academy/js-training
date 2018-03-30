@@ -1,7 +1,7 @@
 'use strict'
 
 /*
- * Create a constant variables named `arr` that contains an array of 4 and '2'
+ * Create a constant variable named `arr` that is an array containing the values 4 and '2'
  *
  * @notions Data-Structures
  */

@@ -1,7 +1,7 @@
 'use strict'
 
 /*
- * Create a getLast function that takes an array or a string
+ * Create a `getLast` function that takes an array or a string
  * and return the last element.
  *
  * @notions Data-Structures, Get

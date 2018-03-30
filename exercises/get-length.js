@@ -1,8 +1,8 @@
 'use strict'
 
 /*
- * Create a getLength function that takes an array or a string
- * and return it's length.
+ * Create a `getLength` function that takes an array or a string
+ * and return its length.
  *
  * @notions Data-Structures, Get
  */

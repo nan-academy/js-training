@@ -1,8 +1,8 @@
 'use strict'
 
 /*
- * Create a constant variables named `escapeStr` that contains specials
- * characters: /\`"'
+ * Create a constant variable named `escapeStr` that contains
+ * the following specials characters: /\`"'
  *
  * @notions Primitive and Operators, Variables
  */

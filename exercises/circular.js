@@ -1,7 +1,7 @@
 'use strict'
 
 /*
- * Create an object `circular` that has a property named `circular` with
+ * Create an object named `circular` that has a property named `circular` with
  * itself as the value
  *
  * @notions Data-Structures, Get, Set

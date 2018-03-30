@@ -1,7 +1,7 @@
 'use strict'
 
 /*
- * Create the function `sameSign` that takes 2 numbers arguments and check
+ * Create the `sameSign` function that takes 2 numbers as arguments and check
  * if they both have the same sign
  *
  * @notions Functions, If-Else
