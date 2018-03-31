@@ -11,6 +11,21 @@
 
 // Your code :
 
+function max(x, y) {
+    if (isNaN(x,y)) {
+    return (x, y);
+} else if {
+    return Math.max(x,y);
+}
+}
+
+/*function max (x,y) {
+    if (x > y) { 
+        return x
+    } else {
+    return y;
+}
+}*/
 //* Begin of tests
 const assert = require('assert')
 
