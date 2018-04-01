@@ -1,7 +1,7 @@
 'use strict'
 
 /*
- * Create a function `repeat` that takes a String and a Number
+ * Create a `repeat` function that takes a string and a number as parameters
  * and return the repeated string by the given number
  * Like the method https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
  * Of course you may not use the method directly

@@ -1,7 +1,7 @@
 'use strict'
 
 /*
- * Create a get function that takes a key and return the corresponding value
+ * Create a `get` function that takes a key and return the corresponding value
  * in the sourceObject
  *
  * @notions Functions, Data-Structures, Get

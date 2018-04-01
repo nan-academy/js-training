@@ -1,7 +1,7 @@
 'use strict'
 
 /*
- * Create a function `sub` that takes 2 arguments and substract them
+ * Create a `sub` function that takes 2 numbers as arguments and substract them
  *
  * @notions Primitive and Operators, Functions
  */

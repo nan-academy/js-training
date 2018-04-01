@@ -1,8 +1,8 @@
 'use strict'
 
 /*
- * Create a function `yell` that takes a string
- * and return the same string but all in upper case
+ * Create a `yell` function that takes a string
+ * and return the same string in upper case
  *
  */
 

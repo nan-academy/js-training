@@ -1,7 +1,7 @@
 'use strict'
 
 /*
- * Create a function `id` that takes one argument and return it
+ * Create an `id` function that takes one argument and return it
  *
  * @notions Functions
  */
