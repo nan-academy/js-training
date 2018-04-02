@@ -7,6 +7,7 @@
  */
 
 // Your code :
+const concatStr = (s1, s2) => [ ...s1, ...s2 ].join('')
 
 //* Begin of tests
 const assert = require('assert')
