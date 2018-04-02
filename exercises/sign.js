@@ -11,6 +11,17 @@
  */
 
 // Your code :
+const sign = num => {
+  if (num > 0) {
+    return 1
+  }
+
+  if (num < 0) {
+    return -1
+  }
+
+  return 0
+}
 
 //* Begin of tests
 const assert = require('assert')

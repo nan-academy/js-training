@@ -8,6 +8,8 @@
  *
  */
 
+const repeat = (str, num) => Array(num + 1).join(str)
+
 //* Begin of tests
 const assert = require('assert')
 
