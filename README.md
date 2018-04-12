@@ -95,7 +95,7 @@ And we also made you a currated list of all the most usefull methods :
   - Search
     [includes](https://devdocs.io/javascript/global_objects/string/includes),
     [startsWidth](https://devdocs.io/javascript/global_objects/string/startswidth),
-    [endsWith](https://devdocs.io/javascript/global_objects/string/endswith),
+    [endsWidth](https://devdocs.io/javascript/global_objects/string/endswidth),
     [indexOf](https://devdocs.io/javascript/global_objects/string/indexof),
     [lastIndexOf](https://devdocs.io/javascript/global_objects/string/lastindexof),
     [charCodeAt](https://devdocs.io/javascript/global_objects/string/charcodeat)
