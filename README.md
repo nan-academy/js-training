@@ -129,6 +129,12 @@ _[fill](https://devdocs.io/javascript/global_objects/array/fill)*_
     [map](https://devdocs.io/javascript/global_objects/array/map),
     [reduce](https://devdocs.io/javascript/global_objects/array/reduce),
     [reduceRight](https://devdocs.io/javascript/global_objects/array/reduceright)
+- Object
+  [keys](https://devdocs.io/javascript/global_objects/object/keys),
+  [values](https://devdocs.io/javascript/global_objects/object/values),
+  [entries](https://devdocs.io/javascript/global_objects/object/entries),
+  [assign](https://devdocs.io/javascript/global_objects/object/assign),
+  [fromEntries](https://devdocs.io/javascript/global_objects/object/fromEntries)
 
 _(*) methods in italics are **NOT** pure (using them with the same arguments won't return the same result).
 They must be used with caution as it is harder to predict their results_
