@@ -94,8 +94,8 @@ And we also made you a currated list of all the most usefull methods :
     [padEnd](https://devdocs.io/javascript/global_objects/string/padend)
   - Search
     [includes](https://devdocs.io/javascript/global_objects/string/includes),
-    [startsWidth](https://devdocs.io/javascript/global_objects/string/startswidth),
-    [endsWidth](https://devdocs.io/javascript/global_objects/string/endswidth),
+    [startsWith](https://devdocs.io/javascript/global_objects/string/startswith),
+    [endsWith](https://devdocs.io/javascript/global_objects/string/endswith),
     [indexOf](https://devdocs.io/javascript/global_objects/string/indexof),
     [lastIndexOf](https://devdocs.io/javascript/global_objects/string/lastindexof),
     [charCodeAt](https://devdocs.io/javascript/global_objects/string/charcodeat)
