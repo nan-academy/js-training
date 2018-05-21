@@ -7,6 +7,7 @@
  * Of course you may not use the method directly
  *
  */
+const repeat = (str, num) => Array(num).fill(str).join('');
 
 //* Begin of tests
 const assert = require('assert')
