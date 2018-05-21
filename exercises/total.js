@@ -5,7 +5,7 @@
  * and return the total
  *
  */
-
+const total = numbers => numbers.reduce((prev, next) => prev + next)
 
 //* Begin of tests
 const assert = require('assert')
