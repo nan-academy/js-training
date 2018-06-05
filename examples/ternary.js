@@ -24,7 +24,7 @@
   followed by : then the expression executed if the condition is falsy
 */
 
-const isTruthy = value => value ? console.log('yes') : console.log('no')
+const isTruthy = value => value ? 'yes' : 'no'
 
 console.log(isTruthy(5))
 console.log(isTruthy(0))
@@ -34,8 +34,8 @@ console.log(isTruthy(null))
 
 // for long expression, we can split our ternary in mutiline like so :
 const isTruthyVerbose = value => value
-  ? console.log('It appears to be something the truth can be find in')
-  : console.log('no, It is not anything close to the truth')
+  ? 'It appears to be something the truth can be find in'
+  : 'no, It is not anything close to the truth'
 
 console.log(isTruthyVerbose({}))
 console.log(isTruthyVerbose())
