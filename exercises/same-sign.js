@@ -21,6 +21,6 @@ assert.strictEqual(sameSign(12, 3232), true)
 assert.strictEqual(sameSign(1, -1), false)
 assert.strictEqual(sameSign(-231, 1), false)
 assert.strictEqual(sameSign(-231, 0), false)
-assert.strictEqual(sameSign(0, 231), false)
+assert.strictEqual(sameSign(0, 231), true)
 assert.strictEqual(sameSign(231, -233), false)
 // End of tests */
