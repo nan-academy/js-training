@@ -2,7 +2,7 @@
 
 /*
  * Create the `min` function that takes 2 number as arguments
- * and returns the greatest
+ * and returns the lowest
  * You must not just use `Math.min`, make your own.
  * see: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
  *
