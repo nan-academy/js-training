@@ -6,7 +6,16 @@
  * @notions Primitive and Operators, Functions
  */
 
-// Your code :
+// Your code : 
+const sub = (a,b) => a - b;
+
+/* ou
+function sub(a,b) {
+    let res = a - b;
+    return res;
+}
+*/
+
 
 //* Begin of tests
 const assert = require('assert')

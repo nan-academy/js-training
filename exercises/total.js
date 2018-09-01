@@ -6,6 +6,14 @@
  *
  */
 
+ // Your code :
+const total = (t) => t.reduce((a, b)=> a + b, 0);
+ /*
+function total(t) {
+    return t.reduce((a, b)=> a + b, 0);
+} 
+*/
+
 
 //* Begin of tests
 const assert = require('assert')

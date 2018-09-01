@@ -8,6 +8,18 @@
  */
 
 // Your code :
+const sameSign = (a,b) => (((a * b) > 0) || ((a === b) && (a === 0))) ? true : false;
+
+/*
+function sameSign(a, b) {
+    if (((a * b) > 0) || ((a === b) && (a === 0))) {
+        return true;        
+    }else{
+        return false;
+    }
+}
+*/
+
 
 //* Begin of tests
 const assert = require('assert')
