@@ -3,6 +3,13 @@
   "index": "primitives.js",
   "tests": [
     {
+      "name": "my-test",
+      "tags": [
+        "object",
+        "get"
+      ]
+    },
+    {
       "name": "primitives",
       "tags": [ "basics", "declaration" ]
     },
