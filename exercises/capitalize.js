@@ -7,6 +7,14 @@
  *
  */
 
+ // Your code :
+const capitalize = s => s[0].toUpperCase() + s.substring(1).toLowerCase();   // ou return s.charAt(0).toUpperCase() + s.slice(1);
+
+/*
+function capitalize(s){   
+    return s[0].toUpperCase() + s.substring(1).toLowerCase();   // ou return s.charAt(0).toUpperCase() + s.slice(1);     
+}
+*/
 
 //* Begin of tests
 const assert = require('assert')

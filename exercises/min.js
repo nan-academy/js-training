@@ -10,6 +10,20 @@
  */
 
 // Your code :
+const min = (a,b) => (a > b) ? b : a;
+
+/*
+function min(a,b){
+    if(a > b){
+        return b;
+    }else if(b > a){
+        return a;
+    }else{
+        return egal
+    }
+}
+*/
+
 
 //* Begin of tests
 const assert = require('assert')

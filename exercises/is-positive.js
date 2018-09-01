@@ -8,6 +8,17 @@
  */
 
 // Your code:
+const isPositive = (a) => (a > 0) ? true : false;
+
+/*
+function isPositive(a) {
+    if(a > 0){
+        return true;
+    }else{
+        return false;
+    }
+}
+*/
 
 
 //* Begin of tests
