@@ -126,6 +126,10 @@
       "name": "multiply-recursive",
       "tags": [ "advanced", "recursion" ]
     }
+    {
+      "name": "my-test",
+      "tags": "tests"
+    }
   ],
   "scripts": {
     "update": "git reset && git stash && git pull https://github.com/nan-ci/js.git master && git stash pop",
