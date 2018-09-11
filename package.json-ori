@@ -128,11 +128,11 @@
     },
     {
       "name": "my-test",
-      "tag": "tests"
+      "tags": "tests"
     }
   ],
   "scripts": {
     "update": "git reset && git stash && git pull https://github.com/nan-ci/js.git master && git stash pop",
-    "test": "./tester basics"
+    "test": "./tester"
   }
 }
