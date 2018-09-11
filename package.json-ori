@@ -128,7 +128,7 @@
     },
     {
       "name": "my-test",
-      "tag": "tests"
+      "tags": "tests"
     }
   ],
   "scripts": {
