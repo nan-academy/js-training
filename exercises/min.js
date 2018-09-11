@@ -10,6 +10,19 @@
  */
 
 // Your code :
+function min(arg1, arg2) {
+  let res;
+  if (arg1 < arg2) {
+    res = arg1;
+  } else {
+    if (arg2 < arg1) {
+      res = arg2;
+    } else {
+      res = "equals";
+    }
+  }
+  return res;
+}
 
 //* Begin of tests
 const assert = require('assert')

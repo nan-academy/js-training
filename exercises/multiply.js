@@ -9,6 +9,26 @@
  */
 
 // Your code :
+function multiply(arg1, arg2) {
+  let res = 0;
+  let i = 1;
+  let bool = false;
+  if (arg2 < 0) {
+    arg2 = -arg2;
+    bool = true;
+  }
+  while (i <= arg2) {
+    i = i + 1;
+    res = res + arg1;
+  }
+  if (bool) {
+    res = -res;
+  }
+  if (arg1 === 0 || arg2 === 0) {
+    res = 0;
+  }
+  return res;
+}
 
 //* Begin of tests
 const assert = require('assert')
