@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 /*
  * Create the `abs` function that takes one number argument
@@ -10,16 +10,23 @@
  */
 
 // Your code :
+function abs(a) {
+  if (a >= 0) {
+    return a;
+  } else {
+    return -1 * a;
+  }
+}
 
 //* Begin of tests
-const assert = require('assert')
+const assert = require("assert");
 
-assert.strictEqual(typeof abs, 'function')
-assert.strictEqual(abs.toString().includes('Math.abs'), false)
-assert.notStrictEqual(abs, Math.abs)
-assert.strictEqual(abs.length, 1)
-assert.strictEqual(abs(0), 0)
-assert.strictEqual(abs(-1), 1)
-assert.strictEqual(abs(-13.2), 13.2)
-assert.strictEqual(abs(132), 132)
+assert.strictEqual(typeof abs, "function");
+assert.strictEqual(abs.toString().includes("Math.abs"), false);
+assert.notStrictEqual(abs, Math.abs);
+assert.strictEqual(abs.length, 1);
+assert.strictEqual(abs(0), 0);
+assert.strictEqual(abs(-1), 1);
+assert.strictEqual(abs(-13.2), 13.2);
+assert.strictEqual(abs(132), 132);
 // End of tests */
