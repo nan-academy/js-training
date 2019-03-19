@@ -1,7 +1,7 @@
 script: ./tester
- language: node_js
+language: node_js
 node_js:
- - "node"
+- "11"
 env:
 - MY_VAR=EverythingIsAwesome
 - NODE_ENV=TEST
