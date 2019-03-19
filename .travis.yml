@@ -1,4 +1,18 @@
-script: ./tester
-language: node_js
+# script: ./tester
+# language: node_js
+# node_js:
+#   - "node"
+
+# language: node_js
+# node_js:
+#  - "node"
+
+ language: node_js
 node_js:
-  - "node"
+ - "node"
+env:
+- MY_VAR=EverythingIsAwesome
+- NODE_ENV=TEST
+
+
+secure: "F96UFMT64EWNnY7MIcyY4bS3LfokP02gh0CF/244fKbyX/VTaL5O+abP9c9tfvhXOaYvVGLcgikZopJgz8Yu9bRf5EDsy99l130fq4q4j0JiporDIBxuSBmmjtKUx774Nd8wLNH0ayDXVtZtVrU4+C3srXDQ/v+lCgLEkvAzCUZWVQehi9ANCRSfBC7jJ7Tjb4ZkLyR6/nqxzvlLwJd3HyGAGwcU8ASuQQiC3/ZhP+y3znko5vxMmAqpYLx2T/6LEs4iQNOYfXgvNnyCh50l2XqKNdpGt1emBrsYE3zzKuvk7CHk8fS7LEIqCPtSDJ8Nb2bY3UguYX7HJ8IzKwjeNjxY3ckLj8Yo+L9ddu6esZTkT9zfd0Jtnzj/YtEp9g6v2bz5jnnHB0iAgaJ9K6c6dMpiKRLufhmViWDyKQDcXNTJJiOUg7ucOEO/bhU9e1aMm5q1SbXjy4VOQVOiT+8lC+93hW1E4MIt393ysKVFEB6B5UvpOhSm/CWYsblkPNvffgVGweLhb0rGIrTZuRmxWi/e0TV3QshpssA3ZzZ3LqiEj2aREesGz8zP/a7jKzQy1IgTOhrsEq5Cg1VtWZjiYcwNeGi/FDulHNit8DjeKhqBlxlkqH3cbQqNYn+kmX+i1wQsWsCR7/Gp/R10MK6P0Q+mwQn/r7FDQeerhLr9Fgk="
