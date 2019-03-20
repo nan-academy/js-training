@@ -213,7 +213,7 @@
   ],
   "scripts": {
     "update": "git reset && git stash && git pull https://github.com/nan-ci/js.git master && git stash pop",
-    "test": "./tester"
+    "test": "./tester basics"
   },
   "devDependencies": {
     "jshint": "^2.10.2"
