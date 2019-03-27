@@ -7,6 +7,21 @@
  * Of course you may not use the method directly
  *
  */
+//code
+
+function repeat(a,b){
+    var rep = a;
+    for(let i = 0;i<b-1; i++){
+        rep = rep+a;
+    }
+    if(b==0){
+        return '';
+    }
+    else{
+        return rep;
+    }
+    
+}
 
 //* Begin of tests
 const assert = require('assert')

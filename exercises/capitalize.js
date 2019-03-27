@@ -6,8 +6,15 @@
  * and in lowercase for the rest of the string
  *
  */
-
-
+//code
+function capitalize(string){
+    let max = string.slice(0, 1)
+    let min = string.slice(1)
+    max = max.toUpperCase()
+    min = min.toLowerCase()
+    return max+min;
+    
+}
 //* Begin of tests
 const assert = require('assert')
 

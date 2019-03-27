@@ -6,7 +6,15 @@
  *
  */
 
-
+// Code
+function sentence(a){
+    let phrase = '';
+    for(let i=0;i<a.length;i++){
+        phrase += a[i];
+        phrase += " "
+    }
+    return phrase.slice(0, -1);
+}
 //* Begin of tests
 const assert = require('assert')
 

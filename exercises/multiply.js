@@ -10,6 +10,40 @@
 
 // Your code :
 
+function multiply(a,b){
+    var result = 0
+    var i = b
+    if(b < 0 && a < 0){
+        while(i < 0){
+            result -= a;
+            i++;
+        }
+    }
+    else if(b < 0 && a > 0){
+        while(i < 0){
+            result -= a;
+            i++;
+        }
+    }
+    else if(b > 0 && a > 0){
+        while(i > 0){
+            result += a;
+            i--;
+        }
+    }
+    else if(b > 0 && a < 0){
+        while(i > 0){
+            result += a;
+            i--;
+        }
+    }
+    else{
+        result = 0
+    }
+    
+    return result;
+}
+
 //* Begin of tests
 const assert = require('assert')
 
