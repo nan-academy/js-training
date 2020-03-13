@@ -161,12 +161,14 @@ const guessUrl = ({ host, pathname, hostname, origin }) => host.endsWith('.githu
   ? [origin]
   : [userContent, 'nan-academy', 'js-training']
 
-let _module
+let _module, _inPopState, _error, _lock
 const unslash = str => str.replace(/(^\/+|\/+$)/g, '')
 const baseUrl = `${location.origin}${location.pathname}`
 const contentUrl = guessUrl(location).join('/')
 const defaults = (arr, ...args) => args.map((v, i) => arr[i] || v)
 const loadHash = async (sourceHash, replace) => {
+  if (_inPopState) return
+  _inPopState = true
   const [exPath, versionPath=''] = sourceHash.replace(/^#(\/?)/, '').split('@')
   const version = versionPath
     ? defaults(unslash(versionPath).split('/'), 'nan-academy', 'js-training', 'master').join('/')
@@ -182,6 +184,7 @@ const loadHash = async (sourceHash, replace) => {
 
   const exercise = _module.exercises.includes(ex) ? ex : _module.exercises[0]
   const hash = `#${mod}.${exercise}${version?`@${version}`:''}`
+  hash === sourceHash || history[replace ? 'replaceState' : 'pushState']({}, '', `${baseUrl}${hash}`)
   const content = localStorage[hash] || (localStorage[hash] = await getContent(url, exercise))
   const [ subject ] = content.split('*/', 1)
   const testStartStr = 'export const tests = ['
@@ -206,11 +209,9 @@ const loadHash = async (sourceHash, replace) => {
     const className = `test-flash test-${++count}`
     cmEditor.doc.markText({ line: line-1, ch: 0 }, { line, ch: 0 }, { className })
   })
-
-  history[replace ?'replaceState' : 'pushState']({}, "", `${baseUrl}${hash}`)
+  _inPopState = false
 }
 
-let _error
 const wait = (delay, arg) => new Promise(s => setTimeout(s, delay, arg))
 const fail = fn => { try { fn() } catch (err) { return true } }
 const runner = async () => {
@@ -280,7 +281,6 @@ You deserve this.
        ~             ~        ~      ~      ~~   ~             ~`)
 }
 
-let _lock
 const runTests = () => _lock || (_lock = runner().finally(() => _lock = undefined))
 const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
 export const cmEditor = CodeMirror(document.getElementById('editor'), {
@@ -298,6 +298,8 @@ export const cmEditor = CodeMirror(document.getElementById('editor'), {
 cmEditor.on('change', e => localStorage[location.hash] = e.getValue())
 loadHash(location.hash, true)
   .catch(() => localStorage.clear() && location.reload())
+
+addEventListener('hashchange', () => loadHash(location.hash, true))
   </script>
 </body>
 </html>
