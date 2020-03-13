@@ -1,5 +1,13 @@
 const importText = code => import(URL.createObjectURL(new Blob([code], {type : 'text/javascript'})))
 
+// check import support
+const check = importText('export const ok = true')
+  .then(() => importText)
+  .catch(err => code => {
+    const tests = eval(`${code.replace(/\nexport /g, '\n')};tests`)
+    return { tests }
+  })
+
 const eq = (a, b) => {
   if (a === b) return true
   if (!a || !b) return false
@@ -21,9 +29,10 @@ let _test = () => {}
 const wait = (delay, arg) => new Promise(s => setTimeout(s, delay, arg))
 const fail = fn => { try { fn() } catch (err) { return true } }
 addEventListener('message', async ({ data: code }) => {
+  const exec = await check
   if (typeof code === 'number') return _test(code)
   try {
-    const { tests } = await importText(code)
+    const { tests } = await exec(code)
     if (!Array.isArray(tests)) throw Error('Missing tests export (invalid module)')
     const ctx = {}
     _test = async i => {
