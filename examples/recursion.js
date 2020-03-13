@@ -25,8 +25,9 @@ countTo10(0) // we need to call it to start the recursion with an initial value
 const times5R = (n, count, result) => (count < 5) // we test our count
   ? times5R(n, count + 1, result + n) // we call ourself with the new values
   : result // we return our results
-// this function need 3 as we need to start with an initial count and result
+// this function need 3 arguments as we need to start with an initial count and result
 
 // so we can create a wrapper function that call it with the initial parameters
 const times5 = n => times5R(n, 0, 0)
 
+console.log(times5(5)) // 25 !

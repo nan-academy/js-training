@@ -16,7 +16,7 @@ const address = {
 const userClement = {
   firstname: 'Clement',
   lastname: 'Denis',
-  email: 'cdenis@thot.space',
+  email: 'cdenis@example.com',
   age: 29,
   address,
 }
@@ -27,7 +27,7 @@ const users = [
   {
     firstname: 'Sofiane',
     lastname: 'Martinez',
-    email: 'smartine@thot.space',
+    email: 'smartine@example.com',
     age: 34,
     address: {
       country: 'France',
