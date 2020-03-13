@@ -214,6 +214,29 @@ const loadHash = async (sourceHash, replace) => {
 
 const wait = (delay, arg) => new Promise(s => setTimeout(s, delay, arg))
 const fail = fn => { try { fn() } catch (err) { return true } }
+window.next = () => {
+  const [ path, version = '' ] = location.hash.split('@')
+  const [ mod, current ] = path.split('.')
+  const next = _module.exercises[_module.exercises.indexOf(current) + 1]
+  if (next) return loadHash(`${mod}.${next}@${version}`)
+  if (_module.next) return loadHash(`${_module.next}@${version}`)
+  cmEditor.setValue(`Congratulation ! You've done all the exercises !
+Enjoy this nice sunset.
+You deserve this.
+
+ 
+            ^^                   @@@@@@@@@
+       ^^       ^^            @@@@@@@@@@@@@@@
+                            @@@@@@@@@@@@@@@@@@              ^^
+                           @@@@@@@@@@@@@@@@@@@@
+ ~~~~ ~~ ~~~~~ ~~~~~~~~ ~~ &&&&&&&&&&&&&&&&&&&& ~~~~~~~ ~~~~~~~~~~~ ~~~
+ ~         ~~   ~  ~       ~~~~~~~~~~~~~~~~~~~~ ~       ~~     ~~ ~
+   ~      ~~      ~~ ~~ ~~  ~~~~~~~~~~~~~ ~~~~  ~     ~~~    ~ ~~~  ~ ~~
+   ~  ~~     ~         ~      ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~
+ ~  ~       ~ ~      ~           ~~ ~~~~~~  ~      ~~  ~             ~~
+       ~             ~        ~      ~      ~~   ~             ~`)
+}
+
 const runner = async () => {
   _error && (_error.clear(), _error = undefined)
   const code = cmEditor.getValue()
@@ -258,27 +281,7 @@ const runner = async () => {
     document.body.classList.add(`test-${index + 1}-fail`)
     return count + 1
   }).reduce((q, t) => q.then(t), Promise.resolve(0))
-  if (failCount) return
-  const [ path, version = '' ] = location.hash.split('@')
-  const [ mod, current ] = path.split('.')
-  const next = _module.exercises[_module.exercises.indexOf(current) + 1]
-  if (next) return loadHash(`${mod}.${next}@${version}`)
-  if (_module.next) return loadHash(`${_module.next}@${version}`)
-  cmEditor.setValue(`Congratulation ! You've done all the exercises !
-Enjoy this nice sunset.
-You deserve this.
-
- 
-            ^^                   @@@@@@@@@
-       ^^       ^^            @@@@@@@@@@@@@@@
-                            @@@@@@@@@@@@@@@@@@              ^^
-                           @@@@@@@@@@@@@@@@@@@@
- ~~~~ ~~ ~~~~~ ~~~~~~~~ ~~ &&&&&&&&&&&&&&&&&&&& ~~~~~~~ ~~~~~~~~~~~ ~~~
- ~         ~~   ~  ~       ~~~~~~~~~~~~~~~~~~~~ ~       ~~     ~~ ~
-   ~      ~~      ~~ ~~ ~~  ~~~~~~~~~~~~~ ~~~~  ~     ~~~    ~ ~~~  ~ ~~
-   ~  ~~     ~         ~      ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~
- ~  ~       ~ ~      ~           ~~ ~~~~~~  ~      ~~  ~             ~~
-       ~             ~        ~      ~      ~~   ~             ~`)
+  failCount || next()
 }
 
 const runTests = () => _lock || (_lock = runner().finally(() => _lock = undefined))
