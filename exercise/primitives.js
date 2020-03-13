@@ -1,27 +1,37 @@
-'use strict'
-
 /*
- * Create a constant variables for each primitives
- * `str`, `num`, `bool` and `undef`
- *
- * @notions Primitive and Operators, Variables
- */
+## Primitive
 
-// Your code :
+### Instructions
+
+Create a constant variables for each primitives:
+  - `str` for `String`
+  - `num` for `Number`
+  - `bool` for `Boolean`
+  - `undef` for `undefined`
+
+### Notions
+  - Primitive and Operators
+  - Variables
+
+*/
 
 
-//* Begin of tests
-const assert = require('assert')
 
-assert.strictEqual(typeof str, 'string')
-assert.strictEqual(str, '1337')
 
-assert.strictEqual(typeof num, 'number')
-assert.strictEqual(num, 42)
 
-assert.strictEqual(typeof bool, 'boolean')
-assert.strictEqual(bool, false)
 
-assert.strictEqual(typeof undef, 'undefined')
-assert.strictEqual(undef, undefined)
-// End of tests */
+
+
+export const tests = [
+  // str is declared and of type string
+  () => typeof str === 'string',
+
+  // num is declared and of type number
+  () => typeof num === 'number',
+
+  // bool is declared and of type boolean
+  () => typeof bool === 'boolean',
+
+  // undef is declared and of type undefined
+  () => undef === undefined,
+]

@@ -1,28 +1,38 @@
-'use strict'
-
 /*
- * Create an object `obj` that has a property for each primitive values
- * much like in primitive.js
- *
- * @notions Functions, Operators
- */
+## Arr
 
-// Your code :
+### Instructions
 
-//* Begin of tests
-const assert = require('assert')
+Create a constant variable named `arr` that is an array containing the values 4 and '2'
 
-assert.strictEqual(typeof obj, 'object')
 
-assert.strictEqual(typeof obj.str, 'string')
-assert.strictEqual(obj.str, '1337')
+### Notions
 
-assert.strictEqual(typeof obj.num, 'number')
-assert.strictEqual(obj.num, 42)
+ - Data-Structures
 
-assert.strictEqual(typeof obj.bool, 'boolean')
-assert.strictEqual(obj.bool, false)
+*/
 
-assert.strictEqual(typeof obj.undef, 'undefined')
-assert.strictEqual(obj.undef, undefined)
-// End of tests */
+
+
+
+
+
+
+
+
+export const tests = [
+  // obj is declared and of type object
+  () => obj.constructor === Object,
+
+  // obj.str is of type string
+  () => typeof obj.str === 'string',
+
+  // obj.num is of type number
+  () => typeof obj.num === 'number',
+
+  // obj.bool is of type boolean
+  () => typeof obj.bool === 'boolean',
+
+  // obj.undef is of type undefined
+  () => typeof obj.undef === 'undefined',
+]
