@@ -1,5 +1,3 @@
-'use strict'
-
 // Now that we know how to access properties
 // We can dynamicaly set them !
 

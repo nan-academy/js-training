@@ -1,5 +1,3 @@
-'use strict'
-
 // first line of the file must be 'use strict' to ensure we use javascript
 // in strict mode
 

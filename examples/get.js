@@ -1,5 +1,3 @@
-'use strict'
-
 // First let's declare some data to use in our exemples :
 
 const street = {

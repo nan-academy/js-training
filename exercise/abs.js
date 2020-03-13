@@ -1,5 +1,3 @@
-'use strict'
-
 /*
  * Create the `abs` function that takes one number argument
  * and returns its absolute value.
@@ -11,7 +9,6 @@
 
 // Your code :
 
-//* Begin of tests
 const assert = require('assert')
 
 assert.strictEqual(typeof abs, 'function')
