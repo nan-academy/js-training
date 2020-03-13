@@ -162,6 +162,7 @@ const guessUrl = ({ host, pathname, hostname, origin }) => host.endsWith('.githu
   : [userContent, 'nan-academy', 'js-training', 'master']
 
 let _module, _inPopState, _error, _lock
+const importText = code => import(URL.createObjectURL(new Blob([code], {type : 'text/javascript'})))
 const unslash = str => str.replace(/(^\/+|\/+$)/g, '')
 const baseUrl = `${location.origin}${location.pathname}`
 const contentUrl = guessUrl(location).join('/')
@@ -177,7 +178,7 @@ const loadHash = async (sourceHash, replace) => {
   const [mod, ex] = defaults(exPath.split('.'), 'browser-hello', 'hello')
   _module = localStorage[`$${mod}.@${version}`]
     ? JSON.parse(localStorage[`$${mod}.@${version}`])
-    : (await import(`${url}/module/${mod}.js`).then(({ exercises = [], next }) => {
+    : (await importText(await (await fetch(`${url}/module/${mod}.js`)).text()).then(({ exercises = [], next }) => {
       localStorage[`$${mod}.@${version}`] = JSON.stringify({ exercises, next })
       return { exercises, next }
     }))
@@ -240,8 +241,7 @@ You deserve this.
 const runner = async () => {
   _error && (_error.clear(), _error = undefined)
   const code = cmEditor.getValue()
-  const urlObject = URL.createObjectURL(new Blob([code], {type : 'text/javascript'}))
-  const { tests } = await import(urlObject)
+  const { tests } = await importText(code)
     .catch(err => {
       if (!(err instanceof Error)) {
         err = { message: err, stack: '', constructor: err ? err.constructor : {name: typeof err} }
