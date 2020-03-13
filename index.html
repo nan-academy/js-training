@@ -149,28 +149,38 @@ const eq = (a, b) => {
   throw err
 }
 
-const getContent = async (url, exercise) => (await (await fetch(`${url}exercise/${exercise}.js`)).text())
+const getContent = async (url, exercise) => (await (await fetch(`${url}/exercise/${exercise}.js`)).text())
   .replace(/\r\n/g, '\n')
+
+const userContent = 'https://raw.githubusercontent.com'
+const localhost = new Set(['localhost', '127.0.0.1'])
+const guessUrl = ({ host, pathname, hostname, origin }) => host.endsWith('.github.io')
+  ? [userContent, host.split('.')[0], unslash(pathname)]
+  : localhost.has(hostname)
+  ? [origin]
+  : [userContent, 'nan-academy', 'js-training']
 
 let _module
 const unslash = str => str.replace(/(^\/+|\/+$)/g, '')
 const baseUrl = `${location.origin}${location.pathname}`
+const contentUrl = guessUrl(location).join('/')
 const defaults = (arr, ...args) => args.map((v, i) => arr[i] || v)
-const loadHash = async sourceHash => {
-  // '#data.arr@nan-academy/js-training'
+const loadHash = async (sourceHash, replace) => {
   const [exPath, versionPath=''] = sourceHash.replace(/^#(\/?)/, '').split('@')
-  const version = defaults(unslash(versionPath).split('/'), 'nan-academy', 'js-training', 'master').join('/')
-  const url = `https://raw.githubusercontent.com/${version}/`
+  const version = versionPath
+    ? defaults(unslash(versionPath).split('/'), 'nan-academy', 'js-training', 'master').join('/')
+    : ''
+  const url = version ? `${userContent}/${version}` : contentUrl
   const [mod, ex] = defaults(exPath.split('.'), 'browser-hello', 'hello')
   _module = localStorage[`$${mod}.@${version}`]
     ? JSON.parse(localStorage[`$${mod}.@${version}`])
-    : (await import(`${url}module/${mod}.js`).then(({ exercises = [], next }) => {
+    : (await import(`${url}/module/${mod}.js`).then(({ exercises = [], next }) => {
       localStorage[`$${mod}.@${version}`] = JSON.stringify({ exercises, next })
       return { exercises, next }
     }))
 
   const exercise = _module.exercises.includes(ex) ? ex : _module.exercises[0]
-  const hash = `#${mod}.${exercise}@${version}`
+  const hash = `#${mod}.${exercise}${version?`@${version}`:''}`
   const content = localStorage[hash] || (localStorage[hash] = await getContent(url, exercise))
   const [ subject ] = content.split('*/', 1)
   const testStartStr = 'export const tests = ['
@@ -196,15 +206,17 @@ const loadHash = async sourceHash => {
     cmEditor.doc.markText({ line: line-1, ch: 0 }, { line, ch: 0 }, { className })
   })
 
-  history.replaceState({}, "", `${baseUrl}${hash}`)
+  history[replace ?'replaceState' : 'pushState']({}, "", `${baseUrl}${hash}`)
 }
 
 let _error
 const wait = (delay, arg) => new Promise(s => setTimeout(s, delay, arg))
+const fail = fn => { try { fn() } catch (err) { return true } }
 const runner = async () => {
   _error && (_error.clear(), _error = undefined)
   const code = cmEditor.getValue()
-  const { tests } = await import(`data:text/javascript;base64,${btoa(code)}`)
+  const urlObject = URL.createObjectURL(new Blob([code], {type : 'text/javascript'}))
+  const { tests } = await import(urlObject)
     .catch(err => {
       if (!(err instanceof Error)) {
         err = { message: err, stack: '', constructor: err ? err.constructor : {name: typeof err} }
@@ -233,7 +245,7 @@ const runner = async () => {
   const failCount = await tests.map((test, index, tests) => async count => {
     document.body.classList.add(`test-${index + 1}-start`)
     const minWait = wait(150)
-    const success = await (async () => test({ eq, code, wait }, ctx))().catch(e => false)
+    const success = await (async () => test({ eq, code, wait, fail }, ctx))().catch(e => false)
     await minWait
     document.body.classList.remove(`test-${index + 1}-start`)
 
@@ -245,7 +257,6 @@ const runner = async () => {
     return count + 1
   }).reduce((q, t) => q.then(t), Promise.resolve(0))
   if (failCount) return
-  console.log('all good man !')
   const [ path, version = '' ] = location.hash.split('@')
   const [ mod, current ] = path.split('.')
   const next = _module.exercises[_module.exercises.indexOf(current) + 1]
@@ -284,10 +295,8 @@ export const cmEditor = CodeMirror(document.getElementById('editor'), {
 })
 
 cmEditor.on('change', e => localStorage[location.hash] = e.getValue())
-loadHash(location.hash)
+loadHash(location.hash, true)
   .catch(() => localStorage.clear() && location.reload())
-
-// navigator.serviceWorker.register('./worker.js')
   </script>
 </body>
 </html>

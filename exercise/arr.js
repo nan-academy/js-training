@@ -1,18 +1,34 @@
-'use strict'
-
 /*
- * Create a constant variable named `arr` that is an array containing the values 4 and '2'
- *
- * @notions Data-Structures
- */
+## Arr
 
-// Your code :
+### Instructions
 
-//* Begin of tests
-const assert = require('assert')
+Create a constant variable named `arr` that is an array
+containing the values 4 and '2'
 
-assert.strictEqual(Array.isArray(arr), true)
-assert.strictEqual(arr[0], 4)
-assert.strictEqual(arr[1], '2')
-assert.strictEqual(arr.length, 2)
-// End of tests */
+
+### Notions
+
+ - Data-Structures
+
+*/
+
+
+
+
+
+
+
+export const tests = [
+  // arr is declared and is an array
+  () => Array.isArray(arr),
+
+  // arr first element is 4
+  () => arr[0] === 4,
+
+  // arr second element is "2"
+  () => arr[1] === '2',
+
+  // arr length is 2
+  () => arr.length === 2,
+]

@@ -1,5 +1,5 @@
 export const exercises = [
-  'primitive',
+  'primitives',
   'arr',
   'obj',
 ]
