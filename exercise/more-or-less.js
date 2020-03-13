@@ -51,3 +51,7 @@ t(() => sub(3, 10) === -7)
 
 // I can combine all of them
 t(() => add(more(10), sub(less(5), 10)) === 5)
+
+const rand = Math.random()
+t(() => less(rand) === rand - 1)
+t(() => more(rand) === rand + 1)
