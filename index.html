@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JS Training</title>
+  <meta charset="utf-8">
+  <style id="css">
+/* LAYOUT */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 16px;
+  font-family: monospace;
+  height: 100vh;
+}
+
+pre {
+  white-space: pre-wrap;
+  padding: 16px;
+  margin-top: 32px;
+}
+
+div.CodeMirror {
+  height: 100vh;
+}
+
+h1, h2, h3, h4 { font-weight: normal; margin-top: 16px; }
+h1 { text-align: center }
+
+/* COLORS */
+.editable {
+  background-color: var(--b-lime);
+}
+html, body {
+  color: var(--b);
+  background: var(--i);
+}
+
+pre {
+  background: var(--white);
+}
+
+mark {
+  background: var(--g-lime);
+  color: var(--b);
+}
+
+.test-flash {
+  animation-duration: 6000ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes pass {
+  0% { background-color: var(--g-turquoise); color: var(--white) }
+  2% { background-color: var(--e-turquoise); color: var(--white) }
+  4% { background-color: var(--b-turquoise); color: var(--g-turquoise) }
+  80% { color: var(--f-turquoise) }
+  100% {}
+}
+
+@-webkit-keyframes fail {
+  0% { background-color: var(--g-red); color: var(--white) }
+  2% { background-color: var(--e-red); color: var(--white) }
+  4% { background-color: var(--b-red); color: var(--g-red) }
+  80% { color: var(--f-red) }
+  100% {}
+}
+
+@-webkit-keyframes start {
+  0% { background-color: var(--a-yellow); color: var(--white) }
+  2% { background-color: var(--c-yellow); color: var(--white) }
+  4% { background-color: var(--b-yellow); color: var(--g-yellow) }
+  100% { color: var(--f-yellow) }
+}
+
+.error-message {
+  color: var(--g-red);
+  text-align: center;
+}
+
+/**/
+@media (prefers-color-scheme: dark) {
+  html, body {
+    color: var(--i);
+    background: var(--a);
+  }
+
+  .cm-s-dracula span.cm-comment.subject {
+    color: #a3b5ef;
+  }
+
+  pre {
+    background: var(--b);
+  }
+
+  mark {
+    background: var(--b-lime);
+    color: var(--white);
+  }
+}
+/**/
+  </style>
+<script>
+const colorDefs = 'red.orange.yellow.lime.green.turquoise.cyan.blue.purple.fuschia.magenta.pink'.split('.')
+document.getElementById('css').innerHTML += `:root {
+  --white: #fff;
+  --black: #000;
+  ${colorDefs.flatMap((name, hue) => [
+    `  --${name}: ${hue*30};`,
+    ...[...Array(9).keys()].map(i => `  --${(i+10).toString(36)}-${name}: hsl(${hue*30}, 90%, ${(i*10)+10}%);`),
+  ]).join('\n')}
+  ${[...Array(9).keys()]
+    .map(i => `  --${(i+10).toString(36)}: hsl(0, 0%, ${(i*10)+10}%);`).join('\n')}
+}
+${[...Array(100).keys()].map(n => `
+.test-${n}-fail .test-${n} { animation-name: fail }
+.test-${n}-pass .test-${n} { animation-name: pass }
+.test-${n}-start .test-${n} { animation-name: start }
+`).join('\n')}
+`
+
+</script>
+</head>
+<body>
+  <div id="editor"></div>
+  <link rel="stylesheet" type="text/css" href="./codemirror.css">
+  <script src="./codemirror.js"></script>
+  <script type="module">
+const eq = (a, b) => {
+  if (a === b) return true
+  if (!a || !b) return false
+  if (typeof a !== typeof b) return false
+  if (typeof a === 'number' && Number.isNaN(a) && Number.isNaN(b)) return true
+  if (typeof a === 'object') {
+    if (a.constructor !== b.constructor) return false
+    const entries = Object.entries(a)
+    if (entries.length !== Object.values(b).length) return false
+    for (const [k,v] of entries) {
+      if (!eq(b[k], v)) return false
+    }
+    return true
+  }
+  throw err
+}
+
+const getContent = async (url, exercise) => (await (await fetch(`${url}exercise/${exercise}.js`)).text())
+  .replace(/\r\n/g, '\n')
+
+let _module
+const unslash = str => str.replace(/(^\/+|\/+$)/g, '')
+const baseUrl = `${location.origin}${location.pathname}`
+const defaults = (arr, ...args) => args.map((v, i) => arr[i] || v)
+const loadHash = async sourceHash => {
+  // '#data.arr@nan-academy/js-training'
+  const [exPath, versionPath=''] = sourceHash.replace(/^#(\/?)/, '').split('@')
+  const version = defaults(unslash(versionPath).split('/'), 'nan-academy', 'js-training', 'master').join('/')
+  const url = `https://raw.githubusercontent.com/${version}/`
+  const [mod, ex] = defaults(exPath.split('.'), 'browser-hello', 'hello')
+  _module = localStorage[`$${mod}.@${version}`]
+    ? JSON.parse(localStorage[`$${mod}.@${version}`])
+    : (await import(`${url}module/${mod}.js`).then(({ exercises = [], next }) => {
+      localStorage[`$${mod}.@${version}`] = JSON.stringify({ exercises, next })
+      return { exercises, next }
+    }))
+
+  const exercise = _module.exercises.includes(ex) ? ex : _module.exercises[0]
+  const hash = `#${mod}.${exercise}@${version}`
+  const content = localStorage[hash] || (localStorage[hash] = await getContent(url, exercise))
+  const [ subject ] = content.split('*/', 1)
+  const testStartStr = 'export const tests = ['
+  const [ base ] = content.split(testStartStr, 1)
+  const start = subject.split('\n').length
+  const size = base.split('\n').length - 1
+  const testsText = content.slice(base.length + testStartStr.length)
+  let count = 0
+
+  _error && (_error.clear(), _error = undefined)
+  document.body.className = ''
+  cmEditor.setValue(content)
+  cmEditor.focus()
+  cmEditor.setCursor(start, 0)
+  cmEditor.doc.markText({ line: 0, ch: 0 }, { line: start - 1, ch: 2 }, { readOnly: true })
+  cmEditor.doc.markText({ line: 0, ch: 2 }, { line: start - 1, ch: 0 }, { className: 'subject' })
+  cmEditor.doc.markText({ line: size, ch: 0 }, { line: cmEditor.doc.size + 1, ch: 0 }, { readOnly: true })
+  testsText.replace(/(?:\n\n\s*?|^\s*)\/\/(.+?)\n/g, (match, group, index) => {
+    const line = size + testsText.slice(0, index + match.length - 1).split('\n').length
+    const matchLines = match.split('\n')
+    const lastMatchedLine = matchLines[matchLines.length-1]
+    const className = `test-flash test-${++count}`
+    cmEditor.doc.markText({ line: line-1, ch: 0 }, { line, ch: 0 }, { className })
+  })
+
+  history.replaceState({}, "", `${baseUrl}${hash}`)
+}
+
+let _error
+const wait = (delay, arg) => new Promise(s => setTimeout(s, delay, arg))
+const runner = async () => {
+  _error && (_error.clear(), _error = undefined)
+  const code = cmEditor.getValue()
+  const { tests } = await import(`data:text/javascript;base64,${btoa(code)}`)
+    .catch(err => {
+      if (!(err instanceof Error)) {
+        err = { message: err, stack: '', constructor: err ? err.constructor : {name: typeof err} }
+      }
+      const message = `${err.constructor.name}: ${err.message}`
+      const [, line, ch] = err.stack.split(/:([0-9]+)(:([0-9]+)?)(?:\n|$)/).map(Number)
+      if (line > -1 && ch > -1) {
+        document.body.className = 'test-0-fail'
+        _error = cmEditor.doc.markText(
+          { line: line-1, ch: 0 },
+          { line: line-1, ch: ch + 1 },
+          { className: `test-flash test-0` },
+        )
+      } else {
+        _error = cmEditor.doc.addLineWidget(
+          (line || cmEditor.doc.size)-1,
+          document.createTextNode(message),
+          { coverGutter: true, noHScroll: true, className: 'error-message' },
+        )
+      }
+      throw err
+    })
+  if (!tests) throw Error(`No tests defined`)
+  const ctx = {}
+  document.body.className = ''
+  const failCount = await tests.map((test, index, tests) => async count => {
+    document.body.classList.add(`test-${index + 1}-start`)
+    const minWait = wait(150)
+    const success = await (async () => test({ eq, code, wait }, ctx))().catch(e => false)
+    await minWait
+    document.body.classList.remove(`test-${index + 1}-start`)
+
+    if (success) {
+      document.body.classList.add(`test-${index + 1}-pass`)
+      return count
+    }
+    document.body.classList.add(`test-${index + 1}-fail`)
+    return count + 1
+  }).reduce((q, t) => q.then(t), Promise.resolve(0))
+  if (failCount) return
+  console.log('all good man !')
+  const [ path, version = '' ] = location.hash.split('@')
+  const [ mod, current ] = path.split('.')
+  const next = _module.exercises[_module.exercises.indexOf(current) + 1]
+  if (next) return loadHash(`${mod}.${next}@${version}`)
+  if (_module.next) return loadHash(`${_module.next}@${version}`)
+  cmEditor.setValue(`Congratulation ! You've done all the exercises !
+Enjoy this nice sunset.
+You deserve this.
+
+ 
+            ^^                   @@@@@@@@@
+       ^^       ^^            @@@@@@@@@@@@@@@
+                            @@@@@@@@@@@@@@@@@@              ^^
+                           @@@@@@@@@@@@@@@@@@@@
+ ~~~~ ~~ ~~~~~ ~~~~~~~~ ~~ &&&&&&&&&&&&&&&&&&&& ~~~~~~~ ~~~~~~~~~~~ ~~~
+ ~         ~~   ~  ~       ~~~~~~~~~~~~~~~~~~~~ ~       ~~     ~~ ~
+   ~      ~~      ~~ ~~ ~~  ~~~~~~~~~~~~~ ~~~~  ~     ~~~    ~ ~~~  ~ ~~
+   ~  ~~     ~         ~      ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~
+ ~  ~       ~ ~      ~           ~~ ~~~~~~  ~      ~~  ~             ~~
+       ~             ~        ~      ~      ~~   ~             ~`)
+}
+
+let _lock
+const runTests = () => _lock || (_lock = runner().finally(() => _lock = undefined))
+const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+export const cmEditor = CodeMirror(document.getElementById('editor'), {
+  mode: 'javascript',
+  theme: darkMode ? 'dracula' : 'neo',
+  keyMap: 'sublime',
+  tabSize: 2,
+  lineNumbers: true,
+  indentWithTabs: false,
+  autoCloseBrackets: true,
+  scrollbarStyle: 'null',
+  extraKeys: { 'Ctrl-S': runTests, 'Cmd-S': runTests, 'Ctrl-Enter': runTests }
+})
+
+cmEditor.on('change', e => localStorage[location.hash] = e.getValue())
+loadHash(location.hash)
+  .catch(() => localStorage.clear() && location.reload())
+
+// navigator.serviceWorker.register('./worker.js')
+  </script>
+</body>
+</html>
