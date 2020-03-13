@@ -16,9 +16,8 @@ Of course you may not use the method directly
 
 */
 
-//* Begin of tests
 export const tests = []
-const t = f => t.push(f)
+const t = f => tests.push(f)
 
 t(() => typeof repeat === 'function')
 t(() => repeat.length === 2)
