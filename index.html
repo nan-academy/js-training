@@ -26,12 +26,16 @@ pre {
   margin-top: 32px;
 }
 
-div.CodeMirror {
-  height: 100vh;
-}
-
 h1, h2, h3, h4 { font-weight: normal; margin-top: 16px; }
 h1 { text-align: center }
+
+div.CodeMirror { height: 100vh }
+.error-message { text-align: center }
+.test-flash {
+  animation-duration: 6000ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
 
 /* COLORS */
 .editable {
@@ -51,13 +55,7 @@ mark {
   color: var(--b);
 }
 
-.test-flash {
-  animation-duration: 6000ms;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-
-@-webkit-keyframes pass {
+@keyframes pass {
   0% { background-color: var(--g-turquoise); color: var(--white) }
   2% { background-color: var(--e-turquoise); color: var(--white) }
   4% { background-color: var(--b-turquoise); color: var(--g-turquoise) }
@@ -65,7 +63,7 @@ mark {
   100% {}
 }
 
-@-webkit-keyframes fail {
+@keyframes fail {
   0% { background-color: var(--g-red); color: var(--white) }
   2% { background-color: var(--e-red); color: var(--white) }
   4% { background-color: var(--b-red); color: var(--g-red) }
@@ -73,38 +71,51 @@ mark {
   100% {}
 }
 
-@-webkit-keyframes start {
+@keyframes start {
   0% { background-color: var(--a-yellow); color: var(--white) }
   2% { background-color: var(--c-yellow); color: var(--white) }
   4% { background-color: var(--b-yellow); color: var(--g-yellow) }
   100% { color: var(--f-yellow) }
 }
 
-.error-message {
-  color: var(--g-red);
-  text-align: center;
+.error-message { color: var(--g-red) }
+
+/* DARK MODE */
+html.dark, .dark body {
+  color: var(--i);
+  background: var(--a);
 }
 
-/**/
-@media (prefers-color-scheme: dark) {
-  html, body {
-    color: var(--i);
-    background: var(--a);
-  }
-
-  .cm-s-dracula span.cm-comment.subject {
-    color: #a3b5ef;
-  }
-
-  pre {
-    background: var(--b);
-  }
-
-  mark {
-    background: var(--b-lime);
-    color: var(--white);
-  }
+.cm-s-dracula span.cm-comment.subject { color: #a3b5ef }
+.dark pre { background: var(--b) }
+.dark mark {
+  background: var(--b-lime);
+  color: var(--white);
 }
+
+.dark @keyframes pass {
+  0% { background-color: var(--g-turquoise); color: var(--white) }
+  2% { background-color: var(--e-turquoise); color: var(--white) }
+  4% { background-color: var(--b-turquoise); color: var(--g-turquoise) }
+  80% { color: var(--f-turquoise) }
+  100% {}
+}
+
+.dark @keyframes fail {
+  0% { background-color: var(--g-red); color: var(--white) }
+  2% { background-color: var(--e-red); color: var(--white) }
+  4% { background-color: var(--b-red); color: var(--g-red) }
+  80% { color: var(--f-red) }
+  100% {}
+}
+
+.dark @keyframes start {
+  0% { background-color: var(--a-yellow); color: var(--white) }
+  2% { background-color: var(--c-yellow); color: var(--white) }
+  4% { background-color: var(--b-yellow); color: var(--g-yellow) }
+  100% { color: var(--f-yellow) }
+}
+
 /**/
   </style>
 <script>
@@ -149,6 +160,10 @@ const eq = (a, b) => {
   }
   throw err
 }
+const DARK = window.matchMedia('(prefers-color-scheme: dark)').matches
+  || Boolean(localStorage.dark)
+
+DARK && document.documentElement.classList.add('dark')
 
 const getContent = async (url, exercise) => (await (await fetch(`${url}/exercise/${exercise}.js`)).text())
   .replace(/\r\n/g, '\n')
@@ -285,10 +300,9 @@ const runner = async () => {
 }
 
 const runTests = () => _lock || (_lock = runner().finally(() => _lock = undefined))
-const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
 export const cmEditor = CodeMirror(document.getElementById('editor'), {
   mode: 'javascript',
-  theme: darkMode ? 'dracula' : 'neo',
+  theme: DARK ? 'dracula' : 'neo',
   keyMap: 'sublime',
   tabSize: 2,
   lineNumbers: true,
