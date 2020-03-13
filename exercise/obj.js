@@ -3,7 +3,7 @@
 
 ### Instructions
 
-Create a constant variable named `Obj` that is an object
+Create a constant variable named `obj` that is an object
 containing a property for each primitives:
 - `str` for `String`
 - `num` for `Number`
