@@ -156,10 +156,10 @@ const getContent = async (url, exercise) => (await (await fetch(`${url}/exercise
 const userContent = 'https://raw.githubusercontent.com'
 const localhost = new Set(['localhost', '127.0.0.1'])
 const guessUrl = ({ host, pathname, hostname, origin }) => host.endsWith('.github.io')
-  ? [userContent, host.split('.')[0], unslash(pathname)]
+  ? [userContent, host.split('.')[0], unslash(pathname), 'gh-pages']
   : localhost.has(hostname)
   ? [origin]
-  : [userContent, 'nan-academy', 'js-training']
+  : [userContent, 'nan-academy', 'js-training', 'master']
 
 let _module, _inPopState, _error, _lock
 const unslash = str => str.replace(/(^\/+|\/+$)/g, '')
@@ -171,7 +171,7 @@ const loadHash = async (sourceHash, replace) => {
   _inPopState = true
   const [exPath, versionPath=''] = sourceHash.replace(/^#(\/?)/, '').split('@')
   const version = versionPath
-    ? defaults(unslash(versionPath).split('/'), 'nan-academy', 'js-training', 'master').join('/')
+    ? defaults(unslash(versionPath).split('/'), 'nan-academy', 'js-training', 'gh-pages').join('/')
     : ''
   const url = version ? `${userContent}/${version}` : contentUrl
   const [mod, ex] = defaults(exPath.split('.'), 'browser-hello', 'hello')
