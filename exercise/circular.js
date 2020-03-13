@@ -13,12 +13,10 @@ itself as the value
 - Get
 - Set
 
- */
+*/
 
-// Your code :
 
-//* Begin of tests
-const tests = []
+export const tests = []
 const t = f => tests.push(f)
 
 t(() => circular.constructor === Object)

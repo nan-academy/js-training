@@ -20,10 +20,10 @@ if they both have the same sign
 
 */
 
-export const tests = {}
-const t = f => tests.push(t)
+export const tests = []
+const t = f => tests.push(f)
 
-t(() => typeof sign !== 'function')
+t(() => typeof sign === 'function')
 t(() => !sign.toString().includes('Math.sign'))
 t(() => sign.length === 1)
 t(() => sign !== Math.sign)

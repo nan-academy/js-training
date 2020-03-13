@@ -242,7 +242,7 @@ const loadHash = async (sourceHash, replace) => {
     ? defaults(unslash(versionPath).split('/'), 'nan-academy', 'js-training', 'gh-pages').join('/')
     : ''
   const url = version ? `${userContent}/${version}` : contentUrl
-  const [mod, ex] = defaults(exPath.split('.'), 'browser-hello', 'hello')
+  const [mod, ex] = defaults(exPath.split('.'), 'browser-hello', 'hello').map(decodeURIComponent)
   localStorage[`$${mod}.@${version}`]
     ? loadModule(JSON.parse(localStorage[`$${mod}.@${version}`]))
     : (await importText(await (await fetch(`${url}/module/${mod}.js`)).text()).then(exports => {
