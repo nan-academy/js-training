@@ -1,11 +1,20 @@
+export const next = 'loop'
 export const exercises = {
   'primitives': {},
-  'escapeStr': {},
+  'escape-str': {},
   'arr': {},
   'obj': {},
+  'nested': {},
   'id': {},
   'get-length': {},
-  'get-first': {},
-  'get-last': {},
-  'more-or-less': {}
+  'last-first-kiss': {},
+  'more-or-less': {},
+  'concat-str': {},
+  'get': {},
+  'set': {},
+  'circular': {},
+  'biggie-smalls': {},
+  'sign': {},
+  'is': {},
+  '何': {},
 }

@@ -1,0 +1,19 @@
+/*
+
+## 何 !?
+
+### Instructions
+
+Create a `inequalty` value that is not equal to itself
+
+### Notions
+
+- Numbers
+
+*/
+
+
+export const tests = []
+const t = f => tests.push(f)
+
+t(() => !(inequalty === inequalty))

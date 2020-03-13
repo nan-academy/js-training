@@ -171,7 +171,7 @@ const exec = async code => {
   document.body.className = ''
   const worker = (_worker && !_worker.terminated)
     ? _worker
-    : (_worker = new Worker('./worker.js'))
+    : (_worker = new Worker('./worker.js', { type: 'module' }))
 
   const send = (arg, timeout) => new Promise(s => {
     setTimeout(() => {
