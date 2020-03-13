@@ -1,20 +1,33 @@
-'use strict'
-
 /*
- * Create an object named `circular` that has a property named `circular` with
- * itself as the value
- *
- * @notions Data-Structures, Get, Set
+
+## Circular
+
+### Instructions
+
+Create an object named `circular` that has a property named `circular` with
+itself as the value
+
+### Notions
+
+- Data-Structures
+- Get
+- Set
+
  */
 
 // Your code :
 
 //* Begin of tests
-const assert = require('assert')
+const tests = []
+const t = f => tests.push(f)
 
-assert.strictEqual(typeof circular, 'object')
-assert.strictEqual(circular.circular, circular)
-assert.strictEqual(circular.circular.circular, circular)
-assert.strictEqual(circular.circular.circular.circular, circular)
-assert.strictEqual(circular.circular.circular.circular.circular, circular)
-// End of tests */
+t(() => circular.constructor === Object)
+t(() => circular.circular === circular)
+t(() => circular.circular.circular === circular)
+t(() => circular.circular.circular.circular === circular)
+t(() => circular.circular.circular.circular.circular === circular)
+
+/*
+  To understand recursion,
+  one must first understand recursion.
+*/

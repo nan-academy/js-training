@@ -56,26 +56,26 @@ mark {
 }
 
 @keyframes pass {
-  0% { background-color: var(--g-turquoise); color: var(--white) }
-  2% { background-color: var(--e-turquoise); color: var(--white) }
-  4% { background-color: var(--b-turquoise); color: var(--g-turquoise) }
-  80% { color: var(--f-turquoise) }
+  0% { background-color: var(--e-turquoise); color: var(--a-turquoise) }
+  2% { background-color: var(--f-turquoise); color: var(--a-turquoise) }
+  4% { background-color: var(--g-turquoise); color: var(--b-turquoise) }
+  80% { color: var(--d-turquoise) }
   100% {}
 }
 
 @keyframes fail {
-  0% { background-color: var(--g-red); color: var(--white) }
-  2% { background-color: var(--e-red); color: var(--white) }
-  4% { background-color: var(--b-red); color: var(--g-red) }
-  80% { color: var(--f-red) }
+  0% { background-color: var(--f-red); color: var(--a-red) }
+  2% { background-color: var(--g-red); color: var(--a-red) }
+  4% { background-color: var(--i-red); color: var(--b-red) }
+  80% { color: var(--d-red) }
   100% {}
 }
 
 @keyframes start {
-  0% { background-color: var(--a-yellow); color: var(--white) }
-  2% { background-color: var(--c-yellow); color: var(--white) }
-  4% { background-color: var(--b-yellow); color: var(--g-yellow) }
-  100% { color: var(--f-yellow) }
+  0% { background-color: var(--e-yellow); color: var(--a-yellow) }
+  2% { background-color: var(--f-yellow); color: var(--a-yellow) }
+  4% { background-color: var(--g-yellow); color: var(--b-yellow) }
+  100% { color: var(--d-yellow) }
 }
 
 .error-message { color: var(--g-red) }
@@ -93,7 +93,7 @@ html.dark, .dark body {
   color: var(--white);
 }
 
-.dark @keyframes pass {
+@keyframes pass-dark {
   0% { background-color: var(--g-turquoise); color: var(--white) }
   2% { background-color: var(--e-turquoise); color: var(--white) }
   4% { background-color: var(--b-turquoise); color: var(--g-turquoise) }
@@ -101,7 +101,7 @@ html.dark, .dark body {
   100% {}
 }
 
-.dark @keyframes fail {
+@keyframes fail-dark {
   0% { background-color: var(--g-red); color: var(--white) }
   2% { background-color: var(--e-red); color: var(--white) }
   4% { background-color: var(--b-red); color: var(--g-red) }
@@ -109,7 +109,7 @@ html.dark, .dark body {
   100% {}
 }
 
-.dark @keyframes start {
+@keyframes start-dark {
   0% { background-color: var(--a-yellow); color: var(--white) }
   2% { background-color: var(--c-yellow); color: var(--white) }
   4% { background-color: var(--b-yellow); color: var(--g-yellow) }
@@ -134,6 +134,9 @@ ${[...Array(100).keys()].map(n => `
 .test-${n}-fail .test-${n} { animation-name: fail }
 .test-${n}-pass .test-${n} { animation-name: pass }
 .test-${n}-start .test-${n} { animation-name: start }
+.dark .test-${n}-fail .test-${n} { animation-name: fail-dark }
+.dark .test-${n}-pass .test-${n} { animation-name: pass-dark }
+.dark .test-${n}-start .test-${n} { animation-name: start-dark }
 `).join('\n')}
 `
 
@@ -145,13 +148,22 @@ ${[...Array(100).keys()].map(n => `
   <script src="./lib/codemirror.js"></script>
   <script type="module">
 const DEFAULT_TIMEOUT = 5000
-const DARK = window.matchMedia('(prefers-color-scheme: dark)').matches
-  || Boolean(localStorage.dark)
+const DARK = localStorage.theme === 'dark'
+  ? true
+  : localStorage.theme === 'light'
+  ? false
+  : window.matchMedia('(prefers-color-scheme: dark)').matches
 
 DARK && document.documentElement.classList.add('dark')
 
-const getContent = async (url, exercise) => (await (await fetch(`${url}/exercise/${exercise}.js`)).text())
-  .replace(/\r\n/g, '\n')
+const getContent = async (url, exercise) => {
+  const res = await fetch(`${url}/exercise/${exercise}.js`)
+  if (!res.ok) {
+    _module && _module.purge()
+    throw Error(`Unable to fetch: ${exercise}.js`)
+  }
+  return (await res.text()).replace(/\r\n/g, '\n')
+}
 
 const userContent = 'https://raw.githubusercontent.com'
 const localhost = new Set(['localhost', '127.0.0.1'])
@@ -239,6 +251,8 @@ const loadHash = async (sourceHash, replace) => {
       loadModule(exports)
     }))
 
+  _module.purge = () => localStorage.removeItem(`$${mod}.@${version}`)
+
   const exercise = _module.exercises[ex] || _module.entries[0] && _module.entries[0][1]
   if (!exercise) return cmEditor.setValue('Empty module')
   const hash = `#${mod}.${exercise.name}${version?`@${version}`:''}`
@@ -304,7 +318,10 @@ cmEditor.on('change', e => localStorage[location.hash] = e.getValue())
 loadHash(location.hash, true)
   .catch(err => {
     console.error(err)
-    localStorage.clear() && location.reload()
+    _module
+      ? _module.purge()
+      : localStorage.clear()
+    location.hash = ''
   })
 
 addEventListener('hashchange', () => loadHash(location.hash, true))

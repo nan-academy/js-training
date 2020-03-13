@@ -13,22 +13,23 @@ Create an `id` function that takes one argument and return it
 */
 
 
-export const test = [
-  // id is declared and is a function
-  () => typeof id === 'function',
+export const tests = []
+const t = f => tests.push(f)
 
-  // id take 1 argument
-  () => id.length === 1,
+// id is declared and is a function
+t(() => typeof id === 'function')
 
-  // id return numbers back
-  () => id(5) === 5,
+// id take 1 argument
+t(() => id.length === 1)
 
-  // id return strings back
-  () => id('pouet') === 'pouet',
+// id return numbers back
+t(() => id(5) === 5)
 
-  // id return itself, why not
-  () => id(id) === id,
+// id return strings back
+t(() => id('pouet') === 'pouet')
 
-  // id return anything really
-  _ => id(_) === _,
-]
+// id return itself, why not
+t(() => id(id) === id)
+
+// id return anything really
+t(_ => id(_) === _)

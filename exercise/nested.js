@@ -39,12 +39,12 @@ t(() => nested.arr.length === 3)
 
 
 // nested is frozen and can not be changed
-t(() => nested.obj = 5)
+t(({ fail }) => fail(() => nested.obj = 5))
 t(() => nested.obj !== 5)
 
 // nested.obj is also frozen and can not be changed
-t(() => nested.obj.update = {})
-t(() => nested.obj.update === undefined )
+t(({ fail }) => fail(() => nested.obj.update = 5))
+t(() => nested.obj.update === undefined)
 
 // nested.arr is not frozen and can be changed
 t(() => nested.arr.push('hot stuff'))

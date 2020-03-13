@@ -7,7 +7,7 @@ const sourceObject = {
 }
 
 /*
-## Get
+## Change
 
 ### Instructions
 
@@ -45,6 +45,5 @@ t(() => set('num', 55) === 55)
 t(() => set('noexist', 'nice') === 'nice')
 t(() => get('num') === 55)
 t(() => get('noexist') === 'nice')
-t(() => set('str') === 'some text')
 t(() => set('log') === undefined)
 t(() => get('log') === undefined)

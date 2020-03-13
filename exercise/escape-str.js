@@ -4,7 +4,12 @@
 ### Instructions
 
 Create a constant variable named `escapeStr` that contains
-the following specials characters: `/\\\`"'`
+the following specials characters:
+  - `
+  - \
+  - /
+  - "
+  - '
 
 
 ### Notions
