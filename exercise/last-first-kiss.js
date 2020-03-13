@@ -4,12 +4,16 @@
 ### Instructions
 
 Create 3 functions:
+
 - a `first` function that takes an array or a string
-and return the first element.
+  and return the first element.
+
 - a `last` function that takes an array or a string
-and return the last element.
-- a `kiss` function that returns an array of
-  the first and the last element
+  and return the last element.
+
+- a `kiss` function that returns an array of 2 elements
+  the last and the first element, in that order
+
 
 ### Notions
 
