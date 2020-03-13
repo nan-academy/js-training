@@ -1,19 +1,34 @@
-'use strict'
-
 /*
- * Create an `id` function that takes one argument and return it
- *
- * @notions Functions
- */
+## Id
 
-// Your code :
+### Instructions
 
-//* Begin of tests
-const assert = require('assert')
+Create an `id` function that takes one argument and return it
 
-assert.strictEqual(typeof id, 'function')
-assert.strictEqual(id.length, 1)
-assert.strictEqual(id(5), 5)
-assert.strictEqual(id('pouet'), 'pouet')
-assert.strictEqual(id(assert), assert)
-// End of tests */
+
+### Notions
+
+- Functions
+
+*/
+
+
+export const test = [
+  // id is declared and is a function
+  () => typeof id === 'function',
+
+  // id take 1 argument
+  () => id.length === 1,
+
+  // id return numbers back
+  () => id(5) === 5,
+
+  // id return strings back
+  () => id('pouet') === 'pouet',
+
+  // id return itself, why not
+  () => id(id) === id,
+
+  // id return anything really
+  _ => id(_) === _,
+]

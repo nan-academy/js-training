@@ -260,7 +260,7 @@ const loadHash = async (sourceHash, replace) => {
   cmEditor.doc.markText({ line: 0, ch: 0 }, { line: start - 1, ch: 2 }, { readOnly: true })
   cmEditor.doc.markText({ line: 0, ch: 2 }, { line: start - 1, ch: 0 }, { className: 'subject' })
   cmEditor.doc.markText({ line: size, ch: 0 }, { line: cmEditor.doc.size + 1, ch: 0 }, { readOnly: true })
-  testsText.replace(/(?:\n\n\s*?|^\s*)\/\/(.+?)\n/g, (match, group, index) => {
+  testsText.replace(/\nt\(.+?=>/g, (match, index) => {
     const line = size + testsText.slice(0, index + match.length - 1).split('\n').length
     const matchLines = match.split('\n')
     const lastMatchedLine = matchLines[matchLines.length-1]

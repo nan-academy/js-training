@@ -1,21 +1,30 @@
-'use strict'
-
 /*
- * Create a `getLength` function that takes an array or a string
- * and return its length.
- *
- * @notions Data-Structures, Get
- */
+## Get Length
 
-// Your code :
+### Instructions
 
-//* Begin of tests
-const assert = require('assert')
+Create a `getLength` function that takes an array or a string
+and return its length.
 
-assert.strictEqual(getLength([ 2, 42 ]), 2)
-assert.strictEqual(getLength([ 'pouet', 4, true ]), 3)
-assert.strictEqual(getLength(Array(100)), 100)
-assert.strictEqual(getLength([ getLength ]), 1)
-assert.strictEqual(getLength('salut'), 5)
-assert.strictEqual(getLength([]), 0)
-// End of tests */
+
+### Notions
+
+- Data-Structures
+- Get
+
+*/
+
+
+export const tests = []
+const t = f => tests.push(f)
+
+// handle simple array
+t(() => getLength([ 2, 42 ]) ===  2)
+
+// handle mixed array
+t(() => getLength([ 'pouet', 4, true ]) ===  3)
+
+t(() => getLength(Array(100)) === 100) // handle holey array
+t(() => getLength('salut') ===  5) // handle strings
+t(() => getLength([]) ===  0) // handle empty arrays
+t(() => getLength('') ===  0) // handle empty strings

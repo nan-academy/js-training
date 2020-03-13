@@ -1,21 +1,36 @@
-'use strict'
-
 /*
- * Create a constant variable named `escapeStr` that contains
- * the following specials characters: /\`"'
- *
- * @notions Primitive and Operators, Variables
- */
+## Escape Str
 
-// Your code :
+### Instructions
 
-//* Begin of tests
-const assert = require('assert')
+Create a constant variable named `escapeStr` that contains
+the following specials characters: `/\\\`"'`
 
-assert.strictEqual(typeof escapeStr, 'string')
-assert.strictEqual(escapeStr.includes("'"), true)
-assert.strictEqual(escapeStr.includes('"'), true)
-assert.strictEqual(escapeStr.includes('`'), true)
-assert.strictEqual(escapeStr.includes('/'), true)
-assert.strictEqual(escapeStr.includes('\\'), true)
-// End of tests */
+
+### Notions
+
+- Primitive and Operators
+- Variables
+
+*/
+
+export const tests = []
+const t = f => tests.push(f)
+
+// escapeStr is declared and of type string 
+t(() => typeof escapeStr === 'string')
+
+// escapeStr should include the character '
+t(() => escapeStr.includes("'"))
+
+// escapeStr should include the character "
+t(() => escapeStr.includes('"'))
+
+// escapeStr should include the character `
+t(() => escapeStr.includes('`'))
+
+// escapeStr should include the character /
+t(() => escapeStr.includes('/'))
+
+// escapeStr should include the character \
+t(() => escapeStr.includes('\\'))

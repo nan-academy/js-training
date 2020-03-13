@@ -13,22 +13,10 @@ containing the values 4 and '2'
 
 */
 
+export const tests = []
+const t = f => tests.push(f)
 
-
-
-
-
-
-export const tests = [
-  // arr is declared and is an array
-  () => Array.isArray(arr),
-
-  // arr first element is 4
-  () => arr[0] === 4,
-
-  // arr second element is "2"
-  () => arr[1] === '2',
-
-  // arr length is 2
-  () => arr.length === 2,
-]
+t(() => Array.isArray(arr)) // arr is declared and is an array
+t(() => arr[0] === 4)       // arr first element is 4
+t(() => arr[1] === '2')     // arr second element is "2"
+t(() => arr.length === 2)   // arr length is 2
