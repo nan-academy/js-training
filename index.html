@@ -144,22 +144,7 @@ ${[...Array(100).keys()].map(n => `
   <link rel="stylesheet" type="text/css" href="./lib/codemirror.css">
   <script src="./lib/codemirror.js"></script>
   <script type="module">
-const eq = (a, b) => {
-  if (a === b) return true
-  if (!a || !b) return false
-  if (typeof a !== typeof b) return false
-  if (typeof a === 'number' && Number.isNaN(a) && Number.isNaN(b)) return true
-  if (typeof a === 'object') {
-    if (a.constructor !== b.constructor) return false
-    const entries = Object.entries(a)
-    if (entries.length !== Object.values(b).length) return false
-    for (const [k,v] of entries) {
-      if (!eq(b[k], v)) return false
-    }
-    return true
-  }
-  throw err
-}
+const DEFAULT_TIMEOUT = 5000
 const DARK = window.matchMedia('(prefers-color-scheme: dark)').matches
   || Boolean(localStorage.dark)
 
@@ -176,12 +161,67 @@ const guessUrl = ({ host, pathname, hostname, origin }) => host.endsWith('.githu
   ? [origin]
   : [userContent, 'nan-academy', 'js-training', 'master']
 
-let _module, _inPopState, _error, _lock
+let _module, _inPopState, _error, _lock, _worker
 const importText = code => import(URL.createObjectURL(new Blob([code], {type : 'text/javascript'})))
 const unslash = str => str.replace(/(^\/+|\/+$)/g, '')
 const baseUrl = `${location.origin}${location.pathname}`
 const contentUrl = guessUrl(location).join('/')
 const defaults = (arr, ...args) => args.map((v, i) => arr[i] || v)
+const exec = async code => {
+  document.body.className = ''
+  const worker = (_worker && !_worker.terminated)
+    ? _worker
+    : (_worker = new Worker('./worker.js'))
+
+  const send = (arg, timeout) => new Promise(s => {
+    setTimeout(() => {
+      s(false)
+      if (worker.terminated) return
+      worker.terminated = true
+      worker.terminate()
+    }, timeout || DEFAULT_TIMEOUT)
+    if (worker.terminated) return setTimeout(s, 32)
+    worker.addEventListener('message', event => s(event.data), { once: true, passive: true })
+    worker.postMessage(arg)
+  })
+
+  document.body.classList.add(`test-1-start`)
+  const { line, error, count } = await send(code, 10000)
+    .then(data => data || ({ error: 'TimeoutError: Worker is stuck' }))
+  if (error) {
+    document.body.className = 'test-0-fail'
+    return _error = line > -1
+      ? cmEditor.doc.markText(
+        { line: line-1, ch: 0 },
+        { line, ch: 0 },
+        { className: `test-flash test-0` },
+      )
+      : cmEditor.doc.addLineWidget(
+        (line || cmEditor.doc.size)-1,
+        document.createTextNode(error),
+        { coverGutter: true, noHScroll: true, className: 'error-message' },
+      )
+  }
+
+  for (const n of Array(count).keys()) {
+    document.body.classList.add(`test-${n+1}-start`)
+    const minWait = new Promise(s => setTimeout(s, 60))
+    const pass = await send(n).catch(false)
+    await minWait
+    document.body.classList.remove(`test-${n+1}-start`)
+    document.body.classList.add(`test-${n+1}-${pass ? 'pass' : 'fail'}`)
+  }
+}
+
+const loadModule = ({ next, exercises }) => {
+  const entries = Object.entries(exercises).map(([k, v], i) => [ k, { ...v, name: k, i }])
+  for (const [,e] of entries) {
+    e.prev = entries[e.i - 1] && entries[e.i - 1][1]
+    e.next = entries[e.i + 1] && entries[e.i + 1][1]
+  }
+  _module = { next, entries, exercises: Object.fromEntries(entries) }
+}
+
 const loadHash = async (sourceHash, replace) => {
   if (_inPopState) return
   _inPopState = true
@@ -191,17 +231,19 @@ const loadHash = async (sourceHash, replace) => {
     : ''
   const url = version ? `${userContent}/${version}` : contentUrl
   const [mod, ex] = defaults(exPath.split('.'), 'browser-hello', 'hello')
-  _module = localStorage[`$${mod}.@${version}`]
-    ? JSON.parse(localStorage[`$${mod}.@${version}`])
-    : (await importText(await (await fetch(`${url}/module/${mod}.js`)).text()).then(({ exercises = [], next }) => {
-      localStorage[`$${mod}.@${version}`] = JSON.stringify({ exercises, next })
-      return { exercises, next }
+  localStorage[`$${mod}.@${version}`]
+    ? loadModule(JSON.parse(localStorage[`$${mod}.@${version}`]))
+    : (await importText(await (await fetch(`${url}/module/${mod}.js`)).text()).then(exports => {
+      const { next, exercises } = exports
+      localStorage[`$${mod}.@${version}`] = JSON.stringify({ next, exercises })
+      loadModule(exports)
     }))
 
-  const exercise = _module.exercises.includes(ex) ? ex : _module.exercises[0]
-  const hash = `#${mod}.${exercise}${version?`@${version}`:''}`
+  const exercise = _module.exercises[ex] || _module.entries[0] && _module.entries[0][1]
+  if (!exercise) return cmEditor.setValue('Empty module')
+  const hash = `#${mod}.${exercise.name}${version?`@${version}`:''}`
   hash === sourceHash || history[replace ? 'replaceState' : 'pushState']({}, '', `${baseUrl}${hash}`)
-  const content = localStorage[hash] || (localStorage[hash] = await getContent(url, exercise))
+  const content = localStorage[hash] || (localStorage[hash] = await getContent(url, exercise.name))
   const [ subject ] = content.split('*/', 1)
   const testStartStr = 'export const tests = ['
   const [ base ] = content.split(testStartStr, 1)
@@ -228,78 +270,24 @@ const loadHash = async (sourceHash, replace) => {
   _inPopState = false
 }
 
-const wait = (delay, arg) => new Promise(s => setTimeout(s, delay, arg))
-const fail = fn => { try { fn() } catch (err) { return true } }
 window.next = () => {
   const [ path, version = '' ] = location.hash.split('@')
   const [ mod, current ] = path.split('.')
-  const next = _module.exercises[_module.exercises.indexOf(current) + 1]
-  if (next) return loadHash(`${mod}.${next}@${version}`)
+  const next = _module.exercises[current] && _module.exercises[current].next
+  if (next) return loadHash(`${mod}.${next.name}@${version}`)
   if (_module.next) return loadHash(`${_module.next}@${version}`)
-  cmEditor.setValue(`Congratulation ! You've done all the exercises !
-Enjoy this nice sunset.
-You deserve this.
-
- 
-            ^^                   @@@@@@@@@
-       ^^       ^^            @@@@@@@@@@@@@@@
-                            @@@@@@@@@@@@@@@@@@              ^^
-                           @@@@@@@@@@@@@@@@@@@@
- ~~~~ ~~ ~~~~~ ~~~~~~~~ ~~ &&&&&&&&&&&&&&&&&&&& ~~~~~~~ ~~~~~~~~~~~ ~~~
- ~         ~~   ~  ~       ~~~~~~~~~~~~~~~~~~~~ ~       ~~     ~~ ~
-   ~      ~~      ~~ ~~ ~~  ~~~~~~~~~~~~~ ~~~~  ~     ~~~    ~ ~~~  ~ ~~
-   ~  ~~     ~         ~      ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~
- ~  ~       ~ ~      ~           ~~ ~~~~~~  ~      ~~  ~             ~~
-       ~             ~        ~      ~      ~~   ~             ~`)
+  loadHash('success.congratulation@nan-academy/js-training')
 }
 
-const runner = async () => {
+const runTests = async () => {
+  if (_lock) return
   _error && (_error.clear(), _error = undefined)
-  const code = cmEditor.getValue()
-  const { tests } = await importText(code)
-    .catch(err => {
-      if (!(err instanceof Error)) {
-        err = { message: err, stack: '', constructor: err ? err.constructor : {name: typeof err} }
-      }
-      const message = `${err.constructor.name}: ${err.message}`
-      const [, line, ch] = err.stack.split(/:([0-9]+)(:([0-9]+)?)(?:\n|$)/).map(Number)
-      if (line > -1 && ch > -1) {
-        document.body.className = 'test-0-fail'
-        _error = cmEditor.doc.markText(
-          { line: line-1, ch: 0 },
-          { line: line-1, ch: ch + 1 },
-          { className: `test-flash test-0` },
-        )
-      } else {
-        _error = cmEditor.doc.addLineWidget(
-          (line || cmEditor.doc.size)-1,
-          document.createTextNode(message),
-          { coverGutter: true, noHScroll: true, className: 'error-message' },
-        )
-      }
-      throw err
-    })
-  if (!tests) throw Error(`No tests defined`)
-  const ctx = {}
-  document.body.className = ''
-  const failCount = await tests.map((test, index, tests) => async count => {
-    document.body.classList.add(`test-${index + 1}-start`)
-    const minWait = wait(150)
-    const success = await (async () => test({ eq, code, wait, fail }, ctx))().catch(e => false)
-    await minWait
-    document.body.classList.remove(`test-${index + 1}-start`)
-
-    if (success) {
-      document.body.classList.add(`test-${index + 1}-pass`)
-      return count
-    }
-    document.body.classList.add(`test-${index + 1}-fail`)
-    return count + 1
-  }).reduce((q, t) => q.then(t), Promise.resolve(0))
-  failCount || next()
+  await (_lock = exec(cmEditor.getValue())).finally(() => _lock = undefined)
+  if (Array.from(document.body.classList).some(c => c.endsWith('-fail'))) return
+  await new Promise(s => setTimeout(s, 250))
+  next()
 }
 
-const runTests = () => _lock || (_lock = runner().finally(() => _lock = undefined))
 export const cmEditor = CodeMirror(document.getElementById('editor'), {
   mode: 'javascript',
   theme: DARK ? 'dracula' : 'neo',
@@ -314,7 +302,10 @@ export const cmEditor = CodeMirror(document.getElementById('editor'), {
 
 cmEditor.on('change', e => localStorage[location.hash] = e.getValue())
 loadHash(location.hash, true)
-  .catch(() => localStorage.clear() && location.reload())
+  .catch(err => {
+    console.error(err)
+    localStorage.clear() && location.reload()
+  })
 
 addEventListener('hashchange', () => loadHash(location.hash, true))
   </script>
