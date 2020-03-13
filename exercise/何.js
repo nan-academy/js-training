@@ -4,7 +4,7 @@
 
 ### Instructions
 
-Create a `inequalty` value that is not equal to itself
+Create a `inequality` value that is not equal to itself
 
 ### Notions
 
@@ -16,4 +16,4 @@ Create a `inequalty` value that is not equal to itself
 export const tests = []
 const t = f => tests.push(f)
 
-t(() => !(inequalty === inequalty))
+t(() => !(inequality === inequality))
