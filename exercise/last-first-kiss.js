@@ -23,7 +23,6 @@ Create 3 functions:
 */
 
 
-
 export const tests = []
 const t = f => tests.push(f)
 

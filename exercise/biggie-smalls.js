@@ -20,11 +20,11 @@ const t = f => tests.push(f)
 
 // bigger
 t(() => typeof biggie !== 'undefined')
-t(() => biggie > Number.MAX_VALUE)
+t(() => biggie > 1.7976931348623157e+308)
 
 // smaller
 t(() => typeof smalls !== 'undefined')
-t(() => smalls < Number.MIN_VALUE)
+t(() => smalls < -1.7976931348623157e+308)
 
 /*
   Damn right I like the life I live,
