@@ -3,7 +3,16 @@
 
 ### Instructions
 
-Create a function for each primitive type
+Create an object of functions to check a value type
+- `is.num` value is a number
+- `is.nan` value is NaN
+- `is.str` value is a string
+- `is.bool` value is a boolean
+- `is.undef` value is undefined
+- `is.def` value is defined
+- `is.arr` value is an array
+- `is.obj` value is a simple object or null objects
+- `is.fun` value is a function
 
 ### Notions
 
@@ -12,42 +21,57 @@ Create a function for each primitive type
 
 */
 
-
 export const tests = []
 const t = f => tests.push(f)
 
-t(() => typeof isNum === 'function' && isNum.length === 1)
-t(() => isNum(1))
-t(() => isNum(-0))
-t(() => isNum(0.5))
-t(() => isNum(NaN))
-t(() => !isNum(true))
-t(() => !isNum())
-t(() => !isNum(''))
-t(() => !isNum([]))
+// setup context for following tests
+t((_, ctx) => ctx.values = [
+  1,
+  NaN,
+  true,
+  '',
+  '💩',
+  undefined,
+  () => {},
+  [],
+  {},
+  [1, Array(1), [], 2],
+  { length: 10 },
+  Object.create(null),
+  null,
+  console.log,
+  void 0,
+])
 
-t(() => typeof isStr === 'function' && isStr.length === 1)
-t(() => isStr(''))
-t(() => isStr(`${[]}`))
-t(() => !isStr(1))
-t(() => !isStr(true))
-t(() => !isStr())
-t(() => !isStr([]))
+// is.num
+t(({ eq }, ctx) => eq(ctx.values.filter(is.num), [1, NaN]))
 
-t(() => typeof isBool === 'function' && isBool.length === 1)
-t(() => isBool(true))
-t(() => isBool(false))
-t(() => isBool(!1))
-t(() => !isBool(1))
-t(() => !isBool())
-t(() => !isBool(''))
-t(() => !isBool([]))
+// is.nan
+t(({ eq }, ctx) => eq(ctx.values.filter(is.nan), [NaN]))
 
-t(() => typeof isUndef === 'function' && isUndef.length === 1)
-t(() => isUndef())
-t(() => isUndef(undefined))
-t(() => !isUndef(!1))
-t(() => !isUndef(1))
-t(() => !isUndef(''))
-t(() => !isUndef([]))
-t(() => !isUndef(null))
+// is.str
+t(({ eq }, ctx) => eq(ctx.values.filter(is.str), ['', '💩']))
+
+// is.bool
+t(({ eq }, ctx) => eq(ctx.values.filter(is.bool), [true]))
+
+// is.undef
+t(({ eq }, ctx) => eq(ctx.values.filter(is.undef), [undefined, undefined]))
+
+// is.def
+t((_, ctx) => !ctx.values.filter(is.def).includes(undefined))
+t((_, ctx) => ctx.values.filter(is.def).length === ctx.values.length - 2)
+
+// is.arr
+t(({ eq }, ctx) => eq(ctx.values.filter(is.arr), [[], [1, Array(1), [], 2]]))
+
+// is.obj
+t(({ eq }, ctx) => eq(ctx.values.filter(is.obj), [
+  {},
+  { length: 10 },
+  Object.create(null),
+]))
+
+// is.fun
+t((_, ctx) => ctx.values.filter(is.fun).length === 2)
+t((_, ctx) => ctx.values.filter(is.fun)[1] === console.log)

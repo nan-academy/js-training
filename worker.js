@@ -10,10 +10,10 @@ const check = importText('export const ok = true')
 
 const eq = (a, b) => {
   if (a === b) return true
-  if (!a || !b) return false
   if (typeof a !== typeof b) return false
   if (typeof a === 'number' && Number.isNaN(a) && Number.isNaN(b)) return true
   if (typeof a === 'object') {
+    if (!a || !b) return false
     if (a.constructor !== b.constructor) return false
     const entries = Object.entries(a)
     if (entries.length !== Object.values(b).length) return false
