@@ -44,3 +44,4 @@ t(() => true)
 // then, we will move to the next file !
 t(({ wait }) => wait(2000, true))
 
+Object.freeze(tests)

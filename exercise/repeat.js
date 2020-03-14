@@ -27,3 +27,5 @@ t(() => repeat('ba', 10) === 'babababababababababa')
 t(() => repeat('pouet', 2) === 'pouetpouet')
 t(() => repeat('haha', 1) === 'haha')
 t(() => repeat('hehehe', 0) === '')
+
+Object.freeze(tests)

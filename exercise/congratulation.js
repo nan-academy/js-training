@@ -19,3 +19,5 @@ You deserve this.
 
 
 export const tests = []
+
+Object.freeze(tests)

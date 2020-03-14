@@ -38,3 +38,4 @@ t(() => typeof obj.bool === 'boolean')
 // obj.undef is of type undefined
 t(() => 'undef' in obj && typeof obj.undef === 'undefined')
 
+Object.freeze(tests)

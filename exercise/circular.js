@@ -29,3 +29,5 @@ t(() => circular.circular.circular.circular.circular === circular)
   To understand recursion,
   one must first understand recursion.
 */
+
+Object.freeze(tests)

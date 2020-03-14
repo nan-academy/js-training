@@ -47,3 +47,5 @@ t(() => get('num') === 55)
 t(() => get('noexist') === 'nice')
 t(() => set('log') === undefined)
 t(() => get('log') === undefined)
+
+Object.freeze(tests)

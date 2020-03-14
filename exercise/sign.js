@@ -42,3 +42,5 @@ t(() => !sameSign(-231, 1))
 t(() => !sameSign(-231, 0))
 t(() => !sameSign(0, 231))
 t(() => !sameSign(231, -233))
+
+Object.freeze(tests)

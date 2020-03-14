@@ -39,3 +39,5 @@ t(() => escapeStr.includes('/'))
 
 // escapeStr should include the character \
 t(() => escapeStr.includes('\\'))
+
+Object.freeze(tests)

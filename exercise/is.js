@@ -75,3 +75,5 @@ t(({ eq }, ctx) => eq(ctx.values.filter(is.obj), [
 // is.fun
 t((_, ctx) => ctx.values.filter(is.fun).length === 2)
 t((_, ctx) => ctx.values.filter(is.fun)[1] === console.log)
+
+Object.freeze(tests)

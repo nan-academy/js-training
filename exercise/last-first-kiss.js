@@ -39,3 +39,5 @@ t(() => first([]) === undefined)
 t(({ eq }) => eq(kiss([1, 2, 3, 4, 5, 6]), [6, 1]))
 t(({ eq }) => eq(kiss([eq, kiss, first]), [first, eq]))
 t(({ eq }) => eq(kiss([]), [undefined, undefined]))
+
+Object.freeze(tests)

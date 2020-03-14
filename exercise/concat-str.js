@@ -23,3 +23,5 @@ t(() => concatStr('yolo', 'swag') === 'yoloswag')
 // handle non strings correctly
 t(() => concatStr(1, 2) === '12')
 t(() => concatStr(concatStr, concatStr) === String(concatStr).repeat(2))
+
+Object.freeze(tests)

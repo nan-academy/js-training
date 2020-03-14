@@ -30,3 +30,4 @@ t(() => typeof bool === 'boolean')
 // undef is declared and of type undefined
 t(() => undef === undefined)
 
+Object.freeze(tests)

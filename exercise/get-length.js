@@ -28,3 +28,5 @@ t(() => getLength(Array(100)) === 100) // handle holey array
 t(() => getLength('salut') ===  5) // handle strings
 t(() => getLength([]) ===  0) // handle empty arrays
 t(() => getLength('') ===  0) // handle empty strings
+
+Object.freeze(tests)

@@ -33,3 +33,5 @@ t(() => id(id) === id)
 
 // id return anything really
 t(_ => id(_) === _)
+
+Object.freeze(tests)
