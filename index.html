@@ -235,7 +235,7 @@ if (localStorage.theme === 'dark' || (localStorage.theme !== 'light' && window.m
       <div class="title">😩 Was it enjoyable ? 😀</div>
       <div class="range">
         <span class="min">tiring</span>
-        <input type="range" name="interest" min="1" max="100" step="0.01">
+        <input type="range" name="fun" min="1" max="100" step="0.01">
         <span class="max">fun</span>
       </div>
     </label>
@@ -362,21 +362,38 @@ const countLines = str => {
 }
 
 const skipButton = document.getElementById('skip-feedback')
+const normalize = ([k, str]) => [k, String(str||'').replace(/↵/g, '↲').replace(/\n/g, '↵')]
+const parametrize = data => `${new URLSearchParams(Object.entries(data).map(normalize))}`
+const formatInput = e => `${e.name}_${e.value}`.replace(/~/g, '-')
+const encodeFeedback = () => parametrize({
+  hash: feedback.hash,
+  attempt: localStorage[`${feedback.hash}/attempt`] || 0,
+  code: inputs.map(formatInput).join('~'),
+})
+
+const decodeFeedback = hash => {
+  const stored = localStorage[`${hash}/feedback`]
+  if (!stored) return {}
+  const encodedValues = new URLSearchParams(stored).get('code')
+  const result = {}
+  for (const part of encodedValues.split('~')) {
+    const [key] = part.split('_', 1)
+    result[key] = part.slice(key.length + 1).replace(/↵/g, '\n')
+  }
+  return result
+}
+
 const closeFeedback = () => {
   feedback.style.display = 'none'
   cmEditor.focus()
-  const data = JSON.stringify({
-    hash: location.hash,
-    url: baseUrl,
-    ...Object.fromEntries([...new FormData(feedback)].map(formatInput)),
-  })
+  const data = encodeFeedback()
   if (localStorage[`${feedback.hash}/feedback`] === data) return false
   localStorage[`${feedback.hash}/feedback`] = data
   return true
 }
 
 const openFeedback = (hash = location.hash) => {
-  const prevFeedback = JSON.parse(localStorage[`${hash}/feedback`] || '{}')
+  const prevFeedback = decodeFeedback(hash)
   for (const input of inputs) {
     const v = prevFeedback[input.name]
     v === undefined
@@ -450,16 +467,12 @@ const loadHash = async (sourceHash, replace) => {
   _loading = false
 }
 
-const log = localhost.has(location.hostname) ? console.log : (path, data) =>
 const rand = () => Math.random().toString(36).slice(2).padStart(11, '0')
-  fetch(`https://chupato.com/log/${unslash(path)}`, {
-    method: 'POST',
-    headers: {
-      Session: localStorage.session || (localStorage.session = rand()),
-      'content-type': 'application/json',
-    },
-    body: typeof data === 'string' ? data : JSON.stringify(data),
-  }).catch(() => {})
+const sess = `session=${localStorage.session || (localStorage.session = rand())}`
+const log = localhost.has(location.hostname) ? console.log : (path, data) => {
+  typeof data === 'string' || (data = parametrize(data))
+  fetch(`https://chupato.com/log/${unslash(path)}?${sess}&${data}`).catch(() => {})
+}
 
 const next = () => {
   const [ path, version = '' ] = location.hash.split('@')
@@ -477,7 +490,6 @@ feedback.onsubmit = e => {
   log('feedback', localStorage[`${feedback.hash}/feedback`])
 }
 const inputs = [...feedback.querySelectorAll('textarea, input')]
-const formatInput = ([k,v]) => [k, k === 'remarks' ? v : Number(v)]
 
 let _lastCode
 const runTests = async () => {
@@ -491,7 +503,7 @@ const runTests = async () => {
   const fail = Array.from(document.body.classList).some(c => c.endsWith('-fail'))
   const changed = code !== _lastCode
   _lastCode = code
-  changed && log(fail ? 'fail' : 'pass', { hash, url: baseUrl, attempt, code: save() })
+  changed && log(fail ? 'fail' : 'pass', { hash, attempt, code: save() })
   if (fail) return
   await new Promise(s => setTimeout(s, 250))
   next()
