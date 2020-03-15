@@ -37,6 +37,69 @@ div.CodeMirror { height: 100vh }
   animation-fill-mode: forwards;
 }
 
+#feedback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  padding: 24px;
+  text-align: center;
+  display: none;
+}
+
+#feedback label {
+  margin-top: 52px;
+  display: block;
+}
+#feedback .range {
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+#feedback .min,
+#feedback .max,
+#feedback input[type="range"] {
+  margin: 0 6px;
+  width: 33%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#feedback textarea {
+  width: 100%;
+  margin-top: 18px;
+  height: 180px;
+  resize: vertical;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 6px;
+  font-weight: bold;
+}
+
+#feedback .min { text-align: right }
+#feedback .max { text-align: left }
+
+#feedback textarea:focus {
+  outline-offset: 3px;
+  outline-width: 2px;
+  outline-style: dashed;
+}
+#feedback button {
+  border: 2px solid;
+  background: transparent;
+  padding: 6px;
+  border-radius: 8px;
+  margin-top: 6px;
+  outline: none;
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+
 /* COLORS */
 .editable {
   background-color: var(--b-lime);
@@ -81,8 +144,19 @@ mark {
 
 .error-message { color: var(--g-red) }
 
+#feedback { background: var(--i) }
+#feedback .min { color: var(--c-orange) }
+#feedback .max { color: var(--c-turquoise) }
+#feedback textarea:focus { outline-color: var(--c-turquoise) }
+#feedback button:focus { color: var(--c-turquoise) }
+#feedback button:hover { color: var(--b-turquoise) }
+#feedback button {
+  color: var(--b);
+  background: white;
+}
+
 /* DARK MODE */
-html.dark, .dark body {
+.dark #feedback, html.dark, .dark body {
   color: var(--i);
   background: var(--a);
 }
@@ -117,70 +191,15 @@ html.dark, .dark body {
   100% { color: var(--f-yellow) }
 }
 
-form#feedback {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 100;
-  background: black;
-  padding: 24px;
-  text-align: center;
-  display: none;
-}
-
-#feedback label {
-  margin-top: 52px;
-  display: block;
-}
-#feedback .range {
-  height: 36px;
-  display: flex;
-  align-items: center;
-}
-
-#feedback .min,
-#feedback .max,
-#feedback input[type="range"] {
-  margin: 0 6px;
-  width: 33%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#feedback textarea {
-  width: 100%;
-  margin-top: 18px;
-  height: 180px;
-  resize: vertical;
-  border: none;
-  border-radius: 3px;
-  font-size: 16px;
-  padding: 6px;
-  font-weight: bold;
-}
-#feedback .min { text-align: right; color: var(--h-orange) }
-#feedback .max { text-align: left; color: var(--h-turquoise) }
-
-#feedback textarea:focus {
-  outline-offset: 3px;
-  outline-color: var(--h-turquoise);
-  outline-width: 2px;
-  outline-style: dashed;
-}
-#feedback button:focus {
-  color: var(--h-turquoise);
-}
-#feedback button {
+.dark #feedback .min { color: var(--h-orange) }
+.dark #feedback .max { color: var(--h-turquoise) }
+.dark #feedback textarea:focus { outline-color: var(--h-turquoise) }
+.dark #feedback button:focus { color: var(--h-turquoise) }
+.dark #feedback button:hover { color: var(--g-turquoise) }
+.dark #feedback button {
   color: white;
-  border: 2px solid;
-  background: transparent;
-  padding: 6px;
-  border-radius: 8px;
-  margin-top: 6px;
-  outline: none;
+  background: inherit;
 }
-
 
 /**/
   </style>
@@ -401,8 +420,8 @@ const openFeedback = (hash = location.hash) => {
       : (v && (input.value = v))
   }
   feedback.hash = hash
-  document.activeElement.blur()
   feedback.style.display = 'block'
+  inputs.find(e => e.name === 'remarks').focus()
 }
 
 window.addEventListener('keydown', e => {
