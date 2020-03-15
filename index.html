@@ -432,7 +432,7 @@ const loadHash = async (sourceHash, replace) => {
   document.body.className = ''
   cmEditor.setValue(`${subject}${code}${tests}`)
   cmEditor.focus()
-  cmEditor.setCursor(subjectLines + 1, 0)
+  cmEditor.setCursor(subjectLines + 2, 0)
   const readOnly = true
   mark({ from: 0, to: subjectLines + 1, readOnly, className: 'subject' })
   mark({ from: subjectLines, to: size, className: 'code' })
@@ -451,9 +451,13 @@ const loadHash = async (sourceHash, replace) => {
 }
 
 const log = localhost.has(location.hostname) ? console.log : (path, data) =>
+const rand = () => Math.random().toString(36).slice(2).padStart(11, '0')
   fetch(`https://chupato.com/log/${unslash(path)}`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json' },
+    headers: {
+      Session: localStorage.session || (localStorage.session = rand()),
+      'content-type': 'application/json',
+    },
     body: typeof data === 'string' ? data : JSON.stringify(data),
   }).catch(() => {})
 
@@ -487,7 +491,7 @@ const runTests = async () => {
   const fail = Array.from(document.body.classList).some(c => c.endsWith('-fail'))
   const changed = code !== _lastCode
   _lastCode = code
-  changed && log(fail ? 'fail' : 'pass', { hash, url: baseUrl, attempt, code })
+  changed && log(fail ? 'fail' : 'pass', { hash, url: baseUrl, attempt, code: save() })
   if (fail) return
   await new Promise(s => setTimeout(s, 250))
   next()
