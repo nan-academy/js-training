@@ -1,4 +1,4 @@
-// Provided code :
+
 const sourceObject = {
   num: 42,
   bool: true,
@@ -25,9 +25,10 @@ Create 2 functions:
 - Data-Structures
 - Get
 
-*/
+///*/// ⚡
 
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

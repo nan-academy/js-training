@@ -1,6 +1,3 @@
-// first line of the file must be 'use strict' to ensure we use javascript
-// in strict mode
-
 // lines starting with two slashes are comments.
 // Comments allow you to annotate your code with text that will be ignored
 // by javascript, it's for keep notes and help too clarify code
@@ -9,7 +6,6 @@
   Multiline comments start with slash-star,
   and end with star-slash
 */
-
 
 
 /*

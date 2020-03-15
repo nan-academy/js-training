@@ -12,9 +12,10 @@ and return its length.
 - Data-Structures
 - Get
 
-*/
+///*/// ⚡
 
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

@@ -42,6 +42,7 @@ div.CodeMirror { height: 100vh }
   background-color: var(--b-lime);
 }
 html, body {
+  position: relative;
   color: var(--b);
   background: var(--i);
 }
@@ -116,6 +117,71 @@ html.dark, .dark body {
   100% { color: var(--f-yellow) }
 }
 
+form#feedback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  background: black;
+  padding: 24px;
+  text-align: center;
+  display: none;
+}
+
+#feedback label {
+  margin-top: 52px;
+  display: block;
+}
+#feedback .range {
+  height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+#feedback .min,
+#feedback .max,
+#feedback input[type="range"] {
+  margin: 0 6px;
+  width: 33%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#feedback textarea {
+  width: 100%;
+  margin-top: 18px;
+  height: 180px;
+  resize: vertical;
+  border: none;
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 6px;
+  font-weight: bold;
+}
+#feedback .min { text-align: right; color: var(--h-orange) }
+#feedback .max { text-align: left; color: var(--h-turquoise) }
+
+#feedback textarea:focus {
+  outline-offset: 3px;
+  outline-color: var(--h-turquoise);
+  outline-width: 2px;
+  outline-style: dashed;
+}
+#feedback button:focus {
+  color: var(--h-turquoise);
+}
+#feedback button {
+  color: white;
+  border: 2px solid;
+  background: transparent;
+  padding: 6px;
+  border-radius: 8px;
+  margin-top: 6px;
+  outline: none;
+}
+
+
 /**/
   </style>
 <script>
@@ -140,22 +206,74 @@ ${[...Array(100).keys()].map(n => `
 `).join('\n')}
 `
 
+if (localStorage.theme === 'dark' || (localStorage.theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  document.documentElement.classList.add('dark')
+}
+
 </script>
 </head>
 <body>
   <div id="editor"></div>
+  <form id="feedback">
+    <label>
+      <div class="title">👶 How challenging was this exercise ? 🤖</div>
+      <div class="range">
+        <span class="min">not at all</span>
+        <input type="range" name="intelligibility" min="1" max="100" step="0.01">
+        <span class="max">too much</span>
+      </div>
+    </label>
+    <label>
+      <div class="title">🤷 Was the subject intelligible ? 🔎</div>
+      <div class="range">
+        <span class="min">incomprehensible</span>
+        <input type="range" name="difficulty" min="1" max="100" step="0.01">
+        <span class="max">clear</span>
+      </div>
+    </label>
+    <label>
+      <div class="title">😩 Was it enjoyable ? 😀</div>
+      <div class="range">
+        <span class="min">tiring</span>
+        <input type="range" name="interest" min="1" max="100" step="0.01">
+        <span class="max">fun</span>
+      </div>
+    </label>
+    <label>
+      <div class="title">💩 Was it compelling ? 👍</div>
+      <div class="range">
+        <span class="min">boring</span>
+        <input type="range" name="interest" min="1" max="100" step="0.01">
+        <span class="max">interesting</span>
+      </div>
+    </label>
+    <label>
+      <div class="title">🕳 How much did you learn ? 🎓</div>
+      <div class="range">
+        <span class="min">nothing</span>
+        <input type="range" name="payoff" min="1" max="100" step="0.01">
+        <span class="max">a lot</span>
+      </div>
+    </label>
+    <label>
+      <span class="title">🙏 Please say anything you think could help improve this exercise</span>
+      <textarea name="remarks"></textarea>
+    </label>
+    /* --
+    <button type="button" tabindex="-1" id="skip-feedback">❌ cancel 💔</button>
+    -----
+    <button type="submit">✔ Submit 💚</button>
+    -- */
+  </form>
   <link rel="stylesheet" type="text/css" href="./lib/codemirror.css">
   <script src="./lib/codemirror.js"></script>
   <script type="module">
+let _module, _loading, _error, _lock, _worker, _save
+
+const ZAP = '///*/// ⚡'
 const DEFAULT_TIMEOUT = 5000
-const DARK = localStorage.theme === 'dark'
-  ? true
-  : localStorage.theme === 'light'
-  ? false
-  : window.matchMedia('(prefers-color-scheme: dark)').matches
-
-DARK && document.documentElement.classList.add('dark')
-
+const userContent = 'https://raw.githubusercontent.com'
+const localhost = new Set(['localhost', '127.0.0.1'])
 const getContent = async (url, exercise) => {
   const res = await fetch(`${url}/exercise/${exercise}.js`)
   if (!res.ok) {
@@ -165,20 +283,17 @@ const getContent = async (url, exercise) => {
   return (await res.text()).replace(/\r\n/g, '\n')
 }
 
-const userContent = 'https://raw.githubusercontent.com'
-const localhost = new Set(['localhost', '127.0.0.1'])
+const defaults = (arr, ...args) => args.map((v, i) => arr[i] || v)
+const unslash = str => str.replace(/(^\/+|\/+$)/g, '')
 const guessUrl = ({ host, pathname, hostname, origin }) => host.endsWith('.github.io')
   ? [userContent, host.split('.')[0], unslash(pathname), 'gh-pages']
   : localhost.has(hostname)
   ? [origin]
   : [userContent, 'nan-academy', 'js-training', 'master']
 
-let _module, _inPopState, _error, _lock, _worker
 const importText = code => import(URL.createObjectURL(new Blob([code], {type : 'text/javascript'})))
-const unslash = str => str.replace(/(^\/+|\/+$)/g, '')
 const baseUrl = `${location.origin}${location.pathname}`
 const contentUrl = guessUrl(location).join('/')
-const defaults = (arr, ...args) => args.map((v, i) => arr[i] || v)
 const exec = async code => {
   document.body.className = ''
   const worker = (_worker && !_worker.terminated)
@@ -234,15 +349,60 @@ const loadModule = ({ next, exercises }) => {
   _module = { next, entries, exercises: Object.fromEntries(entries) }
 }
 
+const mark = ({ from: f, to: t, ...opts }) => cmEditor.doc.markText(
+  { line: f, ch: 0 },
+  { line: t, ch: 0 },
+  opts,
+)
+
+const countLines = str => {
+  let total = 0
+  for (const c of str) { c === '\n' && (total++) }
+  return total
+}
+
+const skipButton = document.getElementById('skip-feedback')
+const closeFeedback = () => {
+  feedback.style.display = 'none'
+  cmEditor.focus()
+  const data = JSON.stringify({
+    hash: location.hash,
+    url: baseUrl,
+    ...Object.fromEntries([...new FormData(feedback)].map(formatInput)),
+  })
+  if (localStorage[`${feedback.hash}/feedback`] === data) return false
+  localStorage[`${feedback.hash}/feedback`] = data
+  return true
+}
+
+const openFeedback = (hash = location.hash) => {
+  const prevFeedback = JSON.parse(localStorage[`${hash}/feedback`] || '{}')
+  for (const input of inputs) {
+    const v = prevFeedback[input.name]
+    v === undefined
+      ? (input.value = input.type === 'range' ? 50.01 : '')
+      : (v && (input.value = v))
+  }
+  feedback.hash = hash
+  document.activeElement.blur()
+  feedback.style.display = 'block'
+}
+
+window.addEventListener('keydown', e => {
+  e.key === 'Escape' && (cmEditor.hasFocus() ? openFeedback() : closeFeedback())
+}, { passive: true })
+
+skipButton.addEventListener('click', closeFeedback, { passive: true })
 const loadHash = async (sourceHash, replace) => {
-  if (_inPopState) return
-  _inPopState = true
+  if (_loading) return
+  _loading = true
+  _save = undefined
   const [exPath, versionPath=''] = sourceHash.replace(/^#(\/?)/, '').split('@')
   const version = versionPath
     ? defaults(unslash(versionPath).split('/'), 'nan-academy', 'js-training', 'gh-pages').join('/')
     : ''
   const url = version ? `${userContent}/${version}` : contentUrl
-  const [mod, ex] = defaults(exPath.split('.'), 'browser-hello', 'hello').map(decodeURIComponent)
+  const [mod, ex] = defaults(exPath.split('.'), 'hello', 'introduction').map(decodeURIComponent)
   localStorage[`$${mod}.@${version}`]
     ? loadModule(JSON.parse(localStorage[`$${mod}.@${version}`]))
     : (await importText(await (await fetch(`${url}/module/${mod}.js`)).text()).then(exports => {
@@ -257,34 +417,47 @@ const loadHash = async (sourceHash, replace) => {
   if (!exercise) return cmEditor.setValue('Empty module')
   const hash = `#${mod}.${exercise.name}${version?`@${version}`:''}`
   hash === sourceHash || history[replace ? 'replaceState' : 'pushState']({}, '', `${baseUrl}${hash}`)
-  const content = localStorage[hash] || (localStorage[hash] = await getContent(url, exercise.name))
-  const [ subject ] = content.split('*/', 1)
-  const testStartStr = 'export const tests = ['
-  const [ base ] = content.split(testStartStr, 1)
-  const start = subject.split('\n').length
-  const size = base.split('\n').length - 1
-  const testsText = content.slice(base.length + testStartStr.length)
-  let count = 0
+  const content = await getContent(url, exercise.name)
+  const subjectIndex = content.indexOf(ZAP) + ZAP.length
+  const testIndex = content.lastIndexOf(ZAP)
+  const subject = content.slice(0, subjectIndex)
+  const tests = content.slice(testIndex)
+  const code = `\n\n${(localStorage[hash] || content.slice(subjectIndex, testIndex)).trim()}\n\n`
+  const subjectLines = countLines(subject)
+  const testsLines = countLines(tests)
+  const codeLines = countLines(code)
+  const size = subjectLines + codeLines
 
   _error && (_error.clear(), _error = undefined)
   document.body.className = ''
-  cmEditor.setValue(content)
+  cmEditor.setValue(`${subject}${code}${tests}`)
   cmEditor.focus()
-  cmEditor.setCursor(start, 0)
-  cmEditor.doc.markText({ line: 0, ch: 0 }, { line: start - 1, ch: 2 }, { readOnly: true })
-  cmEditor.doc.markText({ line: 0, ch: 2 }, { line: start - 1, ch: 0 }, { className: 'subject' })
-  cmEditor.doc.markText({ line: size, ch: 0 }, { line: cmEditor.doc.size + 1, ch: 0 }, { readOnly: true })
-  testsText.replace(/\nt\(.+?=>/g, (match, index) => {
-    const line = size + testsText.slice(0, index + match.length - 1).split('\n').length
+  cmEditor.setCursor(subjectLines + 1, 0)
+  const readOnly = true
+  mark({ from: 0, to: subjectLines + 1, readOnly, className: 'subject' })
+  mark({ from: subjectLines, to: size, className: 'code' })
+  mark({ from: size, to: size + codeLines + 1, readOnly, className: 'tests' })
+  _save = () => localStorage[hash] = cmEditor.getValue().slice(subjectIndex, -tests.length).trim()
+
+  let count = 0
+  tests.replace(/\nt\(/g, (match, index) => {
+    const line = size + countLines(tests.slice(0, index + match.length - 1))
     const matchLines = match.split('\n')
     const lastMatchedLine = matchLines[matchLines.length-1]
     const className = `test-flash test-${++count}`
-    cmEditor.doc.markText({ line: line-1, ch: 0 }, { line, ch: 0 }, { className })
+    mark({ from: line, to: line + 1, className })
   })
-  _inPopState = false
+  _loading = false
 }
 
-window.next = () => {
+const log = localhost.has(location.hostname) ? console.log : (path, data) =>
+  fetch(`https://chupato.com/log/${unslash(path)}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: typeof data === 'string' ? data : JSON.stringify(data),
+  }).catch(() => {})
+
+const next = () => {
   const [ path, version = '' ] = location.hash.split('@')
   const [ mod, current ] = path.split('.')
   const next = _module.exercises[current] && _module.exercises[current].next
@@ -293,18 +466,40 @@ window.next = () => {
   loadHash('success.congratulation@nan-academy/js-training')
 }
 
+const feedback = document.getElementById('feedback')
+feedback.onsubmit = e => {
+  e.preventDefault()
+  if (!closeFeedback()) return
+  log('feedback', localStorage[`${feedback.hash}/feedback`])
+}
+const inputs = [...feedback.querySelectorAll('textarea, input')]
+const formatInput = ([k,v]) => [k, k === 'remarks' ? v : Number(v)]
+
+let _lastCode
 const runTests = async () => {
   if (_lock) return
   _error && (_error.clear(), _error = undefined)
-  await (_lock = exec(cmEditor.getValue())).finally(() => _lock = undefined)
-  if (Array.from(document.body.classList).some(c => c.endsWith('-fail'))) return
+  const { hash, hostname } = location
+  const k = `${hash}/attempt`
+  const attempt = localStorage[k] = (Number(localStorage[k]) || 0) + 1
+  const code = cmEditor.getValue()
+  await (_lock = exec(code)).finally(() => _lock = undefined)
+  const fail = Array.from(document.body.classList).some(c => c.endsWith('-fail'))
+  const changed = code !== _lastCode
+  _lastCode = code
+  changed && log(fail ? 'fail' : 'pass', { hash, url: baseUrl, attempt, code })
+  if (fail) return
   await new Promise(s => setTimeout(s, 250))
   next()
+  const current = _module.exercises[location.hash.split('@')[0].split('.')[1]]
+  if (!current || !current.feedback || localStorage[`${location.hash}/prompted`]) return
+  localStorage[`${location.hash}/prompted`] = Date.now()
+  await openFeedback(hash)
 }
 
 export const cmEditor = CodeMirror(document.getElementById('editor'), {
   mode: 'javascript',
-  theme: DARK ? 'dracula' : 'neo',
+  theme: document.documentElement.classList.contains('dark') ? 'dracula' : 'neo',
   keyMap: 'sublime',
   tabSize: 2,
   lineNumbers: true,
@@ -314,7 +509,9 @@ export const cmEditor = CodeMirror(document.getElementById('editor'), {
   extraKeys: { 'Ctrl-S': runTests, 'Cmd-S': runTests, 'Ctrl-Enter': runTests }
 })
 
-cmEditor.on('change', e => localStorage[location.hash] = e.getValue())
+const save = () => _save && _save()
+cmEditor.on('change', (t => () => (clearTimeout(t), t = setTimeout(save, 200)))())
+
 loadHash(location.hash, true)
   .catch(err => {
     console.error(err)
@@ -325,6 +522,7 @@ loadHash(location.hash, true)
   })
 
 addEventListener('hashchange', () => loadHash(location.hash, true))
+
   </script>
 </body>
 </html>

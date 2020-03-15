@@ -14,10 +14,11 @@ Create a `nested` constant variable that contains
 - Data Structures
 - https://devdocs.io/javascript/global_objects/object/freeze
 
-*/
+///*/// ⚡
 
 
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

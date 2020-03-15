@@ -14,8 +14,9 @@ Of course you may not use the method directly
 - Loops or Recursion
 - https://devdocs.io/javascript/global_objects/string/repeat
 
-*/
+///*/// ⚡
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

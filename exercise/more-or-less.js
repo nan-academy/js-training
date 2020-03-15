@@ -15,9 +15,10 @@ Create 4 functions
 - Functions
 - Operators
 
-*/
+///*/// ⚡
 
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

@@ -14,8 +14,9 @@ Create a constant variables for each primitives:
 - Primitive and Operators
 - Variables
 
-*/
+///*/// ⚡
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 // str is declared and of type string

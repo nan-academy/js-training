@@ -18,8 +18,9 @@ if they both have the same sign
 - If-Else
 - devdocs.io/javascript/global_objects/math/sign
 
-*/
+///*/// ⚡
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

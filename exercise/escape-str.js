@@ -17,8 +17,9 @@ the following specials characters:
 - Primitive and Operators
 - Variables
 
-*/
+///*/// ⚡
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

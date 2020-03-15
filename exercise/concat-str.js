@@ -10,8 +10,9 @@ Create a `concatStr` function that takes 2 arguments and concatenate them
 - Functions
 - Operators
 
-*/
+///*/// ⚡
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

@@ -11,8 +11,9 @@ containing the values 4 and '2'
 
  - Data-Structures
 
-*/
+///*/// ⚡
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

@@ -18,16 +18,15 @@ You can only edit code after this comment (this block of faded text).
 Once you think your solution is OK you can run the tests
 to verify your results.
 
-*/ // <- this little */ indicate the end of the subject comment
-
+         ↓ this zap emoji indicate the end of the subject
+///*/// ⚡
 
 
 // you are now in the area were can write any valid js code :)
 // for now, you don't have anything to write, just keep reading.
 
 
-
-// ↓ this mark the end of your editing zone
+///*/// ⚡ <- this mark the end of your editing zone
 export const tests = []
 const t = f => tests.push(f)
 

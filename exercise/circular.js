@@ -13,9 +13,10 @@ itself as the value
 - Get
 - Set
 
-*/
+///*/// ⚡
 
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

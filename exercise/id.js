@@ -10,9 +10,10 @@ Create an `id` function that takes one argument and return it
 
 - Functions
 
-*/
+///*/// ⚡
 
 
+///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
 

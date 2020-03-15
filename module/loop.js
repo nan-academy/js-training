@@ -1,5 +1,5 @@
 export const exercises = {
-  'repeat': {},
+  'repeat': { feedback: true },
 // 'rget': {}, 
 // 'cut-corners': {},
 }
