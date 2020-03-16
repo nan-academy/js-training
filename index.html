@@ -332,20 +332,20 @@ import { router } from './lib/router.js'
 let _module, _loading, _error, _lock, _worker, _save, _activePage
 
 const exerciseProps = {
-  feedbackStatus: String,
-  feedback: String,
-  prompted: Number,
-  attempt: Number,
-  begin: Number,
-  code: String,
-  end: Number,
+  feedbackStatus: _ => _||'',
+  feedback: _ => _||'',
+  prompted: _ => Number(_) || 0,
+  attempt: _ => Number(_) || 0,
+  begin: _ => Number(_) || 0,
+  code: _ => _||'',
+  end: _ => Number(_) || 0,
 }
 
 const exerciseEntries = Object.entries(exerciseProps)
 const buildExerciseStore = hash => Object.fromEntries(exerciseEntries.map(([key,parser]) => {
   const path = `${hash}/${key}`
   const get = () => parser(localStorage[path])
-  const set = value => localStorage[path] = value
+  const set = value => localStorage[path] = value || ''
   const setnx = value => localStorage[path] || set(value)
   return [ key, { get, set, setnx } ]
 }))
