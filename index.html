@@ -13,7 +13,8 @@
 }
 
 body {
-  max-width: 720px;
+  position: relative;
+  max-width: 85ch;
   margin: 0 auto;
   font-size: 16px;
   font-family: monospace;
@@ -37,37 +38,34 @@ div.CodeMirror { height: 100vh }
   animation-fill-mode: forwards;
 }
 
-#feedback {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 100;
+.ui { cursor: pointer; user-select: none }
+
+form {
   padding: 24px;
   text-align: center;
-  display: none;
+  width: 100%;
 }
 
-#feedback label {
+form label {
   margin-top: 52px;
   display: block;
 }
-#feedback .range {
+form .range {
   height: 36px;
   display: flex;
   align-items: center;
 }
 
-#feedback .min,
-#feedback .max,
-#feedback input[type="range"] {
+form .min,
+form .max,
+form input[type="range"] {
   margin: 0 6px;
   width: 33%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-#feedback textarea {
+form textarea {
   width: 100%;
   margin-top: 18px;
   height: 180px;
@@ -79,15 +77,15 @@ div.CodeMirror { height: 100vh }
   font-weight: bold;
 }
 
-#feedback .min { text-align: right }
-#feedback .max { text-align: left }
+form .min { text-align: right }
+form .max { text-align: left }
 
-#feedback textarea:focus {
+form textarea:focus {
   outline-offset: 3px;
   outline-width: 2px;
   outline-style: dashed;
 }
-#feedback button {
+form button {
   border: 2px solid;
   background: transparent;
   padding: 6px;
@@ -98,14 +96,29 @@ div.CodeMirror { height: 100vh }
   font-size: 16px;
   line-height: 22px;
 }
+form button:focus { outline: none }
 
+.select {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+
+.select label {
+  border: 3px solid transparent;
+  padding: 1px 6px;
+}
+
+.select input[type="radio"] { opacity: 0; position: fixed; }
+.select input[type="radio"]:checked + label { border-bottom-color: currentColor }
+.select input[type="radio"]:focus + label { border: 3px dashed }
 
 /* COLORS */
 .editable {
   background-color: var(--b-lime);
 }
+
 html, body {
-  position: relative;
   color: var(--b);
   background: var(--i);
 }
@@ -144,19 +157,22 @@ mark {
 
 .error-message { color: var(--g-red) }
 
-#feedback { background: var(--i) }
-#feedback .min { color: var(--c-orange) }
-#feedback .max { color: var(--c-turquoise) }
-#feedback textarea:focus { outline-color: var(--c-turquoise) }
-#feedback button:focus { color: var(--c-turquoise) }
-#feedback button:hover { color: var(--b-turquoise) }
-#feedback button {
+form { background: var(--i) }
+form .min { color: var(--c-orange) }
+form .max { color: var(--c-turquoise) }
+form textarea:focus { outline-color: var(--c-turquoise) }
+form button:focus { color: var(--c-turquoise) }
+form button:hover { color: var(--b-turquoise) }
+form button {
   color: var(--b);
   background: white;
 }
 
+.select .title { color: var(--e) }
+.select input[type="radio"]:checked + label { color: var(--c-turquoise) }
+
 /* DARK MODE */
-.dark #feedback, html.dark, .dark body {
+.dark form, html.dark, .dark body {
   color: var(--i);
   background: var(--a);
 }
@@ -191,17 +207,23 @@ mark {
   100% { color: var(--f-yellow) }
 }
 
-.dark #feedback .min { color: var(--h-orange) }
-.dark #feedback .max { color: var(--h-turquoise) }
-.dark #feedback textarea:focus { outline-color: var(--h-turquoise) }
-.dark #feedback button:focus { color: var(--h-turquoise) }
-.dark #feedback button:hover { color: var(--g-turquoise) }
-.dark #feedback button {
+.dark form .min { color: var(--h-orange) }
+.dark form .max { color: var(--h-turquoise) }
+.dark form textarea:focus { outline-color: var(--h-turquoise) }
+.dark form button:focus { color: var(--h-turquoise) }
+.dark form button:hover { color: var(--g-turquoise) }
+.dark form button {
   color: white;
   background: inherit;
 }
 
-/**/
+.dark .select .title { color: #a3b5ef }
+.dark .select input[type="radio"]:checked + label { color: var(--h-orange) }
+
+/* ROUTING */
+#editor, #menu, #feedback { display: none }
+.page-editor #editor, .page-menu #menu, .page-feedback #feedback { display: inherit }
+ 
   </style>
 <script>
 const colorDefs = 'red.orange.yellow.lime.green.turquoise.cyan.blue.purple.fuschia.magenta.pink'.split('.')
@@ -224,16 +246,24 @@ ${[...Array(100).keys()].map(n => `
 .dark .test-${n}-start .test-${n} { animation-name: start-dark }
 `).join('\n')}
 `
-
-if (localStorage.theme === 'dark' || (localStorage.theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-  document.documentElement.classList.add('dark')
-}
-
 </script>
 </head>
 <body>
   <div id="editor"></div>
+  <form id="menu">
+    <h2>Menu</h2>
+    <div class="select">
+      <input type="radio" name="theme" id="light" value="light">
+      ☀ <label class="ui" for="light">Light</label>
+      <div class="title">/* -- theme -- */</div>
+      <input type="radio" name="theme" id="dark" value="dark">
+      <label class="ui" for="dark">Dark</label> 🌒
+    </div>
+    <button type="button" id="feedback-button">Feedback</button>
+
+  </form>
   <form id="feedback">
+    <h2>Feedback</h2>
     <label>
       <div class="title">👶 How challenging was this exercise ? 🤖</div>
       <div class="range">
@@ -279,15 +309,57 @@ if (localStorage.theme === 'dark' || (localStorage.theme !== 'light' && window.m
       <textarea name="remarks"></textarea>
     </label>
     /* --
-    <button type="button" tabindex="-1" id="skip-feedback">❌ cancel 💔</button>
+    <button type="button" tabindex="-1" id="skip-feedback">❌ Cancel (escape) 💔</button>
     -----
-    <button type="submit">✔ Submit 💚</button>
+    <button type="submit">✔ Submit (enter) 💚</button>
     -- */
   </form>
+  <script>    
+const dark = document.getElementById('dark')
+const light = document.getElementById('light')
+
+if (localStorage.theme === 'dark' || (localStorage.theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  document.documentElement.classList.add('dark')
+  dark.checked = true
+} else {
+  light.checked = true
+}
+</script>
   <link rel="stylesheet" type="text/css" href="./lib/codemirror.css">
   <script src="./lib/codemirror.js"></script>
   <script type="module">
-let _module, _loading, _error, _lock, _worker, _save
+import { router } from './lib/router.js'
+let _module, _loading, _error, _lock, _worker, _save, _activePage
+
+const exerciseProps = {
+  feedbackStatus: String,
+  feedback: String,
+  prompted: Number,
+  attempt: Number,
+  begin: Number,
+  code: String,
+  end: Number,
+}
+
+const exerciseEntries = Object.entries(exerciseProps)
+const buildExerciseStore = hash => Object.fromEntries(exerciseEntries.map(([key,parser]) => {
+  const path = `${hash}/${key}`
+  const get = () => localStorage[path]
+  const set = value => localStorage[path] = value
+  const setnx = value => localStorage[path] || set(value)
+  return [ key, { get, set, setnx } ]
+}))
+
+const store = new Proxy({}, {
+  get: (_,k) => k in exerciseProps
+    ? (_[location.hash] || (_[location.hash] = buildExerciseStore(location.hash)))[k]
+    : (_[k] || (_[k] = buildExerciseStore(k))),
+})
+  
+const feedback = document.getElementById('feedback')
+const feedbackBtn = document.getElementById('feedback-button')
+const inputs = [...feedback.querySelectorAll('textarea, input')]
+const remarks = inputs.find(e => e.name === 'remarks')
 
 const ZAP = '///*/// ⚡'
 const DEFAULT_TIMEOUT = 5000
@@ -317,7 +389,7 @@ const exec = async code => {
   document.body.className = ''
   const worker = (_worker && !_worker.terminated)
     ? _worker
-    : (_worker = new Worker('./worker.js', { type: 'module' }))
+    : (_worker = new Worker('./lib/worker.js', { type: 'module' }))
 
   const send = (arg, timeout) => new Promise(s => {
     setTimeout(() => {
@@ -386,12 +458,12 @@ const parametrize = data => `${new URLSearchParams(Object.entries(data).map(norm
 const formatInput = e => `${e.name}_${e.value}`.replace(/~/g, '-')
 const encodeFeedback = () => parametrize({
   hash: feedback.hash,
-  attempt: localStorage[`${feedback.hash}/attempt`] || 0,
+  attempt: store[feedback.hash].attempt || 0,
   code: inputs.map(formatInput).join('~'),
 })
 
-const decodeFeedback = hash => {
-  const stored = localStorage[`${hash}/feedback`]
+const decodeFeedback = () => {
+  const stored = store[feedback.hash].feedback.get()
   if (!stored) return {}
   const encodedValues = new URLSearchParams(stored).get('code')
   const result = {}
@@ -402,33 +474,6 @@ const decodeFeedback = hash => {
   return result
 }
 
-const closeFeedback = () => {
-  feedback.style.display = 'none'
-  cmEditor.focus()
-  const data = encodeFeedback()
-  if (localStorage[`${feedback.hash}/feedback`] === data) return false
-  localStorage[`${feedback.hash}/feedback`] = data
-  return true
-}
-
-const openFeedback = (hash = location.hash) => {
-  const prevFeedback = decodeFeedback(hash)
-  for (const input of inputs) {
-    const v = prevFeedback[input.name]
-    v === undefined
-      ? (input.value = input.type === 'range' ? 50.01 : '')
-      : (v && (input.value = v))
-  }
-  feedback.hash = hash
-  feedback.style.display = 'block'
-  inputs.find(e => e.name === 'remarks').focus()
-}
-
-window.addEventListener('keydown', e => {
-  e.key === 'Escape' && (cmEditor.hasFocus() ? openFeedback() : closeFeedback())
-}, { passive: true })
-
-skipButton.addEventListener('click', closeFeedback, { passive: true })
 const loadHash = async (sourceHash, replace) => {
   if (_loading) return
   _loading = true
@@ -452,13 +497,14 @@ const loadHash = async (sourceHash, replace) => {
   const exercise = _module.exercises[ex] || _module.entries[0] && _module.entries[0][1]
   if (!exercise) return cmEditor.setValue('Empty module')
   const hash = `#${mod}.${exercise.name}${version?`@${version}`:''}`
-  hash === sourceHash || history[replace ? 'replaceState' : 'pushState']({}, '', `${baseUrl}${hash}`)
+  const s = store[hash]
+  hash === sourceHash || history[replace ? 'replaceState' : 'pushState']({}, '', `${baseUrl}${location.search}${hash}`)
   const content = await getContent(url, exercise.name)
   const subjectIndex = content.indexOf(ZAP) + ZAP.length
   const testIndex = content.lastIndexOf(ZAP)
   const subject = content.slice(0, subjectIndex)
   const tests = content.slice(testIndex)
-  const code = `\n\n${(localStorage[hash] || content.slice(subjectIndex, testIndex)).trim()}\n\n`
+  const code = `\n\n${(s.code.setnx(content.slice(subjectIndex, testIndex))).trim()}\n\n`
   const subjectLines = countLines(subject)
   const testsLines = countLines(tests)
   const codeLines = countLines(code)
@@ -473,7 +519,7 @@ const loadHash = async (sourceHash, replace) => {
   mark({ from: 0, to: subjectLines + 1, readOnly, className: 'subject' })
   mark({ from: subjectLines, to: size, className: 'code' })
   mark({ from: size, to: size + codeLines + 1, readOnly, className: 'tests' })
-  _save = () => localStorage[hash] = cmEditor.getValue().slice(subjectIndex, -tests.length).trim()
+  _save = () => s.code.set(cmEditor.getValue().slice(subjectIndex, -tests.length).trim())
 
   let count = 0
   tests.replace(/\nt\(/g, (match, index) => {
@@ -483,6 +529,7 @@ const loadHash = async (sourceHash, replace) => {
     const className = `test-flash test-${++count}`
     mark({ from: line, to: line + 1, className })
   })
+  s.begin.setnx(Date.now())
   _loading = false
 }
 
@@ -502,34 +549,35 @@ const next = () => {
   loadHash('success.congratulation@nan-academy/js-training')
 }
 
-const feedback = document.getElementById('feedback')
-feedback.onsubmit = e => {
-  e.preventDefault()
-  if (!closeFeedback()) return
-  log('feedback', localStorage[`${feedback.hash}/feedback`])
-}
-const inputs = [...feedback.querySelectorAll('textarea, input')]
-
 let _lastCode
 const runTests = async () => {
   if (_lock) return
   _error && (_error.clear(), _error = undefined)
   const { hash, hostname } = location
-  const k = `${hash}/attempt`
-  const attempt = localStorage[k] = (Number(localStorage[k]) || 0) + 1
+  const s = store[hash]
+  const end = s.end.get()
+  const attempt = end ? s.attempt.get() : s.attempt.set((s.attempt.get() || 0) + 1)
   const code = cmEditor.getValue()
   await (_lock = exec(code)).finally(() => _lock = undefined)
+  if (end) return
   const fail = Array.from(document.body.classList).some(c => c.endsWith('-fail'))
   const changed = code !== _lastCode
   _lastCode = code
   changed && log(fail ? 'fail' : 'pass', { hash, attempt, code: save() })
   if (fail) return
+  s.end.setnx(Date.now())
   await new Promise(s => setTimeout(s, 250))
+  const current = _module.exercises[hash.split('@')[0].split('.')[1]]
+  const [lastFeedbackTime] = Object.entries(localStorage)
+    .filter(([k]) => k.endsWith('/prompted'))
+    .map(([k,v]) => Number(v))
+    .sort((a, b) => b - a)
+  const canAsk = !lastFeedbackTime || (Date.now() - lastFeedbackTime) > 60*60*1000
+  if (canAsk && current && current.feedback && !s.prompted.get()) {
+    s.prompted.set(Date.now())
+    open('feedback')
+  }
   next()
-  const current = _module.exercises[location.hash.split('@')[0].split('.')[1]]
-  if (!current || !current.feedback || localStorage[`${location.hash}/prompted`]) return
-  localStorage[`${location.hash}/prompted`] = Date.now()
-  await openFeedback(hash)
 }
 
 export const cmEditor = CodeMirror(document.getElementById('editor'), {
@@ -557,7 +605,70 @@ loadHash(location.hash, true)
   })
 
 addEventListener('hashchange', () => loadHash(location.hash, true))
+addEventListener('keydown', e => {
+  e.key === 'Escape' && getPage().onEscape && getPage().onEscape()
+}, { passive: true })
 
+feedback.addEventListener('submit', async e => {
+  e.preventDefault()
+  open('editor')
+  const s = store[feedback.hash]
+  if (s.feedbackStatus.get() === 'sending') return
+  s.feedbackStatus.set('sending')
+  // disable buttons
+  await log('feedback', s.feedback.get())
+  // re-enable buttons
+  // submit value = update
+  s.feedbackStatus.set('done')
+})
+window.cm = cmEditor
+
+skipButton.addEventListener('click', () => open('editor'), { passive: true })
+
+const onOpenFeedback = () => {
+  feedback.hash = location.hash
+  const prevFeedback = decodeFeedback()
+  for (const input of inputs) {
+    const v = prevFeedback[input.name]
+    v === undefined
+      ? (input.value = input.type === 'range' ? 50.01 : '')
+      : (v && (input.value = v))
+  }
+  remarks.focus()
+}
+
+const { open, getPage } = router({
+  editor: {
+    onOpen: () => {
+      cmEditor.refresh()
+      cmEditor.focus()
+    },
+    onEscape: () => open('menu'),
+  },
+  menu: {
+    onOpen: () => feedbackBtn.focus(),
+    onEscape: () => open('editor'),
+  },
+  feedback: {
+    onOpen: onOpenFeedback,
+    onClose: () => store[feedback.hash].feedback.set(encodeFeedback()),
+    onEscape: () => open('editor'),
+  },
+})
+
+dark.addEventListener('change', () => {
+  document.documentElement.classList.add('dark')
+  cm.setOption('theme', 'dracula')
+  localStorage.theme = 'dark'
+})
+
+light.addEventListener('change', () => {
+  document.documentElement.classList.remove('dark')
+  cm.setOption('theme', 'neo')
+  localStorage.theme = 'light'
+})
+
+feedbackBtn.addEventListener('click', () => open('feedback'))
   </script>
 </body>
 </html>
