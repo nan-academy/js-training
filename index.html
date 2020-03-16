@@ -344,7 +344,7 @@ const exerciseProps = {
 const exerciseEntries = Object.entries(exerciseProps)
 const buildExerciseStore = hash => Object.fromEntries(exerciseEntries.map(([key,parser]) => {
   const path = `${hash}/${key}`
-  const get = () => localStorage[path]
+  const get = () => parser(localStorage[path])
   const set = value => localStorage[path] = value
   const setnx = value => localStorage[path] || set(value)
   return [ key, { get, set, setnx } ]
@@ -498,7 +498,8 @@ const loadHash = async (sourceHash, replace) => {
   if (!exercise) return cmEditor.setValue('Empty module')
   const hash = `#${mod}.${exercise.name}${version?`@${version}`:''}`
   const s = store[hash]
-  hash === sourceHash || history[replace ? 'replaceState' : 'pushState']({}, '', `${baseUrl}${location.search}${hash}`)
+  const pushType = replace ? 'replaceState' : 'pushState'
+  hash === sourceHash || history[pushType]({}, '', `${baseUrl}${location.search}${hash}`)
   const content = await getContent(url, exercise.name)
   const subjectIndex = content.indexOf(ZAP) + ZAP.length
   const testIndex = content.lastIndexOf(ZAP)
@@ -572,11 +573,24 @@ const runTests = async () => {
     .filter(([k]) => k.endsWith('/prompted'))
     .map(([k,v]) => Number(v))
     .sort((a, b) => b - a)
-  const canAsk = !lastFeedbackTime || (Date.now() - lastFeedbackTime) > 60*60*1000
-  if (canAsk && current && current.feedback && !s.prompted.get()) {
+
+  const canAsk = current
+    && current.feedback  // Only if the module ask for it
+    && !s.prompted.get() // Once per exercise
+    && (lastFeedbackTime
+
+      // Once per hour
+      ? (Date.now() - lastFeedbackTime) > 60*60*1000
+
+      // Randomized 20% for the first prompt
+      : Math.random() < 0.2
+    )
+
+  if (canAsk) {
     s.prompted.set(Date.now())
     open('feedback')
   }
+
   next()
 }
 
