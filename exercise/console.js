@@ -56,6 +56,54 @@ console.log(2.1 * 10 + 21)
 console.log(4.2 * (5 + 5)) // Precedence is enforced with parentheses.
 
 
+// There's also `null` and `undefined`.
+console.log(null) // used to indicate a deliberate non-value
+console.log(undefined) // used to indicate a value is not currently present
+// (although `undefined` is actually a value itself)
+// I recommand to avoid using null as much as possible and always use undefined
+
+
+// You may mix types, but results may not be what you expect
+console.log('21' + 21)
+console.log('21' * 2)
+console.log('21' * true) // true is cooerced to be the number 1
+console.log('21' * false) // false become the number 0
+
+// When javascript can't compute a number it returns NaN (stands for 'Not a Number')
+console.log(NaN)
+console.log('21' * 'pouet')
+
+// Infinity is another special number
+console.log(Infinity)
+console.log(1 / 0)
+console.log(-Infinity) // it can be negative
+console.log(-1 / 0)
+
+// Comparaisons always return a boolean :
+
+// Equality is ===
+console.log(1 === 1) // true
+console.log(1 === 2) // false
+
+// Inequality is !==
+console.log(1 !== 1) // = false
+console.log(1 !== 2) // = true
+
+// You can use the Negation ! symbol to get the inverse boolean of any value
+console.log(!true) // = false
+console.log(!false) // = true
+
+// Greater than and lesser than
+console.log(1 < 10) // = true
+console.log(1 > 10) // = false
+console.log(2 <= 2) // = true
+console.log(2 >= 2) // = true
+
+// and it works for strings
+console.log('a' < 'b') // = true
+console.log('aba' < 'abc') // = true
+
+///*/// ⚡
 
 
 ///*/// ⚡
@@ -64,5 +112,28 @@ const t = f => tests.push(f)
 
 t(() => true)
 
-// The more you know:
-// - https://mathiasbynens.be/notes/javascript-escapes (more about escape sequences)
+// THE MORE YOU KNOW :
+
+// Non boolean values are either 'truthy' or 'falsy'
+console.log(!0) // = true
+console.log(!1) // = false
+console.log(!123) // = false
+console.log(!'') // = true
+console.log(!'pouet') // = false
+
+// Type coercion is performed for comparisons with double equals...
+console.log('5' == 5) // = true
+console.log(null == undefined) // = true
+
+// ...avoid loosing your hairs and you use the strict === instead... please...
+console.log('5' === 5) // = false
+console.log(null === undefined) // = false
+
+// JavaScript has one number type (which is a 64-bit IEEE 754 double).
+// Doubles have a 52-bit mantissa, which is enough to store integers
+// up to about 9✕10¹⁵ precisely.
+
+// Float have limited precision, this is why :
+console.log(0.1 + 0.2) // is not precisly 0.3 but 0.30000000000000004
+
+// links: - https://mathiasbynens.be/notes/javascript-escapes (more about escape sequences)
