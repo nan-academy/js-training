@@ -38,7 +38,7 @@ div.CodeMirror { height: 100vh }
   animation-fill-mode: forwards;
 }
 
-.ui { cursor: pointer; user-select: none }
+a, button, .ui { cursor: pointer; user-select: none }
 
 form {
   padding: 24px;
@@ -223,7 +223,29 @@ form button {
 /* ROUTING */
 #editor, #menu, #feedback { display: none }
 .page-editor #editor, .page-menu #menu, .page-feedback #feedback { display: inherit }
- 
+
+.select label { margin-top: 0 }
+
+h2, h3 { color: #A3B5EF }
+form h3 {
+  margin-top: 48px;
+  margin-bottom: 36px; 
+}
+
+#menu-content a {
+  margin-top: 9px;
+  display: block;
+  text-decoration: none;
+}
+
+a:hover { text-decoration: underline }
+a.active:before { content: '/* -- ' }
+a.active:after  { content: ' -- */' }
+
+.dark a { color: var(--i) }
+.dark a:text-d { color: var(--i) }
+.dark a:hover { color: var(--h-turquoise) }
+
   </style>
 <script>
 const colorDefs = 'red.orange.yellow.lime.green.turquoise.cyan.blue.purple.fuschia.magenta.pink'.split('.')
@@ -252,6 +274,7 @@ ${[...Array(100).keys()].map(n => `
   <div id="editor"></div>
   <form id="menu">
     <h2>Menu</h2>
+    <h3>Settings</h3>
     <div class="select">
       <input type="radio" name="theme" id="light" value="light">
       ☀ <label class="ui" for="light">Light</label>
@@ -259,8 +282,10 @@ ${[...Array(100).keys()].map(n => `
       <input type="radio" name="theme" id="dark" value="dark">
       <label class="ui" for="dark">Dark</label> 🌒
     </div>
+    <h3>Exercises</h3>
+    <div id="menu-content"></div>
+    <h3>Actions</h3>
     <button type="button" id="feedback-button">Feedback</button>
-
   </form>
   <form id="feedback">
     <h2>Feedback</h2>
@@ -332,12 +357,12 @@ import { router } from './lib/router.js'
 let _module, _loading, _error, _lock, _worker, _save, _activePage
 
 const exerciseProps = {
-  feedbackStatus: _ => _||'',
-  feedback: _ => _||'',
+  feedbackStatus: _ => _ || '',
+  feedback: _ => _ || '',
   prompted: _ => Number(_) || 0,
   attempt: _ => Number(_) || 0,
   begin: _ => Number(_) || 0,
-  code: _ => _||'',
+  code: _ => _ || '',
   end: _ => Number(_) || 0,
 }
 
@@ -356,6 +381,7 @@ const store = new Proxy({}, {
     : (_[k] || (_[k] = buildExerciseStore(k))),
 })
   
+const menu = document.getElementById('menu-content')
 const feedback = document.getElementById('feedback')
 const feedbackBtn = document.getElementById('feedback-button')
 const inputs = [...feedback.querySelectorAll('textarea, input')]
@@ -493,13 +519,16 @@ const loadHash = async (sourceHash, replace) => {
     }))
 
   _module.purge = () => localStorage.removeItem(`$${mod}.@${version}`)
+  _module.version = version ? `@${version}` : ''
+  _module.name = mod
 
   const exercise = _module.exercises[ex] || _module.entries[0] && _module.entries[0][1]
   if (!exercise) return cmEditor.setValue('Empty module')
-  const hash = `#${mod}.${exercise.name}${version?`@${version}`:''}`
+  const hash = `#${mod}.${exercise.name}${_module.version}`
   const s = store[hash]
   const pushType = replace ? 'replaceState' : 'pushState'
-  hash === sourceHash || history[pushType]({}, '', `${baseUrl}${location.search}${hash}`)
+  hash === location.hash || history[pushType]({}, '', `${baseUrl}${location.search}${hash}`)
+  getPage() && getPage().onLoad && getPage().onLoad()
   const content = await getContent(url, exercise.name)
   const subjectIndex = content.indexOf(ZAP) + ZAP.length
   const testIndex = content.lastIndexOf(ZAP)
@@ -609,15 +638,6 @@ export const cmEditor = CodeMirror(document.getElementById('editor'), {
 const save = () => _save && _save()
 cmEditor.on('change', (t => () => (clearTimeout(t), t = setTimeout(save, 200)))())
 
-loadHash(location.hash, true)
-  .catch(err => {
-    console.error(err)
-    _module
-      ? _module.purge()
-      : localStorage.clear()
-    location.hash = ''
-  })
-
 addEventListener('hashchange', () => loadHash(location.hash, true))
 addEventListener('keydown', e => {
   e.key === 'Escape' && getPage().onEscape && getPage().onEscape()
@@ -651,7 +671,25 @@ const onOpenFeedback = () => {
   remarks.focus()
 }
 
-const { open, getPage } = router({
+const createLink = hash => {
+  const a = document.createElement('a')
+  const url = `${baseUrl}${location.search}${hash}`
+
+  location.hash === hash && a.classList.add('active')
+  a.textContent = hash.slice(1)
+  a.classList.add('ui')
+  a.href = url
+
+  a.addEventListener('click', e => {
+    e.preventDefault()
+    loadHash(hash)
+  })
+
+  menu.appendChild(a)
+  return a
+}
+
+const { open, getPage, pages } = router({
   editor: {
     onOpen: () => {
       cmEditor.refresh()
@@ -661,6 +699,20 @@ const { open, getPage } = router({
   },
   menu: {
     onOpen: () => feedbackBtn.focus(),
+    onLoad: () => {
+      let elem = menu // empty the menu
+      while (elem && elem.firstChild) { elem.removeChild(elem.firstChild) }
+      if (!_module) return
+      for (const [name, props] of _module.entries) {
+        const hash = `#${_module.name}.${name}${_module.version}`
+        const s = store[hash]
+        const a = createLink(hash)
+        a.classList.add(s.end.get() ? 'pass' : s.begin.get() ? 'fail' : 'none')
+      }
+      if (!_module.next) return
+      const next = createLink(`#${_module.next}${_module.version}`)
+      next.textContent = `next: ${_module.next}`
+    },
     onEscape: () => open('editor'),
   },
   feedback: {
@@ -683,6 +735,16 @@ light.addEventListener('change', () => {
 })
 
 feedbackBtn.addEventListener('click', () => open('feedback'))
+
+loadHash(location.hash, true)
+  .catch(err => {
+    console.error(err)
+    _module
+      ? _module.purge()
+      : localStorage.clear()
+    location.hash = ''
+  })
+
   </script>
 </body>
 </html>
