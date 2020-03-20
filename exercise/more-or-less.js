@@ -17,7 +17,6 @@ Create 4 functions
 
 ///*/// ⚡
 
-
 ///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)

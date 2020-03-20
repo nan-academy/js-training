@@ -13,6 +13,7 @@ export const exercises = {
   'change': { feedback: true },
   'circular': { feedback: true },
   'biggie-smalls': { feedback: true },
+  'min-max': { feedback: true },
   'sign': { feedback: true },
   'is': { feedback: true },
   '何': { feedback: true },

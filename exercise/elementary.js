@@ -1,5 +1,4 @@
 /*
-
 ## Elementary
 
 ### Instructions
@@ -11,10 +10,9 @@ Create 3 functions:
 
 */
 
-Math.imul = () => { throw Error('forbidden') }
+Math.imul = undefined
 
 ///*/// ⚡
-
 
 ///*/// ⚡
 export const tests = []

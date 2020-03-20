@@ -1,5 +1,4 @@
 /*
-
 ## 何 !?
 
 ### Instructions
@@ -11,7 +10,6 @@ Create a `inequality` value that is not equal to itself
 - Numbers
 
 ///*/// ⚡
-
 
 ///*/// ⚡
 export const tests = []

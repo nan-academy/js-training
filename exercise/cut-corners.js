@@ -1,5 +1,4 @@
 /*
-
 ## Cut corners
 
 ### Instructions
@@ -15,14 +14,11 @@ Create a function for each rounding math functions:
 
 - https://devdocs.io/javascript/global_objects/math
 
-*/// Disable Math.*
+*/
 
-for (const name of ['round', 'ceil', 'floor', 'trunc']) {
-  Math[name] = () => { throw Error(`${name} is disabled for this exercise`) }
-}
+Math.round = Math.ceil = Math.floor = Math.trunc = undefined
 
 ///*/// ⚡
-
 
 ///*/// ⚡
 export const tests = []

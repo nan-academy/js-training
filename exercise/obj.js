@@ -16,7 +16,6 @@ containing a property for each primitives:
 
 ///*/// ⚡
 
-
 ///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
