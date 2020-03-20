@@ -13,6 +13,7 @@ export const exercises = {
   'change': { feedback: true },
   'circular': { feedback: true },
   'biggie-smalls': { feedback: true },
+  'method-man': { feedback: true }, // capitalize / sentence (join) / ?? (split)
   'min-max': { feedback: true },
   'sign': { feedback: true },
   'is': { feedback: true },
