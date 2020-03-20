@@ -1,5 +1,3 @@
-Math.abs = undefined
-
 /*
 ## Abs(olute)
 
@@ -14,6 +12,10 @@ You are not allowed to use `Math.abs`, make your own.
 - examples/functions.js
 - examples/ternary.js
 - https://devdocs.io/javascript/global_objects/math/abs
+
+*/
+
+Math.abs = undefined
 
 ///*/// ⚡
 

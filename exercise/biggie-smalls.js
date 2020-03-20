@@ -1,5 +1,4 @@
 /*
-
 ## Biggie Smalls
 
 ### Instructions
@@ -13,7 +12,6 @@ Create 2 variables
 - Numbers
 
 ///*/// ⚡
-
 
 ///*/// ⚡
 export const tests = []

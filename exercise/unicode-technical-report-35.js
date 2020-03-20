@@ -1,5 +1,4 @@
 /*
-
 ## Unicode Technical Report 35
 
 ### Subject
@@ -34,9 +33,7 @@ Implement a `format` function that takes 2 arguments:
 
 - https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 
-
 ///*/// ⚡
-
 
 ///*/// ⚡
 export const tests = []

@@ -28,7 +28,6 @@ and remove the 2 first characters and 2 last characters.
 
 ///*/// ⚡
 
-
 ///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)

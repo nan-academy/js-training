@@ -12,7 +12,6 @@ Create an `id` function that takes one argument and return it
 
 ///*/// ⚡
 
-
 ///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)

@@ -28,7 +28,6 @@ const sourceObject = {
 
 ///*/// ⚡
 
-
 ///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
