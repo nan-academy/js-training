@@ -1,11 +1,3 @@
-
-const sourceObject = {
-  num: 42,
-  bool: true,
-  str: 'some text',
-  log: console.log,
-}
-
 /*
 ## Change
 
@@ -24,6 +16,15 @@ Create 2 functions:
 - Functions
 - Data-Structures
 - Get
+
+*/
+
+const sourceObject = {
+  num: 42,
+  bool: true,
+  str: 'some text',
+  log: console.log,
+}
 
 ///*/// ⚡
 

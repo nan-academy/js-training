@@ -1,5 +1,3 @@
-const is = {}
-
 /*
 ## Is
 
@@ -24,6 +22,10 @@ Add new function properties to the object `is`` to check a value type
 - https://devdocs.io/javascript/operators/typeof
 - https://developer.mozilla.org/en-US/docs/Glossary/Truthy
 - https://developer.mozilla.org/en-US/docs/Glossary/Falsy
+
+*/
+
+const is = {}
 
 ///*/// ⚡
 
