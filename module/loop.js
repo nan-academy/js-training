@@ -12,5 +12,5 @@ export const exercises = {
   'unbreakable': { feedback: true }, // join / split
   'chunk': { feedback: true },
   // flat / deep-flat
-  // 'at': {},
+  'get': { feedback: true },
 }
