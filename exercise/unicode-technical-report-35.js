@@ -95,3 +95,5 @@ t(() => format(ending, 'hh:mm:ss a') === '09:02:14 AM')
 // mix
 t(() => format(ending, 'HH(mm)ss [dd] <MMM>') === '09(02)14 [02] <Sep>')
 t(() => format(ending, 'dd/MM/yyyy') === '02/09/1945')
+
+Object.freeze(tests)

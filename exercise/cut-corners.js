@@ -29,3 +29,5 @@ t(({ eq }) => eq(nums.map(round), [3, -3, 3, -3]))
 t(({ eq }) => eq(nums.map(floor), [3, -4, 2, -3]))
 t(({ eq }) => eq(nums.map(trunc), [3, -3, 2, -2]))
 t(({ eq }) => eq(nums.map(ceil), [4, -3, 3, -2]))
+
+Object.freeze(tests)

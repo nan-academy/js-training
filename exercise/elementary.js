@@ -48,3 +48,5 @@ t(() => modulo(123, 22) === 13)
 t(() => modulo(123, -22) === 13)
 t(() => modulo(-123, 22) === -13)
 t(() => modulo(-123, -22) === -13)
+
+Object.freeze(tests)
