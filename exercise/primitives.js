@@ -3,7 +3,7 @@
 
 ### Instructions
 
-Create a constant variables for each primitives:
+Create a constant variable for each primitives:
 - `str` for `String`
 - `num` for `Number`
 - `bool` for `Boolean`

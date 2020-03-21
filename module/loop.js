@@ -8,9 +8,9 @@ export const exercises = {
   // occurence (str, char) => occurence('abcdabcd', 'a') -> // 2
   // fizzbuzz
   'index-of': { feedback: true }, // index-of / last-index-of / includes
-  // join / split
+  'unbreakable': { feedback: true }, // join / split
   // flat / deep-flat
   // reverse
   // sample
-  // 'rget': {}, 
+  // 'at': {}, 
 }
