@@ -53,3 +53,5 @@ t(() => cutFirstLast('abcdef') === 'cd')
 t(() => cutFirstLast('af') === '')
 t(() => cutFirstLast('afd') === '')
 t(() => cutFirstLast('yoafdyo') === 'afd')
+
+Object.freeze(tests)

@@ -17,3 +17,5 @@ t(() => capitalize('str') === 'Str')
 t(() => capitalize('qsdqsdqsd') === 'Qsdqsdqsd')
 t(() => capitalize('STR') === 'Str')
 t(() => capitalize('zapZAP') === 'Zapzap')
+
+Object.freeze(tests)

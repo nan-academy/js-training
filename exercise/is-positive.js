@@ -19,3 +19,5 @@ t(() => !isPositive(-1))
 t(() => !isPositive(-0.7))
 t(() => !isPositive(-787823))
 t(() => !isPositive(0))
+
+Object.freeze(tests)

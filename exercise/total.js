@@ -15,3 +15,6 @@ t(() => total.length === 1)
 t(() => total([ 1, 1, 1]) === 3)
 t(() => total([ 10, 10, 10]) === 30)
 t(() => total([ 24, -10, 10, 0, 0, 100 ]) === 124)
+
+Object.freeze(tests)
+
