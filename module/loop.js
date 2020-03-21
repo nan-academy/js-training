@@ -11,6 +11,6 @@ export const exercises = {
   'reverse': { feedback: true },
   'unbreakable': { feedback: true }, // join / split
   'chunk': { feedback: true },
-  // flat / deep-flat
   'get': { feedback: true },
+  'flat': { feedback: true },
 }
