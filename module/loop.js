@@ -1,16 +1,19 @@
 export const next = 'find-your-timing'
 export const exercises = {
   'repeat': { feedback: true },
-  // 'cut-corners': {}, // round - ceil - floor - trunk
+  'cut-corners': { feedback: true }, // round - ceil - floor - trunk
+  'elementary': { feedback: true }, // multiply / divide
   'slice': { feedback: true },
-  // flat
-  // deep-flat
+  'keep-cut': { feedback: true },
   'triangle': { feedback: true },
-  // includes
-  // join
-  // reverse
-  // sample
-  // 'rget': {},
+  // occurence (str, char) => occurence('abcdabcd', 'a') -> // 2
+  // fizzbuzz
+  'index-of': { feedback: true }, // index-of / last-index-of / includes
+  'reverse': { feedback: true },
+  'unbreakable': { feedback: true }, // join / split
+  'chunk': { feedback: true },
+  'get': { feedback: true },
   'fizzbuzz': { feedback: true },
   'pyramid': { feedback: true },
+  'flat': { feedback: true },
 }

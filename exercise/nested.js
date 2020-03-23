@@ -16,8 +16,6 @@ Create a `nested` constant variable that contains
 
 ///*/// ⚡
 
-
-
 ///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
@@ -50,3 +48,5 @@ t(() => nested.obj.update === undefined)
 // nested.arr is not frozen and can be changed
 t(() => nested.arr.push('hot stuff'))
 t(() => nested.arr.length === 4)
+
+Object.freeze(tests)
