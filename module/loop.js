@@ -4,6 +4,7 @@ export const exercises = {
   'cut-corners': { feedback: true }, // round - ceil - floor - trunk
   'elementary': { feedback: true }, // multiply / divide
   'slice': { feedback: true },
+<<<<<<< HEAD
   'keep-cut': { feedback: true },
   // occurence (str, char) => occurence('abcdabcd', 'a') -> // 2
   // fizzbuzz
@@ -13,4 +14,16 @@ export const exercises = {
   'chunk': { feedback: true },
   'get': { feedback: true },
   'flat': { feedback: true },
+=======
+  // flat
+  // deep-flat
+  'triangle': { feedback: true },
+  // includes
+  // join
+  // reverse
+  // sample
+  // 'rget': {},
+  'fizzbuzz': { feedback: true },
+  'pyramid': { feedback: true },
+>>>>>>> new loop exercises fizzbuzz, pyramid and triangle
 }
