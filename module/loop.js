@@ -5,9 +5,12 @@ export const exercises = {
   'slice': { feedback: true },
   // flat
   // deep-flat
+  'triangle': { feedback: true },
   // includes
   // join
   // reverse
   // sample
-  // 'rget': {}, 
+  // 'rget': {},
+  'fizzbuzz': { feedback: true },
+  'pyramid': { feedback: true },
 }
