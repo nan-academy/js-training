@@ -3,6 +3,7 @@ export const exercises = {
   'primitives': { feedback: true },
   'escape-str': { feedback: true },
   'arr': { feedback: true },
+  'mutability': { feedback: true },
   'obj': { feedback: true },
   'nested': { feedback: true },
   'more-or-less': { feedback: true },
