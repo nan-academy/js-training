@@ -36,6 +36,6 @@ t(() => yell('howdy stranger ?') === 'HOWDY STRANGER ?')
 t(() => yell('Déjà vu') === 'DÉJÀ VU')
 
 t(() => whisper('DÉJÀ VU') === '*déjà vu*')
-t(() => whisper('HOWDY STRANGER ?') === 'howdy stranger ?')
+t(() => whisper('HOWDY STRANGER ?') === '*howdy stranger ?*')
 
 Object.freeze(tests)
