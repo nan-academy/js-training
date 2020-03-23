@@ -17,7 +17,6 @@ Create 4 functions
 
 ///*/// ⚡
 
-
 ///*/// ⚡
 export const tests = []
 const t = f => tests.push(f)
@@ -56,3 +55,5 @@ t(() => add(more(10), sub(less(5), 10)) === 5)
 const rand = Math.random()
 t(() => less(rand) === rand - 1)
 t(() => more(rand) === rand + 1)
+
+Object.freeze(tests)

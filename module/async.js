@@ -13,4 +13,7 @@ export const exercises = {
   // promise-race
 
   // await-use
+
+  // event-use
+  // event-api
 }

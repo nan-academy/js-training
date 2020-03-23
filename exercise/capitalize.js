@@ -1,19 +1,21 @@
-'use strict'
-
 /*
- * Create a `capitalize` function that takes a string
- * and transforms it to upper case only for the first letter,
- * and in lowercase for the rest of the string
- *
- */
+## Capitalize
 
+### Instructions
 
-//* Begin of tests
-const assert = require('assert')
+Create a `capitalize` function that takes a string
+and transforms it to upper case only for the first letter,
+and in lowercase for the rest of the string
 
-assert.strictEqual(typeof capitalize, "function")
-assert.strictEqual(capitalize('str'), 'Str')
-assert.strictEqual(capitalize('qsdqsdqsd'), 'Qsdqsdqsd')
-assert.strictEqual(capitalize('STR'), 'Str')
-assert.strictEqual(capitalize('zapZAP'), 'Zapzap')
-// End of tests */
+///*/// ⚡
+
+///*/// ⚡
+export const tests = []
+const t = f => tests.push(f)
+
+t(() => capitalize('str') === 'Str')
+t(() => capitalize('qsdqsdqsd') === 'Qsdqsdqsd')
+t(() => capitalize('STR') === 'Str')
+t(() => capitalize('zapZAP') === 'Zapzap')
+
+Object.freeze(tests)

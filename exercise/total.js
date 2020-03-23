@@ -1,18 +1,20 @@
-'use strict'
-
 /*
  * Create a `total` function that takes an array of numbers
  * and return the total
  *
  */
 
+///*/// ⚡
 
-//* Begin of tests
-const assert = require('assert')
+///*/// ⚡
+export const tests = []
+const t = f => tests.push(f)
 
-assert.strictEqual(typeof total, 'function')
-assert.strictEqual(total.length, 1)
-assert.deepStrictEqual(total([ 1, 1, 1]), 3)
-assert.deepStrictEqual(total([ 10, 10, 10]), 30)
-assert.deepStrictEqual(total([ 24, -10, 10, 0, 0, 100 ]), 124)
-// End of tests */
+t(() => typeof total === 'function')
+t(() => total.length === 1)
+t(() => total([ 1, 1, 1]) === 3)
+t(() => total([ 10, 10, 10]) === 30)
+t(() => total([ 24, -10, 10, 0, 0, 100 ]) === 124)
+
+Object.freeze(tests)
+

@@ -1,5 +1,4 @@
 /*
-
 ## Unicode Technical Report 35
 
 ### Subject
@@ -34,9 +33,7 @@ Implement a `format` function that takes 2 arguments:
 
 - https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 
-
 ///*/// ⚡
-
 
 ///*/// ⚡
 export const tests = []
@@ -98,3 +95,5 @@ t(() => format(ending, 'hh:mm:ss a') === '09:02:14 AM')
 // mix
 t(() => format(ending, 'HH(mm)ss [dd] <MMM>') === '09(02)14 [02] <Sep>')
 t(() => format(ending, 'dd/MM/yyyy') === '02/09/1945')
+
+Object.freeze(tests)
