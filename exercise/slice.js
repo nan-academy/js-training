@@ -13,8 +13,8 @@ It takes an additionnal first argument which is the string or the array
 
 */
 
-Array.prototype.slice = () => { throw Error('forbidden') }
-String.prototype.slice = () => { throw Error('forbidden') }
+Array.prototype.slice = undefined
+String.prototype.slice = undefined
 
 ///*/// ⚡
 

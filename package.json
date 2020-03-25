@@ -1,6 +1,7 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
-    "test": "./node"
+    "test": "node ./node-runner.js"
   }
 }

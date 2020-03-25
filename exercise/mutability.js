@@ -1,32 +1,46 @@
-let person = {
-    name: "Rick",
-    age: 100,
-    country: "US"
-  }
-
 /*
 ## Mutability
 
 ### Instruction
 
-This exercises focus on teaching about object mutability
+Create a copy of the person object called clone1.
+Create an other copy of the person object called clone2.
 
-Make a copy of the `person` object call `clonedPerson` without binding the same object or present the same identity
+Create a new variable `samePerson` with the same value as `person`.
+
+Increase by one the property age of `person`
+
 
 ## Notions
 
-- mutability
+- set
+- get
 - data-structures
 
+*/
+
+const person = {
+  name: 'Rick',
+  age: 77,
+  country: 'US'
+}
+
 ///*/// ⚡
 
 ///*/// ⚡
-export const tests = [];
-const t = f => tests.push(f);
-t(() => typeof triangle === 'object')
-t(({ eq }) => !eq(clonedPerson, person))
-t(() => clonedPerson.name === "Rick")
-t(() => clonedPerson.age === 100)
-t(() => clonedPerson.country === "US")
+export const tests = []
+const t = f => tests.push(f)
 
-Object.freeze(tests);
+t(() => typeof samePerson === 'object')
+t(() => typeof person === 'object')
+t(() => typeof clone === 'object')
+t(() => eq(clone1, clone2))     // equal
+t(() => clone1 !== clone2)      // but different !
+t(() => person === samePerson)  // same value
+t(() => person.name === 'Rick')
+t(() => person.age === 78)
+t(() => person.country === 'FR')
+t(() => clone1.country === 'US')
+t(() => clone2.age === 77)
+
+Object.freeze(tests)
