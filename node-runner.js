@@ -30,46 +30,14 @@ const importCode = code => {
     String.prototype[`_${name}`] = function () { return `\u001b[${value};1m${this}\u001b[0m` }
   })
 
-
-const current = []
-const ok = '  ✓ '.grn()
-
-const formatPathParts = (value, i) => i
-  ? ':'.mgt() + value.blu()
-  : value.wht()
-
-const wrapInParen = ((open, close) => str => `${open}${str}${close}`)('('.wht(), ')'.wht())
-
-const prettyPath = p => p.split(':').map(formatPathParts).join('')
-const parseStackLine = (line, err) => {
-  if (!line) return ''
-  let [ , src, path ] = line.split(/at (.+) \((.+)\)$/)
-  if (!src) return wrapInParen(prettyPath(line))
-  if ((src).includes('anonymous')) {
-    src = err.key ? `assert.${err.key.cyn()}` : (err.name || 'Error').cyn()
-  }
-  return wrapInParen(`${src} ${prettyPath(path)}`)
+const prettyStack = err => {
+  const msg = err.message.red()
+  const [line] = err.stack.split('\n')
+    .filter(line => line.startsWith('    at data:text/'))
+  if (!line) return msg
+  const [ , src, l, c ] = line.split(/:/)
+  return src ? `${msg} (${l.blu()}${':'.mgt()}${c.blu()})` : msg
 }
-
-const prettyStack = err => err.message.red()
-  +' '+ parseStackLine(err.stack.split('\n')
-    .filter(line => line.includes(current.filename))[0], err)
-
-Object.keys(assert).filter(key => key !== 'fail').forEach(key => {
-  const fn = assert[key]
-  const last = fn.length - 1
-  assert[key] = (...args) => {
-    try {
-      fn(...args)
-      current.push(`${ok}${current.length + 1} - ${args[last] || key}`)
-    } catch (err) {
-      current.allPass = false
-      err.key = key
-      current.push(`  ✗`.red() +' '+ (current.length + 1) +' '+ prettyStack(err))
-    }
-  }
-})
-
 
 const save = proto => (entries => () => entries.forEach(([k,v]) => proto[k] = v))
   (Object.getOwnPropertyNames(proto).map(k => [k, proto[k]]).filter(([,v]) => typeof v === 'function'))
@@ -84,7 +52,7 @@ const restore = [ Array.prototype, String.prototype, Math, () => messages.length
 
 const wait = (delay, arg) => new Promise(s => setTimeout(s, delay, arg))
 const fail = fn => { try { fn() } catch (err) { return true } }
-const eq = assert.assertDeepEqual
+const eq = (a, b) => (assert.deepStrictEqual(a, b), true)
 
 const openExercise = async path => {
   const [exerciseCode, solution] = await Promise.all([
@@ -99,9 +67,11 @@ const openExercise = async path => {
 
   const code = solution ? `\n${solution}\n` : parts[1] 
   const mod = await importCode([ parts[0], code, parts[2] ].join('// /*/ // ⚡'))
-  const descriptions = parts[2].split(/(\nt\(.+)/g).filter((_,i) => i%2)
-
-  return { ...mod, code, descriptions }
+  return { ...mod, code }
+}
+const prettify = fn => {
+  const code = fn.toString()
+  return code.slice(code.split('=>', 1)[0].length + 3)._blk()
 }
 
 const test = async (name, timeout) => {
@@ -110,10 +80,15 @@ const test = async (name, timeout) => {
   const ctx = {}
   for (const t of ex.tests) {
     ++i
+    let err = ''
     const tools = { eq, fail, wait, code: ex.code }
-    if (!await Promise.race([ t(tools, ctx), wait(timeout) ])) {
-      log('test', i, 'failed:', ex.descriptions[i]._blk())
+    const running = (async () => t(tools, ctx))().catch(e => (err = e, false))
+    if (!await Promise.race([ running, wait(timeout) ])) {
+      log(`  ✗`.red(), prettify(t))
+      err && log('   ', prettyStack(err))
       return false
+    } else {
+      console.log('  ✓ '.grn(), prettify(t))
     }
   }
   return true
@@ -132,40 +107,6 @@ const run = async modname => {
     }
   }
   return next ? run(next) : log('All done !')
-  /*
-  const codes = await Promise.all(pkg.tests.map(async ({ name }) => ({
-    code: await readFile(join(__dirname, 'exercises', name +'.js'), 'utf-8'),
-    filename: name + '.js',
-    name,
-  }))).catch(err => (console.error(err), process.exit(1)))
-
-  let failedTestCount = 0
-  for (const { code, filename, name } of codes) {
-    current.length = 0
-    current.allPass = true
-    current.filename = filename
-
-    try {
-      (new Module(filename, module.parent))._compile(code, filename)
-      if (current.allPass) {
-        console.log('✓'.grn(), name)
-      } else {
-        failedTestCount++
-        console.log('-'.blu(), name)
-        console.log(current.join('\n'))
-      }
-    } catch (err) {
-      if (!failedTestCount) {
-        console.log(`✗`.red(), name, prettyStack(err))
-      }
-      failedTestCount++
-    }
-  }
-  if (failedTestCount > 1) {
-    console.log(`...and ${failedTestCount - 1} more to pass.`.wht())
-  }
-  process.exit(failedTestCount)
-  */
 }
 
 const args = process.argv.slice(2)

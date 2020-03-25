@@ -33,8 +33,9 @@ const t = (f) => tests.push(f)
 
 t(() => typeof samePerson === 'object')
 t(() => typeof person === 'object')
-t(() => typeof clone === 'object')
-t(() => eq(clone1, clone2)) // equal
+t(() => typeof clone1 === 'object')
+t(() => typeof clone2 === 'object')
+t(({ eq }) => eq(clone1, clone2)) // equal
 t(() => clone1 !== clone2) // but different !
 t(() => person === samePerson) // same value
 t(() => person.name === 'Rick')
