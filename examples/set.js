@@ -55,7 +55,6 @@ multipleOf5[2] = 15
 // Their is another way to do things for Arrays using Array methods
 // but I'll show we about those later
 
-
 // So we just have to access the value we want to set
 // and assign a value to it with `=`
 // The way we access to set or get is exactly the same

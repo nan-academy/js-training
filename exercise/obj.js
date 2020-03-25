@@ -14,17 +14,17 @@ containing a property for each primitives:
 
 - Data-Structures
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 // obj is declared and of type object
 t(() => obj.constructor === Object)
 
 // obj is constant and can not be re-assigned
-t(({ fail }) => obj && fail(() => obj = 10))
+t(({ fail }) => obj && fail(() => (obj = 10)))
 
 // obj.str is of type string
 t(() => typeof obj.str === 'string')

@@ -20,11 +20,11 @@ Implement 2 functions:
 String.prototype.split = undefined
 Array.prototype.join = undefined
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(({ eq }) => eq(split('a b c', ' '), ['a', 'b', 'c']))
 t(({ eq }) => eq(split('ggg - ddd - b', ' - '), ['ggg', 'ddd', 'b']))

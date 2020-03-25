@@ -31,7 +31,6 @@ if (!condition) {
   console.log('the condition is truthy')
 }
 
-
 // now, a simplification can be made, our else isn't necessary here
 const min = (a, b) => {
   if (a < b) {
@@ -46,6 +45,5 @@ const min = (a, b) => {
 
 console.log(min(4, 29))
 console.log(min(4, 2))
-
 
 // TODO: find some exemples good fonctions to learn if if if if #obama

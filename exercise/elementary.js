@@ -12,11 +12,11 @@ Create 3 functions:
 
 Math.imul = undefined
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 // * is not allowed for this exercise
 t(({ code }) => !code.includes('*'))

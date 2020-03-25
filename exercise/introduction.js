@@ -19,16 +19,14 @@ Once you think your solution is OK you can run the tests
 to verify your results.
 
          ↓ this zap emoji indicate the end of the subject
-///*/// ⚡
-
+// /*/ // ⚡
 
 // you are now in the area were can write any valid js code :)
 // for now, you don't have anything to write, just keep reading.
 
-
-///*/// ⚡ <- this mark the end of your editing zone
+// /*/ // ⚡ <- this mark the end of your editing zone
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 // this is an example of test, tests be executed to verify your code
 // if it returns true, your code is good, if not, try again !

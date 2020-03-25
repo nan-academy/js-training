@@ -22,7 +22,7 @@
   followed by : then the expression executed if the condition is falsy
 */
 
-const isTruthy = value => value ? 'yes' : 'no'
+const isTruthy = (value) => (value ? 'yes' : 'no')
 
 console.log(isTruthy(5))
 console.log(isTruthy(0))
@@ -31,16 +31,17 @@ console.log(isTruthy(''))
 console.log(isTruthy(null))
 
 // for long expression, we can split our ternary in mutiline like so :
-const isTruthyVerbose = value => value
-  ? 'It appears to be something the truth can be find in'
-  : 'no, It is not anything close to the truth'
+const isTruthyVerbose = (value) =>
+  value
+    ? 'It appears to be something the truth can be find in'
+    : 'no, It is not anything close to the truth'
 
 console.log(isTruthyVerbose({}))
 console.log(isTruthyVerbose())
 console.log(isTruthyVerbose(undefined))
 
 // let's use a condition to rewrite the function Math.min
-const min = (a, b) => a < b ? a : b
+const min = (a, b) => (a < b ? a : b)
 // So we declare a constant variable min and assign it a function
 // this function takes 2 arguments, a and b
 // if a is lower than b we return a otherwise b is returned

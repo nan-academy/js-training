@@ -12,8 +12,6 @@ You must first open the console of your browser.
 All right, from here we can do a bunch of stuff,
 but want we want to do is login values
 
-///*/// ⚡
-
 console.log('Hello')
 // you should see this text in your console
 
@@ -21,12 +19,12 @@ console.log('Hello')
 // I think it's because they are a chain of characters
 // H, e, l, l, o
 // theys are enclosed by ', " or `
-console.log('World !')   // single quotes
+console.log('World !') // single quotes
 console.log("It's automatic !") // double quotes
-console.log(`"WoW" !`)          // back quotes
+console.log(`"WoW" !`) // back quotes
 
 // Some characters need to be escaped with a backslash \
-console.log('It\'s automatic')
+console.log("It's automatic")
 // for example, here we started a string with '
 // as such, the next ' would signal the end of the string
 // or, we want to include the ' inside the string
@@ -41,7 +39,6 @@ World!`)
 console.log(`Hello\nWorld!`)
 // that's called an escape sequence
 
-
 // ok moving on to the numbers:
 console.log(42)
 console.log(0.75)
@@ -55,13 +52,11 @@ console.log(1042 % 50)
 console.log(2.1 * 10 + 21)
 console.log(4.2 * (5 + 5)) // Precedence is enforced with parentheses.
 
-
 // There's also `null` and `undefined`.
 console.log(null) // used to indicate a deliberate non-value
 console.log(undefined) // used to indicate a value is not currently present
 // (although `undefined` is actually a value itself)
 // I recommand to avoid using null as much as possible and always use undefined
-
 
 // You may mix types, but results may not be what you expect
 console.log('21' + 21)
@@ -103,12 +98,11 @@ console.log(2 >= 2) // = true
 console.log('a' < 'b') // = true
 console.log('aba' < 'abc') // = true
 
-///*/// ⚡
+// /*/ // ⚡
 
-
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => true)
 

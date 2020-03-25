@@ -12,11 +12,11 @@ itself as the value
 - Get
 - Set
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => circular.constructor === Object)
 t(() => circular.circular === circular)

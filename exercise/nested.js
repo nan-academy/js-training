@@ -14,16 +14,16 @@ Create a `nested` constant variable that contains
 - Data Structures
 - https://devdocs.io/javascript/global_objects/object/freeze
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => nested.constructor === Object)
 
 // nested is constant and can not be re-assigned
-t(({ fail }) => nested && fail(() => nested = 10))
+t(({ fail }) => nested && fail(() => (nested = 10)))
 
 t(() => nested.obj.constructor === Object)
 t(() => typeof nested.obj.str === 'string')
@@ -36,13 +36,12 @@ t(() => nested.arr[1] === undefined)
 t(() => nested.arr[2] === '2')
 t(() => nested.arr.length === 3)
 
-
 // nested is frozen and can not be changed
-t(({ fail }) => fail(() => nested.obj = 5))
+t(({ fail }) => fail(() => (nested.obj = 5)))
 t(() => nested.obj !== 5)
 
 // nested.obj is also frozen and can not be changed
-t(({ fail }) => fail(() => nested.obj.update = 5))
+t(({ fail }) => fail(() => (nested.obj.update = 5)))
 t(() => nested.obj.update === undefined)
 
 // nested.arr is not frozen and can be changed

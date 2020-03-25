@@ -17,12 +17,11 @@ You are not allowed to use `Math.abs`, make your own.
 
 Math.abs = undefined
 
-///*/// ⚡
+// /*/ // ⚡
 
-
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => abs(0) === 0)
 t(() => abs(-1) === 1)

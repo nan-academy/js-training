@@ -44,7 +44,13 @@ const users = [
 
 const allowedCountries = ['France', 'Spain', 'Portugal', 'Russia', 'Iceland']
 
-const coords = [[32, 45], [-38, 57], [87, 99], [57, -2], [-74, -29]]
+const coords = [
+  [32, 45],
+  [-38, 57],
+  [87, 99],
+  [57, -2],
+  [-74, -29],
+]
 
 // Ok so now that we have all those structures, let's see how to access values
 // The first way to access value is using square brackets and the key `['key']`

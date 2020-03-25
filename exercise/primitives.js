@@ -14,11 +14,11 @@ Create a constant variable for each primitives:
 - Primitive and Operators
 - Variables
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 // str is declared and of type string
 t(() => typeof str === 'string')
 

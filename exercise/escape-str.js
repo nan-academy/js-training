@@ -17,13 +17,13 @@ the following specials characters:
 - Primitive and Operators
 - Variables
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
-// escapeStr is declared and of type string 
+// escapeStr is declared and of type string
 t(() => typeof escapeStr === 'string')
 
 // escapeStr should include the character '

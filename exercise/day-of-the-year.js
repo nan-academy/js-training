@@ -6,11 +6,11 @@
 Make a `dayOfTheYear` functions that takes a date
 and returns the number of days since the first day of that year
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => dayOfTheYear(new Date('0001-01-01')) === 1)
 t(() => dayOfTheYear(new Date('1664-08-09')) === 222)

@@ -20,18 +20,18 @@ while (count < 10) {
 }
 
 // Let's create a function that add the given argument 5 times with while
-const times5 = n => {
+const times5 = (n) => {
   let result = 0 // create for holding the result or our operation
   let count = 0 // create a counter to keep track of how many loops we did
 
-  while (count < 5) { // check the condition, see if we have made enough loops
+  while (count < 5) {
+    // check the condition, see if we have made enough loops
     count = count + 1 // increment our loop counter variable by one
     result = result + n // add our given value `n` to our result
   }
   // loop is over !
   return result // return our result
 }
-
 
 /*
 
@@ -54,7 +54,8 @@ let countOfTheLetterO = 0 // this will hold our total
 
 // for each element of our string
 // we assign it's value to a const variable named letter
-for (const letter of sentence) { // our loop will stop on reaching the end
+for (const letter of sentence) {
+  // our loop will stop on reaching the end
   if (letter === 'o') {
     // we have a match ! better add it to our total now...
     countOfTheLetterO = countOfTheLetterO + 1

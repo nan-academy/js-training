@@ -11,19 +11,19 @@ Create 2 variables
 
 - Numbers
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 // bigger
 t(() => typeof biggie !== 'undefined')
-t(() => biggie > 1.7976931348623157e+308)
+t(() => biggie > 1.7976931348623157e308)
 
 // smaller
 t(() => typeof smalls !== 'undefined')
-t(() => smalls < -1.7976931348623157e+308)
+t(() => smalls < -1.7976931348623157e308)
 
 Object.freeze(tests)
 

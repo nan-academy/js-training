@@ -37,7 +37,6 @@ console.log({
   'the last key': 'the end',
 })
 
-
 // If our key is a valid identifiers (like variables identifiers)
 // We can omit the quotes ''
 console.log({ validKey: 'valid value !' })
@@ -79,7 +78,6 @@ const myStreet = {
 // sweet, let's log that variable value
 console.log(myStreet)
 
-
 // Guess what, we can use variables values when creating objects !
 console.log({
   country: 'France',
@@ -87,7 +85,6 @@ console.log({
   postalCode: 31000,
   street: myStreet, // here, the value contained in myStreet is used
 })
-
 
 // Let's store this address into a variable
 const address = {
@@ -106,7 +103,6 @@ console.log({
   address: address,
 })
 
-
 // If we use a variable as a property, like here in address
 // We can omit the key, JavaScript will use the variable identifier as it's key
 // So we can rewrite the previous user object like so :
@@ -119,7 +115,6 @@ console.log({
 })
 // Of course this works only when our variable identifier is our key.
 // That's it on declaring objects !
-
 
 /*
   Array
@@ -137,9 +132,9 @@ console.log({
 
 console.log([]) // Here I log an empty array
 
-console.log([ 1, 2, 3 ]) // We don't need to specify the index
+console.log([1, 2, 3]) // We don't need to specify the index
 // that would roughly translate to this object:
-console.log({ '0': 1, '1': 2, '2': 3  })
+console.log({ '0': 1, '1': 2, '2': 3 })
 
 // So if we have a bunch of values we want to group together
 // but the keys are not important, we can use an array
@@ -151,27 +146,21 @@ console.log({ '0': 1, '1': 2, '2': 3  })
 // Just like objects, they are values
 // So like all other values we can store them in variables
 
-const allowedCountries = [
-  'France',
-  'Spain',
-  'Portugal',
-  'Russia',
-  'Iceland',
-]
+const allowedCountries = ['France', 'Spain', 'Portugal', 'Russia', 'Iceland']
 
 console.log(allowedCountries)
 
 // Of course we can make arrays of arrays
 console.log([
-  [  32, 45 ],
-  [ -38, 57 ],
-  [  87, 99 ],
-  [  57, -2 ],
-  [ -74, -29 ],
+  [32, 45],
+  [-38, 57],
+  [87, 99],
+  [57, -2],
+  [-74, -29],
 ])
 
 // we can use variables values
-console.log([ allowedCountries, allowedCountries, allowedCountries ])
+console.log([allowedCountries, allowedCountries, allowedCountries])
 // Here I made an array with 3 countries
 
 // And we can freely mix arrays and objects, any values really, surprise me

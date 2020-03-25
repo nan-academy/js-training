@@ -16,13 +16,13 @@ Write 4 functions:
 
 - Methods
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
-t((_, ctx) => ctx.r = String(Math.random()))
+t((_, ctx) => (ctx.r = String(Math.random())))
 
 t(({ eq }) => eq(words('a b c'), ['a', 'b', 'c']))
 t(({ eq }) => eq(words('Hello  world'), ['Hello', '', 'world']))

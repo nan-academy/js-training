@@ -10,11 +10,11 @@ Create a `concatStr` function that takes 2 arguments and concatenate them
 - Functions
 - Operators
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => typeof concatStr === 'function', 'Should be a function')
 t(() => concatStr.length === 2, 'Should takes 2 arguments')

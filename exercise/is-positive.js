@@ -7,11 +7,11 @@ Create a `isPositive` function that takes a number as
 parameter and return true if the given number is
 stricly positive, or false otherwise
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => isPositive(3))
 t(() => isPositive(1998790))

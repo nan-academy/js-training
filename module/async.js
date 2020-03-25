@@ -5,15 +5,12 @@ export const exercises = {
   // callback-all
   // callback-serie
   // callback-race
-
   // promise-use
   // promise-api
   // promise-all
   // promise-serie
   // promise-race
-
   // await-use
-
   // event-use
   // event-api
 }

@@ -10,11 +10,11 @@ Create an `id` function that takes one argument and return it
 
 - Functions
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 // id is declared and is a function
 t(() => typeof id === 'function')
@@ -32,6 +32,6 @@ t(() => id('pouet') === 'pouet')
 t(() => id(id) === id)
 
 // id return anything really
-t(_ => id(_) === _)
+t((_) => id(_) === _)
 
 Object.freeze(tests)

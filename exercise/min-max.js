@@ -23,11 +23,11 @@ and returns the lowest
 
 */
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => max(0, -2) === 0)
 t(() => max(-1, 10) === 10)

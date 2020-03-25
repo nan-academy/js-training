@@ -33,11 +33,11 @@ Implement a `format` function that takes 2 arguments:
 
 - https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 const landing = new Date('July 20, 1969, 20:17:40 UTC')
 const returning = new Date('July 21, 1969, 17:54:12 UTC')

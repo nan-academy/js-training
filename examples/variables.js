@@ -7,13 +7,11 @@
 
 let pouet
 
-
 // Now the identifier pouet can be use in the rest of my code
 // but we didn't gave any value to our variable so showing it's value
 // will output undefined :
 
 console.log(pouet)
-
 
 // to assign a value to it, we use a simple =
 
@@ -55,7 +53,6 @@ const isConstant = true
 // to the constant variable identified by 'isConstant'
 
 // now we protected our variable against re-assignement
-
 
 // There's shorthand for performing math operations on variables:
 someVar += 5 // equivalent to someVar = someVar + 5 someVar is 10 now

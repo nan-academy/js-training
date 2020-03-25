@@ -1,6 +1,10 @@
 {
   "private": true,
   "type": "module",
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
   "scripts": {
     "test": "node ./node-runner.js"
   }

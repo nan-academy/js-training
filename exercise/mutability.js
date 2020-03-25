@@ -22,21 +22,21 @@ Increase by one the property age of `person`
 const person = {
   name: 'Rick',
   age: 77,
-  country: 'US'
+  country: 'US',
 }
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => typeof samePerson === 'object')
 t(() => typeof person === 'object')
 t(() => typeof clone === 'object')
-t(() => eq(clone1, clone2))     // equal
-t(() => clone1 !== clone2)      // but different !
-t(() => person === samePerson)  // same value
+t(() => eq(clone1, clone2)) // equal
+t(() => clone1 !== clone2) // but different !
+t(() => person === samePerson) // same value
 t(() => person.name === 'Rick')
 t(() => person.age === 78)
 t(() => person.country === 'FR')

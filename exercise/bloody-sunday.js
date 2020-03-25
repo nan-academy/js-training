@@ -14,11 +14,11 @@ that return what week day the given date is.
 
 > note that the 01/01/0001 is still a monday.
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => bloodySunday(new Date('0001-01-01')) === 'Monday')
 t(() => bloodySunday(new Date('0001-01-02')) === 'Thuesday')

@@ -7,7 +7,6 @@
   and end with star-slash
 */
 
-
 /*
   Primitives and operators
 */
@@ -25,13 +24,12 @@ console.log(1042 % 50)
 console.log(2.1 * 10 + 21)
 console.log(4.2 * (5 + 5)) // Precedence is enforced with parentheses.
 
-
 // Strings are with ', " or `
 console.log('Hello World!')
 console.log("I'm such a nice boy") // but you may use " if your string contains '
 
 // if you need to have a quote in a string you can escape it with a backslash \
-console.log('It\'s time to escape !!')
+console.log("It's time to escape !!")
 console.log('Hello' + 'World!')
 console.log('Hello\nWorld!')
 console.log(`Hello
@@ -42,7 +40,6 @@ console.log(null) // used to indicate a deliberate non-value
 console.log(undefined) // used to indicate a value is not currently present
 // (although `undefined` is actually a value itself)
 // I recommand to avoid using null as much as possible and always use undefined
-
 
 // You may mix types, but results may not be what you expect
 console.log('21' + 21)
@@ -83,7 +80,6 @@ console.log(2 >= 2) // = true
 // and it works for strings
 console.log('a' < 'b') // = true
 console.log('aba' < 'abc') // = true
-
 
 // THE MORE YOU KNOW :
 

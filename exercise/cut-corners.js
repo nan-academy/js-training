@@ -18,11 +18,11 @@ Create a function for each rounding math functions:
 
 Math.round = Math.ceil = Math.floor = Math.trunc = undefined
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 const nums = [Math.PI, -Math.PI, Math.E, -Math.E]
 
 t(({ eq }) => eq(nums.map(round), [3, -3, 3, -3]))

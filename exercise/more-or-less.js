@@ -15,11 +15,11 @@ Create 4 functions
 - Functions
 - Operators
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 // more is declared and is a function and take 1 argument
 t(() => typeof more === 'function')

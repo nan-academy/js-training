@@ -26,11 +26,11 @@ const sourceObject = {
   log: console.log,
 }
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 // Get
 t(() => typeof get === 'function')

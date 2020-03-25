@@ -10,7 +10,6 @@
 
 // This is very useful, you can specify a generic operation
 
-
 // array of function
 // function in objects
 // lambda

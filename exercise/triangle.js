@@ -22,23 +22,36 @@ of the number passed as argument.
 
 - Loops or Recursion
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
-t((_, { code }) => code.split('\n').filter(s => s.trim()).length < 35)
+t((_, { code }) => code.split('\n').filter((s) => s.trim()).length < 35)
+t(() => triangle('#', 4) === _4)
+t(() => triangle('a', 5) === _5)
+t(() => triangle('+', 10) === _10)
+t(() => triangle('{}', 29) === _29)
 
-t(() => triangle('a', 5) === `
+Object.freeze(tests)
+
+const _4 = `
+#
+##
+###
+####
+`.slice(1)
+
+const _5 = `
 a
 aa
 aaa
 aaaa
 aaaaa
-`.slice(1))
+`.slice(1)
 
-t(() => triangle('+', 10) === `
+const _10 = `
 +
 ++
 +++
@@ -49,16 +62,9 @@ t(() => triangle('+', 10) === `
 ++++++++
 +++++++++
 ++++++++++
-`.slice(1))
+`.slice(1)
 
-t(() => triangle('#', 4) === `
-#
-##
-###
-####
-`.slice(1))
-
-t(() => triangle('{}', 29) === `
+const _29 = `
 {}
 {}{}
 {}{}{}
@@ -88,6 +94,4 @@ t(() => triangle('{}', 29) === `
 {}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
 {}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
 {}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
-`.slice(1))
-
-Object.freeze(tests)
+`.slice(1)

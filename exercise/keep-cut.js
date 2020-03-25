@@ -26,11 +26,11 @@ and remove the 2 first characters and 2 last characters.
 
 - https://devdocs.io/javascript/global_objects/array/slice
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => keepFirst('abcdef') === 'ab')
 t(() => keepFirst('a') === 'a')

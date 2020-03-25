@@ -21,7 +21,7 @@
 // So to use them we need to declare them, and for that we use a variable
 
 // Let's see an exemple with a function that add 5
-const add5 = n => n + 5
+const add5 = (n) => n + 5
 // Anndddd... that's it !
 // let's break this down
 // first I declare the constant variable identified by add5
@@ -93,12 +93,12 @@ console.log(multiply(multiply(5, add5(5)), multiply(2, add5(10))))
 
 // We can call other functions from a function !
 // let's use that to create add10 just using add5:
-const add10 = n => add5(add5(n))
+const add10 = (n) => add5(add5(n))
 
 console.log(add10(10))
 
 // And just like that build up complexity
-const op1 = n => add10(multiply(n, add5(n)))
+const op1 = (n) => add10(multiply(n, add5(n)))
 
 /*
 
@@ -116,4 +116,3 @@ clamp9000 // clamp the given value between 0 and 9000
 
 
 */
-

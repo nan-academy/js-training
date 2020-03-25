@@ -9,11 +9,11 @@ Create a `inequality` value that is not equal to itself
 
 - Numbers
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 t(() => !(inequality === inequality))
 

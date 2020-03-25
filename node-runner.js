@@ -92,13 +92,13 @@ const openExercise = async path => {
     readFileOrEmpty(path.replace(/\bexercise\b/, 'solution')),
   ])
 
-  const parts = exerciseCode.split('///*/// ⚡')
+  const parts = exerciseCode.split('// /*/ // ⚡')
   if (parts.length !== 3) {
     // show error of invalid exercise file !
   }
 
   const code = solution ? `\n${solution}\n` : parts[1] 
-  const mod = await importCode([ parts[0], code, parts[2] ].join('///*/// ⚡'))
+  const mod = await importCode([ parts[0], code, parts[2] ].join('// /*/ // ⚡'))
   const descriptions = parts[2].split(/(\nt\(.+)/g).filter((_,i) => i%2)
 
   return { ...mod, code, descriptions }

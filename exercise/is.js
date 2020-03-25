@@ -27,11 +27,11 @@ Add new function properties to the object `is`` to check a value type
 
 const is = {}
 
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
-const t = f => tests.push(f)
+const t = (f) => tests.push(f)
 
 // setup context for following tests
 
@@ -43,7 +43,7 @@ t(match(is.str, ['', '💩']))
 t(match(is.bool, [true]))
 t(match(is.undef, [undefined, undefined]))
 t(match(is.arr, [[], [1, Array(1), [], 2]]))
-t(match(is.obj, [ {}, { length: 10 }, Object.create(null) ]))
+t(match(is.obj, [{}, { length: 10 }, Object.create(null)]))
 t(match(is.fun, [t, console.log]))
 t(match(is.falsy, [0, NaN, '', undefined, null, void 0]))
 
@@ -52,18 +52,19 @@ t(() => !vals().filter(is.def).includes(undefined))
 t(() => vals().filter(is.def).length === vals().length - 2)
 
 // is.truthy
-t(match(is.truthy, [
-  true,
-  '💩',
-  t,
-  [],
-  {},
-  [1, Array(1), [], 2],
-  { length: 10 },
-  Object.create(null),
-  console.log,
-]))
-
+t(
+  match(is.truthy, [
+    true,
+    '💩',
+    t,
+    [],
+    {},
+    [1, Array(1), [], 2],
+    { length: 10 },
+    Object.create(null),
+    console.log,
+  ])
+)
 
 const vals = () => [
   0,

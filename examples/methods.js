@@ -50,10 +50,8 @@ console.log(baseStr.split('-').join(''))
 // Well from this point on they are pretty much like functions
 // You need to use them to get the hang of it.
 
-
 // Some work with split / join
 // Capitalize
-
 
 // after map reduce filter
 // Jaden Smith Case
