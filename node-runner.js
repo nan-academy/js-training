@@ -69,9 +69,15 @@ const openExercise = async path => {
   const mod = await importCode([ parts[0], code, parts[2] ].join('// /*/ // ⚡'))
   return { ...mod, code }
 }
-const prettify = fn => {
+const prettify = (fn, short) => {
   const code = fn.toString()
-  return code.slice(code.split('=>', 1)[0].length + 3)._blk()
+  const full = code.slice(code.split('=>', 1)[0].length + 3).trim()
+  if (!short) return full._blk()
+  const lines = full.split('\n')
+
+  return lines.length > 1
+    ? `${lines[0]} [...] ${lines[lines.length-1].trim()}`._blk()
+    : lines[0]._blk()
 }
 
 const test = async (name, timeout) => {
@@ -88,7 +94,7 @@ const test = async (name, timeout) => {
       err && log('   ', prettyStack(err))
       return false
     } else {
-      console.log('  ✓ '.grn(), prettify(t))
+      console.log('  ✓ '.grn(), prettify(t, true))
     }
   }
   return true

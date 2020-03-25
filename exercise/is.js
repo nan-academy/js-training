@@ -35,25 +35,25 @@ const t = (f) => tests.push(f)
 
 // setup context for following tests
 
-const match = (fun, values) => ({ eq }) => eq(vals().filter(fun), values)
+const match = ({eq}, fun, values) => eq(vals().filter(fun), values)
 
-t(match(is.num, [0, NaN]))
-t(match(is.nan, [NaN]))
-t(match(is.str, ['', '💩']))
-t(match(is.bool, [true]))
-t(match(is.undef, [undefined, undefined]))
-t(match(is.arr, [[], [1, Array(1), [], 2]]))
-t(match(is.obj, [{}, { length: 10 }, Object.create(null)]))
-t(match(is.fun, [t, console.log]))
-t(match(is.falsy, [0, NaN, '', undefined, null, void 0]))
+t((_) => match(_, is.num, [0, NaN]))
+t((_) => match(_, is.nan, [NaN]))
+t((_) => match(_, is.str, ['', '💩']))
+t((_) => match(_, is.bool, [true]))
+t((_) => match(_, is.undef, [undefined, undefined]))
+t((_) => match(_, is.arr, [[], [1, Array(1), [], 2]]))
+t((_) => match(_, is.obj, [{}, { length: 10 }, Object.create(null)]))
+t((_) => match(_, is.fun, [t, console.log]))
+t((_) => match(_, is.falsy, [0, NaN, '', undefined, null, void 0]))
 
 // is.def
 t(() => !vals().filter(is.def).includes(undefined))
 t(() => vals().filter(is.def).length === vals().length - 2)
 
 // is.truthy
-t(
-  match(is.truthy, [
+t((_) =>
+  match(_, is.truthy, [
     true,
     '💩',
     t,
