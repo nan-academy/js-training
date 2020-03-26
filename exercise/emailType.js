@@ -7,11 +7,9 @@ Create a `emailType` function, that can find an email and the type of email bein
 The function has to return an array with the full match of the email (example-01@gmail.com) 
 and the group where the type is (@gmail).
 
-### Notions
+// /*/ // ⚡
 
-///*/ // ⚡
-
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
 const t = f => tests.push(f)
 t(() => typeof emailType === 'function')
