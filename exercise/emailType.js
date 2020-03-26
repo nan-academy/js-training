@@ -3,14 +3,11 @@
 
 ### Instructions
 
-Create a `emailType` function, using regular expressions, 
-that can find the email and the type of email being used in a given string.
+Create a `emailType` function, that can find an email and the type of email being used in a given string.
 The function has to return an array with the full match of the email (example-01@gmail.com) 
 and the group where the type is (@gmail).
 
 ### Notions
-
-- Regular Expressions
 
 ///*/// ⚡
 
