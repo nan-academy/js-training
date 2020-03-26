@@ -15,4 +15,5 @@ export const exercises = {
   triangle: { feedback: true },
   nasa: { feedback: true },
   pyramid: { feedback: true },
+  sums: { feedback: true },
 }
