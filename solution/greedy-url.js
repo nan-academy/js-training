@@ -1,14 +1,14 @@
-getURL = data => {
+const getURL = data => {
   let regex = /https*:\/\/\S+/g
   return data.match(regex)
 }
 
-greedyQuery = data => {
+const greedyQuery = data => {
   let regex = /https*:\/\/\S+\?(\S+=\S+\&*){3,}/g
   return data.match(regex)
 }
 
-notSoGreedyQuery = data => {
+const notSoGreedy = data => {
   let regex = /https*:\/\/\S+\?(\w+=[^&\r\n\t\f\v ]+&*){2,3}/g
   let result = data.match(regex)
   for (let i = 0; i < result.length; i++) {

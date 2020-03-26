@@ -29,5 +29,6 @@ t(() => !sameAmount(data, 'q ', 'qqqqqqq'))
 t(() => sameAmount(data, 'fs', 'q '))
 t(() => !sameAmount(data, 'fs', 'q'))
 t(() => sameAmount(data, 'j', 'w'))
+t(() => !sameAmount(data, 'j', ''))
 
 Object.freeze(tests)

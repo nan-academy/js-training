@@ -1,4 +1,4 @@
-const findexpression = nbr => {
+const findExpression = nbr => {
   return find(1, '1', nbr)
 }
 
