@@ -18,6 +18,8 @@ Implement 2 functions:
 */
 
 String.prototype.split = undefined
+String.prototype.match = undefined
+RegExp.prototype.exec = undefined
 Array.prototype.join = undefined
 
 // /*/ // ⚡
