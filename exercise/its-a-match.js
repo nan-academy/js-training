@@ -21,7 +21,7 @@ const t = f => tests.push(f)
 t(() => normal.test("hi"))
 t(() => normal.test("higher"))
 t(() => !normal.test("likelihood"))
-t(() => !normal.test("Hi") === false)
+t(() => !normal.test("Hi"))
 t(() => normal.test("I love sushi"))
 
 t(() => start.test("hi"))
