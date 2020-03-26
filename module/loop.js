@@ -12,6 +12,7 @@ export const exercises = {
   chunk: { feedback: true },
   get: { feedback: true },
   flat: { feedback: true },
+  'find-expression': { feedback: true },
   triangle: { feedback: true },
   fizzbuzz: { feedback: true },
   pyramid: { feedback: true },
