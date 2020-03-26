@@ -88,7 +88,7 @@ const test = async (name, timeout) => {
     ++i
     let err = ''
     const tools = { eq, fail, wait, code: ex.code }
-    const running = (async () => t(tools, ctx))().catch(e => (err = e, false))
+    const running = (async () => t(tools, ctx))().catch(e => (err = e, false)).finally(restore)
     if (!await Promise.race([ running, wait(timeout) ])) {
       log(`  ✗`.red(), prettify(t))
       err && log('   ', prettyStack(err))
@@ -106,7 +106,7 @@ const run = async modname => {
   for (const [ex, props] of Object.entries(exercises)) {
     try {
       log(ex)
-      if (!await test(ex, timeout).finally(restore)) return
+      if (!await test(ex, timeout)) return
     } catch (err) {
       log(err)
       return

@@ -1,0 +1,1 @@
+const inequality = NaN
