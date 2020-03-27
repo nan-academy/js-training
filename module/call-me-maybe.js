@@ -1,6 +1,6 @@
 export const next = 'object'
 export const exercises = {
-  // each / map
+  map: { feedback: true } // each / map
   // filter / reject / partition
   // fold / foldr / reduce
   // every / some
