@@ -13,6 +13,6 @@ export const exercises = {
   get: { feedback: true },
   flat: { feedback: true },
   triangle: { feedback: true },
-  fizzbuzz: { feedback: true },
+  nasa: { feedback: true },
   pyramid: { feedback: true },
 }

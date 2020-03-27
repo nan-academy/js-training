@@ -1,4 +1,3 @@
-
 const reverse = (x) =>
   typeof x === 'string'
     ? reverse([...x]).join('')

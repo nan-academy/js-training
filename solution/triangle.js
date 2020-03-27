@@ -1,0 +1,1 @@
+const triangle = (s, size) => [...Array(size).keys()].map(k => s.repeat(k + 1)).join('\n')
