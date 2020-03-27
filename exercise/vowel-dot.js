@@ -20,4 +20,5 @@ t(({eq}) => eq(vowelDots(""), ""))
 t(({eq}) => eq(vowelDots("rhythm"), "rhythm"))
 t(({eq}) => eq(vowelDots("Algorithm"), "A.lgo.ri.thm"))
 
+
 Object.freeze(tests)
