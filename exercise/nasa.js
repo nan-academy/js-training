@@ -13,9 +13,11 @@ numbers from 1 to the number passed as parameter, with three exception.
 
 - For the number that are divisible by 3 and 5 add 'NASA'.
 
+
 ### Notions
 
-- Loops or Recursion
+- https://nan-academy.github.io/js-training/examples/loops.js
+- https://nan-academy.github.io/js-training/examples/recursion.js
 
 // /*/ // ⚡
 

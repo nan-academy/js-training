@@ -13,9 +13,9 @@ Increase by one the property age of `person`
 
 ## Notions
 
-- set
-- get
-- data-structures
+- https://nan-academy.github.io/js-training/examples/set.js
+- https://nan-academy.github.io/js-training/examples/get.js
+- https://nan-academy.github.io/js-training/examples/data-structures.js
 
 */
 

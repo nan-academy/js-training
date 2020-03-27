@@ -10,6 +10,7 @@ Implement 2 functions:
 - `split` that works like the string method `.split` but take the array as
   it's first argument.
 
+
 ### Notions
 
 - https://devdocs.io/javascript/global_objects/array/join

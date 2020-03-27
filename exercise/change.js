@@ -11,11 +11,13 @@ Create 2 functions:
   value for the corresponding property of the sourceObject
   and return the set value
 
+
 ### Notions
 
-- Functions
-- Data-Structures
-- Get
+- https://nan-academy.github.io/js-training/examples/functions.js
+- https://nan-academy.github.io/js-training/examples/data-structures.js
+- https://nan-academy.github.io/js-training/examples/get.js
+- https://nan-academy.github.io/js-training/examples/set.js
 
 */
 

@@ -11,8 +11,8 @@ Create a constant variable for each primitives:
 
 ### Notions
 
-- Primitive and Operators
-- Variables
+- https://nan-academy.github.io/js-training/examples/primitive-and-operators.js
+- https://nan-academy.github.io/js-training/examples/variables.js
 
 // /*/ // ⚡
 

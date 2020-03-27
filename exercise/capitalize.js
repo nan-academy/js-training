@@ -13,9 +13,10 @@ and in lowercase for the rest of the string
 export const tests = []
 const t = (f) => tests.push(f)
 
-t(() => capitalize('str') === 'Str')
-t(() => capitalize('qsdqsdqsd') === 'Qsdqsdqsd')
-t(() => capitalize('STR') === 'Str')
-t(() => capitalize('zapZAP') === 'Zapzap')
+t(({ eq }) => eq(capitalize('str'), 'Str'))
+t(({ eq }) => eq(capitalize('qsdqsdqsd'), 'Qsdqsdqsd'))
+t(({ eq }) => eq(capitalize('STR'), 'Str'))
+t(({ eq }) => eq(capitalize('zapZAP'), 'Zapzap'))
+t(({ eq }) => eq(capitalize('zap ZAP'), 'Zap zap'))
 
 Object.freeze(tests)

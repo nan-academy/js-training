@@ -16,6 +16,7 @@ Add new function properties to the object `is`` to check a value type
 - `is.truthy` value is truthy
 - `is.falsy` value is falsy
 
+
 ### Notions
 
 - Primitive and operators
