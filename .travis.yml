@@ -3,4 +3,4 @@ before_install:
   - export PATH="/home/travis/.deno/bin:$PATH"
 
 script:
-  - deno -A ./tests/mod.ts
+  - deno -A ./tests/mod.js
