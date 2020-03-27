@@ -1,15 +1,3 @@
-const get = keyWanted => {
-  for (let [key, value] of Object.entries(sourceObject))
-    if (keyWanted === key) return value
-}
+const get = keyWanted => sourceObject[keyWanted]
 
-const set = (keyWanted, newValue) => {
-  let exist = 0
-  for (let [key] of Object.entries(sourceObject))
-    if (keyWanted === key) {
-      sourceObject[keyWanted] = newValue
-      exist = 1
-    }
-  if (exist === 0) sourceObject[keyWanted] = newValue
-  return newValue
-}
+const set = (keyWanted, newValue) => (sourceObject[keyWanted] = newValue)
