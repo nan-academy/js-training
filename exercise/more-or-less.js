@@ -12,8 +12,8 @@ Create 4 functions
 
 ### Notions
 
-- Functions
-- Operators
+- https://nan-academy.github.io/js-training/examples/functions.js
+- https://nan-academy.github.io/js-training/examples/primitive-and-operators.js
 
 // /*/ // ⚡
 

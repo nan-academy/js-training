@@ -11,7 +11,8 @@ Of course you may not use the method directly
 
 ### Notions
 
-- Loops or Recursion
+- https://nan-academy.github.io/js-training/examples/loops.js
+- https://nan-academy.github.io/js-training/examples/recursion.js
 - https://devdocs.io/javascript/global_objects/string/repeat
 
 // /*/ // ⚡

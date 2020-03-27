@@ -5,9 +5,10 @@
 
 Create a `inequality` value that is not equal to itself
 
+
 ### Notions
 
-- Numbers
+- https://devdocs.io/javascript/global_objects/number
 
 // /*/ // ⚡
 

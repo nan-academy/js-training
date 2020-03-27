@@ -18,9 +18,11 @@ of the number passed as argument.
 ****
 *****
 
+
 ### Notions
 
-- Loops or Recursion
+- https://nan-academy.github.io/js-training/examples/loops.js
+- https://nan-academy.github.io/js-training/examples/recursion.js
 
 // /*/ // ⚡
 

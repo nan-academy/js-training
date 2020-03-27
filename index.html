@@ -484,7 +484,7 @@ const parametrize = data => `${new URLSearchParams(Object.entries(data).map(norm
 const formatInput = e => `${e.name}_${e.value}`.replace(/~/g, '-')
 const encodeFeedback = () => parametrize({
   hash: feedback.hash,
-  attempt: store[feedback.hash].attempt || 0,
+  attempt: store[feedback.hash].attempt.get() || 0,
   code: inputs.map(formatInput).join('~'),
 })
 

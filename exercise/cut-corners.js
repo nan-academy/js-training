@@ -25,6 +25,7 @@ export const tests = []
 const t = (f) => tests.push(f)
 const nums = [Math.PI, -Math.PI, Math.E, -Math.E, 0]
 
+t(({ code }) => !/String|['"`]|toFixed|slice/.test(code))
 t((_, ctx) => ctx.r = Math.random() * 10)
 t(({ eq }) => eq(nums.map(round), [3, -3, 3, -3, 0]))
 t(({ eq }) => eq(nums.map(floor), [3, -4, 2, -3, 0]))

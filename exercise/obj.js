@@ -12,7 +12,7 @@ containing a property for each primitives:
 
 ### Notions
 
-- Data-Structures
+- https://nan-academy.github.io/js-training/examples/data-structures.js
 
 // /*/ // ⚡
 

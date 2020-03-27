@@ -16,12 +16,14 @@ and returns the lowest
 
 ### Notions
 
-- Functions
-- Ternary
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max
+- https://nan-academy.github.io/js-training/examples/functions.js
+- https://nan-academy.github.io/js-training/examples/ternary.js
+- https://devdocs.io/javascript/global_objects/array/Math/min
+- https://devdocs.io/javascript/global_objects/array/Math/max
 
 */
+
+Math.min = Math.max = undefined
 
 // /*/ // ⚡
 
