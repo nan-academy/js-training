@@ -2,10 +2,20 @@
 ##It's a match
 
 ### Instruction
- Create a variable `normal` and assign to it a regular expression that matches with the expression 'hi'.
- Create a variable `begin` and assign to it a regular expression that matches with the expression 'hi', only when it is in the beggining.
- Create a variable `end` and assign to it a regular expression that matches with the expression 'hi', only when it is in the end.
- Create a variable `beginEnd` and assign to it a regular expression that matches with the expression 'hi', only when it is in the end.
+
+Create 4 variables:
+
+- `normal`: a regular expression that matches with the expression 'hi'.
+
+- `begin`: a regular expression that matches with the expression 'hi', only when
+it is in the beginning.
+
+- `end`: a regular expression that matches with the expression 'hi', only when
+it is in the end.
+
+- `beginEnd`: a regular expression that matches with the expression 'hi', only
+when it is in the beginning and the end.
+ */
 
 // /*/ // ⚡
 
