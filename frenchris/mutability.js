@@ -1,6 +1,6 @@
-let clone1 = Object.assign(person)
-let clone2 = Object.assign(person)
+let clone1 = Object.create(person)
+let clone2 = Object.create(person)
 
-let samePerson = Object.assign(person)
+let samePerson = Object.create(person)
 
 person.age = 78
