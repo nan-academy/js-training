@@ -8,4 +8,8 @@ export const exercises = {
   'day-of-the-year': { feedback: true },
   'bloody-sunday': { feedback: true },
   'unicode-technical-report-35': { feedback: true },
+  'its-a-match': { feedback: true },
+  'letter-space-number': { feedback: true },
+  'vowel-dot': { feedback: true },
+  'ion-out': { feedback: true },
 }
