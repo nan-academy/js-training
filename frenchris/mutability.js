@@ -1,6 +1,7 @@
-let clone1 = Object.create(person)
-let clone2 = Object.create(person)
+let clone1 = { ...person }
+let clone2 = { ...person }
 
-let samePerson = Object.create(person)
+let samePerson = person
 
 person.age = 78
+person.country = `FR`
