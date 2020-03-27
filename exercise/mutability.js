@@ -4,11 +4,12 @@
 ### Instruction
 
 Create a copy of the person object called clone1.
-Create an other copy of the person object called clone2.
+Create another copy of the person object called clone2.
 
 Create a new variable `samePerson` with the same value as `person`.
 
 Increase by one the property age of `person`
+Change the property country of `person` to `FR`
 
 
 ## Notions
@@ -22,14 +23,14 @@ Increase by one the property age of `person`
 const person = {
   name: 'Rick',
   age: 77,
-  country: 'US',
+  country: 'US'
 }
 
 // /*/ // ⚡
 
 // /*/ // ⚡
 export const tests = []
-const t = (f) => tests.push(f)
+const t = f => tests.push(f)
 
 t(() => typeof samePerson === 'object')
 t(() => typeof person === 'object')
