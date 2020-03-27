@@ -29,14 +29,15 @@ Just like triangle
 // /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
-t((_, { code }) => code.split('\n').filter((s) => s.trim()).length < 38)
+t(({ code }) => code.split('\n').filter((s) => s.trim()).length < 38)
+t(({ code }) => !code.includes('$'))
 
-t(() => pyramid('a', 5) === _5.slice(1))
-t(() => pyramid('+', 10) === _10.slice(1))
-t(() => pyramid('#', 40) === _40.slice(1))
-t(() => pyramid('{}', 12) === _12.slice(1))
-t(() => pyramid('ABC', 7) === _7.slice(1))
-t(() => pyramid('<^>', 13) === _13.slice(1))
+t(() => pyramid('a', 5) === $5.slice(1))
+t(() => pyramid('+', 10) === $10.slice(1))
+t(() => pyramid('#', 40) === $40.slice(1))
+t(() => pyramid('{}', 12) === $12.slice(1))
+t(() => pyramid('ABC', 7) === $7.slice(1))
+t(() => pyramid('<^>', 13) === $13.slice(1))
 
 Object.freeze(tests)
 
