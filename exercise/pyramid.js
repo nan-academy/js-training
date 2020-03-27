@@ -41,7 +41,7 @@ t(() => pyramid('<^>', 13) === $13.slice(1))
 
 Object.freeze(tests)
 
-const _5 = `
+const $5 = `
     a
    aaa
   aaaaa
@@ -49,7 +49,7 @@ const _5 = `
 aaaaaaaaa
 `
 
-const _10 = `
+const $10 = `
          +
         +++
        +++++
@@ -62,7 +62,7 @@ const _10 = `
 +++++++++++++++++++
 `
 
-const _7 = `
+const $7 = `
                   ABC
                ABCABCABC
             ABCABCABCABCABC
@@ -71,7 +71,7 @@ const _7 = `
    ABCABCABCABCABCABCABCABCABCABCABC
 ABCABCABCABCABCABCABCABCABCABCABCABCABC
 `
-const _12 = `
+const $12 = `
                       {}
                     {}{}{}
                   {}{}{}{}{}
@@ -86,7 +86,7 @@ const _12 = `
 {}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
 `
 
-const _13 = `
+const $13 = `
                                     <^>
                                  <^><^><^>
                               <^><^><^><^><^>
@@ -102,7 +102,7 @@ const _13 = `
 <^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^><^>
 `
 
-const _40 = `
+const $40 = `
                                        #
                                       ###
                                      #####
