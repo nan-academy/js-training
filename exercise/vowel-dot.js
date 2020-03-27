@@ -12,12 +12,12 @@ Create a function called vowelDots that receives a string and adds a `.` after e
 export const tests = []
 const t = f => tests.push(f)
 
-t(() => typeof vowelDots === "function")
-t(() => typeof vowels === "object")
-t(() => vowelDots.length === 1)
-t(() => vowelDots("something") === "so.me.thi.ng")
-t(() => vowelDots("") === "")
-t(() => vowelDots("rhythm") === "rhythm")
-t(() => vowelDots("Algorithm") === "A.lgo.ri.thm")
+t(({eq}) => eq(typeof vowelDots, "function"))
+t(({eq}) => eq(typeof vowels, "object"))
+t(({eq}) => eq(vowelDots.length, 1))
+t(({eq}) => eq(vowelDots("something"), "so.me.thi.ng"))
+t(({eq}) => eq(vowelDots(""), ""))
+t(({eq}) => eq(vowelDots("rhythm"), "rhythm"))
+t(({eq}) => eq(vowelDots("Algorithm"), "A.lgo.ri.thm"))
 
 Object.freeze(tests)

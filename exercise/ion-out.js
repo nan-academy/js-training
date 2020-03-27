@@ -11,17 +11,16 @@ https://www.regular-expressions.info/lookaround.html
 // /*/ // ⚡
 
 
-
 // /*/ // ⚡
 
 export const tests = []
 const t = f => tests.push(f)
 
-t(() => typeof ionOut === 'function')
-t(() => ionOut.length === 1)
-t(({ eq }) => eq(ionOut('attention, direction'), ['attent', 'direct']))
-t(({ eq }) => eq(ionOut('promotion, provision'), ['promot']))
-t(({ eq }) =>
+t(({eq}) => eq(typeof ionOut, 'function'))
+t(({eq}) => eq(ionOut.length, 1))
+t(({eq}) => eq(ionOut('attention, direction'), ['attent', 'direct']))
+t(({eq}) => eq(ionOut('promotion, provision'), ['promot']))
+t(({eq}) =>
   eq(ionOut(' 1st position is the vision of the 2nd position'), [
     'posit',
     'posit'
