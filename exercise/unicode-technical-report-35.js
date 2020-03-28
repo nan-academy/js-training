@@ -39,8 +39,8 @@ Implement a `format` function that takes 2 arguments:
 export const tests = []
 const t = (f) => tests.push(f)
 
-const landing = new Date('July 20, 1969, 20:17:40 UTC')
-const returning = new Date('July 21, 1969, 17:54:12 UTC')
+const landing = new Date('July 20, 1969, 20:17:40')
+const returning = new Date('July 21, 1969, 17:54:12')
 const eclipse = new Date(-585, 4, 28)
 const ending = new Date('2 September 1945, 9:02:14')
 
@@ -79,14 +79,14 @@ t(({ eq }) => eq(format(landing, 'EEEE'), 'Sunday'))
 t(({ eq }) => eq(format(returning, 'EEEE'), 'Monday'))
 
 // time
-t(({ eq }) => eq(format(landing, 'H:m:s'), '22:17:40'))
-t(({ eq }) => eq(format(landing, 'HH:mm:ss'), '22:17:40'))
-t(({ eq }) => eq(format(landing, 'h:m:s a'), '10:17:40 PM'))
-t(({ eq }) => eq(format(landing, 'hh:mm:ss a'), '10:17:40 PM'))
-t(({ eq }) => eq(format(returning, 'H:m:s'), '19:54:12'))
-t(({ eq }) => eq(format(returning, 'HH:mm:ss'), '19:54:12'))
-t(({ eq }) => eq(format(returning, 'h:m:s a'), '7:54:12 PM'))
-t(({ eq }) => eq(format(returning, 'hh:mm:ss a'), '07:54:12 PM'))
+t(({ eq }) => eq(format(landing, 'H:m:s'), '20:17:40'))
+t(({ eq }) => eq(format(landing, 'HH:mm:ss'), '20:17:40'))
+t(({ eq }) => eq(format(landing, 'h:m:s a'), '8:17:40 PM'))
+t(({ eq }) => eq(format(landing, 'hh:mm:ss a'), '08:17:40 PM'))
+t(({ eq }) => eq(format(returning, 'H:m:s'), '17:54:12'))
+t(({ eq }) => eq(format(returning, 'HH:mm:ss'), '17:54:12'))
+t(({ eq }) => eq(format(returning, 'h:m:s a'), '5:54:12 PM'))
+t(({ eq }) => eq(format(returning, 'hh:mm:ss a'), '05:54:12 PM'))
 t(({ eq }) => eq(format(ending, 'H:m:s'), '9:2:14'))
 t(({ eq }) => eq(format(ending, 'HH:mm:ss'), '09:02:14'))
 t(({ eq }) => eq(format(ending, 'h:m:s a'), '9:2:14 AM'))
