@@ -1,4 +1,4 @@
 let normal = /hi/
-let start = /^hi/
+let begin = /^hi/
 let end = /hi$/
-let startEnd = /^hi$/
+let beginEnd = /^hi$/

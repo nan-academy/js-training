@@ -1,7 +1,6 @@
-let vowels = /[aeiou]/g
+let vowels = /[aeiou]/gi
 
 const vowelDots = str => {
-  console.log("typeof : ", typeof vowels === typeof /s/g)
   let vowelsOrder = str.match(vowels)
   if (vowelsOrder === null) {
     return str
@@ -15,5 +14,5 @@ const vowelDots = str => {
     }
     i++
   }
-  console.log(vowelsOrder, s, result)
+  return result
 }
