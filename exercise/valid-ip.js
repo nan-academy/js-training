@@ -11,6 +11,11 @@ A valid IP has the following format :
 - xxx is a number from 0-255
 - You cannot have a 0 before a number, example 0xx
 
+
+### Notions
+
+- https://github.com/ziishaned/learn-regex#4-lookarounds
+
 // /*/ // ⚡
 
 // /*/ // ⚡

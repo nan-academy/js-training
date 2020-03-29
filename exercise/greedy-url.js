@@ -11,9 +11,10 @@ Write 3 functions :
 
 You can search for greedy quantifiers for help
 
+
 ### Notions
 
-- https://www.regular-expressions.info/refrepeat.html
+- https://github.com/ziishaned/learn-regex#4-lookarounds
 
 // /*/ // ⚡
 

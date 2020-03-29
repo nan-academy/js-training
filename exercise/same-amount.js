@@ -8,6 +8,11 @@ Create a `sameAmount` function that takes three strings as parameter.
 The objective is to confirm that the second and the third parameter occurred
  the same amount of times in the first parameter.
 
+
+### Notions
+
+- https://github.com/ziishaned/learn-regex#4-lookarounds
+
 // /*/ // ⚡
 
 // /*/ // ⚡
