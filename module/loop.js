@@ -9,6 +9,7 @@ export const exercises = {
   'index-of': { feedback: true }, // index-of / last-index-of / includes
   reverse: { feedback: true },
   unbreakable: { feedback: true }, // join / split
+  'find-expression': { feedback: true },
   chunk: { feedback: true },
   get: { feedback: true },
   flat: { feedback: true },
