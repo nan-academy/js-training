@@ -10,6 +10,6 @@ is.arr = value => Array.isArray(value)
 is.truthy = value => !!value
 is.falsy = value => !value
 is.def = value => !is.undef(value)
-// tests with arrays so had to use Array.isArray
+// tests with arrays so had to use !Array.isArray
 is.obj = value =>
   typeof value === 'object' && !Array.isArray(value) && value !== null
