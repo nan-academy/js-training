@@ -7,6 +7,7 @@ Create the `slice` function that works like `Array.slice` and `String.slice`
 
 It takes an additionnal first argument which is the string or the array
 
+
 ### Notions
 
 - https://devdocs.io/javascript/global_objects/array/slice
