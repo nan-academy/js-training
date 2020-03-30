@@ -9,9 +9,11 @@ word containing 'ion' following a t, without the 'ion'.
 
 ### Notions
 
-- https://www.regular-expressions.info/lookaround.html
+- https://github.com/ziishaned/learn-regex#4-lookarounds
 
 // /*/ // ⚡
+
+const ionOut = (str) => str.split(/(\w+t)ion/).filter((_, i) => i % 2)
 
 // /*/ // ⚡
 
@@ -27,4 +29,5 @@ t(({ eq }) =>
     'posit',
   ])
 )
+
 Object.freeze(tests)
