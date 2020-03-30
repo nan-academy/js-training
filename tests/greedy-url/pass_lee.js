@@ -14,6 +14,7 @@ const notSoGreedy = data => {
   for (let i = 0; i < result.length; i++) {
     if (result[i].charAt(result[i].length - 1) == '&') {
       result.splice(i, 1)
+      i = i - 1
     }
   }
   return result
