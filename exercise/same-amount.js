@@ -3,9 +3,10 @@
 
 ### Instruction
 
-Create a `sameAmount` function that takes three strings as parameter.
+Create a `sameAmount` function that takes three parameter,
+a data string and 2 regexes.
 
-The objective is to confirm that the second and the third parameter occurred
+The objective is to confirm that the second and the third parameter matched
  the same amount of times in the first parameter.
 
 
