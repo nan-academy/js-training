@@ -14,7 +14,7 @@ Write 4 functions:
 
 ### Notions
 
-- Methods
+- https://nan-academy.github.io/js-training/examples/methods.js
 
 // /*/ // ⚡
 

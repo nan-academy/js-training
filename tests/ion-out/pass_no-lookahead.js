@@ -1,0 +1,1 @@
+const ionOut = (str) => str.split(/(\w+t)ion/).filter((_, i) => i % 2)

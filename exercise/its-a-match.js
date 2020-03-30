@@ -16,6 +16,11 @@ Create 4 regular expression in variables:
 - `beginEnd` matches with the expression 'hi',
   only when it is in the beginning and the end.
 
+
+### Notions
+
+- https://github.com/ziishaned/learn-regex#28-anchors
+
 // /*/ // ⚡
 
 // /*/ // ⚡
