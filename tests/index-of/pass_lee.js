@@ -1,17 +1,15 @@
-// - `lastIndexOf` that return the index of the last occurence of a value
-// - `includes` that return true if the value was found in the array
-
 const indexOf = (arr, char, start = 0) => {
-  if (char === undefined) return -1
   for (let i = start; i < arr.length; i++) {
     if (arr[i] == char) return i
   }
+  return -1
 }
 
-const lastIndexOf = (arr, char, start = 0) => {
-  if (char == undefined) return -1
-  for (let i = arr.length; i >= start; i--) {
+const lastIndexOf = (arr, char, start = arr.length - 1) => {
+  for (let i = start; i >= 0; i--) {
     if (arr[i] == char) return i
   }
+  return -1
 }
+
 const includes = (arr, char) => indexOf(arr, char) > 0
