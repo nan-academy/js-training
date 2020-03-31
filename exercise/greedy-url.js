@@ -38,18 +38,18 @@ https//nan-academy.github.io/js-training/?page=editor#data.nested impolite or in
 https://192.168.1.123?something=nothing&pro=[23] htts:/nan-academy.github.io/js-training?b=123&a=123/?page=editor#data.nested  Like e-mail and voicemail and unlike calls https://www.notherExample.com/catalog.asp?itemid=232&template=fresh&crcat=ppc&crsource=google&crkw=buy-a-lot&id=3&qwe=ty (in which the caller hopes to speak directly with the recipient),
 http://www.example.com/catalog.asp?itemid=232&template=fresh&crcat=ppc&crsource=google&crkw=buy-a-lot texting does not require the caller and recipient to both be free at the same moment0.0.0.0`
 
-const $notSoGreedy = [
-  'http://example.com/hello?you=something&something=you',
-  'http://www.example.com/mypage.html?crcat=test&crsource=test&crkw=buy-a-loteasy',
-  'http://example.com/path?name=Branch&products=[Journeys,Email,Universal%20Ads]interact',
-  'https://192.168.1.123?something=nothing&pro=[23]'
-]
-
 const $greedyQuery = [
   'http://hummm/how?how=come&same=[123,21]&you=nextperson&id=123312&next=123DSAD&ok=true&notOk=true',
   'http://www.example.com/mypage.html?crcat=test&crsource=test&crkw=buy-a-loteasy',
   'https://www.notherExample.com/catalog.asp?itemid=232&template=fresh&crcat=ppc&crsource=google&crkw=buy-a-lot&id=3&qwe=ty',
   'http://www.example.com/catalog.asp?itemid=232&template=fresh&crcat=ppc&crsource=google&crkw=buy-a-lot'
+]
+
+const $notSoGreedy = [
+  'http://example.com/hello?you=something&something=you',
+  'http://www.example.com/mypage.html?crcat=test&crsource=test&crkw=buy-a-loteasy',
+  'http://example.com/path?name=Branch&products=[Journeys,Email,Universal%20Ads]interact',
+  'https://192.168.1.123?something=nothing&pro=[23]'
 ]
 
 const $getURL = [
