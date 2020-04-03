@@ -21,7 +21,7 @@ export const tests = []
 const t = (f) => tests.push(f)
 
 t(() => bloodySunday(new Date('0001-01-01')) === 'Monday')
-t(() => bloodySunday(new Date('0001-01-02')) === 'Thuesday')
+t(() => bloodySunday(new Date('0001-01-02')) === 'Tuesday')
 t(() => bloodySunday(new Date('0001-01-03')) === 'Wednesday')
 t(() => bloodySunday(new Date('0001-01-04')) === 'Thursday')
 t(() => bloodySunday(new Date('0001-01-05')) === 'Friday')
