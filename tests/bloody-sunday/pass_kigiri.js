@@ -25,7 +25,7 @@ const dayOfTheYear = (d) => {
 const daysMap = [
   'Saturday',
   'Monday',
-  'Thuesday',
+  'Tuesday',
   'Wednesday',
   'Thursday',
   'Friday',
