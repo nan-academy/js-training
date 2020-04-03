@@ -77,7 +77,6 @@ const seconds = (date, form) =>
 const format = (date, form) => {
   let result = form.split(/[^A-Za-z]/)
   for (let i = 0; i < result.length; i++) {
-    // console.log(result[i])
     if (result[i].includes('y')) form = form.replace(/y+/, year(date, form))
     if (result[i].includes('G')) form = form.replace(/G+/, era(date, form))
     if (result[i].includes('M')) form = form.replace(/M+/, monthF(date, form))
