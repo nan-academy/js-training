@@ -8,11 +8,7 @@ const dayOfTheYear = (d) => {
   let i = -1,
     total = d.getDate()
   while (++i < m) {
-    if (i === 1) {
-      total += isLeapYear(d) ? 29 : 28
-    } else {
-      total += i % 2 ? 30 : 31
-    }
+    total += i === 1 ? 28 + isLeapYear(d) : 31 - (i < 7 == i % 2)
   }
   return total
 }
