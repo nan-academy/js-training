@@ -12,12 +12,13 @@ const dayOfTheYear = (date) => {
   let count = 0
 
   for (let i = 0; i < month; i++) {
-    if (i == 1) {
+    if (i === 1) {
       count += countLeapYears(date) ? 29 : 28
     } else {
-      count += i % 2 == 0 ? 31 : 30
+      count += (i % 2 === 0 && i <= 6) || (i % 2 !== 0 && i > 6) ? 31 : 30
     }
   }
   count += day
+  console.log(count)
   return count
 }

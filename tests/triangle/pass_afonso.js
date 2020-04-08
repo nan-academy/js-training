@@ -6,6 +6,5 @@ const triangle = (char, nbr) => {
       result += '\n'
     }
   }
-  console.log(result)
   return result
 }
