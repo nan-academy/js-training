@@ -21,7 +21,7 @@ const bloodySunday = (date) => {
     case 1:
       return 'Monday'
     case 2:
-      return 'Thuesday'
+      return 'Tuesday'
     case 3:
       return 'Wednesday'
     case 4:

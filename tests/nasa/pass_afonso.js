@@ -15,6 +15,5 @@ const nasa = (n) => {
       result += ' '
     }
   }
-  console.log(result)
   return result
 }
