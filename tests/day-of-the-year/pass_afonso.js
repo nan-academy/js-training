@@ -19,6 +19,5 @@ const dayOfTheYear = (date) => {
     }
   }
   count += day
-  console.log(count)
   return count
 }
