@@ -15,21 +15,6 @@ Create 3 functions that works like the `.filter`, `.map` and `.reduce` array met
 - https://devdocs.io/javascript/global_objects/array/map
 - https://devdocs.io/javascript/global_objects/array/reduce
 
-*/
-
-const object = {
-  firstName: 'Cassie',
-  lastName: 'Hayes',
-  age: 23,
-  codingLng: ['Prolog', 'C++', 'Assembly', 'JS', 'Shell', 'C', 'Go'],
-  jobs: ['Uni-Partner', 'M-ITI'],
-  computer: {
-    brand: 'DELL',
-    model: 'XPS 13',
-    OS: 'Linux',
-  },
-}
-
 // /*/ // ⚡
 
 // /*/ // ⚡
@@ -43,13 +28,13 @@ const isObj = (v) => v && (v.constructor === Object || !v.constructor)
 const validate = ({ eq }, obj, ...a) =>
   Object.keys(obj).length == a.length &&
   a.every((prop) => obj.hasOwnProperty(prop)) &&
-  a.every((prop) => eq(obj[prop], object[prop.replace(/\w+_/, '')]))
+  a.every((prop) => eq(obj[prop], $1[prop.replace(/\w+_/, '')]))
 
 // filter values
 t((_) =>
   validate(
     _,
-    filterValues(object, (v) => isString(v)),
+    filterValues($1, (v) => isString(v)),
     'firstName',
     'lastName'
   )
@@ -57,7 +42,7 @@ t((_) =>
 t((_) =>
   validate(
     _,
-    filterValues(object, (v) => isArray(v)),
+    filterValues($1, (v) => isArray(v)),
     'codingLng',
     'jobs'
   )
@@ -65,7 +50,7 @@ t((_) =>
 t((_) =>
   validate(
     _,
-    filterValues(object, (v) => /a/.test(v)),
+    filterValues($1, (v) => /a/.test(v)),
     'firstName',
     'lastName',
     'jobs'
@@ -75,25 +60,23 @@ t((_) =>
 // map value
 t(({ eq }) =>
   eq(
-    mapValues(object, (ele) => (isString(ele) ? `category_2_${ele}` : ele)),
-    $1
+    mapValues($1, (ele) => (isString(ele) ? `category_2_${ele}` : ele)),
+    $2
   )
 )
 t(({ eq }) =>
   eq(
-    mapValues(object, (ele) =>
+    mapValues($1, (ele) =>
       isObj(ele) ? mapValues(ele, (v) => `ASPEC_${v}`) : ele
     ),
-    $2
+    $3
   )
 )
 
 // reduce value
 t(({ eq }) =>
   eq(
-    reduceValues(object, (acc, cr) =>
-      isString(cr) ? acc.concat(', ', cr) : acc
-    ),
+    reduceValues($1, (acc, cr) => (isString(cr) ? acc.concat(', ', cr) : acc)),
     'Cassie, Hayes'
   )
 )
@@ -102,8 +85,20 @@ t(() => reduceValues({ a: 1, b: 2, c: 3 }, (acc, cr) => acc + cr, 3) === 9)
 
 Object.freeze(tests)
 
-const $1 = { ...object }
-const $2 = { ...object }
-$1.firstName = 'category_2_Cassie'
-$1.lastName = 'category_2_Hayes'
-$2.computer = { brand: 'ASPEC_DELL', model: 'ASPEC_XPS 13', OS: 'ASPEC_Linux' }
+const $1 = {
+  firstName: 'Cassie',
+  lastName: 'Hayes',
+  age: 23,
+  codingLng: ['Prolog', 'C++', 'Assembly', 'JS', 'Shell', 'C', 'Go'],
+  jobs: ['Uni-Partner', 'M-ITI'],
+  computer: {
+    brand: 'DELL',
+    model: 'XPS 13',
+    OS: 'Linux',
+  },
+}
+const $2 = { ...$1 }
+const $3 = { ...$1 }
+$2.firstName = 'category_2_Cassie'
+$2.lastName = 'category_2_Hayes'
+$3.computer = { brand: 'ASPEC_DELL', model: 'ASPEC_XPS 13', OS: 'ASPEC_Linux' }
