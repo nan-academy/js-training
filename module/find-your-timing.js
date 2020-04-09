@@ -5,7 +5,7 @@ export const exercises = {
   'letter-space-number': { feedback: true },
   'vowel-dots': { feedback: true },
   'ion-out': { feedback: true },
-
+  'group-price' : { feedback: true },
   // date
   'count-leap-years': { feedback: true },
   'day-of-the-year': { feedback: true },
