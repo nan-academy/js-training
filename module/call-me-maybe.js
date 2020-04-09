@@ -1,9 +1,9 @@
 export const next = 'object'
 export const exercises = {
-  map: { feedback: true } // each / map
+  map: { feedback: true }, // each / map
   // filter / reject / partition
   // fold / foldr / reduce
-  // every / some
+  every: { feedback: true }, // some
   // chunk
   // curry
 }
