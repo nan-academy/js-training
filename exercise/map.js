@@ -6,8 +6,8 @@
 Create an array named 'arr2' that contains the values of 'arr1'
 with the following modifications applied to each of the values:
 1) They have to be multiplied by 2
-2) Then the results have to be substrated by 4
-3) finally, the negative values have to be replaced by 0
+2) Then the results have to be subtracted by 4
+3) finally, the negative values have to be replaced by null
 
 then do the same with arrRandom1 by returning arrRandom2
 
