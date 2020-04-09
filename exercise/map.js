@@ -42,17 +42,9 @@ t(() => arr2[4] === check(arr1[4]))
 
 t(() => {
   for (let i of arrRandom1) {
-    if (arrRandom1[i] >= 2) {
-      if (arrRandom2[i] !== check(arrRandom1[i])) {
-        return false
-      }
-    }
-    if (arrRandom1[i] < 2) {
-      if (arrRandom2[i] !== null) {
-        return false
-      }
-    }
-
+    if (arrRandom1[i] >= 2)
+      if (arrRandom2[i] !== check(arrRandom1[i])) return false
+    if (arrRandom1[i] < 2) if (arrRandom2[i] !== null) return false
     return true
   }
 })
