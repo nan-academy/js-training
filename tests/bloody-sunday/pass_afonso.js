@@ -9,7 +9,6 @@ const bloodySunday = (date) => {
   s.setFullYear(1, 0, 1)
 
   let nbr = 1
-  console.log('s', s.toString(), 'd', d.toString())
   while (s.getTime() !== d.getTime()) {
     s.setDate(s.getDate() + 1)
     nbr++
