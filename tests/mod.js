@@ -37,6 +37,7 @@ for (const exInfo of await Deno.readdir('exercise')) {
     const result = await test({
       api,
       name: `${baseName}/${info.name}`,
+      timeout: 200,
       failFast: true,
       code: `${parts[0]}// /*/ // ⚡\n${code}// /*/ // ⚡\n${parts[2]}`
     })
