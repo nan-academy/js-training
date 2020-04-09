@@ -71,7 +71,7 @@ t((_) =>
     _,
     mapKeys(
       filterKeys($1, (k) => k === 'jobs'),
-      (k) => 'previous_jobs'
+      (k) => `previous_${k}`
     ),
     'previous_jobs'
   )
