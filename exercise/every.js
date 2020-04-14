@@ -3,7 +3,8 @@
 
 ### Instruction
 
-Create two boolean variables called `len1` and `len2` that are set to `true` if in
+Create two boolean variables called `len1` and `len2`
+Those variables will return `true` if in
 the array `arr1` and `arr2`, respectively, every string has at least 5 characters.
 
 Do the same with `arrRand1` and `arrRand2` by returning `lenRand1` and `lenRand2`.
