@@ -19,24 +19,28 @@ You will have a small database to help with the groceries!!
 - https://devdocs.io/javascript/global_objects/array/map
 - https://devdocs.io/javascript/global_objects/array/reduce
 
+
 */
+
 const groceriesCart = {
   tomato: 200,
   vinegar: 80,
-  sugar: 100,
   oil: 50,
-  onion: 200,
+  onion: 220,
   garlic: 22,
-  paprika: 4,
 }
 
-// the database has the calories, .... per 100 grams
+// small database with nutrition facts, per 100 grams
 // prettier-ignore
 const nutritionDB = {
   tomato: { calories: 18, protein: 0.9, carbs: 3.9, sugar: 2.6, fiber: 1.2, fat: 0.2 },
   vinegar: { calories: 20, protein: 0.04, carbs: 0.6, sugar: 0.4, fiber: 0, fat: 0 },
-  oil: { calories: 884, protein: 123, carbs: 123, sugar: 123, fiber: 123, fat: 100 },
-  onion: { calories: 40, protein: 0, carbs: 0, sugar: 0, fiber: 0, fat: 100 },
+  oil: { calories: 48, protein: 0, carbs: 0, sugar: 123, fiber: 0, fat: 151 },
+  onion: { calories: 0, protein: 1, carbs: 9, sugar: 0, fiber: 0, fat: 0 },
+  garlic: { calories: 149, protein: 6.4, carbs: 33, sugar: 1, fiber: 2.1, fat: 0.5 },
+  paprika: { calories: 282, protein: 14.14, carbs: 53.99, sugar: 1, fiber: 0, fat: 12.89 },
+  sugar: { calories: 387, protein: 0, carbs: 100, fiber: 0, fat: 0 },
+  orange: { calories: 49, protein: 0.9, carbs: 13, fiber: 0.2, fat: 0.1 },
 }
 
 // /*/ // ⚡
@@ -46,68 +50,49 @@ export const tests = []
 const t = (f) => tests.push(f)
 
 // filter values
-t(({ eq }) =>
-  eq(
-    filterValues(groceriesCart, (v) => v < 80),
-    {
-      oil: 50,
-      garlic: 22,
-      paprika: 4,
-    }
-  )
-)
-t(({ eq }) =>
-  eq(
-    filterValues(groceriesCart, (v) => v === 100),
-    { sugar: 100 }
-  )
-)
-t(({ eq }) =>
-  eq(
-    filterValues(
-      nutritionDB,
-      (v) => Object.entries(filterValues(v, (ele) => ele === 0)).length !== 0
-    ),
-    $2
-  )
-)
+t(({ eq }) => eq($filter1, { oil: 50, garlic: 22 }))
+t(({ eq }) => eq($filter2, { onion: 220 }))
+t(({ eq }) => eq($filter3, $2))
 
 // map value
-t(({ eq }) =>
-  eq(
-    mapValues(
-      filterValues(groceriesCart, (v) => v === 200),
-      (ele) => ele - 100
-    ),
-    { tomato: 100, onion: 100 }
-  )
-)
-t(({ eq }) =>
-  eq(
-    mapValues(groceriesCart, (ele) => ele + 100),
-    $1
-  )
-)
+t(({ eq }) => eq($map1, { tomato: 100, onion: 120 }))
+t(({ eq }) => eq($map2, $1))
 
 // reduce value
-t(() => reduceValues(groceriesCart, (acc, cr) => acc + cr) === 656)
+t(() => reduceValues(groceriesCart, (acc, cr) => acc + cr) === 572)
 t(() => reduceValues({ a: 1, b: 2, c: 3 }, (acc, cr) => acc + cr) === 6)
 t(() => reduceValues({ a: 1, b: 2, c: 3 }, (acc, cr) => acc + cr, 3) === 9)
 
 Object.freeze(tests)
 
+// filter values
+const $filter1 = filterValues(groceriesCart, (v) => v < 80)
+const $filter2 = filterValues(groceriesCart, (v) => v === 220)
+const $filter3 = filterValues(
+  nutritionDB,
+  (v) => Object.entries(filterValues(v, (ele) => ele === 0)).length !== 0
+)
+
+// map value
+const $map1 = mapValues(
+  filterValues(groceriesCart, (v) => v >= 200),
+  (ele) => ele - 100
+)
+const $map2 = mapValues(groceriesCart, (ele) => ele + 100)
+
 const $1 = {
   tomato: 300,
   vinegar: 180,
-  sugar: 200,
   oil: 150,
-  onion: 300,
+  onion: 320,
   garlic: 122,
-  paprika: 104,
 }
 
 // prettier-ignore
 const $2 = {
-  onion: { calories: 40, carbs: 0, fat: 100, fiber: 0, protein: 0, sugar: 0 },
-  vinegar: { calories: 20, carbs: 0.6, fat: 0, fiber: 0, protein: 0.04, sugar: 0.4 },
+  vinegar: { calories: 20, protein: 0.04, carbs: 0.6, sugar: 0.4, fiber: 0, fat: 0 },
+  oil: { calories: 48, protein: 0, carbs: 0, sugar: 123, fiber: 0, fat: 151 },
+  onion: { calories: 0, protein: 1, carbs: 9, sugar: 0, fiber: 0, fat: 0 },
+  paprika: { calories: 282, protein: 14.14, carbs: 53.99, sugar: 1, fiber: 0, fat: 12.89 },
+  sugar: { calories: 387, protein: 0, carbs: 100, fiber: 0, fat: 0 }
 }
