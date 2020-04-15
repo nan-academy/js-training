@@ -3,10 +3,12 @@
 
 ### Instruction
 
-Create 3 functions that works like the `.filter`, `.map` and `.reduce` array method but for entries of an objects
+Finnish your groceries!!!
+
+Create 3 functions that works like the `.filter`, `.map` and `.reduce` array method but for the entries of the grocery cart
 - `filterEntries` filters using both key and value
 - `mapEntries` changes either the key or the value or both
-- `reduceEntries` reducing each entries of an object
+- `reduceEntries` that will give you the average of calories, proteins, ..., of all items in your grocery cart
 
 
 ### Notions
@@ -14,6 +16,27 @@ Create 3 functions that works like the `.filter`, `.map` and `.reduce` array met
 - https://devdocs.io/javascript/global_objects/array/filter
 - https://devdocs.io/javascript/global_objects/array/map
 - https://devdocs.io/javascript/global_objects/array/reduce
+
+*/
+
+const groceriesCart = {
+  oil: 500,
+  onion: 230,
+  garlic: 220,
+  paprika: 480,
+}
+
+// the database has the calories, .... per 100 grams
+// prettier-ignore
+const nutritionDB = {
+  tomato: { calories: 18, protein: 0.9, carbs: 3.9, sugar: 2.6, fiber: 1.2, fat: 0.2 },
+  vinegar: { calories: 20, protein: 0.04, carbs: 0.6, sugar: 0.4, fiber: 0, fat: 0 },
+  oil: { calories: 884, protein: 123, carbs: 123, sugar: 123, fiber: 123, fat: 100 },
+  onion: { calories: 40, protein: 0, carbs: 0, sugar: 0, fiber: 0, fat: 100 },
+  garlic: { calories: 40, protein: 0, carbs: 0, sugar: 0, fiber: 0, fat: 100 },
+  sugar: { calories: 400, protein: 23, carbs: 0, sugar: 100, fiber: 0, fat: 100 },
+  paprika: { calories: 230, protein: 12.2, carbs: 2.1, sugar: 0, fiber: 0, fat: 23.1 },
+}
 
 // /*/ // ⚡
 
@@ -24,64 +47,50 @@ const t = (f) => tests.push(f)
 // filter entries
 t(({ eq }) =>
   eq(
-    filterEntries($3, ([k, v]) => k == 'lastName' || v == 'Sonia'),
-    { firstName: 'Sonia', lastName: 'Silva' }
+    filterEntries(groceriesCart, ([k, v]) => k == 'garlic' || v == 480),
+    { garlic: 220, paprika: 480 }
   )
 )
 t(({ eq }) =>
   eq(
-    filterEntries($3, ([k, v]) => /age/.test(k) || /C/g.test(v)),
-    { age: 20, codingLng: ['Assembly', 'C'] }
+    filterEntries(groceriesCart, ([k, v]) => /oil/.test(k) || v === 230),
+    { oil: 500, onion: 230 }
   )
 )
 
 // map entries
 t(({ eq }) =>
   eq(
-    mapEntries({ a: 'b', b: 'c', c: 'a' }, ([k, v]) => [
-      `prefix_${k}`,
-      `prefix_${v}`,
-    ]),
-    { prefix_a: 'prefix_b', prefix_b: 'prefix_c', prefix_c: 'prefix_a' }
+    mapEntries(groceriesCart, ([k, v]) => [`✔️${k}`, v - v]),
+    $1
   )
 )
 t(({ eq }) =>
   eq(
     mapEntries(
-      filterEntries($3, ([k, v]) => typeof v == 'string'),
-      ([k, v]) => [`prefix_${k}`, `prefix_${v}`]
+      filterEntries(groceriesCart, ([k, v]) => k === 'onion'),
+      ([k, v]) => [`✔️${k}`, v - 100]
     ),
-    { prefix_firstName: 'prefix_Sonia', prefix_lastName: 'prefix_Silva' }
+    { '✔️onion': 130 }
   )
 )
 
 // reduce entries
-t(({ eq }) =>
-  eq(
-    reduceEntries($1, (acc, cr) => (acc += Math.max(...cr[1]) / 3), 0),
-    12.333333333333332
-  )
-)
-t(({ eq }) =>
-  eq(
-    reduceEntries($2, (acc, cr) => acc.push(Math.round(cr[1])) && acc, []),
-    [1, 1, 34]
-  )
-)
+t(({ eq }) => eq(reduceEntries(groceriesCart), $2))
 
 Object.freeze(tests)
 
-const $1 = { a: [1, 2, 3], b: [22], c: [12, 2] }
-const $2 = { a: 1.23, b: 0.92, c: 33.999 }
-const $3 = {
-  firstName: 'Sonia',
-  lastName: 'Silva',
-  age: 20,
-  codingLng: ['Assembly', 'C'],
-  jobs: ['IBM', 'cisco'],
-  computer: {
-    brand: 'Lenovo',
-    model: 'ThinkPad X390',
-    OS: 'Linux',
-  },
+const $1 = {
+  '✔️oil': 0,
+  '✔️onion': 0,
+  '✔️garlic': 0,
+  '✔️paprika': 0,
+}
+
+// prettier-ignore
+const $2 = {
+  garlic: { calories: 88, carbs: 0, fat: 220, fiber: 0, protein: 0, sugar: 0},
+  oil: { calories: 4420, carbs: 615, fat: 500, fiber: 615, protein: 615, sugar: 615 },
+  onion: { calories: 92, carbs: 0, fat: 230, fiber: 0, protein: 0, sugar: 0 },
+  paprika: { calories: 1104, carbs: 10.08, fat: 110.88, fiber: 0, protein: 58.56, sugar: 0 }
 }

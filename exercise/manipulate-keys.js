@@ -3,10 +3,12 @@
 
 ### Instruction
 
-Create 3 functions that works like the `.filter`, `.map` and `.reduce` array method but for the keys of an objects
-- `filterKeys` filters the keys
-- `mapKeys` changes the keys
-- `reduceKeys` reducing each key of an object
+I do not want onions. I want apples!!!
+
+Create 3 functions that works like the `.filter`, `.map` and `.reduce` array method but for the keys of your grocery cart.
+- `filterKeys` filters the name of items you have
+- `mapKeys` changes the name of items you have
+- `reduceKeys` reducing you grocery cart
 
 
 ### Notions
@@ -15,112 +17,125 @@ Create 3 functions that works like the `.filter`, `.map` and `.reduce` array met
 - https://devdocs.io/javascript/global_objects/array/map
 - https://devdocs.io/javascript/global_objects/array/reduce
 
+*/
+
+const groceriesCart = {
+  vinegar: 80,
+  sugar: 100,
+  oil: 50,
+  onion: 200,
+  garlic: 22,
+  paprika: 4,
+}
+
+// the database has the calories, .... per 100 grams
+// prettier-ignore
+const nutritionDB = {
+  tomato: { calories: 18, protein: 0.9, carbs: 3.9, sugar: 2.6, fiber: 1.2, fat: 0.2 },
+  vinegar: { calories: 20, protein: 0.04, carbs: 0.6, sugar: 0.4, fiber: 0, fat: 0 },
+  oil: { calories: 884, protein: 123, carbs: 123, sugar: 123, fiber: 123, fat: 100 },
+  onion: { calories: 40, protein: 0, carbs: 0, sugar: 0, fiber: 0, fat: 100 },
+  garlic: { calories: 40, protein: 0, carbs: 0, sugar: 0, fiber: 0, fat: 100 },
+}
+
 // /*/ // ⚡
 
 // /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 
-const validate = ({ eq }, obj, ...a) =>
+const validate = (obj, ...a) =>
   Object.keys(obj).length == a.length &&
-  a.every((prop) => obj.hasOwnProperty(prop)) &&
-  a.every((prop) => eq(obj[prop], $1[prop.replace(/\w+_/, '')]))
+  a.every((prop) => obj.hasOwnProperty(prop))
 
 // filter keys
-t((_) =>
+t(() =>
   validate(
-    _,
-    filterKeys($1, (k) => k.length <= 6),
-    'jobs',
-    'age'
+    filterKeys(groceriesCart, (k) => k.length <= 6),
+    'sugar',
+    'oil',
+    'onion',
+    'garlic'
   )
 )
-t((_) =>
+t(() =>
   validate(
-    _,
-    filterKeys($1, (k) => /Name/.test(k)),
-    'firstName',
-    'lastName'
+    filterKeys(groceriesCart, (k) => /onion/.test(k)),
+    'onion'
   )
 )
-
-t((_) =>
+t(() =>
   validate(
-    _,
-    filterKeys($1, (k) => /firstName|jobs/.test(k)),
-    'firstName',
-    'jobs'
+    filterKeys(nutritionDB, (k) => /onion|garlic/.test(k)),
+    'onion',
+    'garlic'
   )
 )
 
 // map keys
-t((_) =>
-  validate(
-    _,
-    mapKeys($1, (k) => `failed_${k}`),
-    'failed_firstName',
-    'failed_lastName',
-    'failed_age',
-    'failed_codingLng',
-    'failed_jobs',
-    'failed_computer'
+t(({ eq }) =>
+  eq(
+    mapKeys(groceriesCart, (k) => `✔️${k}`),
+    $1
   )
 )
-t((_) =>
-  validate(
-    _,
+t(({ eq }) =>
+  eq(
     mapKeys(
-      filterKeys($1, (k) => k === 'jobs'),
-      (k) => `previous_${k}`
+      filterKeys(groceriesCart, (k) => k === 'onion'),
+      (k) => (k = 'orange')
     ),
-    'previous_jobs'
+    { orange: 200 }
   )
 )
-t((_) =>
-  validate(
-    _,
+t(({ eq }) =>
+  eq(
     mapKeys(
-      filterKeys($1, (k) => k.length >= 8),
-      (k) => `version1_${k}`
+      filterKeys(nutritionDB, (k) => k === 'tomato'),
+      (k) => `small_${k}`
     ),
-    'version1_firstName',
-    'version1_lastName',
-    'version1_codingLng',
-    'version1_computer'
+    $2
   )
 )
 
 // reduce keys
 t(({ eq }) =>
   eq(
-    reduceKey($1, (acc, cr) => acc.concat(', ', cr)),
-    'firstName, lastName, age, codingLng, jobs, computer'
+    reduceKey(groceriesCart, (acc, cr) => acc.concat(', ', cr)),
+    'vinegar, sugar, oil, onion, garlic, paprika'
   )
 )
 t(({ eq }) =>
   eq(
-    reduceKey($1, (acc, cr) => (acc += (cr.length <= 4) ^ 1), 0),
-    4
+    reduceKey(groceriesCart, (acc, cr) => (acc += (cr.length <= 4) ^ 1), 0),
+    5
   )
 )
 t(({ eq }) =>
   eq(
-    reduceKey($1, (acc, cr) => (acc += (cr.length <= 4) & 1), 0),
-    2
+    reduceKey(groceriesCart, (acc, cr) => (acc += (cr.length <= 4) & 1), 0),
+    1
   )
 )
 
 Object.freeze(tests)
 
 const $1 = {
-  firstName: 'Luis',
-  lastName: 'Archibald',
-  age: 36,
-  codingLng: ['Prolog', 'SQL', 'Shell', 'C'],
-  jobs: ['Amazon'],
-  computer: {
-    brand: 'HP',
-    model: 'Elite Dragonfly',
-    OS: 'Microsoft',
+  '✔️vinegar': 80,
+  '✔️sugar': 100,
+  '✔️oil': 50,
+  '✔️onion': 200,
+  '✔️garlic': 22,
+  '✔️paprika': 4,
+}
+
+const $2 = {
+  small_tomato: {
+    calories: 18,
+    protein: 0.9,
+    carbs: 3.9,
+    sugar: 2.6,
+    fiber: 1.2,
+    fat: 0.2,
   },
 }
