@@ -1,5 +1,7 @@
 export const next = 'async'
 export const exercises = {
+  remove: { feedback: true },
+  invert: { feedback: true },
   // invert { a: 1 } -> { 1: 'a' }
   // pick / remove
   'manipulate-values': { feedback: true }, // mapValue / filterValue / reduceValue on objects
