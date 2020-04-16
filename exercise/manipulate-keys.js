@@ -105,13 +105,7 @@ const $1 = {
   '✔️paprika': 4,
 }
 
+// prettier-ignore
 const $2 = {
-  small_tomato: {
-    calories: 18,
-    protein: 0.9,
-    carbs: 3.9,
-    sugar: 2.6,
-    fiber: 1.2,
-    fat: 0.2,
-  },
+  small_tomato: { calories: 18, protein: 0.9, carbs: 3.9, sugar: 2.6, fiber: 1.2, fat: 0.2 }
 }
