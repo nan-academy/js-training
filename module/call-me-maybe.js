@@ -4,10 +4,15 @@ export const exercises = {
   'do-your-own-map': { feedback: true },
   'for-each': { feedback: true },
   'do-your-own-for-each': { feedback: true },
-  // filter / reject / partition
+  filter: { feedback: true },
+  'do-your-own-filter': { feeback: true },
+  // reject / partition
   // fold / foldr / reduce
-  every: { feedback: true }, // some
+  every: { feedback: true },
   'do-your-own-every': { feedback: true },
+  curry2: { feedback: true },
+  some: { feedback: true },
+  'do-your-own-some': { feedback: true },
   // chunk
   // curry
 }
