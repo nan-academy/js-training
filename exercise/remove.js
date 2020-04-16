@@ -34,7 +34,10 @@ const theObject = {
 // /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
-t(({ eq }) => eq(remove(theObject, ['date_of_creation']), $newObject))
+
+t(({ eq }) =>
+  eq(remove(theObject, 'date_of_creation', 'you_can_use'), $newObject)
+)
 t(({ eq }) => eq(remove($1, ['heLikes']), $new1))
 t(({ eq }) => eq(theObject.difficulty, 8))
 t(({ eq }) => eq(theObject.you_can_use, $newObject.you_can_use))
@@ -46,15 +49,6 @@ Object.freeze(tests)
 const $newObject = {
   name: 'brackets',
   difficulty: 8,
-  you_can_use: [
-    'strconv.Atoi',
-    'os.*',
-    'append',
-    'fmt.*',
-    'len',
-    '--cast',
-    'strings.Split',
-  ],
 }
 const $1 = {
   name: 'Rick',

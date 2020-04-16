@@ -1,6 +1,8 @@
-const remove = (obj, prop) => {
-  if (prop in obj) {
-    Reflect.deleteProperty(obj, prop)
+const remove = (obj, ...prop) => {
+  if (obj.hasOwnProperty(...prop)) {
+    for (let a of prop) {
+      Reflect.deleteProperty(obj, a)
+    }
     return obj
   } else {
     return obj
