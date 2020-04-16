@@ -20,7 +20,6 @@ You will have a small database to help you with the groceries.
 - https://devdocs.io/javascript/global_objects/array/map
 - https://devdocs.io/javascript/global_objects/array/reduce
 
-
 */
 
 const groceriesCart = {

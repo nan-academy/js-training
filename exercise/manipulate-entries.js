@@ -10,7 +10,6 @@ Create 3 functions that works like the `.filter`, `.map` and `.reduce` array met
 - `mapEntries` changes either the key or the value or both.
 - `reduceEntries` that will give you the average of calories, proteins, ..., of all items in your grocery cart.
 
-
 ### Notions
 
 - https://devdocs.io/javascript/global_objects/array/filter

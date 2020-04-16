@@ -10,7 +10,6 @@ Create 3 functions that works like the `.filter`, `.map` and `.reduce` array met
 - `mapKeys` changes the name of the items you have.
 - `reduceKeys` reducing you grocery cart.
 
-
 ### Notions
 
 - https://devdocs.io/javascript/global_objects/array/filter
