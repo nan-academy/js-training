@@ -1,14 +1,14 @@
 /*
 ## manipulate-Keys
 
-### Instruction
+### Instructions
 
 Finnish your groceries!!!
 
-Create 3 functions that works like the `.filter`, `.map` and `.reduce` array method but for the entries of the grocery cart
-- `filterEntries` filters using both key and value
-- `mapEntries` changes either the key or the value or both
-- `reduceEntries` that will give you the average of calories, proteins, ..., of all items in your grocery cart
+Create 3 functions that works like the `.filter`, `.map` and `.reduce` array method but for the entries of the grocery cart.
+- `filterEntries` filters using both key and value.
+- `mapEntries` changes either the key or the value or both.
+- `reduceEntries` that will give you the average of calories, proteins, ..., of all items in your grocery cart.
 
 
 ### Notions
