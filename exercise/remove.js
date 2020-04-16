@@ -3,9 +3,11 @@
 
 ### Instructions
 
-In this exercise you need to be able to remove and modify a property from a given object.
-You will need to make sure that the name doesn't change, the `date_of_creation` property is removed, 
-the difficulty is changed to 8 and `strconv.Itoa` is substituted by `fmt.*` and `len`.
+Create a function `remove` that takes an object and a key and is able to remove a certain key 
+from an object.
+You also need to be able to modify properties.
+You will need to make sure that the name doesn't change, the difficulty 
+is changed to 8 and `strconv.Itoa` is substituted by `fmt.*` and `len`.
 
 ### Notions
 
@@ -32,13 +34,19 @@ const theObject = {
 // /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
-const size = Object.keys(theObject).length
-
-t(() => size === 3)
+t(({ eq }) => eq(remove(theObject, ['date_of_creation']), $newObject))
+t(({ eq }) => eq(remove($1, ['heLikes']), $new1))
 t(({ eq }) => eq(theObject.difficulty, 8))
-t(({ eq }) => eq(typeof theObject.date_of_creation, 'undefined'))
-t(({ eq }) =>
-  eq(theObject.you_can_use, [
+t(({ eq }) => eq(theObject.you_can_use, $newObject.you_can_use))
+t(({ fail }) => fail(() => (theObject.name.update = 'other name')))
+t(() => theObject.name !== 'other name')
+
+Object.freeze(tests)
+
+const $newObject = {
+  name: 'brackets',
+  difficulty: 8,
+  you_can_use: [
     'strconv.Atoi',
     'os.*',
     'append',
@@ -46,9 +54,16 @@ t(({ eq }) =>
     'len',
     '--cast',
     'strings.Split',
-  ])
-)
-t(({ fail }) => fail(() => (theObject.name.update = 'other name')))
-t(() => theObject.name !== 'other name')
-
-Object.freeze(tests)
+  ],
+}
+const $1 = {
+  name: 'Rick',
+  age: 47,
+  country: 'US',
+  heLikes: ['computers', 'beach', 'skate', 'ice cream'],
+}
+const $new1 = {
+  name: 'Rick',
+  age: 47,
+  country: 'US',
+}
