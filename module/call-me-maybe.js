@@ -11,6 +11,7 @@ export const exercises = {
   every: { feedback: true },
   'do-your-own-every': { feedback: true },
   curry2: { feedback: true },
+  'do-your-own-curry': { feedback: true },
   some: { feedback: true },
   'do-your-own-some': { feedback: true },
   // chunk
