@@ -3,16 +3,25 @@
 
 ### Instructions
 
-Create a Filter function that takes an array as first argument, a function as second,
+1) Create a `Filter` function that takes an array as first argument, a function as second,
 and that works like the method .filter
 
 The use of `filter` is forbidden for this exercise
 
+2) Create a `Reject` function that takes an array as first argument, a function as second,
+and that works like the reject function from lodash.
+
+3) Create a `Partition` function that takes an array as first argument, a function as second,
+and that works like the partition function from lodash.
+
 ### Notions
 
 -filter
-
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+-reject
+https://lodash.com/docs/4.17.15#reject
+-partition
+https://lodash.com/docs/4.17.15#partition
 
 */
 
@@ -53,12 +62,40 @@ t(({ eq }) => eq(Filter(arr1, check2), arr1.filter(check2)))
 t(({ eq }) => eq(Filter(arr1, check3), arr1.filter(check3)))
 t(({ eq }) => eq(Filter(arr1, check4), arr1.filter(check4)))
 t(({ eq }) => eq(Filter(arr1, check5), arr1.filter(check5)))
-t(({ eq }) => eq(Filter(arr1, check6), arr1.filter(check6)))
-t(({ eq }) => eq(Filter(arr1, check7), arr1.filter(check7)))
-t(({ eq }) => eq(Filter(arr1, check8), arr1.filter(check8)))
-t(({ eq }) => eq(Filter(arr1, check9), arr1.filter(check9)))
-t(({ eq }) => eq(Filter(arr1, check10), arr1.filter(check10)))
 
+t(({ eq }) => eq(Reject(arr1, check1), [-95, 15, 3, 5, 33, 45]))
+t(({ eq }) => eq(Reject(arr1, check2), [10, -10, 20, -95, 86, 2, 5, 32, 950]))
+t(({ eq }) => eq(Reject(arr1, check3), [86, 2, 3, 32, 33, 66]))
+t(({ eq }) => eq(Reject(arr1, check4), [-95, 15, 86, 2, 3, 5, 32, 33, 45, 66]))
+t(({ eq }) =>
+  eq(Reject(arr1, check5), [10, -10, 20, -95, 15, 86, 2, 3, 5, 32, 33, 45, 950])
+)
+t(({ eq }) =>
+  eq(Reject(arr1, check9), [10, -10, 20, -95, 86, 2, 3, 5, 32, 33, 950, 66])
+)
+t(({ eq }) => eq(Reject(arr1, check10), [-95, 15, 86, 2, 3, 5, 32, 33, 45, 66]))
+
+t(({ eq }) =>
+  eq(Partition(arr1, check6), [
+    [10, -10, 20, 450, 950, 150],
+    [-95, 15, 86, 2, 3, 5, 32, 33, 45, 66],
+  ])
+)
+
+t(({ eq }) =>
+  eq(Partition(arr1, check9), [
+    [15, 45, 450, 150],
+    [10, -10, 20, -95, 86, 2, 3, 5, 32, 33, 950, 66],
+  ])
+)
+t(({ eq }) =>
+  eq(Partition(arr1, check10), [
+    [10, -10, 20, 450, 950, 150],
+    [-95, 15, 86, 2, 3, 5, 32, 33, 45, 66],
+  ])
+)
+
+/// those are random tests.
 t(({ eq }) =>
   eq(
     Filter(arrRandom1, randomArrFunctions[0]),
