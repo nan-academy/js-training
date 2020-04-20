@@ -4,10 +4,11 @@
 ### Instruction
 
 Create two boolean variables called `len1` and `len2`
-Those variables will return `true` if in
-the array `arr1` and `arr2`, respectively, every string has at least 5 characters.
+Those variables will return `true` if in the array `arr1` and `arr2`,
+respectively, every string has at least 5 characters.
 
-Do the same with `arrRand1` and `arrRand2` by returning `lenRand1` and `lenRand2`.
+Do the same with `arrRand1` and `arrRand2` by returning
+`lenRand1` and `lenRand2`.
 
 The use of `for` and `while` is forbidden for this exercise.
 

@@ -8,7 +8,7 @@ Create the function Curry that will curry any functions put as argument.
 example:
 
 const Mult2 = (el1,el2) => el1 * el2
-console.log(Mult2(2,2)) // result expected 4
+console.log(Mult2(2,2)) // result epected 4
 
 
 const Mult2Curried = Curry(Mult2)

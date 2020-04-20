@@ -7,7 +7,10 @@ export const exercises = {
   filter: { feedback: true },
   'do-your-own-filter': { feeback: true },
   // reject / partition
-  // fold / foldr / reduce
+  foldl: {feedback: true},
+  foldr: {feedback: true},
+  reduce: { feedback: true },
+  'do-your-own-reduce': { feedback: true },
   every: { feedback: true },
   'do-your-own-every': { feedback: true },
   curry2: { feedback: true },
@@ -15,5 +18,4 @@ export const exercises = {
   some: { feedback: true },
   'do-your-own-some': { feedback: true },
   // chunk
-  // curry
 }
