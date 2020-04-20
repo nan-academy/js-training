@@ -4,9 +4,12 @@
 ### Instruction
 
 Create a function called `sumOrMul` that receives an array and adds or
-multiplies its elements depending if the element is an odd or even number and
-returns the final value. If the element is even you should multiply it,
-otherwise you should add it.
+multiplies its elements depending on whether the element is an odd or an even number.
+
+If the element is even the function should multiply it,
+otherwise it should add it.
+
+The function returns the final value.
 
 Example:
 sumOrMul([1, 2, 3, 4]) = ((1 * 2) + 3) * 4 = 20
