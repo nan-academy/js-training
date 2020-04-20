@@ -28,11 +28,17 @@ const multiplier = (a, b) => a * b
 
 t(() => Reduce(adder, arr1) === arr1.reduce(adder))
 t(() => Reduce(multiplier, arr1) === arr1.reduce(multiplier))
+t(() => Reduce(adder, arr1, 5) === arr1.reduce(adder, 5))
+t(() => Reduce(multiplier, arr1, 6) === arr1.reduce(multiplier, 6))
 
 t(() => Reduce(adder, arr2) === arr2.reduce(adder))
 t(() => Reduce(multiplier, arr2) === arr2.reduce(multiplier))
+t(() => Reduce(adder, arr2, 7) === arr2.reduce(adder, 7))
+t(() => Reduce(multiplier, arr2, 8) === arr2.reduce(multiplier, 8))
 
 t(() => Reduce(adder, randArr) === randArr.reduce(adder))
 t(() => Reduce(multiplier, randArr) === randArr.reduce(multiplier))
+t(() => Reduce(adder, randArr, 9) === randArr.reduce(adder, 9))
+t(() => Reduce(multiplier, randArr, 10) === randArr.reduce(multiplier, 10))
 
 t(({ code }) => !code.includes('reduce'))
