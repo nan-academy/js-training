@@ -1,4 +1,5 @@
-function pick(o, keys) {
-  for (var k in o) keys.includes(k) || delete o[k];
-  return o;
+const pick = (o, keys) => {
+  const result = {}
+  for (var k in o) keys.includes(k) ? (result[k] = o[k]) : {}
+  return result
 }
