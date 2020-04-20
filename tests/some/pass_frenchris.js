@@ -1,1 +1,1 @@
-const Some = (el, nbr) => el.some(nbr)
+const GiveMeSome = (el, fun) => el.some(fun)
