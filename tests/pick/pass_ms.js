@@ -1,5 +1,5 @@
 const pick = (o, keys) => {
   const result = {}
-  for (var k in o) keys.includes(k) ? (result[k] = o[k]) : {}
+  for (let [k, v] of Object.entries(o)) keys.includes(k) ? (result[k] = v) : {}
   return result
 }
