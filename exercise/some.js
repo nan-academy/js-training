@@ -3,12 +3,16 @@
 
 ### Instruction
 
-Create a function called `someThing` that has as parameters an array and a
+Create a function called `GiveMeSome` that has as parameters an array and a
 number and returns whether the array contains the number or not, displaying
 true or false, respectively.
 
 The use of `for`, `while`, `include` and `indexOf` is forbidden for this
 exercise.
+
+### Notions
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
 
  */
 ///*/// ⚡
@@ -30,20 +34,20 @@ for (let i = 0; i < 7; i++) {
 }
 
 const equals10 = (el) => el === 10
-t(() => array1.some(equals10) === someThing(array1, 10))
-t(() => array2.some(equals10) === someThing(array2, 10))
-t(() => array3.some(equals10) === someThing(array3, 10))
+t(() => array1.some(equals10) === GiveMeSome(array1, equals10))
+t(() => array2.some(equals10) === GiveMeSome(array2, equals10))
+t(() => array3.some(equals10) === GiveMeSome(array3, equals10))
 
 const equals55 = (el) => el === 55
-t(() => array1.some(equals55) === someThing(array1, 55))
-t(() => array2.some(equals55) === someThing(array2, 55))
-t(() => array3.some(equals55) === someThing(array3, 55))
+t(() => array1.some(equals55) === GiveMeSome(array1, equals55))
+t(() => array2.some(equals55) === GiveMeSome(array2, equals55))
+t(() => array3.some(equals55) === GiveMeSome(array3, equals55))
 
 let x = randNbr(7)
 const equalsX = (el) => el === x
-t(() => array1.some(equalsX) === someThing(array1, x))
-t(() => array2.some(equalsX) === someThing(array2, x))
-t(() => array3.some(equalsX) === someThing(array3, x))
+t(() => array1.some(equalsX) === GiveMeSome(array1, equalsX))
+t(() => array2.some(equalsX) === GiveMeSome(array2, equalsX))
+t(() => array3.some(equalsX) === GiveMeSome(array3, equalsX))
 
 t(({ code }) => !code.includes('for'))
 t(({ code }) => !code.includes('while'))
