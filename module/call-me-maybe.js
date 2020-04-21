@@ -5,4 +5,5 @@ export const exercises = {
   'for-each': { feedback: true },
   filter: { feedback: true },
   'has-city': { feedback: true },
+  'curry-easy': { feedback: true },
 }
