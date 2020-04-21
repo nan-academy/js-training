@@ -4,7 +4,7 @@
 ### Instruction
 
 Create a function called `GiveMeSome` that has as parameters an array and a
-number and returns whether the array contains the number or not, displaying
+number (not a function) and returns whether the array contains the number or not, displaying
 true or false, respectively.
 
 The use of `for`, `while`, `include` and `indexOf` is forbidden for this
