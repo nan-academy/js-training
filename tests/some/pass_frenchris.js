@@ -1,1 +1,1 @@
-const GiveMeSome = (el, fun) => el.some(fun)
+const GiveMeSome = (el, nbr) => el.some((el) => el === nbr)
