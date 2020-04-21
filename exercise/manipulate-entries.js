@@ -15,6 +15,8 @@ Create 3 functions that works like the `.filter`, `.map` and `.reduce` array met
 - https://devdocs.io/javascript/global_objects/array/filter
 - https://devdocs.io/javascript/global_objects/array/map
 - https://devdocs.io/javascript/global_objects/array/reduce
+- https://devdocs.io/javascript/global_objects/object/entries
+- https://devdocs.io/javascript/global_objects/object/fromentries
 
 */
 

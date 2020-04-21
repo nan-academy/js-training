@@ -4,6 +4,7 @@
 ### Instructions
 
 Go buy groceries!!!
+
 You have a grocery cart with some items you need.
 The items will have a `key` being the name and a `value` that is the amount in grams.
 
@@ -19,6 +20,8 @@ You will have a small database to help you with the groceries.
 - https://devdocs.io/javascript/global_objects/array/filter
 - https://devdocs.io/javascript/global_objects/array/map
 - https://devdocs.io/javascript/global_objects/array/reduce
+- https://devdocs.io/javascript/global_objects/object/entries
+- https://devdocs.io/javascript/global_objects/object/fromentries
 
 */
 
