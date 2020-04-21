@@ -4,6 +4,7 @@ export const exercises = {
   'using-filter': { feedback: true },
   'for-each': { feedback: true },
   filter: { feedback: true },
+  reduce: { feedback: true },
   'sweet-curry': { feedback: true },
   'has-city': { feedback: true },
   'currify': { feedback: true },
