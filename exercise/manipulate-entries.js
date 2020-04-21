@@ -8,7 +8,7 @@ Finnish your groceries!!!
 Create 3 functions that works like the `.filter`, `.map` and `.reduce` array method but for the entries of the grocery cart.
 - `filterEntries` filters using both key and value.
 - `mapEntries` changes either the key or the value or both.
-- `reduceEntries` that will give you the average of calories, proteins, ..., of all items in your grocery cart.
+- `reduceEntries` that will give you the right amount of calories, proteins, ..., of all items in your grocery cart.
 
 ### Notions
 
@@ -35,7 +35,7 @@ const nutritionDB = {
   garlic: { calories: 149, protein: 6.4, carbs: 33, sugar: 1, fiber: 2.1, fat: 0.5 },
   paprika: { calories: 282, protein: 14.14, carbs: 53.99, sugar: 1, fiber: 0, fat: 12.89 },
   sugar: { calories: 387, protein: 0, carbs: 100, fiber: 0, fat: 0 },
-  orange: { calories: 49, protein: 0.9, carbs: 13, fiber: 0.2, fat: 0.1 }
+  orange: { calories: 49, protein: 0.9, carbs: 13, fiber: 0.2, sugar: 9, fat: 0.1 }
 }
 
 // /*/ // ⚡
