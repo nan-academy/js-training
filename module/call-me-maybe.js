@@ -7,6 +7,7 @@ export const exercises = {
   filter: { feedback: true },
   'sweet-curry': { feedback: true },
   'has-city': { feedback: true },
-  'currify': { feedback: true },
+  flow: { feedback: true },
+  currify: { feedback: true },
   'long-words': { feedback: true },
 }
