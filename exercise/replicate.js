@@ -3,7 +3,7 @@
 
 ### Instructions
 
-Create a function called `replica` that allows you to copy the values of all properties from one or more
+Create a function called `replica` that allows you to deep copy the values of all properties from one or more
 objects to a target object.
 
 Attention with the shallow copies.

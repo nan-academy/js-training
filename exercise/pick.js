@@ -3,7 +3,7 @@
 
 ### Instructions
 
-Create a `pick`function that takes an object and keys.
+Create a `pick` function that takes an object and keys.
 This function will pick only the keys, in the second argument, from the object passed as argument.
 
 ### Notions
