@@ -11,5 +11,4 @@ export const exercises = {
   replicate: { feedback: true },
   'map-curry': { feedback: true},
   // 'deep-defaults': { feedback: true },
-  // at 'a.0.x' { a: [{x: 1}] } -> 1 // at curry
 }

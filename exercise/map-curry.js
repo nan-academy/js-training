@@ -8,6 +8,7 @@ Create a function `mapEntriesCurry` that receives as parameters an object and a 
 You will also have to create two other functions that will be used in the `mapEntriesCurry` function:
 
 - `addToCart` that adds 100g to each element of the grocery cart.
+
 - `caloriesMedia` that finds the media of calories in the cart.
 
 */

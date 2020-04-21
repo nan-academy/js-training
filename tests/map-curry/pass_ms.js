@@ -3,7 +3,6 @@ const mapEntriesCurry = (obj) => (fn) => {
 }
 
 const reduceOBJ = (obj, f, init) => Object.entries(obj).reduce(f, init)
-
 const addToCart = ([key, value]) => [key, value + 100]
 
 const caloriesMedia = ([key, value]) => [
