@@ -38,7 +38,14 @@ const t = (f) => tests.push(f)
 t(({ eq }) =>
   eq(remove(theObject, 'date_of_creation', 'you_can_use'), $newObject)
 )
-t(({ eq }) => eq(remove($1, ['heLikes']), $new1))
+t(({ eq }) =>
+  eq(remove(theObject, 'date_of_creation', 'you_can_use', 'so'), $newObject)
+)
+
+t(({ eq }) => eq(remove($1, 'heLikes'), $new1))
+t(({ eq }) => eq(remove($1, 'heLikes', 'country'), { name: 'Rick', age: 47 }))
+t(({ eq }) => eq(remove($1, 'heLikes', 'country', 'age', 'name'), {}))
+
 t(({ eq }) => eq(theObject.difficulty, 8))
 t(({ eq }) => eq(theObject.you_can_use, $newObject.you_can_use))
 t(({ fail }) => fail(() => (theObject.name.update = 'other name')))

@@ -1,7 +1,9 @@
 const remove = (obj, ...prop) =>
-  obj.hasOwnProperty(...prop)
-    ? prop.map((x) => Reflect.deleteProperty(obj, x)) && obj
-    : obj
+  prop.map((x) =>{
+    if (obj.hasOwnProperty(x)) {
+      Reflect.deleteProperty(obj, x)
+    }
+  }) && obj
 
 theObject.difficulty = 8
 theObject.you_can_use.splice(3, 1, `fmt.*`, `len`)
