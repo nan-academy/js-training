@@ -8,7 +8,7 @@ objects to a target object.
 
 ### Notions
 
-- https://nan-academy.github.io/js-training/examples/data-structures.js
+- https://devdocs.io/javascript/global_objects/object/assign
 
 // /*/ // ⚡
 

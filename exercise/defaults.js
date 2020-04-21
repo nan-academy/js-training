@@ -4,7 +4,7 @@
 ### Instructions
 
 Create a function called `defaultHttp` that returns the object received.
-But by default it will have the properties :
+But by default it should have the properties :
   - `http` as `403`
   - `age` as `0`
   - `connection` as `closed`
