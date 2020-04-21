@@ -6,4 +6,5 @@ export const exercises = {
   filter: { feedback: true },
   'sweet-curry': { feedback: true },
   'has-city': { feedback: true },
+  'do-your-own-curry': { feedback: true },
 }
