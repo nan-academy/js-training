@@ -3,7 +3,7 @@
 
 ### Instructions
 
-Create a function called shallow that allows you to copy the values of all properties from one or more
+Create a function called `shallow` that allows you to copy the values of all properties from one or more
 objects to a target object.
 
 ### Notions

@@ -3,7 +3,7 @@
 
 ### Instructions
 
-Create a function called defaultHttp that returns the object received.
+Create a function called `defaultHttp` that returns the object received.
 But by default it will have the properties :
   - `http` as `403`
   - `age` as `0`
