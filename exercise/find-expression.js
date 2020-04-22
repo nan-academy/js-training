@@ -10,7 +10,7 @@ Create a function called `findExpression` that takes a number as parameter and r
 For example, the number 8 you must first multiplying by 2 twice and then add 4.
 It will look something like this `1 *2 *2 +4`
 
-- If the number can not be reached you should return `null`
+- If the number can not be reached you should return `undefined`
 
 
 ### Notions
