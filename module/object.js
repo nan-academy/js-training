@@ -3,7 +3,7 @@ export const exercises = {
   // invert { a: 1 } -> { 1: 'a' }
   // pick / remove
   // mapValue / filterValue / reduceValue on objects
-  // mapKey / filterKey / reduceKey on objects
+  'manipulate-keys': { feedback: true },
   // mapEntry / filterEntry / reduceEntry on objects
   // assign / defaults
   // assignDeep / defaultsDeep
