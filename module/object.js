@@ -2,6 +2,7 @@ export const next = 'async'
 export const exercises = {
   // invert { a: 1 } -> { 1: 'a' }
   // pick / remove
+  'molecules-cells': { feedback: true },
   // mapValue / filterValue / reduceValue on objects
   // mapKey / filterKey / reduceKey on objects
   // mapEntry / filterEntry / reduceEntry on objects
