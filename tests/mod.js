@@ -51,7 +51,7 @@ for (const exInfo of await Deno.readdir('exercise')) {
       Deno.exit(1)
     } else {
       const T = type === 'pass' ? 'PASS'.grn() : 'FAIL'.red()
-      console.debug('✓'.grn(), baseName.blu(), T, info.name.slice(5, -3))
+      console.debug('✓'.grn(), baseName.blu(), T, result.duration.toFixed(2), info.name.slice(5, -3))
     }
   }
 }
