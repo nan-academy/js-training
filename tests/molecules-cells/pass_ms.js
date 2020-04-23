@@ -7,18 +7,17 @@ const complements = [
 
 const RNA = (dna) => {
   let res = ''
-  let obj = Object.fromEntries(complements)
   for (let i of dna.split('')) {
-    res += obj[i]
+    res += complements[i]
   }
   return res
 }
 
 const DNA = (rna) => {
   let res = ''
-  let invobj = invert(Object.fromEntries(complements))
+  let a = invert(complements)
   for (let i of rna.split('')) {
-    res += invobj[i]
+    res += a[i]
   }
   return res
 }
