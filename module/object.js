@@ -8,4 +8,5 @@ export const exercises = {
   // assign / defaults
   // assignDeep / defaultsDeep
   // at 'a.0.x' { a: [{x: 1}] } -> 1 // at curry
+  flags: { feedback: true },
 }

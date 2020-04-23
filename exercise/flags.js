@@ -8,8 +8,8 @@ properties of that object.
 
 The `help` flag :
   - Should be present in the output by default.
-  - When not present in the input it should output the description of all flags. But when present it can specify the 
-  flags that you want to see the description, ex: `help: ['divide']`
+  - When not present in the input, it should output the description of all flags. But when present it can specify the 
+  flags that you want to see the description of, ex: `help: ['divide']`
 
 Example :
 
