@@ -1,8 +1,8 @@
 const formDes = (flag, input) => `-${flag[0]}, --${flag}: ${input[flag]}`
 
-const flags = ({ descriptions, ...input }) => {
-  descriptions = input.hasOwnProperty('help')
-    ? input.help.map((flag) => formDes(flag, input))
+const flags = ({ help, ...input }) => {
+  let descriptions = help
+    ? help.map((flag) => formDes(flag, input))
     : Object.keys(input).map((flag) => formDes(flag, input))
 
   const alias = { h: 'help' }
