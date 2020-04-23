@@ -1,17 +1,15 @@
-const filterKeys = (obj, filtering) => {
-  let entrie = Object.entries(obj).filter((ele) => filtering(ele[0]) && ele)
-  let result = Object.fromEntries(entrie)
-  return result
-}
+const filterKeys = (obj, filtering) =>
+  Object.fromEntries(
+    Object.entries(obj).filter((ele) => filtering(ele[0]) && ele)
+  )
 
-const mapKeys = (obj, f) => {
-  let entrie = Object.entries(obj).map((ele) => {
-    ele[0] = f(ele[0])
-    return ele
-  })
-  let result = Object.fromEntries(entrie)
-  return result
-}
+const mapKeys = (obj, f) =>
+  Object.fromEntries(
+    Object.entries(obj).map((ele) => {
+      ele[0] = f(ele[0])
+      return ele
+    })
+  )
 
 const reduceKey = (obj, f, init) =>
   init == undefined
