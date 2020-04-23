@@ -1,12 +1,7 @@
-const filterEntries = (obj, f) => {
-  const entries = Object.entries(obj).filter(f)
-  return Object.fromEntries(entries)
-}
+const filterEntries = (obj, f) =>
+  Object.fromEntries(Object.entries(obj).filter(f))
 
-const mapEntries = (obj, f) => {
-  const entries = Object.entries(obj).map(f)
-  return Object.fromEntries(entries)
-}
+const mapEntries = (obj, f) => Object.fromEntries(Object.entries(obj).map(f))
 
 const reduceOBJ = (obj, f, init) =>
   init == undefined
