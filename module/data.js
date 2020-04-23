@@ -6,6 +6,7 @@ export const exercises = {
   obj: { feedback: true },
   nested: { feedback: true },
   mutability: { feedback: true },
+  'molecules-cells': { feedback: true },
   'more-or-less': { feedback: true },
   id: { feedback: true },
   'get-length': { feedback: true },
