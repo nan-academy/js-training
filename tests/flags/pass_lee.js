@@ -1,13 +1,13 @@
-const flags = ({ fl = { h: 'help' }, description = {}, ...input }) => {
-  !input.hasOwnProperty('help') && (description = { ...input })
+const formDes = (flag, input) => `-${flag[0]}, --${flag}: ${input[flag]}`
 
-  for (let [key, value] of Object.entries(input)) {
-    if (key === 'help') {
-      value.forEach((ele) => {
-        description[ele] = input[ele]
-      })
-    }
-    fl[key[0]] = key
+const flags = ({ descriptions, ...input }) => {
+  descriptions = input.hasOwnProperty('help')
+    ? input.help.map((flag) => formDes(flag, input))
+    : Object.keys(input).map((flag) => formDes(flag, input))
+
+  const alias = { h: 'help' }
+  for (let key of Object.keys(input)) {
+    alias[key[0]] = key
   }
-  return { flags: fl, help_description: description }
+  return { alias, description: descriptions.join('\n') }
 }
