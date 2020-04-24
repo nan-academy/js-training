@@ -12,6 +12,4 @@ const addSpace = (s) => {
   }
 }
 
-function curry(value, f) {
-  return f(value)
-}
+const modString = (value, f) => f(value)
