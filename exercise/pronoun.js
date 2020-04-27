@@ -3,16 +3,21 @@
 
 ### Instruction
 
-Create a function called `pronoun` that has as parameters a string and returns an object. 
-This object will have all the pronouns as keys and a sub object with the 
-word in front of the pronouns and a property `count` with the amount of occurrences .
+Create a function called `pronoun` that has a string as parameter. This function returns an object 
+that will have all the pronouns, present in the string, as keys. Each key will have a sub object with the 
+first word after each of the pronouns found in the string.
+Also, a property `count` must be added, to the sub object, with the amount of occurrences of the pronoun.
 
 #### Example
 
 ```js
 const ex = 'Using Array Destructuring, you can iterate through objects easily.'
 
-{ you: { next: [ 'can' ], count: 1 } }
+{ you: { word: [ 'can' ], count: 1 } }
+
+const ex = 'If you want to buy something you have to pay.'
+
+{ you: { word: [ 'want', 'have' ], count: 2 } }
 
 ```
 
@@ -29,8 +34,8 @@ t(({ eq }) => eq(pronoun($pronoun1), $resultPronoun1))
 t(({ eq }) => eq(pronoun($pronoun2), $resultPronoun2))
 t(({ eq }) =>
   eq(pronoun('we will rock you'), {
-    we: { next: ['will'], count: 1 },
-    you: { next: [], count: 0 },
+    we: { word: ['will'], count: 1 },
+    you: { word: [], count: 0 },
   })
 )
 
@@ -58,13 +63,13 @@ const $pronoun1 = `
  they buy`
 
 const $resultPronoun1 = {
-  i: { next: ['buy', 'to'], count: 2 },
-  you: { next: ['buy', 'buy'], count: 2 },
-  he: { next: ['buys'], count: 1 },
-  she: { next: ['buys'], count: 1 },
-  it: { next: ['buys', 'buys', 'buys', 'buys'], count: 4 },
-  we: { next: ['buy'], count: 1 },
-  they: { next: ['buy'], count: 1 },
+  i: { word: ['buy', 'to'], count: 2 },
+  you: { word: ['buy', 'buy'], count: 2 },
+  he: { word: ['buys'], count: 1 },
+  she: { word: ['buys'], count: 1 },
+  it: { word: ['buys', 'buys', 'buys', 'buys'], count: 4 },
+  we: { word: ['buy'], count: 1 },
+  they: { word: ['buy'], count: 1 },
 }
 
 const $pronoun2 = `
@@ -78,7 +83,7 @@ const $pronoun2 = `
  `
 
 const $resultPronoun2 = {
-  you: { next: ['to'], count: 1 },
-  it: { next: ['corresponds'], count: 1 },
-  they: { next: ['may', 'may'], count: 2 },
+  you: { word: ['to'], count: 1 },
+  it: { word: ['corresponds'], count: 1 },
+  they: { word: ['may', 'may'], count: 2 },
 }
