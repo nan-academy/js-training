@@ -37,7 +37,9 @@ t(({ eq, ctx }) => eq(fusion(ctx.objects, ctx.objects1), ctx.objectsResult))
 t(({ eq, ctx }) => eq(fusion(ctx.arrays, ctx.arrays1), ctx.arraysResult))
 
 // testing other types
-t(({ eq }) => eq(fusion(otherTypes, otherTypes1), otherTypesResult))
+t(({ eq, ctx }) =>
+  eq(fusion(ctx.otherTypes, ctx.otherTypes1), ctx.otherTypesResult)
+)
 
 Object.freeze(tests)
 
