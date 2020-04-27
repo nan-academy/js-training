@@ -121,13 +121,12 @@ t(({ eq }) =>
 t(({ eq }) =>
   eq(
     fusion(
-      { data: new Date('December 17, 1995 03:24:00'), reg: /\w/, a: 1 },
-      { a: 1 }
+      { data: new Date('December 17, 1995 03:24:00'), reg: /\w/ },
+      { data: new Date('April 12, 2999 03:24:00'), reg: /\S/ }
     ),
     {
-      data: new Date('December 17, 1995 03:24:00'),
-      reg: /\w/,
-      a: 2,
+      data: new Date('April 12, 2999 03:24:00'),
+      reg: /\S/,
     }
   )
 )

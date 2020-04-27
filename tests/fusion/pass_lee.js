@@ -10,6 +10,8 @@ const fusion = (obj, obj1) => {
       Object.assign(obj[k], obj1[k])
     } else if (typeof obj[k] === 'number') {
       obj[k] = mergeAdd(obj[k], obj1[k])
+    } else {
+      obj[k] = obj1[k]
     }
   }
   return obj
@@ -18,17 +20,3 @@ const fusion = (obj, obj1) => {
 const concatString = (str, str1) => str.concat(' ', str1)
 const mergeArray = (arr, arr1) => arr.push(...arr1) && arr
 const mergeAdd = (nbr, nbr1) => nbr + nbr1
-
-/*
-fusion(
-      {
-        str: 'hello',
-        object: { a: 'b', b: 'a' },
-        nbr: 2,
-      },
-      {
-        str: 'world',
-        object: { a: 'string' },
-        nbr1: 3,
-      }
-    ) */
