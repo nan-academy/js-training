@@ -3,9 +3,9 @@
 
 ### Instruction
 
-Create a function called `pronoun` that has as parameters a string and returns an object, 
-with all the pronouns and the word in front of it, you should include the a property `count` with the 
-amount of occurrences of the pronoun.
+Create a function called `pronoun` that has as parameters a string and returns an object. 
+This object will have all the pronouns as keys and a sub object with the 
+word in front of the pronouns and a property `count` with the amount of occurrences .
 
 #### Example
 
