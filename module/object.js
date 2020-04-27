@@ -8,6 +8,7 @@ export const exercises = {
   'manipulate-entries': { feedback: true },
   // assign / defaults
   // assignDeep / defaultsDeep
+  'deep-copy': { feedback: true },
   // at 'a.0.x' { a: [{x: 1}] } -> 1 // at curry
   flags: { feedback: true },
 }
