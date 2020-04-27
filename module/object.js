@@ -5,5 +5,6 @@ export const exercises = {
   'manipulate-entries': { feedback: true },
   'deep-copy': { feedback: true },
   replica: { feedback: true },
+  pronoun: { feedback: true },
   flags: { feedback: true },
 }
