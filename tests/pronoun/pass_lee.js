@@ -8,7 +8,7 @@ const deepCopy = (target) => {
 
 const pronoun = (str) => {
   let a = {}
-  let c = { next: [], count: 0 }
+  let c = { word: [], count: 0 }
   let b = str.toLowerCase().split(' ')
 
   for (let ele of b) {
@@ -18,7 +18,7 @@ const pronoun = (str) => {
   }
   for (let i = 0; i < b.length; i++) {
     if (a[b[i]] && i != b.length - 1) {
-      a[b[i]].next.push(b[i + 1].replace(/\n/, ''))
+      a[b[i]].word.push(b[i + 1].replace(/\n/, ''))
       a[b[i]].count++
     }
   }
