@@ -48,17 +48,9 @@ t(({ eq }) =>
 t(({ eq }) =>
   eq('agai n and agai n', modString('ai', addSpace('again and again')))
 )
-
-let randLet = String.fromCharCode(97 + Math.floor(Math.random() * 26))
-let re = new RegExp(randLet, 'g')
-
 t(({ eq }) =>
   eq(
-    'The quick brown fox jumps over the lazy dog'.replace(
-      re,
-      randLet.toUpperCase()
-    ),
-    modString(randLet, toUpper('The quick brown fox jumps over the lazy dog'))
+    'The quick brown fox jumps over the lazy dog', modString('the', toUpper('The quick brown fox jumps over the lazy dog'))
   )
 )
 
