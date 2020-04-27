@@ -34,22 +34,17 @@ const array3 = [43, 30, 16, 57, 10]
 const check = (arr, f) => !arr.some(f)
 const greaterEq10 = (n) => n >= 10
 
-const randArr = [...new Array(5)].map(() => Math.round(Math.random() * 25) + 6)
-
 t(() => array1.some(greaterEq10) === Some(array1, greaterEq10))
 t(() => array2.some(greaterEq10) === Some(array2, greaterEq10))
 t(() => array3.some(greaterEq10) === Some(array3, greaterEq10))
-t(() => randArr.some(greaterEq10) === Some(randArr, greaterEq10))
 
 t(() => array1.every(greaterEq10) === Every(array1, greaterEq10))
 t(() => array2.every(greaterEq10) === Every(array2, greaterEq10))
 t(() => array3.every(greaterEq10) === Every(array3, greaterEq10))
-t(() => randArr.every(greaterEq10) === Every(randArr, greaterEq10))
 
 t(() => check(array1, greaterEq10) === None(array1, greaterEq10))
 t(() => check(array2, greaterEq10) === None(array2, greaterEq10))
 t(() => check(array3, greaterEq10) === None(array3, greaterEq10))
-t(() => check(randArr, greaterEq10) === None(randArr, greaterEq10))
 
 t(({ code }) => !code.includes('some'))
 t(({ code }) => !code.includes('every'))
