@@ -1,4 +1,4 @@
-const Reduce = (fn, el, acc) => {
+const reducingArrays = (fn, el, acc) => {
   if (acc) {
     for (let e of el) {
       acc = fn(acc, e)

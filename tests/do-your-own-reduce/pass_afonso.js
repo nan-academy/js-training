@@ -1,4 +1,4 @@
-const Reduce = (f, arr, acc = 0) => {
+const reducingArrays = (f, arr, acc = 0) => {
   let res = acc
   for (let i = 0; i < arr.length; i++) {
     if (i === 0 && res === 0) {
