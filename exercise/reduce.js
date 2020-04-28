@@ -27,26 +27,13 @@ The use of `for` and `while` is forbidden for this exercise
 export const tests = []
 const t = (f) => tests.push(f)
 
-const randArr = [...new Array(10)].map(() => Math.round(Math.random() * 15))
-
-const resultRand = () => {
-  let res = 0
-  for (let i = 0; i < randArr.length; i++) {
-    if (i === 0) {
-      res += randArr[i]
-    } else {
-      res = randArr[i] % 2 === 0 ? res * randArr[i] : res + randArr[i]
-    }
-  }
-  return res
-}
-
-t(() => sumOrMul([1, 2, 3, 4]) === 20)
-t(() => sumOrMul([9, 24, 7, 11, 3]) === 237)
-t(() => sumOrMul([1, 30, 2, 0]) === 0)
-t(() => sumOrMul([1, 30, 0, 3]) === 3)
-
-t(() => sumOrMul(randArr) === resultRand())
+t(({ eq }) => eq(sumOrMul([1, 2, 3, 4]), 20))
+t(({ eq }) => eq(sumOrMul([9, 24, 7, 11, 3]), 237))
+t(({ eq }) => eq(sumOrMul([1, 30, 2, 0]), 0))
+t(({ eq }) => eq(sumOrMul([29, 23, 3, 2, 25]), 135))
+t(({ eq }) => eq(sumOrMul([18, 17, 7, 13, 25]), 80))
+t(({ eq }) => eq(sumOrMul([8, 16, 7, 0, 32]), 0))
+t(({ eq }) => eq(sumOrMul([8, 16, 7, 0, 31]), 31))
 
 t(({ code }) => !code.includes('for'))
 t(({ code }) => !code.includes('while'))
