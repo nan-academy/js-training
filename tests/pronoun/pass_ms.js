@@ -9,8 +9,8 @@ const pronoun = (str) => {
     }
   }
   for (let i = 0; i < b.length; i++) {
-    if (a[b[i]] && i != b.length - 1) {
-      a[b[i]].word.push(b[i + 1].replace(/\n/, ''))
+    if (a[b[i]]) {
+      if (i != b.length - 1) a[b[i]].word.push(b[i + 1].replace(/\n/, ''))
       a[b[i]].count++
     }
   }
