@@ -1,4 +1,4 @@
-function pick(obj, keys) {
+const pick = (obj, keys) => {
   const result = {}
   if (Array.isArray(keys)) {
     for (let [k, v] of Object.entries(obj))
@@ -10,7 +10,7 @@ function pick(obj, keys) {
   )
 }
 
-function omit(obj, keys) {
+const omit = (obj, keys) => {
   var target = {}
   for (let i of Object.keys(obj)) {
     if (keys.indexOf(i) != -1) {
