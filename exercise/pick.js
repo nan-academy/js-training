@@ -28,6 +28,10 @@ t(({ eq, ctx }) => eq(omit(ctx.tools, ['grinders', 'saws']), ctx.newtool))
 t(({ eq, ctx }) => eq(omit(ctx.games, ['board', 'cards']), ctx.newgames))
 t(({ eq, ctx }) => eq(omit(ctx.language, 'Spain'), ctx.newlanguage))
 t(({ eq, ctx }) => eq(omit(ctx.phone, 'iphone'), ctx.phone))
+t(({ eq }) => eq(pick({ something: 5, __proto__:{ d: 6 }}, ['__proto__', 'something']), {}))
+t(({ eq }) => eq(omit({ something: 5, __proto__:{ d: 6 }}, 'something'), {}))
+console.log(pick({ something: 5, __proto__:{ d: 6 }}, ['__proto__', 'something']))
+console.log(omit({ something: 5, __proto__:{ d: 6 }}, 'something'))
 
 Object.freeze(tests)
 
