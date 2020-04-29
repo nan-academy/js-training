@@ -12,7 +12,7 @@ function pick(obj, keys) {
 
 function omit(obj, keys) {
   var target = {}
-  for (let i in obj) {
+  for (let i of Object.keys(obj)) {
     if (keys.indexOf(i) != -1) {
       continue
     }
