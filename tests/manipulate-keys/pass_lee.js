@@ -11,7 +11,4 @@ const mapKeys = (obj, f) =>
     })
   )
 
-const reduceKey = (obj, f, init) =>
-  init == undefined
-    ? Object.keys(obj).reduce(f)
-    : Object.keys(obj).reduce(f, init)
+const reduceKeys = (obj, ...rest) => Object.keys(obj).reduce(...rest)
