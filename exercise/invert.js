@@ -15,17 +15,30 @@ Create a function called `invert` that inverts the object keys and values.
 export const tests = []
 const t = (f) => tests.push(f)
 
-t(({ eq }) => eq(invert($data), $invData))
-t(({ eq }) => eq(invert($1), $inv1))
-t(({ eq }) => eq(invert($0), $inv0))
+// It works with a single proprety
+t(({ eq }) => eq(invert({ language: 'english' }), { english: 'language' }))
+
+// It works with multiple properties
+t(({ eq }) =>
+  eq(invert({ firstName: 'John', lastName: 'Doe', age: 32 }), {
+    John: 'firstName',
+    Doe: 'lastName',
+    32: 'age',
+  })
+)
+
+// Last similar value should override the others
+t(({ eq }) =>
+  eq(invert({ brand: 'ford', motor: 'v8', year: 2000, fast: true, eco: true }), {
+    ford: 'brand',
+    v8: 'motor',
+    2000: 'year',
+    true: 'eco',
+  })
+)
+
+
+// It should ignore properties from the prototype chain
+t(({ eq }) => eq(invert({ f: 5, __proto__:{ d: 6 }}), { 5: 'f' }))
 
 Object.freeze(tests)
-
-const $0 = { language: 'english' }
-const $inv0 = { english: 'language' }
-
-const $1 = { brand: 'ford', motor: 'v8', year: 2000 }
-const $inv1 = { ford: 'brand', v8: 'motor', '2000': 'year' }
-
-const $data = { firstName: 'John', lastName: 'Doe', age: 32 }
-const $invData = { John: 'firstName', Doe: 'lastName', '32': 'age' }
