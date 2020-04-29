@@ -16,7 +16,7 @@ function omit(obj, keys) {
     if (keys.indexOf(i) != -1) {
       continue
     }
-    if (!Object.prototype.hasOwnProperty.call(obj, i)) {
+    if (!Object.hasOwnProperty.call(obj, i)) {
       continue
     }
     target[i] = obj[i]
