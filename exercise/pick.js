@@ -6,6 +6,9 @@
 Create a `pick` function that takes an object and keys.
 This function will pick only the keys, in the second argument, from the object passed as argument.
 
+Create a `omit` function that takes an object and keys.
+This function will omit only the keys, in the second argument, from the object passed as argument.
+
 ### Notions
 
 - https://nan-academy.github.io/js-training/examples/data-structures.js
@@ -15,11 +18,16 @@ This function will pick only the keys, in the second argument, from the object p
 // /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
+t(({ code }) => !code.includes('includes'))
 
 t(({ eq, ctx }) => eq(pick(ctx.agent, ['firstName', 'lastName']), ctx.newAgent))
 t(({ eq, ctx }) => eq(pick(ctx.car, ['brand', 'year']), ctx.newCar))
 t(({ eq, ctx }) => eq(pick(ctx.user, 'ageVerified'), ctx.newUser))
 t(({ eq, ctx }) => eq(pick(ctx.computer, 'graphic'), {}))
+t(({ eq, ctx }) => eq(omit(ctx.tools, ['grinders', 'saws']), ctx.newtool))
+t(({ eq, ctx }) => eq(omit(ctx.games, ['board', 'cards']), ctx.newgames))
+t(({ eq, ctx }) => eq(omit(ctx.language, 'Spain'), ctx.newlanguage))
+t(({ eq, ctx }) => eq(omit(ctx.phone, 'iphone'), ctx.phone))
 
 Object.freeze(tests)
 
@@ -36,4 +44,11 @@ export const setup = () => ({
   user: { firstName: 'John', lastName: 'Doe', age: 32, ageVerified: false },
   newUser: { ageVerified: false },
   computer: { brand: 'lenovo', ram: '32GB', processor: 'i7 8th Gen' },
+  tools: { drill: 'bosh', grinders: 'DeWalt', saws: ' Makita' },
+  newtool: { drill: 'bosh' },
+  games: { board: 'monopoly', cards: 'poker', dice: 'roulette' },
+  newgames: { dice: 'roulette' },
+  language: { England: 'english', Spain: 'spanish', Portugal: 'portuguese' },
+  newlanguage: { England: 'english', Portugal: 'portuguese' },
+  phone: { samsung: 'galaxy', asus: 'zenphone', nokia: 'lumia' },
 })
