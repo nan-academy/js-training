@@ -23,25 +23,27 @@ t(({ code }) => !code.includes('JSON'))
 t(({ eq, ctx }) => eq(ctx.copy, ctx.depthResult))
 // but different
 t(({ ctx }) => ctx.copy !== ctx.depthResult)
-// if the value in the inner object is changed it must fail
+// if we change the inner values of the copied object
+// and compare it to the original object it must fail
 t(({ ctx, fail, eq }) => {
   ctx.copy.a.b1.d2.f3.i4 = 2
   ctx.copy.a.c1 = 1
   return fail(() => eq(ctx.copy, ctx.depthResult))
 })
+t(({ ctx, eq }) => eq(ctx.copy, ctx.changedResult))
 
 // tests the array in depth
 // the copy is equal
 t(({ eq, ctx }) => eq(ctx.copy1, ctx.arrayResult))
 // but different
 t(({ ctx }) => cloneDeep(ctx.copy1) !== ctx.arrayResult)
-// if the value in the inner object is changed it must fail
-// so if the array is changed or sorted it must fail
+// if we change the inner values of the copied object, it must fail
 t(({ ctx, fail, eq }) => {
-  ctx.copy1.a.b.sort()
-  ctx.copy1.a.c.d = 1
+  ctx.copy1.a.b1 = { e2: 1 }
+  ctx.copy1.a.c1.d2 = 1
   return fail(() => eq(ctx.copy1, ctx.arrayResult))
 })
+t(({ ctx, eq }) => eq(ctx.copy1, ctx.changedArray))
 
 Object.freeze(tests)
 
@@ -52,10 +54,16 @@ export const setup = () => ({
   depthResult: {
     a: { b1: { d2: { f3: { i4: 1 }, h3: 1 }, e2: { g3: 2 } }, c1: 2 },
   },
+  changedResult: {
+    a: { b1: { d2: { f3: { i4: 2 }, h3: 1 }, e2: { g3: 2 } }, c1: 1 },
+  },
   copy1: cloneDeep({
-    a: { b: [2, 1, 4], c: { d: [6, 2, 1] } },
+    a: { b1: [2, 1, 4], c1: { d2: [6, 2, 1] } },
   }),
   arrayResult: {
-    a: { b: [2, 1, 4], c: { d: [6, 2, 1] } },
+    a: { b1: [2, 1, 4], c1: { d2: [6, 2, 1] } },
+  },
+  changedArray: {
+    a: { b1: { e2: 1 }, c1: { d2: 1 } },
   },
 })
