@@ -1,6 +1,6 @@
 const invert = (obj) => {
   let ret = {}
-  for (let key in obj) {
+  for (let key of Object.keys(obj)) {
     ret[obj[key]] = key
   }
   obj = ret

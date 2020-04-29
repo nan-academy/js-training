@@ -15,7 +15,7 @@ Create a function called `invert` that inverts the object keys and values.
 export const tests = []
 const t = (f) => tests.push(f)
 
-// It works with a single proprety
+// It works with a single property
 t(({ eq }) => eq(invert({ language: 'english' }), { english: 'language' }))
 
 // It works with multiple properties
@@ -29,16 +29,18 @@ t(({ eq }) =>
 
 // Last similar value should override the others
 t(({ eq }) =>
-  eq(invert({ brand: 'ford', motor: 'v8', year: 2000, fast: true, eco: true }), {
-    ford: 'brand',
-    v8: 'motor',
-    2000: 'year',
-    true: 'eco',
-  })
+  eq(
+    invert({ brand: 'ford', motor: 'v8', year: 2000, fast: true, eco: true }),
+    {
+      ford: 'brand',
+      v8: 'motor',
+      2000: 'year',
+      true: 'eco',
+    }
+  )
 )
 
-
 // It should ignore properties from the prototype chain
-t(({ eq }) => eq(invert({ f: 5, __proto__:{ d: 6 }}), { 5: 'f' }))
+t(({ eq }) => eq(invert({ f: 5, __proto__: { d: 6 } }), { 5: 'f' }))
 
 Object.freeze(tests)
