@@ -11,6 +11,7 @@ export const exercises = {
   unbreakable: { feedback: true }, // join / split
   'find-expression': { feedback: true },
   chunk: { feedback: true },
+  'molecules-cells': { feedback: true },
   get: { feedback: true },
   flat: { feedback: true },
   triangle: { feedback: true },
