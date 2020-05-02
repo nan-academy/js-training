@@ -1,4 +1,4 @@
-function cloneDeep(target, ...objs) {
+function deepCopy(target, ...objs) {
   for (let source of objs) {
     for (let [k] of Object.entries(source)) {
       let vs = source[k]
