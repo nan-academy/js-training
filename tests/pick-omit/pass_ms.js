@@ -1,11 +1,10 @@
 const pick = (obj, keys) => {
-  const result = {}
-  if (Array.isArray(keys)) {
-    for (let [k, v] of Object.entries(obj))
-      keys.indexOf(k) != -1 ? (result[k] = v) : {}
-    return result
+  if (!Array.isArray(keys)) {
+    keys = [keys]
   }
-  return Object.fromEntries(Object.entries(obj).filter(([key]) => keys === key))
+  return Object.fromEntries(
+    Object.entries(obj).filter(([key]) => keys.includes(key))
+  )
 }
 
 const omit = (obj, keys) => {

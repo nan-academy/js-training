@@ -18,7 +18,6 @@ This function will omit only the keys, in the second argument, from the object p
 // /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
-t(({ code }) => !code.includes('includes'))
 
 t(({ eq, ctx }) => eq(pick(ctx.agent, ['firstName', 'lastName']), ctx.newAgent))
 t(({ eq, ctx }) => eq(pick(ctx.car, ['brand', 'year']), ctx.newCar))
