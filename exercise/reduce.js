@@ -20,9 +20,9 @@ sumOrMul([1, 2, 3, 4]) = ((1 * 2) + 3) * 4 = 20
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
 
  */
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 
