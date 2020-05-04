@@ -3,7 +3,7 @@
 
 ### Instructions
 
-Create a function called `deepCopy` that copy objects and arrays recursivly.
+Create a function called `deepCopy` that copy objects and arrays recursively.
 
 ### Notions
 
@@ -38,6 +38,7 @@ t(({ eq }) => {
   const r = Math.random()
   const obj = [r, Object.freeze([r, Object.freeze([r])])]
   const copy = deepCopy(obj)
+  eq(copy, obj)
   return obj[1][1] !== copy[1][1]
 })
 
