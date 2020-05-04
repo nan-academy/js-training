@@ -6,22 +6,18 @@ const days = [
   'Thursday',
   'Friday',
 ]
-const bloodySunday = (date) => {
-  let year = date.getUTCFullYear()
+
+const newWeek = (date) => {
+  let year = date.getFullYear()
   let month = date.getUTCMonth()
   let day = date.getUTCDate()
-  let newd = new Date()
-  newd.setFullYear(year, month, day)
-  let fd = new Date()
-  fd.setFullYear(1, 0, 1)
-
-  let nbr = 1
-  while (fd.getTime() !== newd.getTime()) {
-    fd.setDate(fd.getDate() + 1)
-    nbr++
-    if (nbr === 6) {
-      nbr = 0
-    }
+  let days= (Date.UTC(year, month, day) - Date.UTC(year, 0, 0)) / 24 / 60 / 60 / 1000
+  let leap = Math.floor((year * 97) / 400)
+  if (year == 0) {
+  return (year * 365 + leap + days) % 6 
+  } else {
+  return ((year - 1) * 365 + leap + days) % 6 
   }
-  return days[nbr]
 }
+
+const bloodySunday = (date) => days[newWeek(date)]
