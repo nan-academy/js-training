@@ -27,9 +27,9 @@ string.
 https://stackoverflow.com/questions/36314/what-is-currying
 
  */
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 
@@ -50,7 +50,8 @@ t(({ eq }) =>
 )
 t(({ eq }) =>
   eq(
-    'The quick brown fox jumps over the lazy dog', modString('the', toUpper('The quick brown fox jumps over the lazy dog'))
+    'The quick brown fox jumps over THE lazy dog',
+    modString('the', toUpper('The quick brown fox jumps over the lazy dog'))
   )
 )
 
