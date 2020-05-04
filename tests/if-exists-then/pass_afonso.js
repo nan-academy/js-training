@@ -1,4 +1,4 @@
-const Every = (arr, fun) => {
+const every = (arr, fun) => {
   for (let a of arr) {
     if (!fun(a)) {
       return false
@@ -6,7 +6,7 @@ const Every = (arr, fun) => {
   }
   return true
 }
-const Some = (arr, fun) => {
+const some = (arr, fun) => {
   for (let a of arr) {
     if (fun(a)) {
       return true
@@ -15,4 +15,4 @@ const Some = (arr, fun) => {
   return false
 }
 
-const None = (arr, fun) => !Some(arr, fun)
+const none = (arr, fun) => !some(arr, fun)
