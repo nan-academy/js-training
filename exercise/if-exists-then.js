@@ -5,11 +5,11 @@
 
 Create three functions that receive an array and a function each:
 
-- `Every` that returns true if every element of the array respects the
+- `every` that returns true if every element of the array respects the
 condition of the received function and false otherwise.
-- `Some` that returns true if at least one element of the array respects the
+- `some` that returns true if at least one element of the array respects the
 condition of the received function and false otherwise.
-- `None` that returns true if none of the elements of the array respects the
+- `none` that returns true if none of the elements of the array respects the
 condition of the received function and false otherwise.
 
 The use of `[].every` and `[].some` is forbidden for this exercise.
@@ -19,7 +19,7 @@ The use of `[].every` and `[].some` is forbidden for this exercise.
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
 */
-
+Array.prototype.some = Array.prototype.every = undefined
 ///*/// ⚡
 
 ///*/// ⚡
@@ -31,22 +31,18 @@ const array1 = [3, 6, 1, 7, 2]
 const array2 = [23, 4, 10, 25, 6]
 const array3 = [43, 30, 16, 57, 10]
 
-const check = (arr, f) => !arr.some(f)
 const greaterEq10 = (n) => n >= 10
 
-t(({eq}) => array1.some(greaterEq10) === Some(array1, greaterEq10))
-t(({eq}) => array2.some(greaterEq10) === Some(array2, greaterEq10))
-t(({eq}) => array3.some(greaterEq10) === Some(array3, greaterEq10))
+t(({ eq }) => some(array1, greaterEq10) === false)
+t(({ eq }) => some(array2, greaterEq10) === true)
+t(({ eq }) => some(array3, greaterEq10) === true)
 
-t(({eq}) => array1.every(greaterEq10) === Every(array1, greaterEq10))
-t(({eq}) => array2.every(greaterEq10) === Every(array2, greaterEq10))
-t(({eq}) => array3.every(greaterEq10) === Every(array3, greaterEq10))
+t(({ eq }) => every(array1, greaterEq10) === false)
+t(({ eq }) => every(array2, greaterEq10) === false)
+t(({ eq }) => every(array3, greaterEq10) === true)
 
-t(({eq}) => check(array1, greaterEq10) === None(array1, greaterEq10))
-t(({eq}) => check(array2, greaterEq10) === None(array2, greaterEq10))
-t(({eq}) => check(array3, greaterEq10) === None(array3, greaterEq10))
-
-t(({ code }) => !code.includes('some'))
-t(({ code }) => !code.includes('every'))
+t(({ eq }) => none(array1, greaterEq10) === true)
+t(({ eq }) => none(array2, greaterEq10) === false)
+t(({ eq }) => none(array3, greaterEq10) === false)
 
 Object.freeze(tests)
