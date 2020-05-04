@@ -5,9 +5,7 @@ const pick = (obj, keys) => {
       keys.indexOf(k) != -1 ? (result[k] = v) : {}
     return result
   }
-  return Object.fromEntries(
-    Object.entries(obj).filter(([key]) => [keys].indexOf(key) != -1)
-  )
+  return Object.fromEntries(Object.entries(obj).filter(([key]) => keys === key))
 }
 
 const omit = (obj, keys) => {
