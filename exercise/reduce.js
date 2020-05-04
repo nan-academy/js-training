@@ -14,7 +14,6 @@ The function returns the final value.
 Example:
 sumOrMul([1, 2, 3, 4]) = ((1 * 2) + 3) * 4 = 20
 
-The use of `for` and `while` is forbidden for this exercise
 
 ### Notions
 
@@ -27,15 +26,43 @@ The use of `for` and `while` is forbidden for this exercise
 export const tests = []
 const t = (f) => tests.push(f)
 
-t(({ eq }) => eq(sumOrMul([1, 2, 3, 4]), 20))
-t(({ eq }) => eq(sumOrMul([9, 24, 7, 11, 3]), 237))
-t(({ eq }) => eq(sumOrMul([1, 30, 2, 0]), 0))
-t(({ eq }) => eq(sumOrMul([29, 23, 3, 2, 25]), 135))
-t(({ eq }) => eq(sumOrMul([18, 17, 7, 13, 25]), 80))
-t(({ eq }) => eq(sumOrMul([8, 16, 7, 0, 32]), 0))
-t(({ eq }) => eq(sumOrMul([8, 16, 7, 0, 31]), 31))
+export const setup = () => {
+  const reduceCalls = []
+  const _reduce = Array.prototype.reduce
+  Array.prototype.reduce = function () {
+    reduceCalls.push(this)
+    return _reduce.apply(this, arguments)
+  }
+  return { reduceCalls }
+}
 
-t(({ code }) => !code.includes('for'))
-t(({ code }) => !code.includes('while'))
+t(({ eq }) => eq(sumOrMul([1, 2, 3, 4]), 20))
+t(({ eq }, ctx) =>
+  eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [1, 2, 3, 4])
+)
+t(({ eq }) => eq(sumOrMul([9, 24, 7, 11, 3]), 237))
+t(({ eq }, ctx) =>
+  eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [9, 24, 7, 11, 3])
+)
+t(({ eq }) => eq(sumOrMul([1, 30, 2, 0]), 0))
+t(({ eq }, ctx) =>
+  eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [1, 30, 2, 0])
+)
+t(({ eq }) => eq(sumOrMul([29, 23, 3, 2, 25]), 135))
+t(({ eq }, ctx) =>
+  eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [29, 23, 3, 2, 25])
+)
+t(({ eq }) => eq(sumOrMul([18, 17, 7, 13, 25]), 80))
+t(({ eq }, ctx) =>
+  eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [18, 17, 7, 13, 25])
+)
+t(({ eq }) => eq(sumOrMul([8, 16, 7, 0, 32]), 0))
+t(({ eq }, ctx) =>
+  eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [8, 16, 7, 0, 32])
+)
+t(({ eq }) => eq(sumOrMul([8, 16, 7, 0, 31]), 31))
+t(({ eq }, ctx) =>
+  eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [8, 16, 7, 0, 31])
+)
 
 Object.freeze(tests)
