@@ -20,10 +20,9 @@ The use of `[].every` and `[].some` is forbidden for this exercise.
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
 */
 Array.prototype.some = Array.prototype.every = undefined
-///*/// ⚡
+// /*/ // ⚡
 
-///*/// ⚡
-
+// /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 
