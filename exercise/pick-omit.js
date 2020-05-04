@@ -1,5 +1,5 @@
 /*
-## Pick
+## Pick-Omit
 
 ### Instructions
 
