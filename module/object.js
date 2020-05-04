@@ -1,6 +1,7 @@
 export const next = 'async'
 export const exercises = {
 <<<<<<< HEAD
+<<<<<<< HEAD
   invert: { feedback: true },
   'molecules-cells': { feedback: true },
   fusion: { feedback: true },
@@ -11,6 +12,9 @@ export const exercises = {
   pronoun: { feedback: true },
 =======
   pick: { feedback: true },
+=======
+  'pick-omit': { feedback: true },
+>>>>>>> renaming
   // pick / remove
   // mapValue / filterValue / reduceValue on objects
   // mapKey / filterKey / reduceKey on objects
