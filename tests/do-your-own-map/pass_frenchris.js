@@ -4,4 +4,5 @@ const map = (el, fn) => {
   return result
 }
 
-const flatMap = (el, fn) => map(el, fn).flat()
+const flat = (el) => (Array.isArray(el) ? [...el] : el)
+const flatMap = (el, fn) => flat(map(el, fn))
