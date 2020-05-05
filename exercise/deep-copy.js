@@ -33,6 +33,9 @@ t(({ eq }) => copyAndCompare(eq, [1, [2, [true]]]))
 // mixed nesting
 t(({ eq }) => copyAndCompare(eq, [{ a: () => {} }, ['b', { b: [3] }]]))
 
+// undefined value
+t(({ eq }) => copyAndCompare(eq, { undef: undefined }))
+
 // check deep freeze (caution: might stuns a target for 4 seconds)
 t(({ eq }) => {
   const r = Math.random()
