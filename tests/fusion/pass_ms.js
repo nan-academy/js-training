@@ -1,7 +1,7 @@
 const fusion = (obj, res) => {
   let newObj = Object.assign({}, obj)
   for (let k of Object.keys(res)) {
-    if (!obj[k] || !res[k]) {
+    if (typeof obj[k] !== typeof res[k]) {
       newObj[k] = res[k]
     } else if (typeof obj[k] === 'number' && typeof res[k] === 'number') {
       newObj[k] = obj[k] + res[k]
@@ -15,7 +15,7 @@ const fusion = (obj, res) => {
     } else if (Array.isArray(obj[k]) && Array.isArray(res[k])) {
       newObj[k] = obj[k].concat(res[k])
     } else {
-      Object.assign(newObj, res)
+      newObj[k] = res[k]
     }
   }
   return newObj
