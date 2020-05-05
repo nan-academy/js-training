@@ -1,18 +1,21 @@
 const fusion = (obj, res) => {
+  let newObj = Object.assign({}, obj)
   for (let k of Object.keys(res)) {
-    if (!obj[k]) {
-      obj[k] = res[k]
+    if (!obj[k] || !res[k]) {
+      newObj[k] = res[k]
     } else if (typeof obj[k] === 'number') {
-      obj[k] = obj[k] + res[k]
+      newObj[k] = obj[k] + res[k]
     } else if (typeof obj[k] === 'string') {
-      obj[k] = obj[k].concat(' ', res[k])
+      newObj[k] = obj[k].concat(' ', res[k])
     } else if (obj[k].constructor === Object || !obj[k].constructor) {
-      Object.assign(obj[k], res[k])
+      newObj[k] = fusion(obj[k], res[k])
     } else if (Array.isArray(obj[k])) {
-      obj[k] = obj[k].concat(res[k])
+      newObj[k] = obj[k].concat(res[k])
     } else {
-      obj[k] = res[k]
+      Object.assign(newObj, res)
     }
   }
-  return obj
+  return newObj
 }
+
+const isObj = (obj) => obj.constructor === Object || !obj.constructor
