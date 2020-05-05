@@ -9,7 +9,7 @@ With this create a function called `fusion` that:
 - If the type is an array you must concat it
 - If it is a string you must concatenate with a space
 - If it is numbers you must added them
-- If it is an object you must use recursion
+- If it is an object you must fusion them recursively
 - In case of other types you must replace it with the value of the second object
 - In case the value don't match you must replace it with the value of the second object
 
@@ -23,6 +23,10 @@ const t = (f) => tests.push(f)
 // simple numbers
 t(({ eq }) => eq(fusion({ nbr: 12 }, { nbr: 23 }).nbr, 35))
 
+// handle 0
+t(({ eq }) => eq(fusion({ nbr: 0 }, { nbr: 23 }).nbr, 23))
+t(({ eq }) => eq(fusion({ nbr: 23 }, { nbr: 0 }).nbr, 23))
+
 // multiply numbers
 t(({ eq }) =>
   eq(fusion({ a: 12, b: 2, c: 43 }, { a: 23, b: 2 }), { a: 35, b: 4, c: 43 })
@@ -30,6 +34,9 @@ t(({ eq }) =>
 
 // simple string
 t(({ eq }) => eq(fusion({ str: 'hello' }, { str: 'there' }).str, 'hello there'))
+
+// handle empty strings
+t(({ eq }) => eq(fusion({ str: 'hello' }, { str: '' }).str, 'hello '))
 
 // multiple strings
 t(({ eq }) =>
@@ -81,5 +88,12 @@ t(({ eq }) =>
 
 // other types
 t(({ eq }) => eq(fusion({ reg: /\w/ }, { reg: /\S/ }).reg, /\S/))
+t(({ eq }) => {
+  const set = new Set([1, 2, 3])
+  return eq(fusion({ a: 1, set: new Set([4, 5, 6]) }, { a: 1, set }), {
+    a: 2,
+    set,
+  })
+})
 
 Object.freeze(tests)
