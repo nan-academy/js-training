@@ -3,14 +3,14 @@
 
 ### Instructions
 
-The objective of this exercise is to merge objects depending on the values type
+The objective of this exercise is to merge objects into a new object depending on the values type
 
-Create a function `fusion` that will merge two objects:
-- If the type is an array you must append it
+With this create a function called `fusion` that:
+- If the type is an array you must concat it
 - If it is a string you must concatenate with a space
 - If it is numbers you must added them
-- If it is objects you must merge them
-- In case of other types you must replace it
+- If it is an object you must use recursion
+- In case of other types you must replace it with the second object
 
 // /*/ // ⚡
 
@@ -19,88 +19,69 @@ Create a function `fusion` that will merge two objects:
 export const tests = []
 const t = (f) => tests.push(f)
 
-// testing strings, arrays, objects and numbers
-t(({ eq, ctx }) => eq(fusion(ctx.allTypes, ctx.allTypes1), ctx.allTypesResult))
+// simple numbers
+t(({ eq }) => eq(fusion({ nbr: 12 }, { nbr: 23 }).nbr, 35))
 
-// testing if a property doesn't exist
+// multiply numbers
 t(({ eq }) =>
-  eq(fusion({ array: [1, 3, 5, 7], nbr1: 34 }, {}), {
-    array: [1, 3, 5, 7],
-    nbr1: 34,
+  eq(fusion({ a: 12, b: 2, c: 43 }, { a: 23, b: 2 }), { a: 35, b: 4, c: 43 })
+)
+
+// simple string
+t(({ eq }) => eq(fusion({ str: 'hello' }, { str: 'there' }).str, 'hello there'))
+
+// multiple strings
+t(({ eq }) =>
+  eq(fusion({ a: 'A', b: 'B', c: 'C' }, { a: 'B', b: 'C' }), {
+    a: 'A B',
+    b: 'B C',
+    c: 'C',
   })
 )
 
-// testing objects merging
-t(({ eq, ctx }) => eq(fusion(ctx.objects, ctx.objects1), ctx.objectsResult))
+// simple arrays
+t(({ eq }) => eq(fusion({ arr: [1, '2'] }, { arr: [2] }).arr, [1, '2', 2]))
 
-// testing arrays
-t(({ eq, ctx }) => eq(fusion(ctx.arrays, ctx.arrays1), ctx.arraysResult))
-
-// testing other types
-t(({ eq, ctx }) =>
-  eq(fusion(ctx.otherTypes, ctx.otherTypes1), ctx.otherTypesResult)
+// multiple arrays
+t(({ eq }) =>
+  eq(
+    fusion(
+      { arr: [], arr1: [1] },
+      { arr: [12, 3], arr1: [2, 3], arr2: ['2', '1'] }
+    ),
+    { arr: [12, 3], arr1: [1, 2, 3], arr2: ['2', '1'] }
+  )
 )
 
-Object.freeze(tests)
+// deep nested objects
+t(({ eq }) =>
+  eq(
+    fusion(
+      { a: { b: [1, 2], c: { d: 2 } } },
+      { a: { b: [0, 2, 1], c: { d: 23 } } }
+    ),
+    { a: { b: [1, 2, 0, 2, 1], c: { d: 25 } } }
+  )
+)
 
-export const setup = () => ({
-  allTypes: {
-    str: 'hello',
-    array: [1, 3, 5, 7],
-    object: { a: 'b', b: 'a' },
-    nbr: 2,
-    nbr1: 34,
-  },
-  allTypes1: {
-    str: 'world',
-    array: [2, 4, 6],
-    object: { a: 'a', b: 'a', c: 33 },
-    nbr: 1,
-    nbr1: 3,
-  },
-  allTypesResult: {
-    str: 'hello world',
-    array: [1, 3, 5, 7, 2, 4, 6],
-    object: { a: 'a', b: 'a', c: 33 },
-    nbr: 3,
-    nbr1: 37,
-  },
-  objects: {
-    obj: { a: 'a', b: 'b' },
-    obj1: { a: 123 },
-    obj2: { a: 'b', b: 'a' },
-    nbr: 2,
-  },
-  objects1: {
-    obj: { a: 'b', b: 'a' },
-    obj2: { a: 'string' },
-    nbr1: 3,
-  },
-  objectsResult: {
-    obj: { a: 'b', b: 'a' },
-    obj1: { a: 123 },
-    obj2: { a: 'string', b: 'a' },
-    nbr: 2,
-    nbr1: 3,
-  },
-  arrays: {
-    arr: [1, '2'],
-    arr1: [],
-    arr2: [1, 2, 3, 4],
-  },
-  arrays1: {
-    arr: [2],
-    arr1: [123, 321],
-  },
-  arraysResult: {
-    arr: [1, '2', 2],
-    arr1: [123, 321],
-    arr2: [1, 2, 3, 4],
-  },
-  otherTypes: { data: new Date('December 17, 1995 03:24:00'), reg: /\w/ },
-  otherTypes1: { data: new Date('April 12, 2999 03:24:00'), reg: /\S/ },
-  otherTypesResult: {
-    data: new Date('April 12, 2999 03:24:00'),
-    reg: /\S/,
-  },
-})
+// object mutability
+t(({ eq }) =>
+  eq(
+    fusion(Object.freeze({ a: { b: 1 } }), Object.freeze({ a: { b: 2 } })).a.b,
+    3
+  )
+)
+
+// other types
+t(({ eq }) =>
+  eq(
+    fusion(
+      { data: new Date('December 17, 1995 03:24:00') },
+      { data: new Date('April 12, 2999 03:24:00') }
+    ).data,
+    new Date('April 12, 2999 03:24:00')
+  )
+)
+t(({ eq }) => eq(fusion({ reg: /\w/ }, { reg: /\S/ }).reg, /\S/))
+
+Object.freeze(tests)
