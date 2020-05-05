@@ -48,7 +48,6 @@ const arrayFormatSentence = (item, index, arr) => {
 t(({ eq, ctx }) =>
   eq(map(ctx.numbers, add1), [11, -9, 21, -94, 87, 103, 36, 90, 111])
 )
-
 t(({ eq, ctx }) =>
   eq(map(ctx.numbers, mult2), [20, -20, 40, -190, 172, 204, 70, 178, 220])
 )
