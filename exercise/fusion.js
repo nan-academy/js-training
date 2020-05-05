@@ -10,7 +10,8 @@ With this create a function called `fusion` that:
 - If it is a string you must concatenate with a space
 - If it is numbers you must added them
 - If it is an object you must use recursion
-- In case of other types you must replace it with the second object
+- In case of other types you must replace it with the value of the second object
+- In case the value don't match you must replace it with the value of the second object
 
 // /*/ // ⚡
 
@@ -53,6 +54,12 @@ t(({ eq }) =>
   )
 )
 
+// different matching
+t(({ eq }) => eq(fusion({ a: { b: 1 } }, { a: 1 }).a, 1))
+t(({ eq }) => eq(fusion({ a: 1 }, { a: { b: 1 } }).a, { b: 1 }))
+t(({ eq }) => eq(fusion({ a: [1, 2] }, { a: 1 }).a, 1))
+t(({ eq }) => eq(fusion({ a: 'str' }, { a: 1 }).a, 1))
+
 // deep nested objects
 t(({ eq }) =>
   eq(
@@ -73,15 +80,6 @@ t(({ eq }) =>
 )
 
 // other types
-t(({ eq }) =>
-  eq(
-    fusion(
-      { data: new Date('December 17, 1995 03:24:00') },
-      { data: new Date('April 12, 2999 03:24:00') }
-    ).data,
-    new Date('April 12, 2999 03:24:00')
-  )
-)
 t(({ eq }) => eq(fusion({ reg: /\w/ }, { reg: /\S/ }).reg, /\S/))
 
 Object.freeze(tests)
