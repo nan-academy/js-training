@@ -24,7 +24,7 @@ string.
 
 ### Notions
 
-https://stackoverflow.com/questions/36314/what-is-currying
+- Curry
 
  */
 // /*/ // ⚡
