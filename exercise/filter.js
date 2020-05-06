@@ -4,68 +4,128 @@
 ### Instructions
 
 
-1) Create a function 'filterShortStateName' that takes an array of
+- Create a function `filterShortStateName` that takes an array of
 strings and that returns the ones with less than 7 characters.
 
-Example: 'Iowa' only contains 4 characters
+> Example: `'Iowa'` only contains 4 characters
 
-2) Create a function 'filterStartVowel' that takes an array of strings
+- Create a function `filterStartVowel` that takes an array of strings
 and that returns only the ones that start with a vowel (a,e,i,o,u).
 
-Example: 'Alabama' starts with a vowel
+> Example: `'Alabama'` starts with a vowel
 
-3) Create a function 'filter5Vowels' that takes an array of strings
+- Create a function `filter5Vowels` that takes an array of strings
 and that returns only the ones which contain at least 5
 vowels (a,e,i,o,u).
 
-Example: 'California' countains at least 5 vowels
+> Example: `'California'` countains at least 5 vowels
 
-4) Create a function 'filter1DistinctVowel' that takes an array of
+- Create a function `filter1DistinctVowel` that takes an array of
 strings and that returns only the ones which vowels are of only
 one distinct one (a,e,i,o,u).
 
-Example: Alabama only contains 1 disctinct vowels 'a'.
+> Example: `'Alabama'` only contains 1 disctinct vowels `'a'`.
 
-5) Create a function 'multiFilter' that takes an array of
+- Create a function `multiFilter` that takes an array of
 objects and that returns only the ones which:
 
--the key `capital` contains at least 7 characters.
--the key `name` does not start with a vowel
--the key `abbreviation` has at least one vowel.
--the key `region` is not `South`
+- the key `capital` contains at least 8 characters.
+- the key `name` does not start with a vowel
+- the key `tag` has at least one vowel.
+- the key `region` is not `'South'`
 
 Example of an array of objects matching the criterias:
 
 [
-  {
-    name: 'California',
-    capital: 'Sacramento',
-    abbreviation: 'CA',
-    region: 'West'
-  },
-  {
-    name: 'Pennsylvania',
-    capital: 'Harrisburg',
-    abbreviation: 'PA',
-    region: 'Northeast'
-  }
+  { tag: 'CA', name: 'California', capital: 'Sacramento', region: 'West' },
+  { tag: 'PA', name: 'Pennsylvania', capital: 'Harrisburg', region: 'Northeast' }
 ]
 
 ### Notions
 
-- filter
-
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
-*/
+- https://devdocs.io/javascript/global_objects/array/filter
 
 ///*/ // ⚡
 
 ///*/// ⚡
-
 export const tests = []
 const t = (f) => tests.push(f)
 
-// Monkey patching to check that filter will be used.
+const check = ({ filterCalls }, eq, a, b) => {
+  const result = eq(a, b)
+  const len = filterCalls.length
+  filterCalls.length = 0
+  return len ? result : false
+}
+
+t(({ eq, ctx }) =>
+  check(ctx, eq, filterShortStateName(ctx.arr1), [
+    'Alaska',
+    'Hawaii',
+    'Idaho',
+    'Iowa',
+    'Kansas',
+    'Maine',
+    'Nevada',
+    'Ohio',
+    'Oregon',
+    'Texas',
+    'Utah',
+  ])
+)
+
+t(({ eq, ctx }) =>
+  check(ctx, eq, filterStartVowel(ctx.arr1), [
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Utah',
+  ])
+)
+
+t(({ eq, ctx }) =>
+  check(ctx, eq, filter5Vowels(ctx.arr1), [
+    'California',
+    'Louisiana',
+    'North Carolina',
+    'South Carolina',
+    'South Dakota',
+    'West Virginia',
+  ])
+)
+
+t(({ eq, ctx }) =>
+  check(ctx, eq, filter1DistinctVowel(ctx.arr1), [
+    'Alabama',
+    'Alaska',
+    'Arkansas',
+    'Kansas',
+    'Maryland',
+    'Mississippi',
+    'New Jersey',
+    'Tennessee',
+  ])
+)
+
+t(({ eq, ctx }) =>
+  check(ctx, eq, multiFilter(ctx.arr2), [
+    { tag: 'CA', name: 'California', capital: 'Sacramento', region: 'West' },
+    { tag: 'HI', name: 'Hawaii', capital: 'Honolulu', region: 'West' },
+    { tag: 'MO', name: 'Missouri', capital: 'Jefferson City', region: 'Midwest' },
+    { tag: 'PA', name: 'Pennsylvania', capital: 'Harrisburg', region: 'Northeast' },
+    { tag: 'RI', name: 'Rhode Island', capital: 'Providence', region: 'Northeast' },
+  ])
+)
+
+Object.freeze(tests)
 
 export const setup = () => {
   const filterCalls = []
@@ -74,7 +134,8 @@ export const setup = () => {
     filterCalls.push(this)
     return _filter.apply(this, arguments)
   }
-  let arr1 = [
+
+  const arr1 = Object.freeze([
     'Alabama',
     'Alaska',
     'Arizona',
@@ -125,439 +186,61 @@ export const setup = () => {
     'West Virginia',
     'Wisconsin',
     'Wyoming',
-  ]
+  ])
 
-  let arr2 = [
-    {
-      name: 'Alabama',
-      capital: 'Montgomery',
-      abbreviation: 'AL',
-      region: 'South',
-    },
-    {
-      name: 'Alaska',
-      capital: 'Juneau',
-      abbreviation: 'AK',
-      region: 'West',
-    },
-    {
-      name: 'Arizona',
-      capital: 'Phoenix',
-      abbreviation: 'AZ',
-      region: 'West',
-    },
-    {
-      name: 'Arkansas',
-      capital: 'Little Rock',
-      abbreviation: 'AR',
-      region: 'South',
-    },
-    {
-      name: 'California',
-      capital: 'Sacramento',
-      abbreviation: 'CA',
-      region: 'West',
-    },
-    {
-      name: 'Colorado',
-      capital: 'Denver',
-      abbreviation: 'CO',
-      region: 'West',
-    },
-    {
-      name: 'Connecticut',
-      capital: 'Hartford',
-      abbreviation: 'CT',
-      region: 'Northeast',
-    },
-    {
-      name: 'Delaware',
-      capital: 'Dover',
-      abbreviation: 'DE',
-      region: 'South',
-    },
-    {
-      name: 'District Of Columbia',
-      capital: 'Washington',
-      abbreviation: 'DC',
-      region: 'South',
-    },
-    {
-      name: 'Florida',
-      capital: 'Tallahassee',
-      abbreviation: 'FL',
-      region: 'South',
-    },
-    {
-      name: 'Georgia',
-      capital: 'Atlanta',
-      abbreviation: 'GA',
-      region: 'South',
-    },
-    {
-      name: 'Hawaii',
-      capital: 'Honolulu',
-      abbreviation: 'HI',
-      region: 'West',
-    },
-    {
-      name: 'Idaho',
-      capital: 'Boise',
-      abbreviation: 'ID',
-      region: 'West',
-    },
-    {
-      name: 'Illinois',
-      capital: 'Springfield',
-      abbreviation: 'IL',
-      region: 'Midwest',
-    },
-    {
-      name: 'Indiana',
-      capital: 'Indianapolis',
-      abbreviation: 'IN',
-      region: 'Midwest',
-    },
-    {
-      name: 'Iowa',
-      capital: 'Des Moines',
-      abbreviation: 'IA',
-      region: 'Midwest',
-    },
-    {
-      name: 'Kansas',
-      capital: 'Topeka',
-      abbreviation: 'KS',
-      region: 'Midwest',
-    },
-    {
-      name: 'Kentucky',
-      capital: 'Frankfort',
-      abbreviation: 'KY',
-      region: 'South',
-    },
-    {
-      name: 'Louisiana',
-      capital: 'Baton Rouge',
-      abbreviation: 'LA',
-      region: 'South',
-    },
-    {
-      name: 'Maine',
-      capital: 'Augusta',
-      abbreviation: 'ME',
-      region: 'Northeast',
-    },
-    {
-      name: 'Maryland',
-      capital: 'Annapolis',
-      abbreviation: 'MD',
-      region: 'South',
-    },
-    {
-      name: 'Massachusetts',
-      capital: 'Boston',
-      abbreviation: 'MA',
-      region: 'Northeast',
-    },
-    {
-      name: 'Michigan',
-      capital: 'Lansing',
-      abbreviation: 'MI',
-      region: 'Midwest',
-    },
-    {
-      name: 'Minnesota',
-      capital: 'St. Paul',
-      abbreviation: 'MN',
-      region: 'Midwest',
-    },
-    {
-      name: 'Mississippi',
-      capital: 'Jackson',
-      abbreviation: 'MS',
-      region: 'South',
-    },
-    {
-      name: 'Missouri',
-      capital: 'Jefferson City',
-      abbreviation: 'MO',
-      region: 'Midwest',
-    },
-    {
-      name: 'Montana',
-      capital: 'Helena',
-      abbreviation: 'MT',
-      region: 'West',
-    },
-    {
-      name: 'Nebraska',
-      capital: 'Lincoln',
-      abbreviation: 'NE',
-      region: 'Midwest',
-    },
-    {
-      name: 'Nevada',
-      capital: 'Carson City',
-      abbreviation: 'NV',
-      region: 'West',
-    },
-    {
-      name: 'New Hampshire',
-      capital: 'Concord',
-      abbreviation: 'NH',
-      region: 'Northeast',
-    },
-    {
-      name: 'New Jersey',
-      capital: 'Trenton',
-      abbreviation: 'NJ',
-      region: 'Northeast',
-    },
-    {
-      name: 'New Mexico',
-      capital: 'Santa Fe',
-      abbreviation: 'NM',
-      region: 'West',
-    },
-    {
-      name: 'New York',
-      capital: 'Albany',
-      abbreviation: 'NY',
-      region: 'Northeast',
-    },
-    {
-      name: 'North Carolina',
-      capital: 'Raleigh',
-      abbreviation: 'NC',
-      region: 'South',
-    },
-    {
-      name: 'North Dakota',
-      capital: 'Bismarck',
-      abbreviation: 'ND',
-      region: 'Midwest',
-    },
-    {
-      name: 'Ohio',
-      capital: 'Colombus',
-      abbreviation: 'OH',
-      region: 'Midwest',
-    },
-    {
-      name: 'Oklahoma',
-      capital: 'Oklahoma City',
-      abbreviation: 'OK',
-      region: 'South',
-    },
-    {
-      name: 'Oregon',
-      capital: 'Salem',
-      abbreviation: 'OR',
-      region: 'West',
-    },
-    {
-      name: 'Pennsylvania',
-      capital: 'Harrisburg',
-      abbreviation: 'PA',
-      region: 'Northeast',
-    },
-    {
-      name: 'Rhode Island',
-      capital: 'Providence',
-      abbreviation: 'RI',
-      region: 'Northeast',
-    },
-    {
-      name: 'South Carolina',
-      capital: 'Columbia',
-      abbreviation: 'SC',
-      region: 'South',
-    },
-    {
-      name: 'South Dakota',
-      capital: 'Pierre',
-      abbreviation: 'SD',
-      region: 'Midwest',
-    },
-    {
-      name: 'Tennessee',
-      capital: 'Nashville',
-      abbreviation: 'TN',
-      region: 'South',
-    },
-    {
-      name: 'Texas',
-      capital: 'Austin',
-      abbreviation: 'TX',
-      region: 'South',
-    },
-    {
-      name: 'Utah',
-      capital: 'Salt Lake City',
-      abbreviation: 'UT',
-      region: 'West',
-    },
-    {
-      name: 'Vermont',
-      capital: 'Montpelier',
-      abbreviation: 'VT',
-      region: 'Northeast',
-    },
-    {
-      name: 'Virginia',
-      capital: 'Richmond',
-      abbreviation: 'VA',
-      region: 'South',
-    },
-    {
-      name: 'Washington',
-      capital: 'Olympia',
-      abbreviation: 'WA',
-      region: 'West',
-    },
-    {
-      name: 'West Virginia',
-      capital: 'Charleston',
-      abbreviation: 'WV',
-      region: 'South',
-    },
-    {
-      name: 'Wisconsin',
-      capital: 'Madison',
-      abbreviation: 'WI',
-      region: 'Midwest',
-    },
-    {
-      name: 'Wyoming',
-      capital: 'Cheyenne',
-      abbreviation: 'WY',
-      region: 'West',
-    },
-  ]
+  const arr2 = Object.freeze([
+    { tag: 'AL', name: 'Alabama', capital: 'Montgomery', region: 'South' },
+    { tag: 'AK', name: 'Alaska', capital: 'Juneau', region: 'West' },
+    { tag: 'AZ', name: 'Arizona', capital: 'Phoenix', region: 'West' },
+    { tag: 'AR', name: 'Arkansas', capital: 'Little Rock', region: 'South' },
+    { tag: 'CA', name: 'California', capital: 'Sacramento', region: 'West' },
+    { tag: 'CO', name: 'Colorado', capital: 'Denver', region: 'West' },
+    { tag: 'CT', name: 'Connecticut', capital: 'Hartford', region: 'Northeast' },
+    { tag: 'DE', name: 'Delaware', capital: 'Dover', region: 'South' },
+    { tag: 'DC', name: 'District Of Columbia', capital: 'Washington', region: 'South' },
+    { tag: 'FL', name: 'Florida', capital: 'Tallahassee', region: 'South' },
+    { tag: 'GA', name: 'Georgia', capital: 'Atlanta', region: 'South' },
+    { tag: 'HI', name: 'Hawaii', capital: 'Honolulu', region: 'West' },
+    { tag: 'ID', name: 'Idaho', capital: 'Boise', region: 'West' },
+    { tag: 'IL', name: 'Illinois', capital: 'Springfield', region: 'Midwest' },
+    { tag: 'IN', name: 'Indiana', capital: 'Indianapolis', region: 'Midwest' },
+    { tag: 'IA', name: 'Iowa', capital: 'Des Moines', region: 'Midwest' },
+    { tag: 'KS', name: 'Kansas', capital: 'Topeka', region: 'Midwest' },
+    { tag: 'KY', name: 'Kentucky', capital: 'Frankfort', region: 'South' },
+    { tag: 'LA', name: 'Louisiana', capital: 'Baton Rouge', region: 'South' },
+    { tag: 'ME', name: 'Maine', capital: 'Augusta', region: 'Northeast' },
+    { tag: 'MD', name: 'Maryland', capital: 'Annapolis', region: 'South' },
+    { tag: 'MA', name: 'Massachusetts', capital: 'Boston', region: 'Northeast' },
+    { tag: 'MI', name: 'Michigan', capital: 'Lansing', region: 'Midwest' },
+    { tag: 'MN', name: 'Minnesota', capital: 'St. Paul', region: 'Midwest' },
+    { tag: 'MS', name: 'Mississippi', capital: 'Jackson', region: 'South' },
+    { tag: 'MO', name: 'Missouri', capital: 'Jefferson City', region: 'Midwest' },
+    { tag: 'MT', name: 'Montana', capital: 'Helena', region: 'West' },
+    { tag: 'NE', name: 'Nebraska', capital: 'Lincoln', region: 'Midwest' },
+    { tag: 'NV', name: 'Nevada', capital: 'Carson City', region: 'West' },
+    { tag: 'NH', name: 'New Hampshire', capital: 'Concord', region: 'Northeast' },
+    { tag: 'NJ', name: 'New Jersey', capital: 'Trenton', region: 'Northeast' },
+    { tag: 'NM', name: 'New Mexico', capital: 'Santa Fe', region: 'West' },
+    { tag: 'NY', name: 'New York', capital: 'Albany', region: 'Northeast' },
+    { tag: 'NC', name: 'North Carolina', capital: 'Raleigh', region: 'South' },
+    { tag: 'ND', name: 'North Dakota', capital: 'Bismarck', region: 'Midwest' },
+    { tag: 'OH', name: 'Ohio', capital: 'Colombus', region: 'Midwest' },
+    { tag: 'OK', name: 'Oklahoma', capital: 'Oklahoma City', region: 'South' },
+    { tag: 'OR', name: 'Oregon', capital: 'Salem', region: 'West' },
+    { tag: 'PA', name: 'Pennsylvania', capital: 'Harrisburg', region: 'Northeast' },
+    { tag: 'RI', name: 'Rhode Island', capital: 'Providence', region: 'Northeast' },
+    { tag: 'SC', name: 'South Carolina', capital: 'Columbia', region: 'South' },
+    { tag: 'SD', name: 'South Dakota', capital: 'Pierre', region: 'Midwest' },
+    { tag: 'TN', name: 'Tennessee', capital: 'Nashville', region: 'South' },
+    { tag: 'TX', name: 'Texas', capital: 'Austin', region: 'South' },
+    { tag: 'UT', name: 'Utah', capital: 'Salt Lake City', region: 'West' },
+    { tag: 'VT', name: 'Vermont', capital: 'Montpelier', region: 'Northeast' },
+    { tag: 'VA', name: 'Virginia', capital: 'Richmond', region: 'South' },
+    { tag: 'WA', name: 'Washington', capital: 'Olympia', region: 'West' },
+    { tag: 'WV', name: 'West Virginia', capital: 'Charleston', region: 'South' },
+    { tag: 'WI', name: 'Wisconsin', capital: 'Madison', region: 'Midwest' },
+    { tag: 'WY', name: 'Wyoming', capital: 'Cheyenne', region: 'West' },
+  ].map(e => Object.freeze(e)))
+
   return { filterCalls, arr1, arr2 }
 }
-
-const check = (el, count, arr) =>
-  el.length >= count && el.includes(arr) ? true : false
-
-// 1) filterShortStateName
-// 1st check
-t(({ eq, ctx }) =>
-  eq(filterShortStateName(ctx.arr1), [
-    'Alaska',
-    'Hawaii',
-    'Idaho',
-    'Iowa',
-    'Kansas',
-    'Maine',
-    'Nevada',
-    'Ohio',
-    'Oregon',
-    'Texas',
-    'Utah',
-  ])
-)
-
-// 2nd check (use of filter)
-t(({ eq, ctx }) => eq(check(ctx.filterCalls, 1, ctx.arr1), true))
-
-// 2) filterStartVowel
-// 1st check
-t(({ eq, ctx }) =>
-  eq(filterStartVowel(ctx.arr1), [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Utah',
-  ])
-)
-
-//2nd check (use of filter)
-t(({ eq, ctx }) => eq(check(ctx.filterCalls, 2, ctx.arr1), true))
-
-// 3) filter5vowels
-// 1st check
-
-t(({ eq, ctx }) =>
-  eq(filter5Vowels(ctx.arr1), [
-    'California',
-    'Louisiana',
-    'North Carolina',
-    'South Carolina',
-    'South Dakota',
-    'West Virginia',
-  ])
-)
-
-//2nd check (use of filter)
-t(({ eq, ctx }) => eq(check(ctx.filterCalls, 3, ctx.arr1), true))
-
-// 4) filter1DistinctVowel
-// 1st check
-
-t(({ eq, ctx }) =>
-  eq(filter1DistinctVowel(ctx.arr1), [
-    'Alabama',
-    'Alaska',
-    'Arkansas',
-    'Kansas',
-    'Maryland',
-    'Mississippi',
-    'New Jersey',
-    'Tennessee',
-  ])
-)
-
-//2nd check (use of filter)
-t(({ eq, ctx }) => eq(check(ctx.filterCalls, 4, ctx.arr1), true))
-
-// 5) multiFilter
-// 1st check
-
-t(({ eq, ctx }) =>
-  eq(multiFilter(ctx.arr2), [
-    {
-      name: 'California',
-      capital: 'Sacramento',
-      abbreviation: 'CA',
-      region: 'West',
-    },
-    {
-      name: 'Hawaii',
-      capital: 'Honolulu',
-      abbreviation: 'HI',
-      region: 'West',
-    },
-    {
-      name: 'Missouri',
-      capital: 'Jefferson City',
-      abbreviation: 'MO',
-      region: 'Midwest',
-    },
-    {
-      name: 'Pennsylvania',
-      capital: 'Harrisburg',
-      abbreviation: 'PA',
-      region: 'Northeast',
-    },
-    {
-      name: 'Rhode Island',
-      capital: 'Providence',
-      abbreviation: 'RI',
-      region: 'Northeast',
-    },
-  ])
-)
-//2nd check (use of filter)
-t(({ eq, ctx }) => eq(check(ctx.filterCalls, 5, ctx.arr2), true))
-
-Object.freeze(tests)
