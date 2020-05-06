@@ -1,5 +1,5 @@
 /*
-## replicate
+## replica
 
 ### Instructions
 
