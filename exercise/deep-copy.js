@@ -7,7 +7,7 @@ Create a function called `deepCopy` that copy objects and arrays recursively.
 
 ### Notions
 
-- https://nan-academy.github.io/js-training/examples/data-structures.js
+- https://devdocs.io/javascript-object/
 
 // /*/ // ⚡
 
