@@ -1,24 +1,15 @@
-const deepCopy = (target) => {
-  var result = Array.isArray(target) ? [] : {}
-  for (let [k, v] of Object.entries(target)) {
-    result[k] = typeof v === 'object' && v !== null ? deepCopy(v) : v
-  }
-  return result
-}
-
 const pronoun = (str) => {
+  let b = str.toLowerCase().split(/[^\w]/g)
   let a = {}
-  let c = { word: [], count: 0 }
-  let b = str.toLowerCase().split(' ')
-
-  for (let ele of b) {
-    if (/^(i|you|he|she|it|we|you|they)$/.test(ele)) {
-      a[ele] = deepCopy(c)
-    }
-  }
   for (let i = 0; i < b.length; i++) {
-    if (a[b[i]]) {
-      if (i != b.length - 1) a[b[i]].word.push(b[i + 1].replace(/\n/, ''))
+    if (/^(i|you|he|she|it|we|you|they)$/.test(b[i])) {
+      if (!a[b[i]]) {
+        a[b[i]] = {}
+        a[b[i]]['word'] = []
+        a[b[i]]['count'] = 0
+      }
+      if (b[i + 1] && !/^(i|you|he|she|it|we|you|they)$/.test(b[i+1]))
+      a[b[i]].word.push(b[i + 1])
       a[b[i]].count++
     }
   }

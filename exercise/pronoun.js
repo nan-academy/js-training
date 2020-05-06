@@ -11,13 +11,16 @@ Also, a property `count` must be added, to the sub object, with the amount of oc
 #### Example
 
 ```js
-const ex = 'Using Array Destructuring, you can iterate through objects easily.'
+const ex = 'Using Array Destructuring, you you can iterate through objects easily.'
 
-{ you: { word: [ 'can' ], count: 1 } }
+{ you: { word: [ 'can' ], count: 2 } }
 
-const ex = 'If you want to buy something you have to pay.'
+const ex = 'If he you want to buy something you have to pay.'
 
-{ you: { word: [ 'want', 'have' ], count: 2 } }
+{
+  he: { word: [], count: 1}
+  you: { word: [ 'want', 'have' ], count: 2 }
+}
 
 ```
 
@@ -28,10 +31,53 @@ const ex = 'If you want to buy something you have to pay.'
 export const tests = []
 const t = (f) => tests.push(f)
 
-t(({ eq }) => eq(pronoun(''), {}))
-t(({ eq, ctx }) => eq(pronoun(ctx.pronoun0), {}))
-t(({ eq, ctx }) => eq(pronoun(ctx.pronoun1), ctx.resultPronoun1))
-t(({ eq, ctx }) => eq(pronoun(ctx.pronoun2), ctx.resultPronoun2))
+// no pronouns
+t(({ eq }) =>
+  eq(
+    pronoun(`Your reducer function's returned value is assigned to the accumulator,
+whose value is remembered across each iteration throughout the array and
+ultimately becomes the final, single resulting value.`),
+    {}
+  )
+)
+
+// simple count
+t(({ eq }) =>
+  eq(
+    pronoun(`The seal method seals an object, preventing new properties from being
+ added to it and marking all existing properties as non-configurable. Values of present 
+properties can still be changed as long as they are writable.`),
+    {
+      it: { word: ['and'], count: 1 },
+      they: { word: ['are'], count: 1 },
+    }
+  )
+)
+
+// multiple pronouns
+t(({ eq }) =>
+  eq(pronoun('I buy,\ni to,\nYOU buy,\nit have,\nIt buys,\nit is,\nyou go'), {
+    i: { word: ['buy', 'to'], count: 2 },
+    you: { word: ['buy', 'go'], count: 2 },
+    it: { word: ['have', 'buys', 'is'], count: 3 },
+  })
+)
+
+// repetition of pronouns
+t(({ eq }) =>
+eq(pronoun(`it i it she is gone`), {
+  it: { word: [], count: 2 },
+  i: { word: [], count: 1 },
+  she: { word: ['is'], count: 1 },
+})
+)
+
+// repetition of same pronoun
+t(({ eq }) =>
+  eq(pronoun('she she she she is'), { she: { word: ['is'], count: 4 } })
+)
+
+// pronoun with out verb
 t(({ eq }) =>
   eq(pronoun('we will rock you'), {
     we: { word: ['will'], count: 1 },
@@ -40,48 +86,3 @@ t(({ eq }) =>
 )
 
 Object.freeze(tests)
-
-export const setup = () => ({
-  pronoun0: `Your reducer function's
-  returned value is assigned to the accumulator,
-  whose value is remembered
-  across each iteration throughout the
-  array and ultimately becomes the final,
-  single resulting value.`,
-  pronoun1: `
-   I buy
-   i to
-   you buy
-   he buys
-   she buys
-   it buys
-   it buys
-   it buys
-   it buys
-   we buy
-   you buy
-   they buy`,
-  resultPronoun1: {
-    i: { word: ['buy', 'to'], count: 2 },
-    you: { word: ['buy', 'buy'], count: 2 },
-    he: { word: ['buys'], count: 1 },
-    she: { word: ['buys'], count: 1 },
-    it: { word: ['buys', 'buys', 'buys', 'buys'], count: 4 },
-    we: { word: ['buy'], count: 1 },
-    they: { word: ['buy'], count: 1 },
-  },
-  pronoun2: `
-   The conjugator allows you to conjugate any verb as
-   long as it corresponds
-   to an existing conjugation model.
-   They may be imaginary verbs, they may contain
-   spelling mistakes or often be buzz verbs,
-   not yet aggregated to our conjugation
-   tables like google, crowdfund, retweet.
-   `,
-  resultPronoun2: {
-    you: { word: ['to'], count: 1 },
-    it: { word: ['corresponds'], count: 1 },
-    they: { word: ['may', 'may'], count: 2 },
-  },
-})
