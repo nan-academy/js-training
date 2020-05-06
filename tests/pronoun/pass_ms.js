@@ -1,21 +1,21 @@
 const pronoun = (str) => {
-  let a = {}
+  let obj = {}
   let c = { word: [], count: 0 }
   let b = str.toLowerCase().split(/[^\w]/g)
   let reg = /^(i|you|he|she|it|we|you|they)$/
 
   for (let ele of b) {
     if (reg.test(ele)) {
-      a[ele] = deepCopy(c)
+      obj[ele] = deepCopy(c)
     }
   }
   for (let i = 0; i < b.length; i++) {
-    if (a[b[i]]) {
-      if (b[i + 1] && !reg.test(b[i + 1])) a[b[i]].word.push(b[i + 1])
-      a[b[i]].count++
+    if (obj[b[i]]) {
+      if (b[i + 1] && !reg.test(b[i + 1])) obj[b[i]].word.push(b[i + 1])
+      obj[b[i]].count++
     }
   }
-  return a
+  return obj
 }
 
 function deepCopy(obj) {
