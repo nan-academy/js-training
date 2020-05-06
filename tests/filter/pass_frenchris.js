@@ -1,36 +1,35 @@
-const vowelsPresent = (el) => {
-  let charset = ['a', 'e', 'i', 'o', 'u']
-  let result = [...Array(5)].map((el) => false)
-  for (let e of el)
-    for (let i in charset) if (charset[i] === e) result[i] = true
-  return result.filter((el) => el === true).length
-}
+const filterShortStateName = (arr) => arr.filter((word) => word.length < 7)
 
-const countVowels = (el) => {
-  let charset = ['a', 'e', 'i', 'o', 'u']
+const isVowel = (letter) =>
+  ['a', 'e', 'i', 'o', 'u'].includes(letter.toLowerCase())
+
+const filterStartVowel = (arr) => arr.filter((word) => isVowel(word[0]))
+
+const countVowels = (word) => {
   let result = 0
-  for (let e of el) for (let i in charset) if (charset[i] === e) result++
+  for (let letter of word) if (isVowel(letter)) result++
   return result
 }
 
-const isFirstVowel = (el) => {
+const filter5Vowels = (arr) => arr.filter((word) => countVowels(word) >= 5)
+
+const vowelsPresent = (word) => {
   let charset = ['a', 'e', 'i', 'o', 'u']
-  for (let i in charset) if (charset[i] === el[0]) return true
-  return false
+  let result = [...Array(5)]
+  for (let letter of word.toLowerCase())
+    for (let i = 0; i < charset.length; i++)
+      if (charset[i] === letter) result[i] = true
+  return result.filter((el) => el === true).length
 }
 
-const midFunc = (el, func) =>
-  el
-    .map((el) => el.toLowerCase().split(''))
-    .filter(func)
-    .map((el) => el.join(''))
-    .map((el) => `${el[0].toUpperCase()}${el.slice(1)}`)
+const filter1DistinctVowel = (arr) =>
+  arr.filter((word) => vowelsPresent(word) === 1)
 
-const filterStartVowel = (el) => midFunc(el, isFirstVowel)
-const filter5Vowels = (el) => midFunc(el, (el) => countVowels(el) >= 5)
-const filter1DistinctVowel = (el) =>
-  midFunc(el, (el) => vowelsPresent(el) === 1)
-
-const filterNotStartVowel = (el) => midFunc(el, (el) => !isFirstVowel(el))
-const filterIndexOdd = (el) =>
-  filterNotStartVowel(el.filter((el, i) => i % 2 !== 0))
+const multiFilter = (arr) =>
+  arr.filter(
+    (el) =>
+      el.capital.length > 7 &&
+      !isVowel(el.name[0]) &&
+      countVowels(el.abbreviation) >= 1 &&
+      el.region !== 'South'
+  )
