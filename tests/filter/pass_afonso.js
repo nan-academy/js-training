@@ -1,23 +1,23 @@
-const Filter = (arr, fun) => {
+const filter = (arr, fun) => {
   let res = []
   for (let i = 0; i < arr.length; i++) {
-    if (fun(arr[i])) {
+    if (fun(arr[i], i, arr)) {
       res.push(arr[i])
     }
   }
   return res
 }
 
-const Reject = (arr, fun) => {
+const reject = (arr, fun) => {
   let res = []
   for (let i = 0; i < arr.length; i++) {
-    if (!fun(arr[i])) {
+    if (!fun(arr[i], i, arr)) {
       res.push(arr[i])
     }
   }
   return res
 }
 
-const Partition = (arr, fun) => {
-  return [Filter(arr, fun), Reject(arr, fun)]
+const partition = (arr, fun) => {
+  return [filter(arr, fun), reject(arr, fun)]
 }
