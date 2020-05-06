@@ -7,7 +7,7 @@ Create a function called `invert` that inverts the object keys and values.
 
 ### Notions
 
-- https://nan-academy.github.io/js-training/examples/data-structures.js
+- https://devdocs.io/javascript/global_objects/object
 
 // /*/ // ⚡
 
