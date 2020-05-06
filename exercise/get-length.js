@@ -9,8 +9,8 @@ and return its length.
 
 ### Notions
 
-- Data-Structures
-- Get
+- https://nan-academy.github.io/js-training/examples/data-structures.js
+- https://nan-academy.github.io/js-training/examples/get.js
 
 // /*/ // ⚡
 

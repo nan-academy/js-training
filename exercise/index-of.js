@@ -13,6 +13,7 @@ Create 3 functions:
 > `indexOf` and `lastIndexOf` takes an additionnal `fromIndex` argument
 > that allow you to begin searching from a specific index.
 
+
 ### Notions
 
 - https://devdocs.io/javascript/global_objects/array/indexof

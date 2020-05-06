@@ -9,9 +9,9 @@ itself as the value
 
 ### Notions
 
-- Data-Structures
-- Get
-- Set
+- https://nan-academy.github.io/js-training/examples/data-structures.js
+- https://nan-academy.github.io/js-training/examples/get.js
+- https://nan-academy.github.io/js-training/examples/set.js
 
 // /*/ // ⚡
 

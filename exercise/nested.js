@@ -9,6 +9,7 @@ Create a `nested` constant variable that contains
 
 `nested` and `obj` must be frozen to prevent changes from them.
 
+
 ### Notions
 
 - https://nan-academy.github.io/js-training/examples/data-structures.js

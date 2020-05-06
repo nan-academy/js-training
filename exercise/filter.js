@@ -41,6 +41,7 @@ Example of an array of objects matching the criterias:
   { tag: 'PA', name: 'Pennsylvania', capital: 'Harrisburg', region: 'Northeast' }
 ]
 
+
 ### Notions
 
 - https://devdocs.io/javascript/global_objects/array/filter

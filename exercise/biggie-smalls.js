@@ -10,7 +10,7 @@ Create 2 variables
 
 ### Notions
 
-- Numbers
+- https://devdocs.io/javascript-number/
 
 // /*/ // ⚡
 

@@ -19,7 +19,7 @@ Add new function properties to the object `is`` to check a value type
 
 ### Notions
 
-- Primitive and operators
+- https://nan-academy.github.io/js-training/examples/primitive-and-operators
 - https://devdocs.io/javascript/operators/typeof
 - https://developer.mozilla.org/en-US/docs/Glossary/Truthy
 - https://developer.mozilla.org/en-US/docs/Glossary/Falsy

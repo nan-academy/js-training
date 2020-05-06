@@ -1,6 +1,7 @@
 /*
-
 ## Console
+
+### Instructions
 
 We will now start by learning to use the console.
 

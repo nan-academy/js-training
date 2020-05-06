@@ -9,6 +9,7 @@ Create a constant variable for each primitives:
 - `bool` for `Boolean`
 - `undef` for `undefined`
 
+
 ### Notions
 
 - https://nan-academy.github.io/js-training/examples/primitive-and-operators.js
