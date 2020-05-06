@@ -3,17 +3,19 @@
 
 ### Instruction
 
-Create a function called `sumOrMul` that receives an array and adds or
-multiplies its elements depending on whether the element is an odd or an even number.
+Create three functions :
+- `adder` that receives an array and adds its elements.
+- `sumOrMul` that receives an array and adds or multiplies its elements
+depending on whether the element is an odd or an even number.
+- `funcExec` that receives an array of functions and executes them.
 
-If the element is even the function should multiply it,
-otherwise it should add it.
-
-The function returns the final value.
+All functions may or may not receive an extra argument that should be the
+initial value for the functions execution.
 
 Example:
-sumOrMul([1, 2, 3, 4]) = ((1 * 2) + 3) * 4 = 20
-
+`sumOrMul([1, 2, 3, 4], 5)`
+    //-> (((5 + 1) * 2) + 3) * 4
+  //-> 60
 
 ### Notions
 
@@ -36,23 +38,22 @@ export const setup = () => {
   return { reduceCalls }
 }
 
-t(({ eq }) => eq(sumOrMul([1, 2, 3, 4]), 20))
+t(({ eq }) => eq(adder([1, 2, 3, 4]), 10))
 t(({ eq }, ctx) =>
   eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [1, 2, 3, 4])
 )
-t(({ eq }) => eq(sumOrMul([9, 24, 7, 11, 3]), 237))
+t(({ eq }) => eq(adder([9, 24, 7, 11, 3], 10), 64))
 t(({ eq }, ctx) =>
   eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [9, 24, 7, 11, 3])
 )
-t(({ eq }) => eq(sumOrMul([1, 30, 2, 0]), 0))
-t(({ eq }, ctx) =>
-  eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [1, 30, 2, 0])
-)
+t(({ eq }) => eq(adder([]), 0))
+t(({ eq }, ctx) => eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], []))
+
 t(({ eq }) => eq(sumOrMul([29, 23, 3, 2, 25]), 135))
 t(({ eq }, ctx) =>
   eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [29, 23, 3, 2, 25])
 )
-t(({ eq }) => eq(sumOrMul([18, 17, 7, 13, 25]), 80))
+t(({ eq }) => eq(sumOrMul([18, 17, 7, 13, 25], 12), 278))
 t(({ eq }, ctx) =>
   eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [18, 17, 7, 13, 25])
 )
@@ -64,5 +65,28 @@ t(({ eq }) => eq(sumOrMul([8, 16, 7, 0, 31]), 31))
 t(({ eq }, ctx) =>
   eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], [8, 16, 7, 0, 31])
 )
+
+const fArr1 = [
+  (x) => x + 2,
+  (x) => x ** 2,
+  (x) => x - 7,
+  (x) => `result: [${x}]`,
+]
+const fArr2 = [
+  (x) => x + 20,
+  (x) => x * 3,
+  (x) => {
+    return {
+      result: x,
+      isOdd: x % 2 === 0,
+    }
+  },
+]
+
+t(({ eq }) => eq(funcExec(fArr1, 10), `result: [137]`))
+t(({ eq }, ctx) => eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], fArr1))
+
+t(({ eq }) => eq(funcExec(fArr2, 4), { result: 72, isOdd: true }))
+t(({ eq }, ctx) => eq(ctx.reduceCalls[ctx.reduceCalls.length - 1], fArr2))
 
 Object.freeze(tests)
