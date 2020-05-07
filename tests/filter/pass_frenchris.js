@@ -1,13 +1,13 @@
-const Filter = (el, fun) => {
+const filter = (el, fun) => {
   let answer = []
   for (const [i, val] of el.entries()) if (fun(val, i, el)) answer.push(val)
   return answer
 }
 
-const Reject = (el, fun) => {
+const reject = (el, fun) => {
   let answer = []
   for (const [i, val] of el.entries()) if (!fun(val, i, el)) answer.push(val)
   return answer
 }
 
-const Partition = (el, fun) => [Filter(el, fun), Reject(el, fun)]
+const partition = (el, fun) => [filter(el, fun), reject(el, fun)]

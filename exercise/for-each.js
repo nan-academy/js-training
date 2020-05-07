@@ -3,12 +3,13 @@
 
 ### Instructions
 
-Create a `ForEach` function that takes an array as first argument, a function as second,
+Create a `forEach` function that takes an array as first argument, a function as second,
 and that works like the method .forEach
+
 
 ### Notions
 
--https://devdocs.io/javascript/global_objects/array/foreach
+- https://devdocs.io/javascript/global_objects/array/foreach
 
 */
 Array.prototype.forEach = undefined
@@ -20,41 +21,31 @@ export const tests = []
 const t = (f) => tests.push(f)
 
 export const setup = () => {
-  const arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -10, 20, -95, 86, 32]
-  arr1.__proto__[15] = 1
-
-  return { arr1 }
+  const arr = [1, 2, 3, 4, 5, Math.random(), 7, 10, -10, 20, -95]
+  Object.getPrototypeOf([]).proto = ' [avoid for..in] '
+  return { arr }
 }
 
-const double = (el, i, arr) => (arr[i] = el * 2)
-const decuple = (el, i, arr) => (arr[i] = el * 10)
-const box = (el, i, arr) => (arr[i] = [el])
+// callback is call with the item value
+t(({ eq, ctx }) => {
+  const result = []
+  forEach(ctx.arr, value => result.push(value))
+  return eq(result, ctx.arr)
+})
 
-t(({ eq, ctx }) => eq(forEach(ctx.arr1, double), undefined))
+// callback second parameter is the index
+t(({ eq, ctx }) => {
+  const result = []
+  forEach(ctx.arr, (_, index) => result.push(index))
+  return eq(result, [...ctx.arr.keys()])
+})
 
-t(({ eq, ctx }) => eq(ctx.arr1[0], 2))
-t(({ eq, ctx }) => eq(ctx.arr1[1], 4))
-t(({ eq, ctx }) => eq(ctx.arr1[2], 6))
-t(({ eq, ctx }) => eq(ctx.arr1[3], 8))
-t(({ eq, ctx }) => eq(ctx.arr1[4], 10))
+// callback third parameter is the array
+t(({ eq, ctx }) => {
+  const result = []
+  forEach(ctx.arr, (_, __, arr) => result.push(arr))
+  return eq(result, Array(ctx.arr.length).fill(ctx.arr))
+})
 
-t(({ eq, ctx }) => eq(forEach(ctx.arr1, box), undefined))
-
-t(({ eq, ctx }) => eq(ctx.arr1[5], [12]))
-t(({ eq, ctx }) => eq(ctx.arr1[6], [14]))
-t(({ eq, ctx }) => eq(ctx.arr1[7], [16]))
-t(({ eq, ctx }) => eq(ctx.arr1[8], [18]))
-t(({ eq, ctx }) => eq(ctx.arr1[9], [20]))
-
-t(({ eq, ctx }) => eq(forEach(ctx.arr1, decuple), undefined))
-
-t(({ eq, ctx }) => eq(ctx.arr1[10], -200))
-t(({ eq, ctx }) => eq(ctx.arr1[11], 400))
-t(({ eq, ctx }) => eq(ctx.arr1[12], -1900))
-t(({ eq, ctx }) => eq(ctx.arr1[13], 1720))
-t(({ eq, ctx }) => eq(ctx.arr1[14], 640))
-
-// check of arr1.__proto__[15] = 1 (To avoid for...in)
-t(({ eq, ctx }) => eq(ctx.arr1[15], 1))
 
 Object.freeze(tests)

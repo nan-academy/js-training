@@ -4,5 +4,4 @@ export const exercises = {
   'using-filter': { feedback: true },
   'for-each': { feedback: true },
   filter: { feedback: true },
-  map: { feedback: true },
 }

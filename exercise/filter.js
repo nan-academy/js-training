@@ -3,21 +3,20 @@
 
 ### Instructions
 
-- Create a `Filter` function that takes an array as first argument, a function as second,
+- Create a `filter` function that takes an array as first argument, a function as second,
 and that works like the method [].filter
 
-- Create a `Reject` function that takes an array as first argument, a function as second,
+- Create a `reject` function that takes an array as first argument, a function as second,
 and that works like the reject function from lodash.
 
-- Create a `Partition` function that takes an array as first argument, a function as second,
+- Create a `partition` function that takes an array as first argument, a function as second,
 and that works like the partition function from lodash.
+
 
 ### Notions
 
 - https://devdocs.io/javascript/global_objects/array/filter
-
 - https://lodash.com/docs/4.17.15#reject
-
 - https://lodash.com/docs/4.17.15#partition
 
 */
@@ -25,7 +24,6 @@ Array.prototype.filter = undefined
 ///*/ // ⚡
 
 ///*/// ⚡
-
 export const tests = []
 const t = (f) => tests.push(f)
 
@@ -39,9 +37,8 @@ const check5 = (el, i) =>
 const check6 = el => el.region === 'South' || el.region === 'West'
 
 // Filter
-
 t(({ eq, ctx }) =>
-  eq(Filter(ctx.onlyNumbers, check1), [
+  eq(filter(ctx.onlyNumbers, check1), [
     10,
     -10,
     20,
@@ -54,15 +51,15 @@ t(({ eq, ctx }) =>
     150,
   ])
 )
-t(({ eq, ctx }) => eq(Filter(ctx.onlyNumbers, check2), [15, 33, 450, 66]))
+t(({ eq, ctx }) => eq(filter(ctx.onlyNumbers, check2), [15, 33, 450, 66]))
 t(({ eq, ctx }) =>
-  eq(Filter(ctx.mixedTypes, check3), [
+  eq(filter(ctx.mixedTypes, check3), [
     ['how', 'are', 'the', 2],
     ['iu', 2],
   ])
 )
 t(({ eq, ctx }) =>
-  eq(Filter(ctx.mixedTypes, check4), [
+  eq(filter(ctx.mixedTypes, check4), [
     ['how', 'are', 'the', 2],
     ['iu', 2],
     'good',
@@ -70,14 +67,13 @@ t(({ eq, ctx }) =>
   ])
 )
 t(({ eq, ctx }) =>
-  eq(Filter(ctx.mixedTypes, check5), [-10, 2, 65, 2, 2678, true])
+  eq(filter(ctx.mixedTypes, check5), [-10, 2, 65, 2, 2678, true])
 )
 
 // Reject
-
-t(({ eq, ctx }) => eq(Reject(ctx.onlyNumbers, check1), [-95, 15, 3, 5, 33, 45]))
+t(({ eq, ctx }) => eq(reject(ctx.onlyNumbers, check1), [-95, 15, 3, 5, 33, 45]))
 t(({ eq, ctx }) =>
-  eq(Reject(ctx.onlyNumbers, check2), [
+  eq(reject(ctx.onlyNumbers, check2), [
     10,
     -10,
     20,
@@ -93,7 +89,7 @@ t(({ eq, ctx }) =>
   ])
 )
 t(({ eq, ctx }) =>
-  eq(Reject(ctx.mixedTypes, check3), [
+  eq(reject(ctx.mixedTypes, check3), [
     1,
     2,
     4,
@@ -114,7 +110,7 @@ t(({ eq, ctx }) =>
 )
 
 t(({ eq, ctx }) =>
-  eq(Reject(ctx.mixedTypes, check4), [
+  eq(reject(ctx.mixedTypes, check4), [
     1,
     2,
     4,
@@ -132,7 +128,7 @@ t(({ eq, ctx }) =>
   ])
 )
 t(({ eq, ctx }) =>
-  eq(Reject(ctx.mixedTypes, check5), [
+  eq(reject(ctx.mixedTypes, check5), [
     1,
     2,
     4,
@@ -148,22 +144,21 @@ t(({ eq, ctx }) =>
   ])
 )
 
-// // Partition
-
+// Partition
 t(({ eq, ctx }) =>
-  eq(Partition(ctx.onlyNumbers, check1), [
+  eq(partition(ctx.onlyNumbers, check1), [
     [10, -10, 20, 86, 2, 32, 450, 950, 66, 150],
     [-95, 15, 3, 5, 33, 45],
   ])
 )
 t(({ eq, ctx }) =>
-  eq(Partition(ctx.onlyNumbers, check2), [
+  eq(partition(ctx.onlyNumbers, check2), [
     [15, 33, 450, 66],
     [10, -10, 20, -95, 86, 2, 3, 5, 32, 45, 950, 150],
   ])
 )
 t(({ eq, ctx }) =>
-  eq(Partition(ctx.mixedTypes, check3), [
+  eq(partition(ctx.mixedTypes, check3), [
     [
       ['how', 'are', 'the', 2],
       ['iu', 2],
@@ -189,13 +184,13 @@ t(({ eq, ctx }) =>
   ])
 )
 t(({ eq, ctx }) =>
-  eq(Partition(ctx.mixedTypes, check4), [
+  eq(partition(ctx.mixedTypes, check4), [
     [['how', 'are', 'the', 2], ['iu', 2], 'good', true],
     [1, 2, 4, 8, 'hello', 12, -10, 'of', 'well', 2, 65, 2, 2678, 'be'],
   ])
 )
 t(({ eq, ctx }) =>
-  eq(Partition(ctx.mixedTypes, check5), [
+  eq(partition(ctx.mixedTypes, check5), [
     [-10, 2, 65, 2, 2678, true],
     [
       1,
@@ -215,9 +210,8 @@ t(({ eq, ctx }) =>
 )
 
 /// Filter on an object
-
 t(({ eq, ctx }) =>
-  eq(Filter(ctx.statesData, check6), [
+  eq(filter(ctx.statesData, check6), [
     {
       tag: 'AL',
       name: 'Alabama',
@@ -330,7 +324,6 @@ t(({ eq, ctx }) =>
     { tag: 'WY', name: 'Wyoming', capital: 'Cheyenne', region: 'West' }
   ])
 )
-
 
 export const setup = () => {
   const onlyNumbers = Object.freeze([
