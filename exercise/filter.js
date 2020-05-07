@@ -3,193 +3,376 @@
 
 ### Instructions
 
+- Create a `Filter` function that takes an array as first argument, a function as second,
+and that works like the method [].filter
 
-- Create a function `filterShortStateName` that takes an array of
-strings and that returns the ones with less than 7 characters.
+- Create a `Reject` function that takes an array as first argument, a function as second,
+and that works like the reject function from lodash.
 
-> Example: `'Iowa'` only contains 4 characters
-
-- Create a function `filterStartVowel` that takes an array of strings
-and that returns only the ones that start with a vowel (a,e,i,o,u).
-
-> Example: `'Alabama'` starts with a vowel
-
-- Create a function `filter5Vowels` that takes an array of strings
-and that returns only the ones which contain at least 5
-vowels (a,e,i,o,u).
-
-> Example: `'California'` countains at least 5 vowels
-
-- Create a function `filter1DistinctVowel` that takes an array of
-strings and that returns only the ones which vowels are of only
-one distinct one (a,e,i,o,u).
-
-> Example: `'Alabama'` only contains 1 disctinct vowels `'a'`.
-
-- Create a function `multiFilter` that takes an array of
-objects and that returns only the ones which:
-
-- the key `capital` contains at least 8 characters.
-- the key `name` does not start with a vowel
-- the key `tag` has at least one vowel.
-- the key `region` is not `'South'`
-
-Example of an array of objects matching the criterias:
-
-[
-  { tag: 'CA', name: 'California', capital: 'Sacramento', region: 'West' },
-  { tag: 'PA', name: 'Pennsylvania', capital: 'Harrisburg', region: 'Northeast' }
-]
-
+- Create a `Partition` function that takes an array as first argument, a function as second,
+and that works like the partition function from lodash.
 
 ### Notions
 
 - https://devdocs.io/javascript/global_objects/array/filter
 
+- https://lodash.com/docs/4.17.15#reject
+
+- https://lodash.com/docs/4.17.15#partition
+
+*/
+Array.prototype.filter = undefined
 ///*/ // ⚡
 
 ///*/// ⚡
+
 export const tests = []
 const t = (f) => tests.push(f)
 
-const check = ({ filterCalls }, eq, a, b) => {
-  const result = eq(a, b)
-  const len = filterCalls.length
-  filterCalls.length = 0
-  return len ? result : false
-}
+const check1 = (el) => el % 2 === 0
+const check2 = (el, i) => el % 3 === 0 && i % 2 === 0
+const check3 = (el) => Array.isArray(el)
+const check4 = (el, i, arr) =>
+  typeof el !== 'number' && i % 2 !== 0 && arr.includes(true)
+const check5 = (el, i) =>
+  (typeof el === 'number' || typeof el === 'boolean') && i > 5
+const check6 = el => el.region === 'South' || el.region === 'West'
+
+// Filter
 
 t(({ eq, ctx }) =>
-  check(ctx, eq, filterShortStateName(ctx.arr1), [
-    'Alaska',
-    'Hawaii',
-    'Idaho',
-    'Iowa',
-    'Kansas',
-    'Maine',
-    'Nevada',
-    'Ohio',
-    'Oregon',
-    'Texas',
-    'Utah',
+  eq(Filter(ctx.onlyNumbers, check1), [
+    10,
+    -10,
+    20,
+    86,
+    2,
+    32,
+    450,
+    950,
+    66,
+    150,
+  ])
+)
+t(({ eq, ctx }) => eq(Filter(ctx.onlyNumbers, check2), [15, 33, 450, 66]))
+t(({ eq, ctx }) =>
+  eq(Filter(ctx.mixedTypes, check3), [
+    ['how', 'are', 'the', 2],
+    ['iu', 2],
+  ])
+)
+t(({ eq, ctx }) =>
+  eq(Filter(ctx.mixedTypes, check4), [
+    ['how', 'are', 'the', 2],
+    ['iu', 2],
+    'good',
+    true,
+  ])
+)
+t(({ eq, ctx }) =>
+  eq(Filter(ctx.mixedTypes, check5), [-10, 2, 65, 2, 2678, true])
+)
+
+// Reject
+
+t(({ eq, ctx }) => eq(Reject(ctx.onlyNumbers, check1), [-95, 15, 3, 5, 33, 45]))
+t(({ eq, ctx }) =>
+  eq(Reject(ctx.onlyNumbers, check2), [
+    10,
+    -10,
+    20,
+    -95,
+    86,
+    2,
+    3,
+    5,
+    32,
+    45,
+    950,
+    150,
+  ])
+)
+t(({ eq, ctx }) =>
+  eq(Reject(ctx.mixedTypes, check3), [
+    1,
+    2,
+    4,
+    8,
+    'hello',
+    12,
+    -10,
+    'of',
+    'well',
+    2,
+    65,
+    'good',
+    2,
+    2678,
+    'be',
+    true,
   ])
 )
 
 t(({ eq, ctx }) =>
-  check(ctx, eq, filterStartVowel(ctx.arr1), [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Utah',
+  eq(Reject(ctx.mixedTypes, check4), [
+    1,
+    2,
+    4,
+    8,
+    'hello',
+    12,
+    -10,
+    'of',
+    'well',
+    2,
+    65,
+    2,
+    2678,
+    'be',
+  ])
+)
+t(({ eq, ctx }) =>
+  eq(Reject(ctx.mixedTypes, check5), [
+    1,
+    2,
+    4,
+    8,
+    'hello',
+    12,
+    ['how', 'are', 'the', 2],
+    'of',
+    ['iu', 2],
+    'well',
+    'good',
+    'be',
   ])
 )
 
+// // Partition
+
 t(({ eq, ctx }) =>
-  check(ctx, eq, filter5Vowels(ctx.arr1), [
-    'California',
-    'Louisiana',
-    'North Carolina',
-    'South Carolina',
-    'South Dakota',
-    'West Virginia',
+  eq(Partition(ctx.onlyNumbers, check1), [
+    [10, -10, 20, 86, 2, 32, 450, 950, 66, 150],
+    [-95, 15, 3, 5, 33, 45],
+  ])
+)
+t(({ eq, ctx }) =>
+  eq(Partition(ctx.onlyNumbers, check2), [
+    [15, 33, 450, 66],
+    [10, -10, 20, -95, 86, 2, 3, 5, 32, 45, 950, 150],
+  ])
+)
+t(({ eq, ctx }) =>
+  eq(Partition(ctx.mixedTypes, check3), [
+    [
+      ['how', 'are', 'the', 2],
+      ['iu', 2],
+    ],
+    [
+      1,
+      2,
+      4,
+      8,
+      'hello',
+      12,
+      -10,
+      'of',
+      'well',
+      2,
+      65,
+      'good',
+      2,
+      2678,
+      'be',
+      true,
+    ],
+  ])
+)
+t(({ eq, ctx }) =>
+  eq(Partition(ctx.mixedTypes, check4), [
+    [['how', 'are', 'the', 2], ['iu', 2], 'good', true],
+    [1, 2, 4, 8, 'hello', 12, -10, 'of', 'well', 2, 65, 2, 2678, 'be'],
+  ])
+)
+t(({ eq, ctx }) =>
+  eq(Partition(ctx.mixedTypes, check5), [
+    [-10, 2, 65, 2, 2678, true],
+    [
+      1,
+      2,
+      4,
+      8,
+      'hello',
+      12,
+      ['how', 'are', 'the', 2],
+      'of',
+      ['iu', 2],
+      'well',
+      'good',
+      'be',
+    ],
   ])
 )
 
-t(({ eq, ctx }) =>
-  check(ctx, eq, filter1DistinctVowel(ctx.arr1), [
-    'Alabama',
-    'Alaska',
-    'Arkansas',
-    'Kansas',
-    'Maryland',
-    'Mississippi',
-    'New Jersey',
-    'Tennessee',
-  ])
-)
+/// Filter on an object
 
 t(({ eq, ctx }) =>
-  check(ctx, eq, multiFilter(ctx.arr2), [
-    { tag: 'CA', name: 'California', capital: 'Sacramento', region: 'West' },
+  eq(Filter(ctx.statesData, check6), [
+    {
+      tag: 'AL',
+      name: 'Alabama',
+      capital: 'Montgomery',
+      region: 'South'
+    },
+    { tag: 'AK', name: 'Alaska', capital: 'Juneau', region: 'West' },
+    { tag: 'AZ', name: 'Arizona', capital: 'Phoenix', region: 'West' },
+    {
+      tag: 'AR',
+      name: 'Arkansas',
+      capital: 'Little Rock',
+      region: 'South'
+    },
+    {
+      tag: 'CA',
+      name: 'California',
+      capital: 'Sacramento',
+      region: 'West'
+    },
+    { tag: 'CO', name: 'Colorado', capital: 'Denver', region: 'West' },
+    { tag: 'DE', name: 'Delaware', capital: 'Dover', region: 'South' },
+    {
+      tag: 'DC',
+      name: 'District Of Columbia',
+      capital: 'Washington',
+      region: 'South'
+    },
+    {
+      tag: 'FL',
+      name: 'Florida',
+      capital: 'Tallahassee',
+      region: 'South'
+    },
+    { tag: 'GA', name: 'Georgia', capital: 'Atlanta', region: 'South' },
     { tag: 'HI', name: 'Hawaii', capital: 'Honolulu', region: 'West' },
-    { tag: 'MO', name: 'Missouri', capital: 'Jefferson City', region: 'Midwest' },
-    { tag: 'PA', name: 'Pennsylvania', capital: 'Harrisburg', region: 'Northeast' },
-    { tag: 'RI', name: 'Rhode Island', capital: 'Providence', region: 'Northeast' },
+    { tag: 'ID', name: 'Idaho', capital: 'Boise', region: 'West' },
+    {
+      tag: 'KY',
+      name: 'Kentucky',
+      capital: 'Frankfort',
+      region: 'South'
+    },
+    {
+      tag: 'LA',
+      name: 'Louisiana',
+      capital: 'Baton Rouge',
+      region: 'South'
+    },
+    {
+      tag: 'MD',
+      name: 'Maryland',
+      capital: 'Annapolis',
+      region: 'South'
+    },
+    {
+      tag: 'MS',
+      name: 'Mississippi',
+      capital: 'Jackson',
+      region: 'South'
+    },
+    { tag: 'MT', name: 'Montana', capital: 'Helena', region: 'West' },
+    { tag: 'NV', name: 'Nevada', capital: 'Carson City', region: 'West' },
+    {
+      tag: 'NM',
+      name: 'New Mexico',
+      capital: 'Santa Fe',
+      region: 'West'
+    },
+    {
+      tag: 'NC',
+      name: 'North Carolina',
+      capital: 'Raleigh',
+      region: 'South'
+    },
+    {
+      tag: 'OK',
+      name: 'Oklahoma',
+      capital: 'Oklahoma City',
+      region: 'South'
+    },
+    { tag: 'OR', name: 'Oregon', capital: 'Salem', region: 'West' },
+    {
+      tag: 'SC',
+      name: 'South Carolina',
+      capital: 'Columbia',
+      region: 'South'
+    },
+    {
+      tag: 'TN',
+      name: 'Tennessee',
+      capital: 'Nashville',
+      region: 'South'
+    },
+    { tag: 'TX', name: 'Texas', capital: 'Austin', region: 'South' },
+    {
+      tag: 'UT',
+      name: 'Utah',
+      capital: 'Salt Lake City',
+      region: 'West'
+    },
+    { tag: 'VA', name: 'Virginia', capital: 'Richmond', region: 'South' },
+    { tag: 'WA', name: 'Washington', capital: 'Olympia', region: 'West' },
+    {
+      tag: 'WV',
+      name: 'West Virginia',
+      capital: 'Charleston',
+      region: 'South'
+    },
+    { tag: 'WY', name: 'Wyoming', capital: 'Cheyenne', region: 'West' }
   ])
 )
 
-Object.freeze(tests)
 
 export const setup = () => {
-  const filterCalls = []
-  const _filter = Array.prototype.filter
-  Array.prototype.filter = function () {
-    filterCalls.push(this)
-    return _filter.apply(this, arguments)
-  }
-
-  const arr1 = Object.freeze([
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'Florida',
-    'Georgia',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
+  const onlyNumbers = Object.freeze([
+    10,
+    -10,
+    20,
+    -95,
+    15,
+    86,
+    2,
+    3,
+    5,
+    32,
+    33,
+    45,
+    450,
+    950,
+    66,
+    150,
+  ])
+  const mixedTypes = Object.freeze([
+    1,
+    2,
+    4,
+    8,
+    'hello',
+    12,
+    -10,
+    ['how', 'are', 'the', 2],
+    'of',
+    ['iu', 2],
+    'well',
+    2,
+    65,
+    'good',
+    2,
+    2678,
+    'be',
+    true,
   ])
 
-  const arr2 = Object.freeze([
+  const statesData = Object.freeze([
     { tag: 'AL', name: 'Alabama', capital: 'Montgomery', region: 'South' },
     { tag: 'AK', name: 'Alaska', capital: 'Juneau', region: 'West' },
     { tag: 'AZ', name: 'Arizona', capital: 'Phoenix', region: 'West' },
@@ -243,5 +426,9 @@ export const setup = () => {
     { tag: 'WY', name: 'Wyoming', capital: 'Cheyenne', region: 'West' },
   ].map(e => Object.freeze(e)))
 
-  return { filterCalls, arr1, arr2 }
+  Object.getPrototypeOf([]).proto = ' [avoid for..in] '
+
+  return { onlyNumbers, mixedTypes, statesData }
 }
+
+Object.freeze(tests)
