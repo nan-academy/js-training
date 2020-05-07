@@ -9,5 +9,6 @@ export const exercises = {
   'deep-copy': { feedback: true },
   replica: { feedback: true },
   pronoun: { feedback: true },
+  neuron: { feedback: true },
   flags: { feedback: true },
 }
