@@ -1,6 +1,6 @@
 export const next = 'async'
 export const exercises = {
-  pick: { feedback: true },
+  'pick-omit': { feedback: true },
   invert: { feedback: true },
   'molecules-cells': { feedback: true },
   fusion: { feedback: true },
