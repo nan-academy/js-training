@@ -2,8 +2,8 @@ export const next = 'async'
 export const exercises = {
   'pick-omit': { feedback: true },
   invert: { feedback: true },
-  'molecules-cells': { feedback: true },
   fusion: { feedback: true },
+  'manipulate-values': { feedback: true },
   'manipulate-keys': { feedback: true },
   'manipulate-entries': { feedback: true },
   'deep-copy': { feedback: true },
