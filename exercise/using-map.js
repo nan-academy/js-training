@@ -32,10 +32,13 @@ and which Upper Case each words of a string.
 The function returns then an array of strings.
 
 Example:
+```js
 ['alabama', 'new jersey']
+```
 returns
+```js
 ['Alabama', 'New Jersey']
-
+```
 
 -Create a function named 'farenheitToCelsius' which takes an array
 of farenheit temperatures which converts them to Celsius.
