@@ -252,8 +252,8 @@ t(({ eq, ctx }) =>
 )
 t(({ eq, ctx }) =>
   eq(tempForecasts(ctx.arr1)[8], '35°Celsius in Albuquerque, New Mexico')
-  )
-  
+)
+
 export const setup = () => {
   const mapCalls = []
   const _map = Array.prototype.map
@@ -333,4 +333,4 @@ export const setup = () => {
   return { mapCalls, arr1, arr2, arr3 }
 }
 
-
+Object.freeze(tests)
