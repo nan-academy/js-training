@@ -1,20 +1,6 @@
 import * as api from '../lib/deno-api.js'
 import { test } from '../lib/tester.js'
-import { readFileStr } from 'https://deno.land/std/fs/mod.ts'
-
-const generateTests = async (user) =>
-  Promise.all(
-    (await Deno.readdir(user)).map(async ({ name }) => {
-      const dir = `tests/${name.slice(0, -3)}`
-      await Deno.mkdir(dir)
-        .catch(err => err.name === 'AlreadyExists' || Promise.reject(err))
-
-      return Deno.copyFile(`${user}/${name}`, `${dir}/pass_${user}.js`)
-        .then(() => console.log(`copied: ${dir}/pass_${user}.js`))
-    })
-  )
-
-// generateTests('kigiri')
+import { readFileStr } from 'https://deno.land/std@v1.0.0-rc1/fs/read_file_str.ts'
 
 const blacklist = new Set([
   'console.js',
@@ -22,16 +8,14 @@ const blacklist = new Set([
   'congratulation.js',
 ])
 
-for (const exInfo of await Deno.readdir('exercise')) {
+const results = {}
+for await (const exInfo of Deno.readDir('exercise')) {
   if (blacklist.has(exInfo.name)) continue
-  if (!exInfo.isFile()) continue
+  if (!exInfo.isFile) continue
   const baseName = exInfo.name.slice(0, -3)
   const NOT_FOUND = `Missing tests for exercise ${exInfo.name}`
-  const tests = await Deno.readdir(
-    `tests/${baseName}`
-  ).catch((e) => Promise.reject(e.name === 'NotFound' ? Error(NOT_FOUND) : e))
   const parts = (await readFileStr(`exercise/${exInfo.name}`)).split('// /*/ // ⚡')
-  for (const info of tests) {
+  for await (const info of Deno.readDir(`tests/${baseName}`)) {
     const code = await readFileStr(`tests/${baseName}/${info.name}`)
     const [ type ] = info.name.split('_', 1)
     const result = await test({
@@ -53,5 +37,35 @@ for (const exInfo of await Deno.readdir('exercise')) {
       const T = type === 'pass' ? 'PASS'.grn() : 'FAIL'.red()
       console.debug('✓'.grn(), baseName.blu(), T, result.duration.toFixed(2), info.name.slice(5, -3))
     }
+
+    Object.assign(results[baseName] || (results[baseName] = {}), {
+      [info.name.slice(5, -3)]: { ex: baseName, ok, ...result },
+    })
+
   }
 }
+
+const users = ['afonso', 'kigiri', 'lee', 'ms', 'frenchris' ]
+
+const values = Object.values(results)
+console.log(users
+  .map(user => {
+    const cumul = { user, duration: 0, passed: 0 }
+    for (const {[user]: result = { duration: 0 }} of values) {
+      result.ok && cumul.passed++
+      cumul.duration += result.duration
+    }
+    return cumul
+  })
+  .sort((a, b) => a.passed - b.passed)
+  .map(({ passed, user }) => {
+    const score = `${((passed / values.length) * 100).toFixed(2)}%`
+    const ico = passed === values.length
+      ? `✓ ${user}`.grn()
+      : `✗ ${user}`.red()
+
+    return `${ico} ${score.blu()}`
+  })
+  .join('\n'))
+
+
