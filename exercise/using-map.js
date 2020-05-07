@@ -105,156 +105,118 @@ returns
 ///*/ // ⚡
 
 ///*/// ⚡
-
 export const tests = []
 const t = (f) => tests.push(f)
 
 // citiesOnly
+t(({ eq, ctx }) =>
+  eq(citiesOnly(ctx.states), [
+    'Los Angeles',
+    'San Francisco',
+    'Miami',
+    'New York City',
+    'Juneau',
+    'Boston',
+    'Jackson',
+    'Utqiagvik',
+    'Albuquerque',
+  ])
+)
 
-t(({ eq, ctx }) => eq(citiesOnly(ctx.arr1)[0], 'Los Angeles'))
-t(({ eq, ctx }) => eq(citiesOnly(ctx.arr1)[1], 'San Francisco'))
-t(({ eq, ctx }) => eq(citiesOnly(ctx.arr1)[2], 'Miami'))
-t(({ eq, ctx }) => eq(citiesOnly(ctx.arr1)[3], 'New York City'))
-t(({ eq, ctx }) => eq(citiesOnly(ctx.arr1)[4], 'Juneau'))
-t(({ eq, ctx }) => eq(citiesOnly(ctx.arr1)[5], 'Boston'))
-t(({ eq, ctx }) => eq(citiesOnly(ctx.arr1)[6], 'Jackson'))
-t(({ eq, ctx }) => eq(citiesOnly(ctx.arr1)[7], 'Utqiagvik'))
-t(({ eq, ctx }) => eq(citiesOnly(ctx.arr1)[8], 'Albuquerque'))
-
-t(({ eq, ctx }) => eq(ctx.mapCalls[0], ctx.arr1))
+t(({ eq, ctx }) => eq(ctx.mapCalls[0], ctx.states))
 
 // upperCasingStates
+t(({ eq, ctx }) =>
+  eq(upperCasingStates(ctx.cities), [
+    'Alabama',
+    'New Jersey',
+    'Alaska',
+    'New York',
+    'California',
+    'New Hampshire',
+    'Ohio',
+    'Texas',
+    'West Virginia',
+  ])
+)
 
-t(({ eq, ctx }) => eq(upperCasingStates(ctx.arr2)[0], 'Alabama'))
-t(({ eq, ctx }) => eq(upperCasingStates(ctx.arr2)[1], 'New Jersey'))
-t(({ eq, ctx }) => eq(upperCasingStates(ctx.arr2)[2], 'Alaska'))
-t(({ eq, ctx }) => eq(upperCasingStates(ctx.arr2)[3], 'New York'))
-t(({ eq, ctx }) => eq(upperCasingStates(ctx.arr2)[4], 'California'))
-t(({ eq, ctx }) => eq(upperCasingStates(ctx.arr2)[5], 'New Hampshire'))
-t(({ eq, ctx }) => eq(upperCasingStates(ctx.arr2)[6], 'Ohio'))
-t(({ eq, ctx }) => eq(upperCasingStates(ctx.arr2)[7], 'Texas'))
-t(({ eq, ctx }) => eq(upperCasingStates(ctx.arr2)[8], 'West Virginia'))
-
-t(({ eq, ctx }) => eq(ctx.mapCalls.includes(ctx.arr2), true))
+t(({ eq, ctx }) => eq(ctx.mapCalls.includes(ctx.cities), true))
 
 // farenheitToCelsius
-
-t(({ eq, ctx }) => eq(farenheitToCelsius(ctx.arr3)[0], '30°C'))
-t(({ eq, ctx }) => eq(farenheitToCelsius(ctx.arr3)[1], '37°C'))
-t(({ eq, ctx }) => eq(farenheitToCelsius(ctx.arr3)[2], '5°C'))
-t(({ eq, ctx }) => eq(farenheitToCelsius(ctx.arr3)[3], '12°C'))
-t(({ eq, ctx }) => eq(farenheitToCelsius(ctx.arr3)[4], '-13°C'))
-t(({ eq, ctx }) => eq(farenheitToCelsius(ctx.arr3)[5], '21°C'))
-t(({ eq, ctx }) => eq(farenheitToCelsius(ctx.arr3)[6], '-19°C'))
-
-t(({ eq, ctx }) => eq(ctx.mapCalls.includes(ctx.arr3), true))
-
-// trimTemp
-
 t(({ eq, ctx }) =>
-  eq(trimTemp(ctx.arr1)[0], {
-    city: 'Los Angeles',
-    state: 'california',
-    region: 'West',
-    temperature: '101°F',
-  })
-)
-t(({ eq, ctx }) =>
-  eq(trimTemp(ctx.arr1)[1], {
-    city: 'San Francisco',
-    state: 'california',
-    region: 'West',
-    temperature: '84°F',
-  })
-)
-t(({ eq, ctx }) =>
-  eq(trimTemp(ctx.arr1)[2], {
-    city: 'Miami',
-    state: 'Florida',
-    region: 'South',
-    temperature: '112°F',
-  })
-)
-t(({ eq, ctx }) =>
-  eq(trimTemp(ctx.arr1)[3], {
-    city: 'New York City',
-    state: 'new york',
-    region: 'North East',
-    temperature: '0°F',
-  })
-)
-t(({ eq, ctx }) =>
-  eq(trimTemp(ctx.arr1)[4], {
-    city: 'Juneau',
-    state: 'Alaska',
-    region: 'West',
-    temperature: '21°F',
-  })
-)
-t(({ eq, ctx }) =>
-  eq(trimTemp(ctx.arr1)[5], {
-    city: 'Boston',
-    state: 'massachussetts',
-    region: 'North East',
-    temperature: '45°F',
-  })
-)
-t(({ eq, ctx }) =>
-  eq(trimTemp(ctx.arr1)[6], {
-    city: 'Jackson',
-    state: 'mississippi',
-    region: 'South',
-    temperature: '70°F',
-  })
-)
-t(({ eq, ctx }) =>
-  eq(trimTemp(ctx.arr1)[7], {
-    city: 'Utqiagvik',
-    state: 'Alaska',
-    region: 'West',
-    temperature: '-1°F',
-  })
-)
-t(({ eq, ctx }) =>
-  eq(trimTemp(ctx.arr1)[8], {
-    city: 'Albuquerque',
-    state: 'new mexico',
-    region: 'West',
-    temperature: '95°F',
-  })
+  eq(farenheitToCelsius(ctx.temps), [
+    '30°C',
+    '37°C',
+    '5°C',
+    '12°C',
+    '-13°C',
+    '21°C',
+    '-19°C',
+  ])
 )
 
-t(({ eq, ctx }) => eq(ctx.mapCalls.includes(ctx.arr1), true))
+t(({ eq, ctx }) => eq(ctx.mapCalls.includes(ctx.temps), true))
 
 // trimTemp
-
 t(({ eq, ctx }) =>
-  eq(tempForecasts(ctx.arr1)[0], '38°Celsius in Los Angeles, California')
+  eq(trimTemp(ctx.states), [
+    {
+      city: 'Los Angeles',
+      state: 'california',
+      region: 'West',
+      temperature: '101°F',
+    },
+    {
+      city: 'San Francisco',
+      state: 'california',
+      region: 'West',
+      temperature: '84°F',
+    },
+    { city: 'Miami', state: 'Florida', region: 'South', temperature: '112°F' },
+    {
+      city: 'New York City',
+      state: 'new york',
+      region: 'North East',
+      temperature: '0°F',
+    },
+    { city: 'Juneau', state: 'Alaska', region: 'West', temperature: '21°F' },
+    {
+      city: 'Boston',
+      state: 'massachussetts',
+      region: 'North East',
+      temperature: '45°F',
+    },
+    {
+      city: 'Jackson',
+      state: 'mississippi',
+      region: 'South',
+      temperature: '70°F',
+    },
+    { city: 'Utqiagvik', state: 'Alaska', region: 'West', temperature: '-1°F' },
+    {
+      city: 'Albuquerque',
+      state: 'new mexico',
+      region: 'West',
+      temperature: '95°F',
+    },
+  ])
 )
 
+t(({ eq, ctx }) => eq(ctx.mapCalls.includes(ctx.states), true))
+
+// tempForecasts
 t(({ eq, ctx }) =>
-  eq(tempForecasts(ctx.arr1)[1], '28°Celsius in San Francisco, California')
-)
-t(({ eq, ctx }) =>
-  eq(tempForecasts(ctx.arr1)[2], '44°Celsius in Miami, Florida')
-)
-t(({ eq, ctx }) =>
-  eq(tempForecasts(ctx.arr1)[3], '-18°Celsius in New York City, New York')
-)
-t(({ eq, ctx }) =>
-  eq(tempForecasts(ctx.arr1)[4], '-7°Celsius in Juneau, Alaska')
-)
-t(({ eq, ctx }) =>
-  eq(tempForecasts(ctx.arr1)[5], '7°Celsius in Boston, Massachussetts')
-)
-t(({ eq, ctx }) =>
-  eq(tempForecasts(ctx.arr1)[6], '21°Celsius in Jackson, Mississippi')
-)
-t(({ eq, ctx }) =>
-  eq(tempForecasts(ctx.arr1)[7], '-19°Celsius in Utqiagvik, Alaska')
-)
-t(({ eq, ctx }) =>
-  eq(tempForecasts(ctx.arr1)[8], '35°Celsius in Albuquerque, New Mexico')
+  eq(tempForecasts(ctx.states), [
+    '38°Celsius in Los Angeles, California',
+    '28°Celsius in San Francisco, California',
+    '44°Celsius in Miami, Florida',
+    '-18°Celsius in New York City, New York',
+    '-7°Celsius in Juneau, Alaska',
+    '7°Celsius in Boston, Massachussetts',
+    '21°Celsius in Jackson, Mississippi',
+    '-19°Celsius in Utqiagvik, Alaska',
+    '35°Celsius in Albuquerque, New Mexico',
+  ])
 )
 
 export const setup = () => {
@@ -264,7 +226,8 @@ export const setup = () => {
     mapCalls.push(this)
     return _map.apply(this, arguments)
   }
-  const arr1 = [
+
+  const states = [
     {
       city: 'Los Angeles',
       temperature: '101 °F',
@@ -316,7 +279,7 @@ export const setup = () => {
     },
   ]
 
-  const arr2 = [
+  const cities = [
     'alabama',
     'new jersey',
     'alaska',
@@ -328,12 +291,14 @@ export const setup = () => {
     'west virginia',
   ]
 
-  const arr3 = ['86°F', '100°F', '41°F', '55°F', '10°F', '70°F', '-2°F']
+  Object.getPrototypeOf([]).proto = ' [avoid for..in] '
+  const temps = ['86°F', '100°F', '41°F', '55°F', '10°F', '70°F', '-2°F']
 
-  Object.freeze(arr1)
-  Object.freeze(arr2)
-  Object.freeze(arr3)
-  return { mapCalls, arr1, arr2, arr3 }
+  Object.freeze(states)
+  Object.freeze(cities)
+  Object.freeze(temps)
+
+  return { mapCalls, states, cities, temps }
 }
 
 Object.freeze(tests)
