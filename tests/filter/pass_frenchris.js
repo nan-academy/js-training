@@ -30,6 +30,6 @@ const multiFilter = (arr) =>
     (el) =>
       el.capital.length > 7 &&
       !isVowel(el.name[0]) &&
-      countVowels(el.abbreviation) >= 1 &&
+      countVowels(el.tag) >= 1 &&
       el.region !== 'South'
   )
