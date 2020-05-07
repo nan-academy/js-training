@@ -36,7 +36,7 @@ const posValsIndex = (el, i) => (el >= 0 ? `${i}: ${el}` : undefined)
 const indexValsArray = (el, i, arr) =>
   `${el} is at index: ${i} out of ${arr.length - 1}`
 
-const arrayFormatSentences = (item, index, arr) => {
+const arrayFormatSentence = (item, index, arr) => {
   if (index === arr.length - 2) return `and ${arr[arr.length - 2]} `
   if (index === arr.length - 1) {
     return `are ${String(arr.length - 1)} ${item}.`
