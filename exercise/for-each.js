@@ -22,8 +22,8 @@ const t = (f) => tests.push(f)
 export const setup = () => {
   const arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -10, 20, -95, 86, 32]
   arr1.__proto__[15] = 1
-  let arrCheck = []
-  return { arr1, arrCheck }
+
+  return { arr1 }
 }
 
 const double = (el, i, arr) => (arr[i] = el * 2)
