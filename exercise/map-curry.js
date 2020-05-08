@@ -3,76 +3,178 @@
 
 ### Instruction
 
-Create a function `mapEntriesCurry` that receives as parameters an object and a function.
-You will also have to create two other functions that will be used in the `mapEntriesCurry` function:
-- `addToCart` that adds 100g to each element of the grocery cart.
-- `caloriesMedia` that calculates the media of calories for each element in the cart.
+This exercise consists in creating curry functions to apply in the objects entries.
+You will have to create the following curry functions:
+
+- `defaultCurry` that will curry two objects in witch the second object must be the default object 
+and returns a new object with the modifications applied by the first object
+- `mapCurry` that replicate the function `.map` 
+- `reduceCurry` that replicate the function `.reduce`
+- `filterCurry` that replicate the function `.filter`
+
+You will also have to create for each curry function the following:
+
+- `reduceScore` that will return the total value of the scores of the persons who use the force
+- `filterForce` that will return the force users with `shootingScores` equal or higher than 80
+- `mapMedia` that will return a new object with the propriety `scoreMedia` that is the media of the scores for each person
+
+### Notions
+
+- https://devdocs.io/javascript/global_objects/array/filter
+- https://devdocs.io/javascript/global_objects/array/map
+- https://devdocs.io/javascript/global_objects/array/reduce
+- https://devdocs.io/javascript/global_objects/object/entries
+- https://devdocs.io/javascript/global_objects/object/fromentries
 */
 
-const groceriesCart = {
-  oil: 500,
-  onion: 230,
-  garlic: 220,
-  paprika: 480,
-  tomato: 100,
-  vinegar: 100,
-  sugar: 249,
-  orange: 833,
+// prettier-ignore
+const personnel = {
+  Luke_Skywalker: { id: 5,  pilotingScore: 98, shootingScore: 56, isForceUser: true  },
+  Sabine_Wren:    { id: 82, pilotingScore: 73, shootingScore: 99, isForceUser: false },
+  Zeb_Orellios:   { id: 22, pilotingScore: 20, shootingScore: 59, isForceUser: false },
+  Ezra_Bridger:   { id: 15, pilotingScore: 43, shootingScore: 67, isForceUser: true  },
+  Caleb_Dume:     { id: 11, pilotingScore: 71, shootingScore: 85, isForceUser: true  },
 }
 
-// small database with nutrition facts, per 100 grams
-// prettier-ignore
-const nutritionDB = {
-    tomato: { calories: 18, protein: 0.9, carbs: 3.9, sugar: 2.6, fiber: 1.2, fat: 0.2 },
-    vinegar: { calories: 20, protein: 0.04, carbs: 0.6, sugar: 0.4, fiber: 0, fat: 0 },
-    oil: { calories: 48, protein: 0, carbs: 0, sugar: 123, fiber: 0, fat: 151 },
-    onion: { calories: 0, protein: 1, carbs: 9, sugar: 0, fiber: 0, fat: 0 },
-    garlic: { calories: 149, protein: 6.4, carbs: 33, sugar: 1, fiber: 2.1, fat: 0.5 },
-    paprika: { calories: 282, protein: 14.14, carbs: 53.99, sugar: 1, fiber: 0, fat: 12.89 },
-    sugar: { calories: 387, protein: 0, carbs: 100, fiber: 0, fat: 0 },
-    orange: { calories: 49, protein: 0.9, carbs: 13, fiber: 0.2, fat: 0.1 }
-  }
+// /*/ // ⚡
 
-///*/// ⚡
-
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 
-t(({ eq }) => eq(mapEntriesCurry(groceriesCart)(addToCart), $addCart))
-t(({ eq }) => eq(mapEntriesCurry($secondCart)(addToCart), $addSolSecondCart))
+// default values
+t(({ eq }) => eq(defaultCurry({ http: 403 })({}), { http: 403 }))
+t(({ eq }) =>
+  eq(defaultCurry({ http: 403, connection: 'close' })({ http: 200 }), {
+    http: 200,
+    connection: 'close',
+  })
+)
 
-t(({ eq }) => eq(mapEntriesCurry(groceriesCart)(caloriesMedia), $cart))
-t(({ eq }) => eq(mapEntriesCurry($secondCart)(caloriesMedia), $solSecondCart))
+// object mutation
+t(({ eq }) =>
+  eq(defaultCurry(Object.freeze({ http: 403 }))(Object.freeze({ http: 200 })), {
+    http: 200,
+  })
+)
+
+// multiple values
+t(({ eq }) =>
+  eq(
+    defaultCurry({ http: 403, age: 0, connection: 'close' })({
+      http: 200,
+      age: 30,
+      connection: 'keep-alive',
+      content_type: 'text/css',
+    }),
+    { http: 200, age: 30, connection: 'keep-alive', content_type: 'text/css' }
+  )
+)
+
+// map curry
+t(({ eq }) =>
+  eq(mapCurry(([k, v]) => [`${k}🤙🏼`, `${v}🤙🏼`])({ emoji: 'cool' }), {
+    'emoji🤙🏼': 'cool🤙🏼',
+  })
+)
+
+// reduce curry
+t(({ eq }) =>
+  eq(
+    reduceCurry((acc, [k, v]) => acc.concat(' ', `${k}:${v.id}`))(
+      personnel,
+      'personnel:'
+    ),
+    'personnel: Luke_Skywalker:5 Sabine_Wren:82 Zeb_Orellios:22 Ezra_Bridger:15 Caleb_Dume:11'
+  )
+)
+
+// filter curry
+t(({ eq }) =>
+  eq(filterCurry(([k, v]) => /Luke/.test(k) || v.id > 22)(personnel), {
+    Sabine_Wren: {
+      id: 82,
+      pilotingScore: 73,
+      shootingScore: 99,
+      isForceUser: false,
+    },
+    Luke_Skywalker: {
+      id: 5,
+      pilotingScore: 98,
+      shootingScore: 56,
+      isForceUser: true,
+    },
+  })
+)
+
+//reduce score
+t(({ eq }) => eq(reduceScore(personnel, 0), 420))
+t(({ eq }) => eq(reduceScore(personnel, 420), 840))
+
+//filter score
+t(({ eq }) =>
+  eq(filterForce(personnel), {
+    Luke_Skywalker: {
+      id: 5,
+      pilotingScore: 98,
+      shootingScore: 56,
+      isForceUser: true,
+    },
+    Ezra_Bridger: {
+      id: 15,
+      pilotingScore: 43,
+      shootingScore: 67,
+      isForceUser: true,
+    },
+    Caleb_Dume: {
+      id: 11,
+      pilotingScore: 71,
+      shootingScore: 85,
+      isForceUser: true,
+    },
+  })
+)
+
+// map media
+t(({ eq, ctx }) => eq(mapMedia(personnel), ctx.total))
 
 Object.freeze(tests)
-
-const $cart = {
-  oil: { calories: 240 },
-  onion: { calories: 0 },
-  garlic: { calories: 327.8 },
-  paprika: { calories: 1353.6 },
-  tomato: { calories: 18 },
-  vinegar: { calories: 20 },
-  sugar: { calories: 963.63 },
-  orange: { calories: 408.17 },
-}
-const $addCart = {
-  oil: 600,
-  onion: 330,
-  garlic: 320,
-  paprika: 580,
-  tomato: 200,
-  vinegar: 200,
-  sugar: 349,
-  orange: 933,
-}
-
-const $secondCart = { oil: 500, onion: 230, paprika: 480, tomato: 100 }
-const $solSecondCart = {
-  oil: { calories: 240 },
-  onion: { calories: 0 },
-  paprika: { calories: 1353.6 },
-  tomato: { calories: 18 },
-}
-const $addSolSecondCart = { oil: 600, onion: 330, paprika: 580, tomato: 200 }
+export const setup = () => ({
+  total: {
+    Sabine_Wren: {
+      id: 82,
+      pilotingScore: 73,
+      shootingScore: 99,
+      isForceUser: false,
+      scoreMedia: 72.27,
+    },
+    Zeb_Orellios: {
+      id: 22,
+      pilotingScore: 20,
+      shootingScore: 59,
+      isForceUser: false,
+      scoreMedia: 11.8,
+    },
+    Luke_Skywalker: {
+      id: 5,
+      pilotingScore: 98,
+      shootingScore: 56,
+      isForceUser: true,
+      scoreMedia: 54.88,
+    },
+    Ezra_Bridger: {
+      id: 15,
+      pilotingScore: 43,
+      shootingScore: 67,
+      isForceUser: true,
+      scoreMedia: 28.81,
+    },
+    Caleb_Dume: {
+      id: 11,
+      pilotingScore: 71,
+      shootingScore: 85,
+      isForceUser: true,
+      scoreMedia: 60.35,
+    },
+  },
+})
