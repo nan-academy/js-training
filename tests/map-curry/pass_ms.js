@@ -1,20 +1,20 @@
-const mapEntriesCurry = (obj) => (fn) => {
-  return Object.fromEntries(Object.entries(obj).map(fn))
-}
+const defaultCurry = (obj) => (defObj) => Object.assign({}, obj, defObj)
 
-const reduceOBJ = (obj, f, init) => Object.entries(obj).reduce(f, init)
-const addToCart = ([key, value]) => [key, value + 100]
+const reduceCurry = (fn) => (obj, ...args) =>
+  Object.entries(obj).reduce(fn, ...args)
 
-const caloriesMedia = ([key, value]) => [
-  key,
-  reduceOBJ(
-    nutritionDB,
-    (acc, cr) => {
-      if (cr.includes(key)) {
-        acc['calories'] = (value * cr[1].calories) / 100
-      }
-      return acc
-    },
-    {}
-  ),
-]
+const filterCurry = (fn) => (obj) =>
+  Object.fromEntries(Object.entries(obj).filter(fn))
+
+const mapCurry = (fn) => (obj) =>
+  Object.fromEntries(Object.entries(obj).map(fn))
+
+const reduceScore = reduceCurry(
+  (acc, [, v]) =>
+    (acc += v.isForceUser ? v.pilotingScore + v.shootingScore : 0)
+)
+const filterForce = filterCurry(([k, v]) => v.isForceUser)
+const mapMedia = mapCurry(([k, v]) => [
+  k,
+  (v['scoreMedia'] = (v.pilotingScore * v.shootingScore) / 100) && v,
+])

@@ -6,6 +6,7 @@ export const exercises = {
   'manipulate-values': { feedback: true },
   'manipulate-keys': { feedback: true },
   'manipulate-entries': { feedback: true },
+  'map-curry': { feedback: true },
   'deep-copy': { feedback: true },
   replica: { feedback: true },
   pronoun: { feedback: true },
