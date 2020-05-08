@@ -15,9 +15,9 @@ Please note that those functions can only have one argument each.
 
 - https://stackoverflow.com/questions/36314/what-is-currying
 
-///*/ // ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 
 export const tests = []
 const t = (f) => tests.push(f)
