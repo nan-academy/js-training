@@ -16,47 +16,48 @@ If it is, it should be returned '<city> is a city from <country>', otherwise
 export const tests = []
 const t = (f) => tests.push(f)
 
-const isFrenchCity = (city) =>
-  hasCity('France', [
-    'Bordeaux',
-    'Paris',
-    'Lille',
-    'Lyon',
-    'Marseille',
-    'Saint-Étienne',
-  ])(city)
+const isFrenchCity = hasCity('France', [
+  'Bordeaux',
+  'Paris',
+  'Lille',
+  'Lyon',
+  'Marseille',
+  'Saint-Étienne',
+])
 
-const isAmericanCity = (city) =>
-  hasCity('America', [
-    'New York',
-    'Chicago',
-    'San Francisco',
-    'Washington DC',
-    'Los Angeles',
-  ])(city)
+const isAmericanCity = hasCity('America', [
+  'New York',
+  'Chicago',
+  'San Francisco',
+  'Washington DC',
+  'Los Angeles',
+])
 
-const isChineseCity = (city) =>
-  hasCity('China', [
-    'Beijing',
-    'Shanghai',
-    'Wuhan',
-    'Shenzhen',
-    'Tianjin',
-    'Chengdu',
-  ])(city)
+const isChineseCity = hasCity('China', [
+  'Beijing',
+  'Shanghai',
+  'Wuhan',
+  'Shenzhen',
+  'Tianjin',
+  'Chengdu',
+])
 
 t(({ eq }) => eq(isFrenchCity('Lisbon'), 'Lisbon is not a city from France'))
 t(({ eq }) => eq(isFrenchCity('Lille'), 'Lille is a city from France'))
 t(({ eq }) => eq(isFrenchCity('Chengdu'), 'Chengdu is not a city from France'))
 t(({ eq }) => eq(isFrenchCity('Paris'), 'Paris is a city from France'))
 
-t(({eq})=> eq(isAmericanCity('Manchester'), 'Manchester is not a city from America'))
-t(({eq})=> eq(isAmericanCity('New York'), 'New York is a city from America'))
-t(({eq})=> eq(isAmericanCity(''), ' is not a city from America'))
-t(({eq})=> eq(isAmericanCity('Los Angeles'), 'Los Angeles is a city from America'))
+t(({ eq }) =>
+  eq(isAmericanCity('Manchester'), 'Manchester is not a city from America')
+)
+t(({ eq }) => eq(isAmericanCity('New York'), 'New York is a city from America'))
+t(({ eq }) => eq(isAmericanCity(''), ' is not a city from America'))
+t(({ eq }) =>
+  eq(isAmericanCity('Los Angeles'), 'Los Angeles is a city from America')
+)
 
-t(({eq})=> eq(isChineseCity('Wuhan'), 'Wuhan is a city from China'))
-t(({eq})=> eq(isChineseCity('Tokyo'), 'Tokyo is not a city from China'))
-t(({eq})=> eq(isChineseCity('Seul'), 'Seul is not a city from China'))
-t(({eq})=> eq(isChineseCity('Beijing'), 'Beijing is a city from China'))
+t(({ eq }) => eq(isChineseCity('Wuhan'), 'Wuhan is a city from China'))
+t(({ eq }) => eq(isChineseCity('Tokyo'), 'Tokyo is not a city from China'))
+t(({ eq }) => eq(isChineseCity('Seul'), 'Seul is not a city from China'))
+t(({ eq }) => eq(isChineseCity('Beijing'), 'Beijing is a city from China'))
 Object.freeze(tests)
