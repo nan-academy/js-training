@@ -8,4 +8,5 @@ export const exercises = {
   'sweet-curry': { feedback: true },
   'has-city': { feedback: true },
   'currify': { feedback: true },
+  'long-words': { feedback: true },
 }
