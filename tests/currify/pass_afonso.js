@@ -1,4 +1,4 @@
-function curry(f) {
+function currify(f) {
   return function curried(...args) {
     if (args.length >= f.length) {
       return f(...args)
