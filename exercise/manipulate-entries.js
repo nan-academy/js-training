@@ -1,9 +1,9 @@
 /*
-## manipulate-Keys
+## manipulate-entries
 
 ### Instructions
 
-Finnish your groceries!!!
+Finish your groceries!!!
 
 Create 3 functions that works like the `.filter`, `.map` and `.reduce` array method but for the entries of the grocery cart.
 - `filterEntries` filters using both key and value.
