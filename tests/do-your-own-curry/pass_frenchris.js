@@ -1,4 +1,4 @@
-const Curry = (fn, ...args) =>
+const curry = (fn, ...args) =>
   fn.length <= args.length
     ? fn(...args)
-    : (...extraArg) => Curry(fn, ...args, ...extraArg)
+    : (...extraArg) => curry(fn, ...args, ...extraArg)
