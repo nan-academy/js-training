@@ -10,10 +10,11 @@ const mapCurry = (fn) => (obj) =>
   Object.fromEntries(Object.entries(obj).map(fn))
 
 const reduceScore = reduceCurry(
-  (acc, [, v]) =>
-    (acc += v.isForceUser ? v.pilotingScore + v.shootingScore : 0)
+  (acc, [, v]) => (acc += v.isForceUser ? v.pilotingScore + v.shootingScore : 0)
 )
-const filterForce = filterCurry(([k, v]) => v.isForceUser)
+const filterForce = filterCurry(
+  ([k, v]) => v.isForceUser || v.shootingScore >= 80
+)
 const mapMedia = mapCurry(([k, v]) => [
   k,
   (v['scoreMedia'] = (v.pilotingScore * v.shootingScore) / 100) && v,

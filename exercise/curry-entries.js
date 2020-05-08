@@ -1,5 +1,5 @@
 /*
-## Map Curry
+## curry entries
 
 ### Instruction
 
@@ -91,55 +91,54 @@ t(({ eq }) =>
 
 // filter curry
 t(({ eq }) =>
-  eq(filterCurry(([k, v]) => /Luke/.test(k) || v.id > 22)(personnel), {
+  eq(filterCurry(([, v]) => v.id > 22)(personnel), {
     Sabine_Wren: {
       id: 82,
       pilotingScore: 73,
       shootingScore: 99,
       isForceUser: false,
     },
-    Luke_Skywalker: {
-      id: 5,
-      pilotingScore: 98,
-      shootingScore: 56,
-      isForceUser: true,
-    },
   })
 )
 
-//reduce score
+// reduce score
 t(({ eq }) => eq(reduceScore(personnel, 0), 420))
 t(({ eq }) => eq(reduceScore(personnel, 420), 840))
 
 //filter score
-t(({ eq }) =>
-  eq(filterForce(personnel), {
-    Luke_Skywalker: {
-      id: 5,
-      pilotingScore: 98,
-      shootingScore: 56,
-      isForceUser: true,
-    },
-    Ezra_Bridger: {
-      id: 15,
-      pilotingScore: 43,
-      shootingScore: 67,
-      isForceUser: true,
-    },
-    Caleb_Dume: {
-      id: 11,
-      pilotingScore: 71,
-      shootingScore: 85,
-      isForceUser: true,
-    },
-  })
-)
+t(({ eq, ctx }) => eq(filterForce(personnel), ctx.filter))
 
 // map media
 t(({ eq, ctx }) => eq(mapMedia(personnel), ctx.total))
 
 Object.freeze(tests)
 export const setup = () => ({
+  filter: {
+    Caleb_Dume: {
+      id: 11,
+      isForceUser: true,
+      pilotingScore: 71,
+      shootingScore: 85,
+    },
+    Ezra_Bridger: {
+      id: 15,
+      isForceUser: true,
+      pilotingScore: 43,
+      shootingScore: 67,
+    },
+    Luke_Skywalker: {
+      id: 5,
+      isForceUser: true,
+      pilotingScore: 98,
+      shootingScore: 56,
+    },
+    Sabine_Wren: {
+      id: 82,
+      isForceUser: false,
+      pilotingScore: 73,
+      shootingScore: 99,
+    },
+  },
   total: {
     Sabine_Wren: {
       id: 82,
