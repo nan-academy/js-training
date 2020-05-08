@@ -86,6 +86,19 @@ t(({ eq, ctx }) =>
   )
 )
 
+// out of order
+t(({ eq, ctx }) =>
+  eq(
+    neuron([
+      'Questions: how are you? - Response: well thanks, and you?',
+      'affirmations: i am fine - Response: cool',
+      'Orders: turn on the lights! - Response: done',
+      'affirmations: i am fine - Response: awesome',
+    ]),
+    ctx.multiInteractions
+  )
+)
+
 // testing big dataset
 t(({ eq, ctx }) => eq(neuron(ctx.multipleTypes), ctx.multResult))
 
