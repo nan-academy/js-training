@@ -16,8 +16,8 @@ a string with at least 7 characters.
 
 ### Notions
 
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+- https://devdocs.io/javascript/global_objects/Array/every
+- https://devdocs.io/javascript/global_objects/Array/some
 
 // /*/ // ⚡
 
@@ -50,22 +50,22 @@ let arr3 = ['leak', 'talk', 'bite', 'slip', 'free']
 let arr4 = ['fixture', 'opponent', 'coincide', 'residential', 'relaxation']
 
 t(({ eq }) => eq(longWords(arr1), false))
-t(({ eq }, ctx) => eq(ctx.everyCalls[ctx.everyCalls.length - 1], arr1))
+t(({ eq, ctx }) => eq(ctx.everyCalls[ctx.everyCalls.length - 1], arr1))
 t(({ eq }) => eq(longWords(arr2), true))
-t(({ eq }, ctx) => eq(ctx.everyCalls[ctx.everyCalls.length - 1], arr2))
+t(({ eq, ctx }) => eq(ctx.everyCalls[ctx.everyCalls.length - 1], arr2))
 t(({ eq }) => eq(longWords(arr3), false))
-t(({ eq }, ctx) => eq(ctx.everyCalls[ctx.everyCalls.length - 1], arr3))
+t(({ eq, ctx }) => eq(ctx.everyCalls[ctx.everyCalls.length - 1], arr3))
 t(({ eq }) => eq(longWords(arr4), true))
-t(({ eq }, ctx) => eq(ctx.everyCalls[ctx.everyCalls.length - 1], arr4))
+t(({ eq, ctx }) => eq(ctx.everyCalls[ctx.everyCalls.length - 1], arr4))
 
 t(({ eq }) => eq(oneLongWord(arr1), false))
-t(({ eq }, ctx) => eq(ctx.someCalls[ctx.someCalls.length - 1], arr1))
+t(({ eq, ctx }) => eq(ctx.someCalls[ctx.someCalls.length - 1], arr1))
 t(({ eq }) => eq(oneLongWord(arr2), false))
-t(({ eq }, ctx) => eq(ctx.someCalls[ctx.someCalls.length - 1], arr2))
+t(({ eq, ctx }) => eq(ctx.someCalls[ctx.someCalls.length - 1], arr2))
 t(({ eq }) => eq(oneLongWord(arr3), false))
-t(({ eq }, ctx) => eq(ctx.someCalls[ctx.someCalls.length - 1], arr3))
+t(({ eq, ctx }) => eq(ctx.someCalls[ctx.someCalls.length - 1], arr3))
 t(({ eq }) => eq(oneLongWord(arr4), true))
-t(({ eq }, ctx) => eq(ctx.someCalls[ctx.someCalls.length - 1], arr4))
+t(({ eq, ctx }) => eq(ctx.someCalls[ctx.someCalls.length - 1], arr4))
 
 t(({ eq }) => eq(noLongWords(arr1), false))
 t(({ eq }) => eq(noLongWords(arr2), false))

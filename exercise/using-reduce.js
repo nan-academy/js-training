@@ -94,5 +94,6 @@ export const setup = () => {
       }
     },
   ]
-  return { reduceCalls }
+
+  return { reduceCalls, fArr1, fArr2 }
 }
