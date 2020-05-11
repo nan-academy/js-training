@@ -68,8 +68,8 @@ t((_) => match(_, is.fun, [t, console.log]))
 t((_) => match(_, is.falsy, [0, NaN, '', undefined, null, void 0]))
 
 // is.def
-t(() => !vals().filter(is.def).includes(undefined))
-t(() => vals().filter(is.def).length === vals().length - 2)
+t(({ ctx }) => !ctx.filter(is.def).includes(undefined))
+t(({ ctx }) => ctx.filter(is.def).length === ctx.length - 2)
 
 // is.truthy
 t((_) =>
