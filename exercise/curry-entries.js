@@ -3,20 +3,26 @@
 
 ### Instruction
 
-This exercise consists in creating curry functions to apply in the objects entries.
+This exercise consists in creating curry functions to apply in the objects
+entries.
 You will have to create the following curry functions:
 
-- `defaultCurry` that will curry two objects in witch the second object must be the default object 
-and returns a new object with the modifications applied by the first object
+- `defaultCurry` that will curry two objects in witch the second object must
+be the default object and returns a new object with the modifications applied
+by the first object
 - `mapCurry` that replicate the function `.map` 
 - `reduceCurry` that replicate the function `.reduce`
 - `filterCurry` that replicate the function `.filter`
 
 You will also have to create for each curry function the following:
 
-- `reduceScore` that will return the total value of the scores of the persons who use the force
-- `filterForce` that will return the force users with `shootingScores` equal or higher than 80
-- `mapMedia` that will return a new object with the propriety `scoreMedia` that is the media of the scores for each person
+- `reduceScore` that will return the total value of the scores
+  of the persons who use the force
+- `filterForce` that will return the force users with `shootingScores`
+  equal or higher than 80
+- `mapAverage` that will return a new object with the propriety `averageScore`
+  that is the media of the scores for each person
+
 
 ### Notions
 
@@ -29,11 +35,11 @@ You will also have to create for each curry function the following:
 
 // prettier-ignore
 const personnel = {
-  Luke_Skywalker: { id: 5,  pilotingScore: 98, shootingScore: 56, isForceUser: true  },
-  Sabine_Wren:    { id: 82, pilotingScore: 73, shootingScore: 99, isForceUser: false },
-  Zeb_Orellios:   { id: 22, pilotingScore: 20, shootingScore: 59, isForceUser: false },
-  Ezra_Bridger:   { id: 15, pilotingScore: 43, shootingScore: 67, isForceUser: true  },
-  Caleb_Dume:     { id: 11, pilotingScore: 71, shootingScore: 85, isForceUser: true  },
+  lukeSkywalker: { id: 5,  pilotingScore: 98, shootingScore: 56, isForceUser: true  },
+  sabineWren:    { id: 82, pilotingScore: 73, shootingScore: 99, isForceUser: false },
+  zebOrellios:   { id: 22, pilotingScore: 20, shootingScore: 59, isForceUser: false },
+  ezraBridger:   { id: 15, pilotingScore: 43, shootingScore: 67, isForceUser: true  },
+  calebDume:     { id: 11, pilotingScore: 71, shootingScore: 85, isForceUser: true  },
 }
 
 // /*/ // ⚡
@@ -85,14 +91,14 @@ t(({ eq }) =>
       personnel,
       'personnel:'
     ),
-    'personnel: Luke_Skywalker:5 Sabine_Wren:82 Zeb_Orellios:22 Ezra_Bridger:15 Caleb_Dume:11'
+    'personnel: lukeSkywalker:5 sabineWren:82 zebOrellios:22 ezraBridger:15 calebDume:11'
   )
 )
 
 // filter curry
 t(({ eq }) =>
   eq(filterCurry(([, v]) => v.id > 22)(personnel), {
-    Sabine_Wren: {
+    sabineWren: {
       id: 82,
       pilotingScore: 73,
       shootingScore: 99,
@@ -109,71 +115,23 @@ t(({ eq }) => eq(reduceScore(personnel, 420), 840))
 t(({ eq, ctx }) => eq(filterForce(personnel), ctx.filter))
 
 // map media
-t(({ eq, ctx }) => eq(mapMedia(personnel), ctx.total))
+t(({ eq, ctx }) => eq(mapAverage(personnel), ctx.total))
 
 Object.freeze(tests)
+
+// prettier-ignore
 export const setup = () => ({
   filter: {
-    Caleb_Dume: {
-      id: 11,
-      isForceUser: true,
-      pilotingScore: 71,
-      shootingScore: 85,
-    },
-    Ezra_Bridger: {
-      id: 15,
-      isForceUser: true,
-      pilotingScore: 43,
-      shootingScore: 67,
-    },
-    Luke_Skywalker: {
-      id: 5,
-      isForceUser: true,
-      pilotingScore: 98,
-      shootingScore: 56,
-    },
-    Sabine_Wren: {
-      id: 82,
-      isForceUser: false,
-      pilotingScore: 73,
-      shootingScore: 99,
-    },
+    calebDume:     { id: 11, isForceUser: true,  pilotingScore: 71, shootingScore: 85 },
+    ezraBridger:   { id: 15, isForceUser: true,  pilotingScore: 43, shootingScore: 67 },
+    lukeSkywalker: { id: 5,  isForceUser: true,  pilotingScore: 98, shootingScore: 56 },
+    sabineWren:    { id: 82, isForceUser: false, pilotingScore: 73, shootingScore: 99 },
   },
   total: {
-    Sabine_Wren: {
-      id: 82,
-      pilotingScore: 73,
-      shootingScore: 99,
-      isForceUser: false,
-      scoreMedia: 72.27,
-    },
-    Zeb_Orellios: {
-      id: 22,
-      pilotingScore: 20,
-      shootingScore: 59,
-      isForceUser: false,
-      scoreMedia: 11.8,
-    },
-    Luke_Skywalker: {
-      id: 5,
-      pilotingScore: 98,
-      shootingScore: 56,
-      isForceUser: true,
-      scoreMedia: 54.88,
-    },
-    Ezra_Bridger: {
-      id: 15,
-      pilotingScore: 43,
-      shootingScore: 67,
-      isForceUser: true,
-      scoreMedia: 28.81,
-    },
-    Caleb_Dume: {
-      id: 11,
-      pilotingScore: 71,
-      shootingScore: 85,
-      isForceUser: true,
-      scoreMedia: 60.35,
-    },
+    sabineWren:    { id: 82, pilotingScore: 73, shootingScore: 99, isForceUser: false, averageScore: 86 },
+    zebOrellios:   { id: 22, pilotingScore: 20, shootingScore: 59, isForceUser: false, averageScore: 39.5 },
+    lukeSkywalker: { id: 5,  pilotingScore: 98, shootingScore: 56, isForceUser: true,  averageScore: 77 },
+    ezraBridger:   { id: 15, pilotingScore: 43, shootingScore: 67, isForceUser: true,  averageScore: 55 },
+    calebDume:     { id: 11, pilotingScore: 71, shootingScore: 85, isForceUser: true,  averageScore: 78 },
   },
 })
