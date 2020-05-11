@@ -125,10 +125,10 @@ export const setup = () => ({
     calebDume:     { id: 11, isForceUser: true,  pilotingScore: 71, shootingScore: 85 },
   },
   total: {
-    sabineWren:    { id: 82, pilotingScore: 73, shootingScore: 99, isForceUser: false, averageScore: 3613.5 },
-    zebOrellios:   { id: 22, pilotingScore: 20, shootingScore: 59, isForceUser: false, averageScore: 590    },
-    lukeSkywalker: { id: 5,  pilotingScore: 98, shootingScore: 56, isForceUser: true,  averageScore: 2744   },
-    ezraBridger:   { id: 15, pilotingScore: 43, shootingScore: 67, isForceUser: true,  averageScore: 1440.5 },
-    calebDume:     { id: 11, pilotingScore: 71, shootingScore: 85, isForceUser: true,  averageScore: 3017.5 },
+    sabineWren:    { id: 82, pilotingScore: 73, shootingScore: 99, isForceUser: false, averageScore: 86 },
+    zebOrellios:   { id: 22, pilotingScore: 20, shootingScore: 59, isForceUser: false, averageScore: 39.5 },
+    lukeSkywalker: { id: 5,  pilotingScore: 98, shootingScore: 56, isForceUser: true,  averageScore: 77 },
+    ezraBridger:   { id: 15, pilotingScore: 43, shootingScore: 67, isForceUser: true,  averageScore: 55 },
+    calebDume:     { id: 11, pilotingScore: 71, shootingScore: 85, isForceUser: true,  averageScore: 78 },
   },
 })

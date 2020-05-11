@@ -17,5 +17,5 @@ const filterForce = filterCurry(
 )
 const mapAverage = mapCurry(([k, v]) => [
   k,
-  (v['averageScore'] = (v.pilotingScore * v.shootingScore) / 2) && v,
+  (v['averageScore'] = (v.pilotingScore + v.shootingScore) / 2) && v,
 ])
