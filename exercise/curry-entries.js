@@ -21,7 +21,7 @@ You will also have to create for each curry function the following:
 - `filterForce` that will return the force users with `shootingScores`
   equal or higher than 80
 - `mapAverage` that will return a new object with the propriety `averageScore`
-  that is the media of the scores for each person
+  that is the averages of the scores for each person
 
 
 ### Notions
@@ -114,7 +114,7 @@ t(({ eq }) => eq(reduceScore(personnel, 420), 840))
 //filter score
 t(({ eq, ctx }) => eq(filterForce(personnel), ctx.filter))
 
-// map media
+// map average
 t(({ eq, ctx }) => eq(mapAverage(personnel), ctx.total))
 
 Object.freeze(tests)
@@ -123,15 +123,12 @@ Object.freeze(tests)
 export const setup = () => ({
   filter: {
     calebDume:     { id: 11, isForceUser: true,  pilotingScore: 71, shootingScore: 85 },
-    ezraBridger:   { id: 15, isForceUser: true,  pilotingScore: 43, shootingScore: 67 },
-    lukeSkywalker: { id: 5,  isForceUser: true,  pilotingScore: 98, shootingScore: 56 },
-    sabineWren:    { id: 82, isForceUser: false, pilotingScore: 73, shootingScore: 99 },
   },
   total: {
-    sabineWren:    { id: 82, pilotingScore: 73, shootingScore: 99, isForceUser: false, averageScore: 86 },
-    zebOrellios:   { id: 22, pilotingScore: 20, shootingScore: 59, isForceUser: false, averageScore: 39.5 },
-    lukeSkywalker: { id: 5,  pilotingScore: 98, shootingScore: 56, isForceUser: true,  averageScore: 77 },
-    ezraBridger:   { id: 15, pilotingScore: 43, shootingScore: 67, isForceUser: true,  averageScore: 55 },
-    calebDume:     { id: 11, pilotingScore: 71, shootingScore: 85, isForceUser: true,  averageScore: 78 },
+    sabineWren:    { id: 82, pilotingScore: 73, shootingScore: 99, isForceUser: false, averageScore: 3613.5 },
+    zebOrellios:   { id: 22, pilotingScore: 20, shootingScore: 59, isForceUser: false, averageScore: 590    },
+    lukeSkywalker: { id: 5,  pilotingScore: 98, shootingScore: 56, isForceUser: true,  averageScore: 2744   },
+    ezraBridger:   { id: 15, pilotingScore: 43, shootingScore: 67, isForceUser: true,  averageScore: 1440.5 },
+    calebDume:     { id: 11, pilotingScore: 71, shootingScore: 85, isForceUser: true,  averageScore: 3017.5 },
   },
 })
