@@ -20,6 +20,7 @@ Create a `nested` constant variable that contains
 // /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
+const cantEdit = fn => { try { fn() } catch (err) { return true } }
 
 t(() => nested.constructor === Object)
 
@@ -38,11 +39,11 @@ t(() => nested.arr[2] === '2')
 t(() => nested.arr.length === 3)
 
 // nested is frozen and can not be changed
-t(({ fail }) => fail(() => (nested.obj = 5)))
+t(() => cantEdit(() => nested.obj = 5))
 t(() => nested.obj !== 5)
 
 // nested.obj is also frozen and can not be changed
-t(({ fail }) => fail(() => (nested.obj.update = 5)))
+t(() => cantEdit(() => nested.obj.update = 5))
 t(() => nested.obj.update === undefined)
 
 // nested.arr is not frozen and can be changed
