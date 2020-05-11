@@ -1,0 +1,1 @@
+const flow = (...f) => (...a) => f.reduce((a, f, i) => (i ? f(a) : f(...a)), a)

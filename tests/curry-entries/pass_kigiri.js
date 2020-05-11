@@ -8,7 +8,7 @@ const reduceScore = reduceCurry(
 )
 
 const filterForce = filterCurry(
-  ([, v]) => v.isForceUser || v.shootingScore > 79
+  ([, v]) => v.isForceUser && v.shootingScore > 79
 )
 
 const mapAverage = mapCurry(([k, v]) => [
