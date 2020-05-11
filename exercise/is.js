@@ -34,10 +34,29 @@ const is = {}
 export const tests = []
 const t = (f) => tests.push(f)
 
-// setup context for following tests
+// your functions are all tested against all these values:
+export const setup = () => [
+  0,
+  NaN,
+  true,
+  '',
+  '💩',
+  undefined,
+  t,
+  [],
+  {},
+  [1, Array(1), [], 2],
+  { length: 10 },
+  Object.create(null),
+  null,
+  console.log,
+  void 0,
+]
 
-const match = ({eq}, fun, values) => eq(vals().filter(fun), values)
+const match = ({ eq, ctx }, fun, values) => eq(ctx.filter(fun), values)
 
+// the array of value here is the ones that your function should
+// return true too, while returning false to every others.
 t((_) => match(_, is.num, [0, NaN]))
 t((_) => match(_, is.nan, [NaN]))
 t((_) => match(_, is.str, ['', '💩']))
@@ -66,23 +85,5 @@ t((_) =>
     console.log,
   ])
 )
-
-const vals = () => [
-  0,
-  NaN,
-  true,
-  '',
-  '💩',
-  undefined,
-  t,
-  [],
-  {},
-  [1, Array(1), [], 2],
-  { length: 10 },
-  Object.create(null),
-  null,
-  console.log,
-  void 0,
-]
 
 Object.freeze(tests)
