@@ -5,6 +5,7 @@ export const exercises = {
   'using-reduce': { feedback: true },
   'long-words': { feedback: true },
   'for-each': { feedback: true },
+  map: { feedback: true },
   filter: { feedback: true },
   reduce: { feedback: true },
   quantifiers: { feedback: true },
