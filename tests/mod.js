@@ -8,6 +8,17 @@ const blacklist = new Set([
   'congratulation.js',
 ])
 
+// check for module validity
+const parseModule = async (path, acc) => {
+  if (!path) return { ...acc }
+  const { exercises, next } = await import(`../module/${path}.js`)
+  const mod = Object.fromEntries(Object.keys(exercises)
+    .map(name => [ name, { name, module: path }]))
+  return parseModule(next, { ...mod, ...acc })
+}
+
+const modules = await parseModule('data')
+const orphans = {}
 const results = {}
 for await (const exInfo of Deno.readDir('exercise')) {
   if (blacklist.has(exInfo.name)) continue
@@ -41,7 +52,31 @@ for await (const exInfo of Deno.readDir('exercise')) {
     Object.assign(results[baseName] || (results[baseName] = {}), {
       [info.name.slice(5, -3)]: { ex: baseName, ok, ...result },
     })
+
+    if (modules[baseName]) {
+      modules[baseName].seen = true
+    } else {
+      orphans[baseName] = { name: baseName }
+    }
   }
+}
+
+console.log('\nmodules:')
+const unseen = Object.values(modules).filter(mod => !mod.seen)
+if (unseen.length) {
+  for (const ex of unseen) {
+    console.log('Module:'.red(), ex.module, 'unseen exercise', ex.name)
+  }
+}
+
+if (Object.values(orphans).length) {
+  for (const ex of Object.values(orphans)) {
+    console.log('Exercise:'.red(), ex.name.blu(), 'not found in any modules')
+  }
+}
+const moduleFail = unseen.length || Object.values(orphans).length
+if (!moduleFail) {
+  console.log(`✓`.grn(), 'all modules are valid')
 }
 
 console.log('\nrecap:')
@@ -78,5 +113,6 @@ if (totalFailed > 0) {
   Deno.exit(1)
 } else {
   console.log(`${check(1)}all tests pass (${totalMissing} missing)`)
+  Deno.exit(moduleFail ? 1 : 0)
 }
 
