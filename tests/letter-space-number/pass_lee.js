@@ -1,0 +1,1 @@
+const letterSpaceNumber = (str) => str.match(/\w \d\b/g) || []
