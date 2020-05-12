@@ -45,24 +45,37 @@ export const tests = []
 const t = (f) => tests.push(f)
 
 const adder = (a, b) => a + b
-const multiplier = (a, b) => a * b
-const ifOdd = (a, b) => (b % 2 === 0 ? a + 1 : a - 1)
+const ifOdd = (a, b) => (b % 2 === 0 ? a + 2 : a * 2)
 const concatenate = (a = '', b) => a.concat(b)
 const merger = (a, b) => ({ ...a, ...b })
 
 t(({ eq, ctx }) => eq(fold(ctx.num1, adder, 0), 39))
-t(({ eq, ctx }) => eq(fold(ctx.num1, multiplier, 0), 0))
-t(({ eq, ctx }) => eq(fold(ctx.num1, ifOdd, 0), 2))
+t(({ eq, ctx }) =>
+  eq(fold(ctx.str1, concatenate, '-> '), '-> This is a simple example')
+)
+t(({ eq, ctx }) => eq(fold(ctx.num1, ifOdd, 0), 6))
 t(({ eq, ctx }) => eq(fold(ctx.num1, adder, 4), 43))
-t(({ eq, ctx }) => eq(fold(ctx.num1, multiplier, 5), 0))
-t(({ eq, ctx }) => eq(fold(ctx.num1, ifOdd, 10), 12))
+t(({ eq, ctx }) =>
+  eq(
+    fold(ctx.str2, concatenate, ''),
+    'The quick brown fox jumped over the lazy dog '
+  )
+)
+t(({ eq, ctx }) => eq(fold(ctx.num1, ifOdd, 10), 26))
 
 t(({ eq, ctx }) => eq(foldRight(ctx.num1, adder, 0), 39))
-t(({ eq, ctx }) => eq(foldRight(ctx.num1, multiplier, 0), 0))
-t(({ eq, ctx }) => eq(foldRight(ctx.num1, ifOdd, 0), 2))
+t(({ eq, ctx }) =>
+  eq(foldRight(ctx.str1, concatenate, '-> '), '-> examplesimple a is This ')
+)
+t(({ eq, ctx }) => eq(foldRight(ctx.num1, ifOdd, 0), 12))
 t(({ eq, ctx }) => eq(foldRight(ctx.num1, adder, 4), 43))
-t(({ eq, ctx }) => eq(foldRight(ctx.num1, multiplier, 5), 0))
-t(({ eq, ctx }) => eq(foldRight(ctx.num1, ifOdd, 10), 12))
+t(({ eq, ctx }) =>
+  eq(
+    foldRight(ctx.str2, concatenate, 'This is almost understandable. '),
+    'This is almost understandable. dog lazy the over jumped fox brown quick The '
+  )
+)
+t(({ eq, ctx }) => eq(foldRight(ctx.num1, ifOdd, 10), 32))
 
 t(({ eq, ctx }) => eq(reduce(ctx.num1, adder), 39))
 t(({ eq, ctx }) => eq(reduce(ctx.num2, adder), 63))
