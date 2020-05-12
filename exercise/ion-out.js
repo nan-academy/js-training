@@ -13,10 +13,7 @@ word containing 'ion' following a t, without the 'ion'.
 
 // /*/ // ⚡
 
-const ionOut = (str) => str.split(/(\w+t)ion/).filter((_, i) => i % 2)
-
 // /*/ // ⚡
-
 export const tests = []
 const t = (f) => tests.push(f)
 
