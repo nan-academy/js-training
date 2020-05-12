@@ -4,15 +4,19 @@
 ### Instructions
 
 Create three functions:
+
 - `fold` that receives an array, a function and an accumulator, in this order,
 and applies the function in the elements of the array starting on the left.
+
 - `foldRight` that receives an array, a function and an accumulator, in this order,
 and applies the function in the elements of the array starting on the right.
+
 - `reduce` that works just like the method `[].reduce` when you don't
 specify an accumulator.
 The arguments should be an array and a function.
 The starting value of your accumulator must be the first value of the array.
 If your array is less than 1 argument you should throw an error.
+
 - `reduceRight` like reduce, from the last value to the first
 
 Example:
@@ -63,7 +67,7 @@ t(({ eq, ctx }) => eq(foldRight(ctx.num1, ifOdd, 10), 12))
 t(({ eq, ctx }) => eq(reduce(ctx.num1, adder), 39))
 t(({ eq, ctx }) => eq(reduce(ctx.num2, adder), 63))
 t(({ eq, ctx }) =>
-  eq(reduce(ctx.str1, concatenate), 'This is a simpleexample')
+  eq(reduce(ctx.str1, concatenate), 'This is a simple example')
 )
 
 t(({ eq, ctx }) =>
@@ -82,29 +86,25 @@ t(({ eq, ctx }) =>
   })
 )
 
-t(({ eq, ctx }) => eq(reduce(ctx.num1, adder, 5), 44))
-t(({ eq, ctx }) => eq(reduce(ctx.num2, adder, 9), 72))
+t(({ eq, ctx }) => eq(reduceRight(ctx.num1, adder), 39))
+t(({ eq, ctx }) => eq(reduceRight(ctx.num2, adder), 63))
 t(({ eq, ctx }) =>
-  eq(
-    reduce(ctx.str1, concatenate, ' right?'),
-    ' right?This is a simpleexample'
-  )
+  eq(reduceRight(ctx.str1, concatenate), 'examplesimple a is This ')
 )
 
 t(({ eq, ctx }) =>
   eq(
-    reduce(ctx.str2, concatenate, ' The end'),
-    ' The endThe quick brown fox jumped over the lazy dog '
+    reduceRight(ctx.str2, concatenate),
+    'dog lazy the over jumped fox brown quick The '
   )
 )
 
 t(({ eq, ctx }) =>
-  eq(reduce(ctx.obj, merger, { ending: 3 }), {
-    ending: 3,
-    a: 12,
+  eq(reduceRight(ctx.obj, merger), {
+    f: 'hello',
     b: 6,
     c: { d: 2, e: 3 },
-    f: 'hello',
+    a: 12,
   })
 )
 
@@ -115,7 +115,7 @@ export const setup = () =>
     Object.entries({
       num1: [3, 10, 26, 0],
       num2: [4, 24, 10, 25],
-      str1: ['This ', 'is ', 'a ', 'simple', 'example'],
+      str1: ['This ', 'is ', 'a ', 'simple ', 'example'],
       str2: 'The quick brown fox jumped over the lazy dog'
         .split(' ')
         .map((x) => (x += ' ')),
