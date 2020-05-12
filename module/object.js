@@ -1,7 +1,7 @@
 export const next = 'async'
 export const exercises = {
-  // 'pick-omit': { feedback: true },
   invert: { feedback: true },
+  'pick-omit': { feedback: true },
   fusion: { feedback: true },
   'manipulate-values': { feedback: true },
   'manipulate-keys': { feedback: true },

@@ -4,8 +4,11 @@ export const exercises = {
   'its-a-match': { feedback: true },
   'letter-space-number': { feedback: true },
   'vowel-dots': { feedback: true },
+  'same-amount' : { feedback: true },
   'ion-out': { feedback: true },
+  'greedy-url' : { feedback: true },
   'group-price' : { feedback: true },
+  'valid-ip' : { feedback: true },
   // date
   'count-leap-years': { feedback: true },
   'day-of-the-year': { feedback: true },
