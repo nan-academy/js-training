@@ -13,9 +13,9 @@ const reduceScore = reduceCurry(
   (acc, [, v]) => (acc += v.isForceUser ? v.pilotingScore + v.shootingScore : 0)
 )
 const filterForce = filterCurry(
-  ([, v]) => v.isForceUser || v.shootingScore >= 80
+  ([, v]) => v.isForceUser && v.shootingScore >= 80
 )
-const mapMedia = mapCurry(([k, v]) => [
+const mapAverage = mapCurry(([k, v]) => [
   k,
-  (v['scoreMedia'] = (v.pilotingScore * v.shootingScore) / 100) && v,
+  (v['averageScore'] = (v.pilotingScore + v.shootingScore) / 2) && v,
 ])
