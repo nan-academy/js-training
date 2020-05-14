@@ -2,6 +2,7 @@ import * as api from '../lib/deno-api.js'
 import { test } from '../lib/tester.js'
 import { readFileStr } from 'https://deno.land/std@0.50.0/fs/read_file_str.ts'
 
+const startAll = Date.now()
 const blacklist = new Set([
   'console.js',
   'introduction.js',
@@ -95,19 +96,23 @@ console.log(users
     return cumul
   })
   .sort((a, b) => a.passed - b.passed)
-  .map(({ passed, user, missing }) => {
+  .map(({ passed, user, missing, duration }) => {
     const score = `${((passed / resultEntries.length) * 100).toFixed(2)}%`
     totalMissing += missing.length
     const left = missing.length < 4
       ? missing.slice(0, 3).join(', ')
       : `${missing.slice(0, 3).join(', ')} ...and ${missing.length - 3} more`
-    return `${check(passed === resultEntries.length, user)} ${score.blu()}${left ? `\n   missing: ${left}`: ''}`
+
+    const ico = check(passed === resultEntries.length, user)
+    const missingText = left ? `\n   missing: ${left}`: ''
+    return `${ico} ${score.blu()}${missingText} (${Math.round(duration)}ms)`
   })
   .join('\n\n'))
 
 console.log('\nresult:')
 const all = resultEntries.flatMap(e => Object.values(e[1]))
 const totalFailed = all.reduce((acc, result) => acc + !result.ok, 0)
+console.log(`  ${Date.now() - startAll}ms total elapsed time`)
 if (totalFailed > 0) {
   console.log(`${check(0)}${totalFailed} tests failed (${totalMissing} missing)`)
   Deno.exit(1)
