@@ -1,5 +1,5 @@
 before_install:
-  - curl -fsSL https://deno.land/x/install/install.sh | sh -s v1.0.0-rc1
+  - curl -fsSL https://deno.land/x/install/install.sh | sh -s v1.0.0
   - export PATH="/home/travis/.deno/bin:$PATH"
 
 script:
