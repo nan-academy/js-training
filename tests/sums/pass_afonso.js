@@ -26,6 +26,6 @@ const sums = (nbr) => {
   dp = Array(200)
   res = []
   if (nbr === 0 || nbr === 1) return []
-  solve(nbr, nbr-1, 1, 0)
-  return res.map(v => v.sort())
+  solve(nbr, nbr - 1, 1, 0)
+  return res.map((v) => v.sort())
 }
