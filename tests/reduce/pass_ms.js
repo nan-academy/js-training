@@ -9,7 +9,7 @@ const foldRight = (arr, f, acc) => {
 }
 
 const reduce = (arr, f, acc) => {
-    acc = arr[0] 
+  acc = arr[0]
   for (let [i, v] of arr.entries()) i && (acc = f(acc, v))
   return acc
 }
