@@ -40,8 +40,8 @@ returns
 ['Alabama', 'New Jersey']
 ```
 
--Create a function named 'farenheitToCelsius' which takes an array
-of farenheit temperatures which converts them to Celsius.
+-Create a function named 'fahrenheitToCelsius' which takes an array
+of fahrenheit temperatures which converts them to Celsius.
 Round down the result.
 
 The function then returns the result as an array of strings like below:

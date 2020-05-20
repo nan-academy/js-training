@@ -17,6 +17,9 @@ if they both have the same sign
 - https://nan-academy.github.io/js-training/examples/functions.js
 - https://nan-academy.github.io/js-training/examples/if-else.js
 - https://devdocs.io/javascript/global_objects/math/sign
+*/
+
+Math.sign = undefined
 
 // /*/ // ⚡
 
@@ -25,7 +28,6 @@ export const tests = []
 const t = (f) => tests.push(f)
 
 t(() => typeof sign === 'function')
-t(() => !sign.toString().includes('Math.sign'))
 t(() => sign.length === 1)
 t(() => sign !== Math.sign)
 t(() => sign(-2) === -1)
