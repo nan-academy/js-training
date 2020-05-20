@@ -15,6 +15,9 @@ Of course you may not use the method directly
 - https://nan-academy.github.io/js-training/examples/loops.js
 - https://nan-academy.github.io/js-training/examples/recursion.js
 - https://devdocs.io/javascript/global_objects/string/repeat
+*/
+
+String.prototype.repeat = undefined
 
 // /*/ // ⚡
 
@@ -24,7 +27,6 @@ const t = (f) => tests.push(f)
 
 t(() => typeof repeat === 'function')
 t(() => repeat.length === 2)
-t(() => !repeat.toString().includes('.repeat'))
 t(() => repeat('a', 3) === 'aaa')
 t(() => repeat('ba', 10) === 'babababababababababa')
 t(() => repeat('pouet', 2) === 'pouetpouet')

@@ -7,7 +7,7 @@ Implement 2 functions:
 - `split` that works like the string method `.split` but take the string as
   it's first argument.
 
-- `split` that works like the string method `.split` but take the array as
+- `join` that works like the string method `.split` but take the array as
   it's first argument.
 
 

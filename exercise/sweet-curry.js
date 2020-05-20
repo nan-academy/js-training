@@ -3,11 +3,11 @@
 
 ### Instructions
 
-create the following functions with the "currying" process:
+Create the following functions with the "currying" process:
 
-- mult2 that mutiplies two numbers.
+- mult2 that multiplies two numbers.
 - add3 that adds three numbers.
-- sub4 that substract four numbers.
+- sub4 that subtracts four numbers.
 
 Please note that those functions can only have one argument each.
 

@@ -3,12 +3,12 @@
 
 ### Instructions
 
-Create the `Get` function.
+Create the `get` function.
 It takes 2 arguments:
   - `src` an object
   - `path` a string
 
-And returns the value at the given string path
+And returns the value at the given string path.
 
 // /*/ // ⚡
 

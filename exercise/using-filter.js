@@ -18,13 +18,13 @@ and that returns only the ones that start with a vowel (a,e,i,o,u).
 and that returns only the ones which contain at least 5
 vowels (a,e,i,o,u).
 
-> Example: `'California'` countains at least 5 vowels
+> Example: `'California'` contains at least 5 vowels
 
 - Create a function `filter1DistinctVowel` that takes an array of
 strings and that returns only the ones which vowels are of only
 one distinct one (a,e,i,o,u).
 
-> Example: `'Alabama'` only contains 1 disctinct vowels `'a'`.
+> Example: `'Alabama'` only contains 1 distinct vowels `'a'`.
 
 - Create a function `multiFilter` that takes an array of
 objects and that returns only the ones which:

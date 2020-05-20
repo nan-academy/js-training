@@ -26,7 +26,6 @@ sumOrMul([1, 2, 3, 4], 5)
 
 - https://devdocs.io/javascript/global_objects/array/reduce
 
- */
 // /*/ // ⚡
 
 // /*/ // ⚡
