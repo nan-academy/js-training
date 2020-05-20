@@ -1,7 +1,7 @@
 const findExpression = (nbr) => {
-    if (nbr % 2 !== 0) {
-        return undefined
-      }
+  if (nbr % 2 !== 0) {
+    return undefined
+  }
   const find = (current, history) => {
     if (current == nbr) {
       return history
