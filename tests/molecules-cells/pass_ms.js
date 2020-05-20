@@ -7,26 +7,22 @@ const complements = [
 
 const RNA = (dna) => {
   let res = ''
-  for (let i of dna.split('')) {
-    res += complements[i]
-  }
+  res += dna
+    .split('')
+    .map((f) => Object.fromEntries(complements)[f])
+    .join('')
   return res
 }
 
 const DNA = (rna) => {
   let res = ''
-  let a = invert(complements)
-  for (let i of rna.split('')) {
-    res += a[i]
-  }
+  res = rna
+    .split('')
+    .map((f) => {
+      for (let c of complements) {
+        if (c[1] === f) return c[0]
+      }
+    })
+    .join('')
   return res
-}
-
-const invert = (obj) => {
-  let ret = {}
-  for (let key of Object.keys(obj)) {
-    ret[obj[key]] = key
-  }
-  obj = ret
-  return ret
 }
