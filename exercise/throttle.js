@@ -18,7 +18,6 @@ export const tests = []
 const t = (f) => tests.push(f)
 
 const add = (arr, el) => arr.push(el)
-
 const run = (callback, callLimit, nbr) =>
   new Promise((r) => {
     let arr = []
@@ -39,7 +38,8 @@ t(({ eq }) =>
 )
 // tests the leading option with wait time in the leading edge of the timeout
 t(({ eq }) =>
-  run(throttle(add, 15, { trailing: false, leading: true }), 10, 10).then((v) => eq(v.length, 5)
+  run(throttle(add, 15, { trailing: false, leading: true }), 10, 10).then((v) =>
+    eq(v.length, 5)
   )
 )
 // tests the leading option with wait time not in the leading edge of the timeout
