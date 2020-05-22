@@ -17,12 +17,12 @@ you will have to create a function called `throttle` that works like `_.throttle
 export const tests = []
 const t = (f) => tests.push(f)
 
-let arr = []
-const add = (el) => arr.push(el)
+const add = (arr, el) => arr.push(el)
 
 const run = (callback, callLimit, nbr) =>
   new Promise((r) => {
-    let inter = setInterval(() => callback(1), callLimit)
+    let arr = []
+    let inter = setInterval(() => callback(arr, 1), callLimit)
     setTimeout(() => {
       clearInterval(inter)
       r(arr)
@@ -30,41 +30,34 @@ const run = (callback, callLimit, nbr) =>
   })
 
 // wait 26ms and execute 4 times every 16ms
-t(({ eq }) =>
-  run(throttle(add, 26), 16, 4).then((v) => eq(v.length, 2) && (arr = []))
-)
-// wait 26ms and execute 6 times every 16ms
-t(({ eq }) =>
-  run(throttle(add, 26), 16, 6).then((v) => eq(v.length, 3) && (arr = []))
-)
+t(({ eq }) => run(throttle(add, 26), 16, 4).then((v) => eq(v.length, 2)))
 // tests the trailing option
 t(({ eq }) =>
-  run(throttle(add, 26, { trailing: true, leading: false }), 16, 4).then(
-    (v) => eq(v.length, 1) && (arr = [])
+  run(throttle(add, 26, { trailing: true, leading: false }), 16, 4).then((v) =>
+    eq(v.length, 1)
   )
 )
-// tests the leading option
+// tests the leading option with wait time in the leading edge of the timeout
 t(({ eq }) =>
-  run(throttle(add, 26, { trailing: false, leading: true }), 16, 4).then(
-    (v) => eq(v.length, 1) && (arr = [])
+  run(throttle(add, 15, { trailing: false, leading: true }), 10, 10).then((v) => eq(v.length, 5)
   )
 )
-// tests with different time 10 times
+// tests the leading option with wait time not in the leading edge of the timeout
 t(({ eq }) =>
-  run(throttle(add, 30), 20, 10).then(
-    (v) => eq(v.length, 6) && (arr = [])
+  run(throttle(add, 26, { trailing: false, leading: true }), 16, 4).then((v) =>
+    eq(v.length, 2)
   )
 )
 // tests with both options false
 t(({ eq }) =>
-  run(throttle(add, 26, { trailing: false, leading: false }), 16, 2).then(
-    (v) => eq(v.length, 0) && (arr = [])
+  run(throttle(add, 10, { trailing: false, leading: false }), 5, 2).then((v) =>
+    eq(v.length, 0)
   )
 )
 // tests with both options true
 t(({ eq }) =>
-  run(throttle(add, 26, { trailing: true, leading: true }), 16, 4).then(
-    (v) => eq(v.length, 2) && (arr = [])
+  run(throttle(add, 26, { trailing: true, leading: true }), 16, 4).then((v) =>
+    eq(v.length, 2)
   )
 )
 
