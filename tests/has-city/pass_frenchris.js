@@ -1,5 +1,1 @@
-const addSpace = (el) => (ele) => el.split(ele).join(ele + ' ')
-
-const toUpper = (el) => (ele) => el.split(ele).join(ele.toUpperCase())
-
-const modString = (el, fn) => fn(el)
+const hasCity = (country, arr) => (city) => (arr.includes(city)) ? `${city} is a city from ${country}` : `${city} is not a city from ${country}`
