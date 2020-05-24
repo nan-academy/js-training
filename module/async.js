@@ -8,7 +8,7 @@ export const exercises = {
   // promise-use
   // promise-api
   // promise-all
-  // promise-serie
+  series: { feedback: true },
   // promise-race
   // await-use
   // event-use
