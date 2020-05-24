@@ -7,7 +7,7 @@ export const exercises = {
   // callback-race
   // promise-use
   // promise-api
-  // promise-all
+  all: { feedback: true },
   series: { feedback: true },
   // promise-race
   // await-use
