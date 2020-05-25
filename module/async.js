@@ -10,7 +10,7 @@ export const exercises = {
   // promise-api
   all: { feedback: true },
   series: { feedback: true },
-  // promise-race
+  race: { feedback: true },
   // await-use
   // event-use
   // event-api
