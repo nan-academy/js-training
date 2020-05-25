@@ -56,8 +56,8 @@ t(async ({ eq, ctx, wait }) => {
   if (!result) throw Error('invalid return value')
   const delta = Date.now() - start
   const min = delay * callbacks.length
-  if (delta > min) return true
-  throw Error(`promises should take ~${Math.round(min)}ms but was ${delta}ms`)
+  if (delta >= min) return true
+  throw Error(`promises should take ~${min}ms but was ${delta}ms`)
 })
 
 // it should fail if one of the promises reject
