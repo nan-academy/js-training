@@ -38,7 +38,7 @@ t(async ({ eq }) =>
 
 // ensure callbacks are run one at a time
 t(async ({ eq, ctx, wait }) => {
-  const delay = ctx * 4 + 1
+  const delay = Math.round(ctx * 4 + 1)
   const start = Date.now()
   let pending = false
   const run = async () => {
