@@ -3,8 +3,9 @@
 
 ### Instructions
 
-The objective of this exercise is to learn about `callbacks` and `setTimeout` for this
-you will have to create a function called `throttle` that works like `_.throttle` from lodash.
+Create two functions that will work like `_.throttle` from lodash
+- `throttle`, this function doesn't need to take care of the options
+- `opThrottle`, this function will take care of the `trailing` and `leading` options
 
 ### Notions
 
@@ -17,6 +18,8 @@ you will have to create a function called `throttle` that works like `_.throttle
 export const tests = []
 const t = (f) => tests.push(f)
 
+t(({ code }) => !code.includes('this'))
+
 const add = (arr, el) => arr.push(el)
 const run = (callback, callLimit, nbr) =>
   new Promise((r) => {
@@ -28,35 +31,40 @@ const run = (callback, callLimit, nbr) =>
     }, callLimit * nbr)
   })
 
-// wait 26ms and execute 4 times every 16ms
+// wait 26ms and execute 4 times every 16ms, executes with a wait time of 26
 t(({ eq }) => run(throttle(add, 26), 16, 4).then((v) => eq(v.length, 2)))
+// wait 20ms and execute 2 times every 10ms, executes with a wait time of 26
+t(({ eq }) => run(throttle(add, 20), 10, 2).then((v) => eq(v.length, 1)))
+// wait 16ms and execute 5 times every 26ms, will execute with out waiting
+t(({ eq }) => run(throttle(add, 16), 26, 5).then((v) => eq(v.length, 4)))
+
 // tests the trailing option
 t(({ eq }) =>
-  run(throttle(add, 26, { trailing: true, leading: false }), 16, 4).then((v) =>
+  run(opThrottle(add, 26, { trailing: true, leading: false }), 16, 4).then((v) =>
     eq(v.length, 1)
   )
 )
 // tests the leading option with wait time in the leading edge of the timeout
 t(({ eq }) =>
-  run(throttle(add, 15, { trailing: false, leading: true }), 10, 10).then((v) =>
+  run(opThrottle(add, 15, { trailing: false, leading: true }), 10, 10).then((v) =>
     eq(v.length, 5)
   )
 )
 // tests the leading option with wait time not in the leading edge of the timeout
 t(({ eq }) =>
-  run(throttle(add, 26, { trailing: false, leading: true }), 16, 4).then((v) =>
+  run(opThrottle(add, 26, { trailing: false, leading: true }), 16, 4).then((v) =>
     eq(v.length, 2)
   )
 )
 // tests with both options false
 t(({ eq }) =>
-  run(throttle(add, 10, { trailing: false, leading: false }), 5, 2).then((v) =>
+  run(opThrottle(add, 10, { trailing: false, leading: false }), 5, 2).then((v) =>
     eq(v.length, 0)
   )
 )
 // tests with both options true
 t(({ eq }) =>
-  run(throttle(add, 26, { trailing: true, leading: true }), 16, 4).then((v) =>
+  run(opThrottle(add, 26, { trailing: true, leading: true }), 16, 4).then((v) =>
     eq(v.length, 2)
   )
 )
