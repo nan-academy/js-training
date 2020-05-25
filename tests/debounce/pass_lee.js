@@ -1,7 +1,6 @@
-const debounce = (func, wait, options = {}) => {
+const debounce = (callback, wait, options = {}) => {
   let timeout = 0
-  return function (...args) {
-    let context = this
+  return (...args) => {
     let firstExec = options.leading || (options.leading && options.trailing)
     let nothing = Object.entries(options).length && !options.leading && !options.trailing
 
@@ -11,9 +10,10 @@ const debounce = (func, wait, options = {}) => {
     timeout = setTimeout(function () {
       timeout = 0
       if (!firstExec && !nothing) {
-        func.apply(context, args)
+        callback(...args)
       }
     }, wait)
-    if (callNow && !nothing) func.apply(context, args)
+    if (callNow && !nothing) callback(...args)
   }
 }
+
