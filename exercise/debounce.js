@@ -1,15 +1,15 @@
 /*
 ## debouncing
 
-### Instructions
+## Instruction
 
-The objective of this exercise is to learn about `callbacks` and `setTimeout` for this
-you will have to create a function called `debounce` that works like `_.debounce` from lodash.
+Create two functions that will work like `_.debounce` from lodash
+- `debounce`, this function doesn't need to take care of the options
+- `opDebounce`, this function will take care of the `trailing` and `leading` options
 
 ### Notions
 
 - https://lodash.com/docs/4.17.15#debounce
-
 
 // /*/ // ⚡
 
@@ -17,6 +17,8 @@ you will have to create a function called `debounce` that works like `_.debounce
 
 export const tests = []
 const t = (f) => tests.push(f)
+
+t(({ code }) => !code.includes('this'))
 
 const add = (arr, el) => arr.push(el)
 
@@ -36,35 +38,35 @@ const run = (callback, callLimit, nbr) =>
 // test with debounce wait limit inferior to wait time call (how much time we wait to the function be called again)
 // (20 < 30)
 t(({ eq }) => run(debounce(add, 10), 20, 5).then((v) => eq(v.length, 4)))
-
+t(({ eq }) => run(debounce(add, 5), 15, 10).then((v) => eq(v.length, 9)))
 // testing with wait limit superior to wait time call
 // execution on the trailing edge, after wait limit has elapsed
 t(({ eq }) => run(debounce(add, 20), 10, 5).then((v) => eq(v.length, 0)))
 
 // trailing edge as true
 t(({ eq }) =>
-  run(debounce(add, 20, { leading: false, trailing: true }), 10, 5).then((v) =>
+  run(opDebounce(add, 20, { leading: false, trailing: true }), 10, 5).then((v) =>
     eq(v.length, 0)
   )
 )
 
 // leading edge as true
 t(({ eq }) =>
-  run(debounce(add, 20, { leading: true, trailing: false }), 10, 5).then((v) =>
+  run(opDebounce(add, 20, { leading: true, trailing: false }), 10, 5).then((v) =>
     eq(v.length, 1)
   )
 )
 
 // trailing and leading as true
 t(({ eq }) =>
-  run(debounce(add, 20, { leading: true, trailing: true }), 10, 5).then((v) =>
+  run(opDebounce(add, 20, { leading: true, trailing: true }), 10, 5).then((v) =>
     eq(v.length, 1)
   )
 )
 
 // trailing and leading as false
 t(({ eq }) =>
-  run(debounce(add, 20, { leading: false, trailing: false }), 10, 5).then((v) =>
+  run(opDebounce(add, 20, { leading: false, trailing: false }), 10, 5).then((v) =>
     eq(v.length, 0)
   )
 )
