@@ -31,43 +31,54 @@ const run = (callback, callLimit, nbr) =>
     let inter = setInterval(() => callback(arr, 1), callLimit)
     setTimeout(() => {
       clearInterval(inter)
-      r(arr)
+      r(arr.length)
     }, callLimit * nbr)
   })
 
 // test with debounce wait limit inferior to wait time call (how much time we wait to the function be called again)
-// (20 < 30)
-t(({ eq }) => run(debounce(add, 10), 20, 5).then((v) => eq(v.length, 4)))
-t(({ eq }) => run(debounce(add, 5), 15, 10).then((v) => eq(v.length, 9)))
+// it works concurrently
+t(async ({ eq }) =>
+  eq(
+    await Promise.all([
+      run(debounce(add, 10), 20, 5),
+      run(debounce(add, 5), 15, 10),
+    ]),
+    [4, 9]
+  )
+)
 // testing with wait limit superior to wait time call
 // execution on the trailing edge, after wait limit has elapsed
-t(({ eq }) => run(debounce(add, 20), 10, 5).then((v) => eq(v.length, 0)))
+t(async ({ eq }) => eq(await run(debounce(add, 20), 10, 5), 0))
 
 // trailing edge as true
-t(({ eq }) =>
-  run(opDebounce(add, 20, { leading: false, trailing: true }), 10, 5).then((v) =>
-    eq(v.length, 0)
+t(async ({ eq }) =>
+  eq(
+    await run(opDebounce(add, 20, { leading: false, trailing: true }), 10, 5),
+    0
   )
 )
 
 // leading edge as true
-t(({ eq }) =>
-  run(opDebounce(add, 20, { leading: true, trailing: false }), 10, 5).then((v) =>
-    eq(v.length, 1)
+t(async ({ eq }) =>
+  eq(
+    await run(opDebounce(add, 20, { leading: true, trailing: false }), 10, 5),
+    1
   )
 )
 
 // trailing and leading as true
-t(({ eq }) =>
-  run(opDebounce(add, 20, { leading: true, trailing: true }), 10, 5).then((v) =>
-    eq(v.length, 1)
+t(async ({ eq }) =>
+  eq(
+    await run(opDebounce(add, 20, { leading: true, trailing: true }), 10, 5),
+    1
   )
 )
 
 // trailing and leading as false
-t(({ eq }) =>
-  run(opDebounce(add, 20, { leading: false, trailing: false }), 10, 5).then((v) =>
-    eq(v.length, 0)
+t(async ({ eq }) =>
+  eq(
+    await run(opDebounce(add, 20, { leading: false, trailing: false }), 10, 5),
+    0
   )
 )
 
