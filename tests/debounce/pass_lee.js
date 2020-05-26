@@ -8,16 +8,14 @@ const debounce = (callback, wait) => {
 
 const opDebounce = (callback, wait, options = {}) => {
   let timeout = 0
-  let firstExec = options.leading || (options.leading && options.trailing)
-  let nothing =
-    Object.entries(options).length && !options.leading && !options.trailing
+  let nothing = Object.entries(options).length && !options.leading
   return (...args) => {
-    let callNow = firstExec && !timeout
+    let callNow = options.leading && !timeout
     clearTimeout(timeout)
 
     timeout = setTimeout(() => {
       timeout = 0
-      if (!firstExec && !nothing) {
+      if (!options.leading && !nothing) {
         callback(...args)
       }
     }, wait)

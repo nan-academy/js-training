@@ -5,7 +5,7 @@
 
 Create two functions that will work like `_.debounce` from lodash
 - `debounce`, this function doesn't need to take care of the options
-- `opDebounce`, this function will take care of the `trailing` and `leading` options
+- `opDebounce`, this function will take care of the `leading` options
 
 ### Notions
 
@@ -50,35 +50,27 @@ t(async ({ eq }) =>
 // execution on the trailing edge, after wait limit has elapsed
 t(async ({ eq }) => eq(await run(debounce(add, 20), 10, 5), 0))
 
-// trailing edge as true
+// leading edge as false
+// it works concurrently
 t(async ({ eq }) =>
   eq(
-    await run(opDebounce(add, 20, { leading: false, trailing: true }), 10, 5),
-    0
+    await Promise.all([
+      run(opDebounce(add, 20, { leading: false }), 10, 5),
+      run(opDebounce(add, 20, { leading: false }), 10, 2),
+    ]),
+    [0, 0]
   )
 )
 
 // leading edge as true
+// it works concurrently
 t(async ({ eq }) =>
   eq(
-    await run(opDebounce(add, 20, { leading: true, trailing: false }), 10, 5),
-    1
-  )
-)
-
-// trailing and leading as true
-t(async ({ eq }) =>
-  eq(
-    await run(opDebounce(add, 20, { leading: true, trailing: true }), 10, 5),
-    1
-  )
-)
-
-// trailing and leading as false
-t(async ({ eq }) =>
-  eq(
-    await run(opDebounce(add, 20, { leading: false, trailing: false }), 10, 5),
-    0
+    await Promise.all([
+      run(opDebounce(add, 20, { leading: true }), 10, 3),
+      run(opDebounce(add, 10, { leading: true }), 20, 3),
+    ]),
+    [1, 2]
   )
 )
 
