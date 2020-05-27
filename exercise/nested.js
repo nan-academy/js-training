@@ -48,6 +48,6 @@ t(() => nested.obj.update === undefined)
 
 // nested.arr is not frozen and can be changed
 t(() => cantEdit(() => nested.arr.push('hot stuff')))
-t(() => nested.arr.length === 4)
+t(() => nested.arr.length === 3)
 
 Object.freeze(tests)
