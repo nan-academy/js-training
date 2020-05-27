@@ -1,5 +1,6 @@
 export const next = 'tools'
 export const exercises = {
+  interpolation: { feedback: true },
   throttle: { feedback: true },
   // callback-use
   // callback-api
