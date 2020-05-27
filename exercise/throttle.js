@@ -56,13 +56,15 @@ t(async ({ eq }) =>
 )
 
 // tests the leading option with wait time in the leading edge of the timeout
-t(async ({ eq }) =>
-  eq(await run(opThrottle(add, 15, { leading: true }), 10, 10), 5)
-)
-
 // tests the leading option with wait time not in the leading edge of the timeout
 t(async ({ eq }) =>
-  eq(await run(opThrottle(add, 26, { leading: true }), 16, 4), 2)
+  eq(
+    await Promise.all([
+      run(opThrottle(add, 15, { leading: true }), 10, 10),
+      run(opThrottle(add, 26, { leading: true }), 16, 4)
+    ]),
+    [5, 2]
+  )
 )
 
 // tests without options
