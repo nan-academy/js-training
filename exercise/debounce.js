@@ -18,8 +18,6 @@ Create two functions that will work like `_.debounce` from lodash
 export const tests = []
 const t = (f) => tests.push(f)
 
-t(({ code }) => !code.includes('this'))
-
 const add = (arr, el) => arr.push(el)
 
 // it uses the array to better test the leading and trailing edge of the time limit
@@ -27,8 +25,8 @@ const add = (arr, el) => arr.push(el)
 // if the trailing edge is true it will execute the callback before returning the array
 const run = (callback, callLimit, nbr) =>
   new Promise((r) => {
-    let arr = []
-    let inter = setInterval(() => callback(arr, 1), callLimit)
+    const arr = []
+    const inter = setInterval(() => callback(arr, 1), callLimit)
     setTimeout(() => {
       clearInterval(inter)
       r(arr.length)
@@ -55,8 +53,8 @@ t(async ({ eq }) => eq(await run(debounce(add, 20), 10, 5), 0))
 t(async ({ eq }) =>
   eq(
     await Promise.all([
-      run(opDebounce(add, 20, { leading: false }), 10, 5),
-      run(opDebounce(add, 20, { leading: false }), 10, 2),
+      run(opDebounce(add, 20), 10, 5),
+      run(opDebounce(add, 20), 10, 2),
     ]),
     [0, 0]
   )
