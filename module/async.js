@@ -6,7 +6,7 @@ export const exercises = {
   // callback-all
   // callback-serie
   // callback-race
-  // promise-use
+  'get-json': { feedback: true },
   // promise-api
   all: { feedback: true },
   series: { feedback: true },
