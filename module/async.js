@@ -1,7 +1,6 @@
 export const next = 'tools'
 export const exercises = {
-  'is-winner': { feedback: true },
-  // throttle: { feedback: true },
+  throttle: { feedback: true },
   // callback-use
   // callback-api
   // callback-all
@@ -10,6 +9,7 @@ export const exercises = {
   // promise-use
   // promise-api
   all: { feedback: true },
+  'is-winner': { feedback: true },
   series: { feedback: true },
   race: { feedback: true },
   // await-use
