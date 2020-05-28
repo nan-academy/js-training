@@ -10,6 +10,9 @@ Create a `retry` function, that takes 2 arguments
 and it return a new function, passing arguments given to the
 callback on every tries.
 
+> for count of 3, the function will be called at most 4 times:
+> the initial call + 3 retries.
+
 
 Create a `timeout` function, that takes 2 arguments
 - a `delay`, that tells how long to wait
@@ -39,20 +42,21 @@ const fail = (q) =>
     (e) => e.message
   )
 
-t(async ({ eq, ctx }) => eq(await retry(0, ctx.failNTimes(0))(ctx.r), ctx.r))
-t(async ({ eq, ctx }) => eq(await retry(3, ctx.failNTimes(3))(ctx.r), ctx.r))
-t(async ({ eq, ctx }) => eq(await retry(10, ctx.failNTimes(5))(ctx.r), ctx.r))
+t(async ({ eq, ctx }) => eq(await retry(0, ctx.failNTimes(0))(ctx.r), [ctx.r]))
+t(async ({ eq, ctx }) => eq(await retry(3, ctx.failNTimes(3))(ctx.r), [ctx.r]))
+t(async ({ eq, ctx }) => eq(await retry(10, ctx.failNTimes(5))(ctx.r, ctx.r), [ctx.r, ctx.r]))
 t(async ({ eq, ctx }) =>
   eq(await fail(retry(3, ctx.failNTimes(9))(ctx.r)), `x:${ctx.r}`)
 )
 
-t(async ({ eq, ctx }) => eq(await timeout(2, ctx.delayed(0))(ctx.r), ctx.r))
+t(async ({ eq, ctx }) => eq(await timeout(2, ctx.delayed(0))(ctx.r), [ctx.r]))
+t(async ({ eq, ctx }) => eq(await timeout(2, ctx.delayed(0))(ctx.r, ctx.r), [ctx.r, ctx.r]))
 t(async ({ eq, ctx }) => eq(await fail(timeout(2, ctx.delayed(4))(ctx.r)), 'timeout'))
 
 Object.freeze(tests)
 
 export const setup = () => ({
-  r: Math.random(),
-  failNTimes: (n) => async (v) => --n < 0 ? v : Promise.reject(Error(`x:${v}`)),
-  delayed: (delay) => (v) => new Promise(s => setTimeout(s, delay, v)),
+  r: Math.random().toString(36).slice(2),
+  failNTimes: (n) => async (...v) => --n < 0 ? v : Promise.reject(Error(`x:${v}`)),
+  delayed: (delay) => (...v) => new Promise(s => setTimeout(s, delay, v)),
 })
