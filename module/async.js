@@ -8,7 +8,7 @@ export const exercises = {
   // callback-serie
   // callback-race
   'get-json': { feedback: true },
-  // promise-api
+  'keep-trying-or-giveup': { feedback: true },
   all: { feedback: true },
   'is-winner': { feedback: true },
   series: { feedback: true },
