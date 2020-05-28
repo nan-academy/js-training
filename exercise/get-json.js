@@ -3,7 +3,7 @@
 
 ### Instructions
 
-In this exercise, we will focus on building complexe async flows with promises.
+In this exercise, we will focus on building complex async flows with promises.
 
 Create a `getJSON` function that takes 2 parameters:
 - `path`, that will be the url called by your function
@@ -45,7 +45,7 @@ const fakeFetch = async ({ data, error, ...opts } = {}) => ({
 })
 
 // check url parsing
-t(async ({ eq, ctx }) => {
+t(async ({ eq }) => {
   let url
   fetch = async (arg) => fakeFetch({ url: (url = arg) })
   const pending = getJSON('/test', { query: 'hello world', b: 5 })
@@ -53,14 +53,14 @@ t(async ({ eq, ctx }) => {
 })
 
 // check that it return the given value
-t(async ({ eq, ctx }) => {
+t(async ({ eq }) => {
   const data = Math.random()
   fetch = (url) => fakeFetch({ url, data })
   return eq(await getJSON('/', { q: 1 }), data)
 })
 
 // check that it throw an error with the correct message
-t(async ({ eq, ctx }) => {
+t(async ({ eq }) => {
   const error = `oops: ${Math.random()}`
   fetch = (url) => fakeFetch({ url, error })
 
@@ -74,7 +74,7 @@ t(async ({ eq, ctx }) => {
 })
 
 // check that it throw if the request is not ok
-t(async ({ eq, ctx }) => {
+t(async ({ eq }) => {
   fetch = (url) =>
     fakeFetch({ url, status: 500, statusText: 'Internal Server Error' })
 
@@ -88,7 +88,7 @@ t(async ({ eq, ctx }) => {
 })
 
 // if fetch fail, the error should not be handled
-t(async ({ eq, ctx }) => {
+t(async ({ eq }) => {
   const error = `oops: ${Math.random()}`
   fetch = (url) => Promise.reject(Error(error))
 
