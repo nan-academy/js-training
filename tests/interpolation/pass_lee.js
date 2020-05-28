@@ -1,6 +1,4 @@
-const round = (nbr) => Math.round(nbr * 100) / 100
-
-const interpolation = (step, start, end, callback, duration) => {
+const interpolation = ({ step, start, end, callback, duration }) => {
   let fraction = (end - start) / step
   let timeStamp = duration / step
   let count = 0
@@ -10,8 +8,8 @@ const interpolation = (step, start, end, callback, duration) => {
       count >= step
         ? clearInterval(interval)
         : callback([
-            round(start + count++ * fraction),
-            (countTime = round(countTime + timeStamp)),
+            start + count++ * fraction,
+            (countTime = countTime + timeStamp),
           ]),
     timeStamp
   )
