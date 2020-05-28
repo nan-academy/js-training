@@ -82,6 +82,7 @@ const winners = () => {
 export const tests = []
 const t = (f) => tests.push(f)
 
+//testing correct continent but wrong number of times
 t(({ eq }) =>
   isWinner('England').then((data) => {
     return eq(
@@ -91,12 +92,14 @@ t(({ eq }) =>
   })
 )
 
+//testing non winner country
 t(({ eq }) =>
   isWinner('Colombia').then((data) => {
     return eq(data, 'Colombia never was a winner')
   })
 )
 
+//testing wrong continent country
 t(({ eq }) =>
   isWinner('Uruguay').then((data) => {
     return eq(
@@ -106,12 +109,14 @@ t(({ eq }) =>
   })
 )
 
+//testing no country
 t(({ eq }) =>
   isWinner('').then((data) => {
     return eq(data, ' never was a winner')
   })
 )
 
+//testing correct number of times but wrong continent
 t(({ eq }) =>
   isWinner('Brazil').then((data) => {
     return eq(
@@ -121,6 +126,7 @@ t(({ eq }) =>
   })
 )
 
+//testing correct number of times and correct continent
 t(({ eq }) =>
   isWinner('Germany').then((data) => {
     return eq(
