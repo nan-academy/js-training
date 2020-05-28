@@ -38,7 +38,7 @@ using a the server name as key.
 */
 
 // fake `getJSON` function
-let getJSON = async (url) => ({ url })
+let getJSON = async (url) => url
 
 // /*/ // ⚡
 
@@ -60,7 +60,7 @@ t(async ({ eq, ctx }) => {
 
 // gougleSearch fast enough
 t(async ({ eq, ctx }) => {
-  ctx.setTimings({ web: 3, web_backup: 1, image: 1, video_backup: 4 })
+  ctx.setTimings({ web_backup: 3, image: 1, video_backup: 4 })
   return eq(await gougleSearch(ctx.r), {
     web: `/web?q=${ctx.r}`,
     image: `/image_backup?q=${ctx.r}`,
@@ -80,10 +80,10 @@ t(async ({ eq, ctx }) => {
 
 // gougleSearch too slow !
 t(async ({ eq, ctx }) => {
-  ctx.setTimings({ web: 85 })
+  ctx.setTimings({ web: 85, web_backup: 99 })
   return eq(
     await gougleSearch(ctx.r).then(
-      () => Promise.reject('Should fail'),
+      () => Promise.reject(Error('Should fail')),
       (err) => err.message
     ),
     'timeout'
@@ -97,6 +97,6 @@ export const setup = () => ({
   setTimings: (timings) =>
     (getJSON = (url) =>
       new Promise((s) =>
-        setTimeout(s, timings[url.split(/\/([^?]+)?/)[1]] || 0, { url })
+        setTimeout(s, timings[url.split(/\/([^?]+)?/)[1]] || 0, url)
       )),
 })
