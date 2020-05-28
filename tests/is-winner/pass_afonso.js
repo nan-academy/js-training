@@ -1,5 +1,5 @@
 const isWinner = (candidate) =>
-  winners()
+  db
     .getWinner(candidate)
 
     .catch((err) => Promise.reject(candidate + ' never was a winner'))
@@ -14,7 +14,7 @@ const isWinner = (candidate) =>
     )
 
     .then(async (countryId) => {
-      let arrInfo = await winners().getResults(countryId)
+      let arrInfo = await db.getResults(countryId)
       return arrInfo.length >= 3
         ? Promise.resolve(
             candidate +
@@ -26,11 +26,11 @@ const isWinner = (candidate) =>
                   )) +
               ' winning by ' +
               (arrInfo.length === 1
-                ? arrInfo[0].result
+                ? arrInfo[0].score
                 : arrInfo.reduce((acc, obj, i) =>
                     i === 1
-                      ? acc.result + ', ' + obj.result
-                      : acc + ', ' + obj.result
+                      ? acc.score + ', ' + obj.score
+                      : acc + ', ' + obj.score
                   ))
           )
         : Promise.reject(
