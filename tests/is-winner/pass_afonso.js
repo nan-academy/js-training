@@ -1,34 +1,42 @@
 const isWinner = (candidate) =>
-  new Promise((resolve, reject) => {
-    if (candidate in winners) {
-      resolve(candidate)
-    } else {
-      reject(candidate + ' never was a winner')
-    }
-  })
-    .then(
-      (country) =>
-        new Promise((resolve, reject) => {
-          if (winners[country].continent === 'Europe') {
-            resolve(country)
-          } else {
-            reject(
-              country +
-                ' is not what we are looking for because of the continent'
-            )
-          }
-        })
+  winners()
+    .getWinner(candidate)
+
+    .catch((err) => Promise.reject(candidate + ' never was a winner'))
+
+    .then((countryInfo) =>
+      countryInfo.continent === 'Europe'
+        ? Promise.resolve(countryInfo.id)
+        : Promise.reject(
+            candidate +
+              ' is not what we are looking for because of the continent'
+          )
     )
-    .then((country) => {
-      if (winners[country].times >= 3) {
-        return country
-      }
-      throw (
-        country +
-        ' is not what we are looking for because of the times it was champion'
-      )
+
+    .then(async (countryId) => {
+      let arrInfo = await winners().getResults(countryId)
+      return arrInfo.length >= 3
+        ? Promise.resolve(
+            candidate +
+              ' won the FIFA World Cup in ' +
+              (arrInfo.length === 1
+                ? arrInfo[0].year
+                : arrInfo.reduce((acc, obj, i) =>
+                    i === 1 ? acc.year + ', ' + obj.year : acc + ', ' + obj.year
+                  )) +
+              ' winning by ' +
+              (arrInfo.length === 1
+                ? arrInfo[0].result
+                : arrInfo.reduce((acc, obj, i) =>
+                    i === 1
+                      ? acc.result + ', ' + obj.result
+                      : acc + ', ' + obj.result
+                  ))
+          )
+        : Promise.reject(
+            candidate +
+              ' is not what we are looking for because of the number of times it was champion'
+          )
     })
 
-    .then((data) => data + ' is up to the standards required')
-
-    .catch((error) => error)
+    .catch((d) => d)
