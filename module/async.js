@@ -9,6 +9,7 @@ export const exercises = {
   // callback-race
   'get-json': { feedback: true },
   'keep-trying-or-giveup': { feedback: true },
+  'gougle-search': { feedback: true },
   all: { feedback: true },
   'is-winner': { feedback: true },
   series: { feedback: true },
