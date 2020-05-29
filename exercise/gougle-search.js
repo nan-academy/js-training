@@ -21,7 +21,7 @@ queryServers('pouet', 'hello+world')
 
 
 Create a `gougleSearch` function that takes a single query argument.
-It must call `queryServers` in concurently on 3 servers:
+It must call `queryServers` in concurrently on 3 servers:
 `'web'`, `'image'` and `'video'`.
 
 A timeout of 80milliseconds must be set for the whole operation.
@@ -60,7 +60,7 @@ t(async ({ eq, ctx }) => {
 
 // gougleSearch fast enough
 t(async ({ eq, ctx }) => {
-  ctx.setTimings({ web_backup: 3, image: 1, video_backup: 4 })
+  ctx.setTimings({ web_backup: 3, image: 2, video_backup: 4 })
   return eq(await gougleSearch(ctx.r), {
     web: `/web?q=${ctx.r}`,
     image: `/image_backup?q=${ctx.r}`,
