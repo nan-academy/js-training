@@ -10,6 +10,7 @@ export const exercises = {
   'group-price' : { feedback: true },
   'valid-ip' : { feedback: true },
   // date
+  'rebecca-black': { feedback: true },
   'count-leap-years': { feedback: true },
   'day-of-the-year': { feedback: true },
   'match-cron': { feedback: true },
