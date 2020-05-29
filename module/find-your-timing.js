@@ -14,6 +14,7 @@ export const exercises = {
   'date-is': { feedback: true },
   'count-leap-years': { feedback: true },
   'day-of-the-year': { feedback: true },
+  'get-some-time': { feedback: true },
   'match-cron': { feedback: true },
   'bloody-sunday': { feedback: true },
   'unicode-technical-report-35': { feedback: true },
