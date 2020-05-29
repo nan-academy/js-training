@@ -14,7 +14,7 @@ Then return the first value of those 2 calls
 
 ```js
 queryServers('pouet', 'hello+world')
-  // return the fastests of those 2 calls:
+  // return the fastest of those 2 calls:
   // -> getJSON('/pouet?q=hello+world')
   // -> getJSON('/pouet_backup?q=hello+world')
 ```
