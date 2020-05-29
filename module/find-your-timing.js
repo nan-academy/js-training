@@ -11,6 +11,7 @@ export const exercises = {
   'valid-ip' : { feedback: true },
   // date
   'rebecca-black': { feedback: true },
+  'date-is': { feedback: true },
   'count-leap-years': { feedback: true },
   'day-of-the-year': { feedback: true },
   'match-cron': { feedback: true },
