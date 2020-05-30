@@ -21,9 +21,9 @@ and that works like the partition function from lodash.
 
 */
 Array.prototype.filter = undefined
-///*/ // ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 

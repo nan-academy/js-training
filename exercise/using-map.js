@@ -102,9 +102,9 @@ returns
 
 - https://devdocs.io/javascript/global_objects/array/map
 
-///*/ // ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 

@@ -1,6 +1,6 @@
 import * as api from '../lib/deno-api.js'
 import { test } from '../lib/tester.js'
-import { readFileStr } from 'https://deno.land/std@0.50.0/fs/read_file_str.ts'
+import { readFileStr } from 'https://deno.land/std@0.53.0/fs/read_file_str.ts'
 
 const startAll = Date.now()
 const blacklist = new Set([

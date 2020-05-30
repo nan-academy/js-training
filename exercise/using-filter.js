@@ -46,9 +46,9 @@ Example of an array of objects matching the criterias:
 
 - https://devdocs.io/javascript/global_objects/array/filter
 
-///*/ // ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 export const tests = []
 const t = (f) => tests.push(f)
 

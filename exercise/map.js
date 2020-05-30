@@ -20,9 +20,9 @@ Array.prototype.map = undefined
 Array.prototype.flatMap = undefined
 Array.prototype.flat = undefined
 
-///*/ // ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 
 export const tests = []
 const t = (f) => tests.push(f)

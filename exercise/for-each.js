@@ -13,9 +13,9 @@ and that works like the method .forEach
 
 */
 Array.prototype.forEach = undefined
-///*/ // ⚡
+// /*/ // ⚡
 
-///*/// ⚡
+// /*/ // ⚡
 
 export const tests = []
 const t = (f) => tests.push(f)
