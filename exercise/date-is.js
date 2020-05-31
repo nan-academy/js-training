@@ -1,5 +1,5 @@
 /*
-## Is
+## Date Is
 
 ### Instructions
 
@@ -9,6 +9,7 @@ Create the following functions:
 - `isBefore`, this function will receive two dates and return true if the first date is lesser then the second date
 - `isFuture`, will return true if the date given as parameter is higher then the present date
 - `isPast`, will return true if the date given as parameter less then the present date
+
 
 ### Notions
 
