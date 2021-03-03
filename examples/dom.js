@@ -89,7 +89,7 @@ const someClassLink = document.querySelector('body > a.some-class')
 const div = document.createElement('div') // the string is the html tag
 
 // you can add it in the body (open your inspector to find it)
-document.body.appendChild(div)
+document.body.append(div)
 
 // setting properties of an element
 div.id = 'my-div'
@@ -113,19 +113,14 @@ div.classList.replace('class-1', 'class-3')
 
 console.log(div.className) // 'class-3 class-2'
 
-// add text content
-// first create a text node
-const text = document.createTextNode('some string to display')
-// then add it to the div
-div.appendChild(text)
+// .append also works to add text content
+div.append('some string to display')
 
-// to change the value
-text.nodeValue = 'hello, my value changed'
+// you can mix and add multiple elements in one go:
+document.body.append('some text', div, 'and more text')
+// here we sandwitched our div between some text, nice.
 
-// As you can add multiple text nodes to a div, this allow you
-// to selectively update specific parts of your text
-// but most of the time it's enough to use the smart property `textContent`:
-
+// we can change text content of an element
 div.textContent = 'some text'
 // this will create a text node and replace all the previous by it
 
@@ -133,11 +128,35 @@ div.textContent = 'some text'
 // read more: https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML#Security_considerations
 
 
+// Events:
+// they allow you to react to user inputs
+// it's the foundation of the interactivity of your website
+// each of them are link to an element or the window
+
+// for this example we will take a button:
+const button = document.querySelector('button')
+
+// we need to create a function, let's call it handle click
+const handleClick = event => {
+  // those functions recieve a special event object argument
+  // it's content change depending of the event but you should
+  // always have a target proprerty representing the element
+  // that this event was triggered from.
+  console.log('element', event.target, 'have been clicked !!')
+}
+
+// register the event:
+button.addEventListener('click', handleClick)
+// here we ask the button too call our handleClick function
+// on the 'click' event, so every time it's clicked.
+
+// now if for some reason we want to unregister the event:
+button.removeEventListener('click', handleClick)
+
+
+// TODO: forms, onsubmit, preventDefault, URLSearchParams
+
 // TODO: import / export
-
-// TODO: addEventListener / removeEventListener, preventDefault
-
-// TODO: forms, onsubmit, URLSearchParams
 
 // TODO: fetch, dynamic import
 
