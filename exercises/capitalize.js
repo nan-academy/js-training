@@ -6,6 +6,14 @@
  * and in lowercase for the rest of the string
  *
  */
+// Your code :
+function capitalize(string){
+    var resul = string.substring(0, 1);
+var  tt= resul.toUpperCase()+string.substring(1 ,string.length ).toLowerCase() ;
+
+return tt;
+}
+
 
 
 //* Begin of tests
