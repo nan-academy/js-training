@@ -8,6 +8,9 @@
  */
 
 // Your code :
+function getFirst([argument]){
+    return argument;
+}
 
 //* Begin of tests
 const assert = require('assert')
